@@ -5,32 +5,29 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   display: flex;
-  justify-content: center; 
-  align-items: center;         
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   padding: 100px 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('./src/assets/imagemFundo.jpg');   
+  background-image: url('./src/assets/imagemFundo.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover; 
-
+  -o-background-size: cover;
 }
 
 .asideLogin {
   display: flex;
-  height: 100vh;
-  width: 100vw;
   height: 590px;
   width: 600px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color:  white;
+  background-color: white;
   text-align: center;
   border-radius: 15px;
   padding: 20px;
@@ -77,8 +74,8 @@ label {
   color: #222;
 }
 
-input:focus ~ label,
-input:not(:placeholder-shown) ~ label {
+input:focus~label,
+input:not(:placeholder-shown)~label {
   top: -8px;
   font-size: 12px;
 }
@@ -89,22 +86,141 @@ input:not(:placeholder-shown) ~ label {
   margin-top: 10px;
 }
 
-.botaoLogin{
+.botaoLogin {
   padding: 5px 50px;
   border-radius: 10px;
   border-color: #00AB72;
   font-weight: bolder;
   font-size: 15px;
-  color: #00AB72;  
+  color: #00AB72;
 }
 
-.botaoLogin:hover{
+.botaoLogin:hover {
   background-color: rgb(218, 218, 218);
 }
 
 /* HOME */
 
+.divHome {
+  height: 100vh;
+  width: 100vw;
+  color: white;
+}
 
+.headerHome {
+  height: 130px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 80px;
+  padding-right: 100px;
+  color: white;
+}
 
+.navHome {
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
 
+.navHomeBotoes {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-weight: 100;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 15px;
 
+}
+
+/* Botão Conecte-se */
+.btnConectar {
+  background-color: #00AB72;
+  font-weight: bolder;
+  color: #fafafa;
+  border: none;
+  border-radius: 25px;
+  height: 50px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.logoHome {
+  width: 100px;
+  height: 100px;
+}
+
+/* Dropdown */
+.dropdownHome {
+  position: relative;
+ 
+}
+
+.dropdown-menu-home1 {
+  
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #00AB72;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  min-width: 180px;
+  z-index: 10;
+}
+
+.dropdown-menu-home1 li {
+  margin: 5px 0;
+  text-align: justify;
+  padding-left: 18px;
+}
+
+.dropdown-menu-home1 li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 100;
+}
+
+.dropdownHome:hover .dropdown-menu-home1 {
+  display: flex;
+}
+/* Dropdown 2 */
+.dropdownHome1 {
+  position: relative;
+}
+
+.dropdown-menu-home2 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #00AB72;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  min-width: 180px;
+  z-index: 10;
+}
+
+.dropdown-menu-home2 li {
+  margin: 5px 0;
+  text-align: justify;
+  padding-left: 18px;
+}
+
+.dropdown-menu-home2 li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 100;
+}
+
+.dropdownHome1:hover .dropdown-menu-home2 {
+  display: flex;
+}
