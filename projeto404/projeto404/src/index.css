@@ -224,3 +224,86 @@ input:not(:placeholder-shown)~label {
 .dropdownHome1:hover .dropdown-menu-home2 {
   display: flex;
 }
+
+.divTxt{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 600px;  
+}
+
+.txt2Home{
+  display: block;
+  font-weight: bolder;
+  font-size: 70px;
+    text-shadow:
+    1px 1px 0 #000,
+    2px 2px 0 #000,
+    3px 3px 0 #000,
+    4px 4px 0 #000;
+}
+
+.txt3Home{
+  font-size: 30px;
+  font-weight: bolder;
+    text-shadow:
+    1px 1px 0 #000,
+    2px 2px 0 #000,
+}
+
+/* HOME */
+
+
+/* CADASTRO */
+
+.asideCadastro{
+  display: flex;
+  height: 720px;
+  width: 650px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  text-align: center;
+  border-radius: 15px;
+  padding: 20px;  
+}
+
+.logoCadastro{
+  display: flex;
+  width: 90px;
+  height: 90px;
+  align-self: flex-start;
+  transform: translateY(60px);
+}
+
+.h1Cadastro{
+  display: flex;
+  align-self: flex-end ;
+  transform: translateY(-30px);
+  font-size: 23px;
+  width: 450px;
+  height: auto;
+}
+
+.labelCadastro {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  color: #222;
+}
+
+.inputGroupCadastro {
+  position: relative;
+  margin: 20px 0;
+}
+.cadastro{
+  margin-bottom: 50px;
+}
+
+
+/* CADASTRO */

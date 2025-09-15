@@ -37,10 +37,13 @@ function Home() {
           <button className="btnConectar">Conecte-se</button>
         </nav>
       </header>
+    
+    <div className="divTxt">
+      <h1 className="txt1Home">Em breve 7° Edição</h1>
+      <h1 className="txt2Home">Lideranças <br /> Empáticas</h1>
+      <p className="txt3Home">Educar é desenvolver competências</p>
+    </div>
 
-      <h1>Em breve 7° Edição</h1>
-      <h1>Lideranças Empáticas</h1>
-      <p>Educar é desenvolver competências</p>
     </div>
   );
 }
