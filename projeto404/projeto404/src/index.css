@@ -259,7 +259,7 @@ input:not(:placeholder-shown)~label {
 
 .asideCadastro{
   display: flex;
-  height: 720px;
+  height: 690px;
   width: 650px;
   justify-content: center;
   align-items: center;
@@ -269,6 +269,60 @@ input:not(:placeholder-shown)~label {
   border-radius: 15px;
   padding: 20px;  
 }
+.formNome{
+  display: flex;
+  flex-direction: row;
+  gap: 20px; 
+}
+
+.formTelefone{
+  gap: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.inputGroupCadastro {
+  position: relative;
+}
+
+.inputCadastro {
+  border: none;
+  border-bottom: 2px solid #000;
+  padding: 8px;
+  outline: none;
+  background: none;
+  font-size: 16px;
+}
+
+/* ajustes individuais */
+#nome {
+  width: 220px;
+  margin-bottom: 20px;
+}
+
+#matricula {
+  width: 160px;
+  margin-bottom: 20px;
+}
+
+#email{
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+#cpf{
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+#ddd {
+  width: 100px;
+}
+
+#telefone {
+  width: 260px;
+}
+
 
 .logoCadastro{
   display: flex;
@@ -276,6 +330,7 @@ input:not(:placeholder-shown)~label {
   height: 90px;
   align-self: flex-start;
   transform: translateY(60px);
+  margin-top: -150px;
 }
 
 .h1Cadastro{
@@ -301,8 +356,23 @@ input:not(:placeholder-shown)~label {
   position: relative;
   margin: 20px 0;
 }
-.cadastro{
-  margin-bottom: 50px;
+
+.btnProximo{
+  width: 170px;
+  height: 40px;
+  border-radius: 10px;
+  color: #00AB72;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(50px);
+  background-color: white;
+  border-color: #00AB72;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.btnProximo:hover{
+  background-color: rgb(206, 206, 206);
 }
 
 

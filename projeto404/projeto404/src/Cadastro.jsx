@@ -7,7 +7,7 @@ function Cadastro() {
             <h1 className="h1Cadastro">Crie sua conta agora e impusione o lideranças empáticas</h1>
 
 
-            <form className="cadastro">
+            <form className="formNome">
                 <div className="inputGroupCadastro">
 
                 <input className="inputCadastro"
@@ -27,10 +27,12 @@ function Cadastro() {
                     id="matricula"
                 />
                 <label className="labelCadastro" htmlFor="matricula">Matrícula*</label>
-                
-
+                             
                 </div>
-                
+            </form>
+            
+            <form className="formEmail">
+
                 <div className="inputGroupCadastro">
 
                 <input className="inputCadastro"
@@ -53,6 +55,10 @@ function Cadastro() {
 
                 </div>
 
+            </form>
+                
+            <form className="formTelefone">
+
                 <div className="inputGroupCadastro">
 
                 <input className="inputCadastro"
@@ -74,7 +80,11 @@ function Cadastro() {
                 <label className="labelCadastro" htmlFor="telefone">Telefone*</label>
 
                 </div>
+
             </form>
+
+            <button className="btnProximo">Próximo</button>
+            
 
         </aside>
     )
