@@ -2,6 +2,8 @@ import{useState} from "react"
 
 function Verificar(){
     return(
+        <body className="bodyVerificar">
+            
         <aside className="asideVerificar">
             <img className="logoVerificar" src="./src/assets/LogoFundoBranco.avif" alt="logo" />
             <h1 className="h1VerificarEmail">Verificação de E-mail</h1>
@@ -12,11 +14,13 @@ function Verificar(){
             id="codigo" 
             placeholder ="XXXXXX"                      
             />
-            <p>Não recebeu? <a href="">Reenviar código</a></p>
+            <p className="pVerificar">Não recebeu? <a href=""> Reenviar código</a></p>
 
-            <button>Entrar</button>
+            <button className="btnVerificar">Entrar</button>
 
         </aside>
+        
+        </body>
         
 
     )
