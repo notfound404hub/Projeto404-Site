@@ -15,7 +15,7 @@ function Login() {
         <form className="login">
           <div className="input-group">
             <input
-              className="input"
+              className="inputLogin"
               type="text"
               id="email"
               placeholder=" " 
@@ -25,7 +25,7 @@ function Login() {
 
           <div className="input-group">
             <input
-              className="input"
+              className="inputLogin"
               type="password"
               id="senha"
               placeholder=" "
