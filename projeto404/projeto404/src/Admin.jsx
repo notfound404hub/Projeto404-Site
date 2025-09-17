@@ -11,7 +11,6 @@ function Admin(){
 
             />
             <button className="btnPesquisa"></button>
-
             <button className="btnNotif"></button>
             <button className="btnChat"></button>
             <button className="btnPerfil"></button>  
@@ -19,20 +18,59 @@ function Admin(){
         </header>
         
         <aside>
-            <img className="logoAdmin" src="./src/assets/logo.png" alt="logo" />
-            <button className="btnHome">Página inicial</button>
-            <button className="btnRelatorio">Relatórios</button>
-            <button className="btnCadastros">Cadastros</button>
-            <button className="btnDoacoes">Doações</button>
-            <button className="btnAlimentos">Alimentos</button>
-            <button className="btnDinheiro">Dinheiro</button>
-            <button className="btnUsuarios">Usuários</button>
-            <button className="btnConteudo">Conteúdo</button>
-            <button className="btnAdministrativo">Administrativo</button>
-            <button className="btnSuporte">Suporte</button>
-            <button className="btnFinanceiro">Financeiro</button>
-            <button className="btnConfig">Configurações </button>
-            <button className="btnSair"></button>
+            <img className="logoAdmin" src="./src/assets/LogoFundoBranco.avif" alt="logo" />
+            <button  className="btnAdmin">
+                <img className="icon" src="./src/assets/home.png" alt="home" />
+                Página inicial
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/report.png" alt="relatorio" />
+                Relatórios
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/verify.png" alt="cadastros" />
+                Cadastros
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/heart.png" alt="doacoes" />
+                Doações
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/restaurant.png" alt="alimentos" />
+                Alimentos
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/dollar.png" alt="dinheiro" />
+                Dinheiro
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/graduation.png" alt="usuarios" />
+                Usuários
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/copy-writing.png" alt="conteudo" />
+                Conteúdo
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/administrator.png" alt="administrativo" />
+                Administrativo
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/suport.png" alt="suporte" />
+                Suporte
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/budget.png" alt="financeiro" />
+                Financeiro
+                </button>
+            <button className="btnAdmin">
+                <img className="" src="./src/assets/setting.png" alt="config" />
+                Configurações 
+                </button>
+            <button className="btnAdmin">
+                <img className="icon" src="./src/assets/logout.png" alt="sair" />
+                Sair
+                </button>
 
 
         </aside>
