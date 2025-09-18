@@ -2,6 +2,9 @@ import { useState } from "react";
 
 function Home() {
   return (
+
+    <body className="bodyImg">
+    
     <div className="divHome">
       <header className="headerHome">
         <img
@@ -45,6 +48,8 @@ function Home() {
     </div>
 
     </div>
+      
+    </body>
   );
 }
 

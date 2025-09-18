@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 function Login() {
   return (
+    <body className='bodyImg'>
+    
     <div className="divLogin">
       <aside className="asideLogin">
         <img className="logo" src= "./src/assets/logo.png"  alt="Logo" />
@@ -43,6 +45,8 @@ function Login() {
         <p className="footer">&copy; 2025, 404 not found</p>
       </aside>
     </div>
+      
+    </body>
   );
 }
 

@@ -2,9 +2,9 @@ import{useState} from "react"
 
 function Admin(){
     return(
-        <div>
+        <body className="bodyAdmin">
 
-        <header>
+        <header className="headerAdmin">
             <input type="text" 
             id="pesquisa"
             placeholder="Pesquisar "
@@ -17,7 +17,7 @@ function Admin(){
 
         </header>
         
-        <aside>
+        <aside className="asideAdmin">
             <img className="logoAdmin" src="./src/assets/LogoFundoBranco.avif" alt="logo" />
             <button  className="btnAdmin">
                 <img className="icon" src="./src/assets/home.png" alt="home" />
@@ -48,10 +48,6 @@ function Admin(){
                 Usuários
                 </button>
             <button className="btnAdmin">
-                <img className="icon" src="./src/assets/copy-writing.png" alt="conteudo" />
-                Conteúdo
-                </button>
-            <button className="btnAdmin">
                 <img className="icon" src="./src/assets/administrator.png" alt="administrativo" />
                 Administrativo
                 </button>
@@ -60,11 +56,7 @@ function Admin(){
                 Suporte
                 </button>
             <button className="btnAdmin">
-                <img className="icon" src="./src/assets/budget.png" alt="financeiro" />
-                Financeiro
-                </button>
-            <button className="btnAdmin">
-                <img className="" src="./src/assets/setting.png" alt="config" />
+                <img className="icon" src="./src/assets/setting.png" alt="config" />
                 Configurações 
                 </button>
             <button className="btnAdmin">
@@ -75,7 +67,7 @@ function Admin(){
 
         </aside>
 
-        </div>
+        </body>
 
     )
 }

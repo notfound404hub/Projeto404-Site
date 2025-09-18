@@ -2,6 +2,9 @@ import { useState } from "react"
 
 function Cadastro() {
     return (
+        
+        <body className="bodyImg">
+        
         <aside className="asideCadastro">
             <img className="logoCadastro" src="./src/assets/logo.png" alt="logo" />
             <h1 className="h1Cadastro">Crie sua conta agora e impusione o lideranças empáticas</h1>
@@ -87,6 +90,8 @@ function Cadastro() {
             
 
         </aside>
+            
+        </body>
     )
 }
 
