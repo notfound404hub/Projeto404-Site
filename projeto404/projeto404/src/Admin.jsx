@@ -5,19 +5,58 @@ function Admin(){
         <body className="bodyAdmin">
 
         <header className="headerAdmin">
-            <input type="text" 
+            <div className="linha"></div>
+            
+            <div className="divPesquisar">
+
+            
+            <div className="divEsquerda">
+
+            <input className="inputAdmin" 
+            type="text" 
             id="pesquisa"
             placeholder="Pesquisar "
-
             />
-            <button className="btnPesquisa"></button>
-            <button className="btnNotif"></button>
-            <button className="btnChat"></button>
-            <button className="btnPerfil"></button>  
+            <button className="btnPesquisa">
+                <img className="iconPesquisa" src="./src/assets/search.png" alt="pesquisa" />
+            </button>
+
+            </div>
+
+            <div className="divDireita">
+
+            
+            <button className="btnNotif">
+
+            <img className="btnDivDireita" src="./src/assets/notification.png" alt="notif" />
+            
+            </button>
+            
+            <button className="btnChat">
+
+            <img className="btnDivDireita" src="./src/assets/bubble-chat.png" alt="chat" />
+
+            </button>
+            
+            <button className="btnPerfil">
+            
+            <img className="btnDivDireita" src="./src/assets/user.png" alt="user" />
+
+            </button>  
+
+            </div>
+
+
+
+            </div>
+
+
+
 
         </header>
         
         <aside className="asideAdmin">
+            
             <img className="logoAdmin" src="./src/assets/LogoFundoBranco.avif" alt="logo" />
             <button  className="btnAdmin">
                 <img className="icon" src="./src/assets/home.png" alt="home" />
@@ -55,15 +94,14 @@ function Admin(){
                 <img className="icon" src="./src/assets/suport.png" alt="suporte" />
                 Suporte
                 </button>
-            <button className="btnAdmin">
+            <button className="btnConfig">
                 <img className="icon" src="./src/assets/setting.png" alt="config" />
                 Configurações 
                 </button>
-            <button className="btnAdmin">
+            <button className="btnSair">
                 <img className="icon" src="./src/assets/logout.png" alt="sair" />
                 Sair
                 </button>
-
 
         </aside>
 
