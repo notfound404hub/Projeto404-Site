@@ -1,54 +1,54 @@
 import { useState } from 'react';
+import './index.css'; // Certifique-se de que está importando seu CSS
 
 function Login() {
   return (
-    <body className='bodyImg'>
-    
-    <div className="divLogin">
-      <aside className="asideLogin">
-        <img className="logo" src= "./src/assets/logo.png"  alt="Logo" />
+    <div className="bodyImg"> {/* Corrigido: não se usa <body> dentro do React */}
 
-        <p className="lbl_Bemvindo">
-          Seja bem-vindo ao
-          <br />
-          Lideranças Empáticas
-        </p>
+      <div className="divLogin">
+        <aside className="asideLogin">
+          <img className="logo" src="./src/assets/logo.png" alt="Logo" />
 
-        <form className="login">
-          <div className="input-group">
-            <input
-              className="inputLogin"
-              type="text"
-              id="email"
-              placeholder=" " 
-            />
-            <label htmlFor="email">Email</label>
-          </div>
+          <p className="lbl_Bemvindo">
+            Seja bem-vindo ao
+            <br />
+            Lideranças Empáticas
+          </p>
 
-          <div className="input-group">
-            <input
-              className="inputLogin"
-              type="password"
-              id="senha"
-              placeholder=" "
-            />
-            <label htmlFor="senha">Senha</label>
-          </div>
-        </form>
+          <form className="login">
+            <div className="input-group">
+              <input
+                className="inputLogin"
+                type="text"
+                id="email"
+                required
+              />
+              <label className="lblLogin" htmlFor="email">Email</label>
+            </div>
 
-        <p className="lbl_CriarConta">
-          Não tem uma conta? <a href="">Criar agora!</a>
-        </p>
+            <div className="input-group">
+              <input
+                className="inputLogin"
+                type="password"
+                id="senha"
+                required
+              />
+              <label className="lblLogin" htmlFor="senha">Senha</label>
+            </div>
 
-        <button className="botaoLogin">Login</button>
+            <button type="submit" className="botaoLogin">Login</button>
+          </form>
 
-        <p className="footer">&copy; 2025, 404 not found</p>
-      </aside>
+          <p className="lbl_CriarConta">
+            Não tem uma conta? <a href="#">Criar agora!</a>
+          </p>
+
+          <p className="footer">&copy; 2025, 404 not found</p>
+        </aside>
+      </div>
+
     </div>
-      
-    </body>
   );
 }
 
 export default Login;
-

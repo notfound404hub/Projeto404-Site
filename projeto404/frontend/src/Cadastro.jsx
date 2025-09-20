@@ -3,7 +3,7 @@ import { useState } from "react"
 function Cadastro() {
     return (
         
-        <body className="bodyImg">
+        <div className="bodyImg">
         
         <aside className="asideCadastro">
             <img className="logoCadastro" src="./src/assets/logo.png" alt="logo" />
@@ -91,7 +91,7 @@ function Cadastro() {
 
         </aside>
             
-        </body>
+        </div>
     )
 }
 

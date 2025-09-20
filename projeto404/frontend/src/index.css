@@ -4,7 +4,10 @@
   font-family: Poppins, sans-serif;
   box-sizing: border-box;
 }
+body{
+  margin: 0;
 
+}
 .bodyImg {
   display: flex;
   justify-content: center;
@@ -64,21 +67,22 @@ input {
   color: transparent;
 }
 
-label {
+.lblLogin {
   position: absolute;
   left: 8px;
   top: 12px;
   font-size: 16px;
   pointer-events: none;
-  transition: 0.2s ease all;
   color: #222;
+  transition: top 0.2s ease, font-size 0.2s ease;
 }
 
-input:focus~label,
-input:not(:placeholder-shown)~label {
+.inputLogin:focus ~ .lblLogin,
+.inputLogin:valid ~ .lblLogin {
   top: -8px;
   font-size: 12px;
 }
+
 
 .logo {
   width: 80px;
@@ -87,12 +91,21 @@ input:not(:placeholder-shown)~label {
 }
 
 .botaoLogin {
-  padding: 5px 50px;
+  display: flex;
+  justify-content: center;   
+  align-items: center;
+  align-self: center;
+  padding: 5px;
   border-radius: 10px;
-  border-color: #00AB72;
+  border: 2px solid #00AB72;
   font-weight: bolder;
   font-size: 15px;
   color: #00AB72;
+  width: 200px;
+  height: 40px;            
+  text-align: center;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .botaoLogin:hover {
@@ -269,6 +282,7 @@ input:not(:placeholder-shown)~label {
   border-radius: 15px;
   padding: 20px;  
 }
+
 .formNome{
   display: flex;
   flex-direction: row;
@@ -348,8 +362,14 @@ input:not(:placeholder-shown)~label {
   top: 12px;
   font-size: 16px;
   pointer-events: none;
-  transition: 0.2s ease all;
   color: #222;
+  transition: top 0.2s ease, font-size 0.2s ease;
+}
+
+.inputCadastro:focus ~ .labelCadastro,
+.input:valid ~ .labelCadastro {
+  top: -8px;
+  font-size: 12px;
 }
 
 .inputGroupCadastro {
@@ -369,6 +389,8 @@ input:not(:placeholder-shown)~label {
   border-color: #00AB72;
   font-weight: bolder;
   font-size: 18px;
+  margin-top: -20px;
+
 }
 
 .btnProximo:hover{
@@ -381,10 +403,10 @@ input:not(:placeholder-shown)~label {
 /* VERIFICAÇÃO */
 
 .asideVerificar{
-  position: absolute;
+  position:absolute;
   right: 0;
   top: 0;
-  height: 100vh;
+  height: 100;
   width: 450px;
   margin-right: 0 auto;
   background-color: white;
@@ -394,8 +416,8 @@ input:not(:placeholder-shown)~label {
   display: flex;
   justify-self: center;
   align-self: center;  
-  width: 200px;
-  height: 200px;  
+  width: 150px;
+  height: 150px;  
   margin-top: 20px;
 }
 
@@ -456,6 +478,7 @@ input:not(:placeholder-shown)~label {
   font-weight: bold;
   font-size: 18px;
   background-color: #e7e6e6;
+  cursor: pointer;
 }
 
 .btnVerificar:hover{
@@ -485,21 +508,24 @@ input:not(:placeholder-shown)~label {
   background-color: white;
 }
 
-.asideAdmin{
+.asideAdmin {
   display: flex;
   position: absolute;
   left: 0;
-  top: 0 ;
+  top: 0;
   flex-direction: column;
   height: 100vh;
   width: 250px;
   background-color: #e6e4e4;
   border-radius: 10px;
+  padding-bottom: 20px;
 }
 
-.btnAdmin{
+
+
+.btnAdmin {
   display: flex;
-  align-self: center;
+  align-items: center;
   justify-content: flex-start;
   gap: 8px;
   padding: 5px;
@@ -510,27 +536,13 @@ input:not(:placeholder-shown)~label {
   height: 40px;
   background-color: #e6e4e4;
   cursor: pointer;
+  margin-left: 20px;
 }
 
-.btnConfig{
+.btnConfig,
+.btnSair {
   display: flex;
-  align-self: center;
-  justify-content: flex-start;
-  gap: 8px;
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  border: none;
-  width: 200px;
-  height: 30px;
-  background-color: #e6e4e4;
-  margin-top: 250px;
-  cursor: pointer;
-}
-
-.btnSair{
-  display: flex;
-  align-self: center;
+  align-items: center;
   justify-content: flex-start;
   gap: 8px;
   padding: 5px;
@@ -541,6 +553,7 @@ input:not(:placeholder-shown)~label {
   height: 30px;
   background-color: #e6e4e4;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .icon{
