@@ -9,7 +9,7 @@ function Home() {
       <header className="headerHome">
         <img
           className="logoHome"
-          src="./src/assets/LogoFundoBranco.avif"
+          src="LogoFundoBranco.avif"
           alt="Logo"
         />
 

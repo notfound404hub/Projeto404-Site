@@ -35,7 +35,7 @@ function Login() {
 
       <div className="divLogin">
         <aside className="asideLogin">
-          <img className="logo" src="./src/assets/logo.png" alt="Logo" />
+          <img className="logo" src="logo.png" alt="Logo" />
 
           <p className="lbl_Bemvindo">
             Seja bem-vindo ao

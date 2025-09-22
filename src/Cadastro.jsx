@@ -33,7 +33,7 @@ function Register() {
     return (
         <div className="bodyImg">
             <aside className="asideCadastro">
-                <img className="logoCadastro" src="./src/assets/logo.png" alt="logo" />
+                <img className="logoCadastro" src="logo.png" alt="logo" />
                 <h1 className="h1Cadastro">Crie sua conta agora e impulsione lideranças empáticas</h1>
 
                 <form className="formCadastro" onSubmit={handleSubmit}>
