@@ -18,7 +18,7 @@ function Login() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
-      const res = await axios.post("http://localhost:500/api/users/login", form);
+      const res = await axios.post("https://projeto404-site-backend.vercel.app/api/users/login", form);
       console.log("Resposta do backend:",res.data)
       
       alert(res.data.msg)
