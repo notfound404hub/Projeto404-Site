@@ -1,98 +1,103 @@
 import { useState } from "react"
+import axios from "axios"
 
-function Cadastro() {
+function Register() {
+    const [form, setForm] = useState({
+        Aluno_Nome: "",
+        Aluno_RA: "",
+        Aluno_Email: "",
+        Aluno_Senha: "",
+        Aluno_CPF: "",
+        Aluno_DDD: "",
+        Aluno_Telefone: ""
+    });
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Enviando form:", form) 
+        try {
+            const res = await axios.post("http://localhost:500/api/users/register", form)
+            console.log("Resposta do backend:", res.data)
+            alert(res.data.msg)
+        }
+        catch (err) {
+            console.error("Erro no cadastro:", err.response?.data || err.message)
+            alert("Erro no cadastro:" + (err.response?.data?.error || err.message))
+        }
+    }
+
     return (
-        
         <div className="bodyImg">
-        
-        <aside className="asideCadastro">
-            <img className="logoCadastro" src="./src/assets/logo.png" alt="logo" />
-            <h1 className="h1Cadastro">Crie sua conta agora e impusione o lideranças empáticas</h1>
+            <aside className="asideCadastro">
+                <img className="logoCadastro" src="./src/assets/logo.png" alt="logo" />
+                <h1 className="h1Cadastro">Crie sua conta agora e impulsione lideranças empáticas</h1>
 
+                <form className="formCadastro" onSubmit={handleSubmit}>
+                    <div className="inputGroupRow">
+                        <input 
+                          type="text" 
+                          name="Aluno_Nome" 
+                          placeholder="Primeiro Nome*" 
+                          className="inputCadastro"
+                          onChange={handleChange}
+                          required
+                        />
+                        <input 
+                          type="text" 
+                          name="Aluno_RA" 
+                          placeholder="Matrícula*" 
+                          className="inputCadastro"
+                          onChange={handleChange}
+                          required
+                        />
+                    </div>
 
-            <form className="formNome">
-                <div className="inputGroupCadastro">
+                    <input 
+                      type="email" 
+                      name="Aluno_Email" 
+                      placeholder="E-mail*" 
+                      className="inputCadastro"
+                      onChange={handleChange}
+                      required
+                    />
 
-                <input className="inputCadastro"
-                    type="text"
-                    placeholder=" "
-                    id="nome"
-                />
-                <label className="labelCadastro" htmlFor="nome">Nome*</label>
+                    <input 
+                      type="text" 
+                      name="Aluno_CPF" 
+                      placeholder="CPF ou CNPJ*" 
+                      className="inputCadastro"
+                      onChange={handleChange}
+                      required
+                    />
 
-                </div>
-                
-                <div className="inputGroupCadastro">
+                    <div className="inputGroupRow">
+                        <input 
+                          type="text" 
+                          name="Aluno_DDD" 
+                          placeholder="DDD*" 
+                          className="inputCadastro"
+                          onChange={handleChange}
+                          required
+                        />
+                        <input 
+                          type="text" 
+                          name="Aluno_Telefone" 
+                          placeholder="Telefone*" 
+                          className="inputCadastro"
+                          onChange={handleChange}
+                          required
+                        />
+                    </div>
 
-                <input className="inputCadastro"
-                    type="text"
-                    placeholder=" "
-                    id="matricula"
-                />
-                <label className="labelCadastro" htmlFor="matricula">Matrícula*</label>
-                             
-                </div>
-            </form>
-            
-            <form className="formEmail">
-
-                <div className="inputGroupCadastro">
-
-                <input className="inputCadastro"
-                    type="text"
-                    placeholder=" "
-                    id="email"
-                />
-                <label className="labelCadastro" htmlFor="email">E-mail*</label>
-
-                </div>
-
-                <div className="inputGroupCadastro">
-
-                <input className="inputCadastro"
-                    type="text"
-                    placeholder=" "
-                    id="cpf"
-                />
-                <label className="labelCadastro" htmlFor="cpf">CPF ou CNPJ*</label>
-
-                </div>
-
-            </form>
-                
-            <form className="formTelefone">
-
-                <div className="inputGroupCadastro">
-
-                <input className="inputCadastro"
-                    type="text"
-                    placeholder=" "
-                    id="ddd"
-                />
-                <label className="labelCadastro" htmlFor="ddd">DDD*</label>
-
-                </div>
-
-                <div className="inputGroupCadastro">
-                
-                <input className="inputCadastro"
-                    type="text"
-                    placeholder=" "
-                    id="telefone"
-                />
-                <label className="labelCadastro" htmlFor="telefone">Telefone*</label>
-
-                </div>
-
-            </form>
-
-            <button className="btnProximo">Próximo</button>
-            
-
-        </aside>
-            
+                    <button type="submit" className="btnProximo">Próximo</button>
+                </form>
+            </aside>
         </div>
     )
 }
 
-export default Cadastro;
+export default Register

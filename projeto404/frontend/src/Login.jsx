@@ -1,9 +1,37 @@
 import { useState } from 'react';
-import './index.css'; // Certifique-se de que está importando seu CSS
+import './index.css'; 
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
+
+  const[form,setForm] = useState({
+    Usuario_Email: "",
+    Usuario_Senha: ""
+  })
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setForm({...form, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try{
+      const res = await axios.post("http://localhost:500/api/users/login", form);
+      console.log("Resposta do backend:",res.data)
+      
+      alert(res.data.msg)
+
+      navigate("/admin")
+    } catch(err){
+    console.error("Erro no login:", err.response?.data || err.message)
+    alert("Erro no login:"+(err.response?.data?.error || err.message))
+  }
+}
+
   return (
-    <div className="bodyImg"> {/* Corrigido: não se usa <body> dentro do React */}
+    <div className="bodyImg"> 
 
       <div className="divLogin">
         <aside className="asideLogin">
@@ -15,33 +43,33 @@ function Login() {
             Lideranças Empáticas
           </p>
 
-          <form className="login">
+          <form className="login" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
+                name='Usuario_Email'                
                 className="inputLogin"
-                type="text"
+                type="email"
+                placeholder='Email'
                 id="email"
                 required
+                onChange={handleChange}
               />
-              <label className="lblLogin" htmlFor="email">Email</label>
             </div>
 
             <div className="input-group">
               <input
+                name='Usuario_Senha'   
                 className="inputLogin"
                 type="password"
-                id="senha"
+                placeholder='Senha'
+                id="senha"                          
                 required
+                onChange={handleChange}
               />
-              <label className="lblLogin" htmlFor="senha">Senha</label>
             </div>
 
             <button type="submit" className="botaoLogin">Login</button>
           </form>
-
-          <p className="lbl_CriarConta">
-            Não tem uma conta? <a href="#">Criar agora!</a>
-          </p>
 
           <p className="footer">&copy; 2025, 404 not found</p>
         </aside>
