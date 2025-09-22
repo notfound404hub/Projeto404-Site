@@ -105,7 +105,7 @@ function Admin() {
             <button className="btnPesquisa">
               <img
                 className="iconPesquisa"
-                src="./src/assets/search.png"
+                src="search.png"
                 alt="pesquisa"
               />
             </button>
@@ -115,7 +115,7 @@ function Admin() {
             <button className="btnNotif">
               <img
                 className="btnDivDireita"
-                src="./src/assets/notification.png"
+                src="notification.png"
                 alt="notif"
               />
             </button>
@@ -123,7 +123,7 @@ function Admin() {
             <button className="btnChat">
               <img
                 className="btnDivDireita"
-                src="./src/assets/bubble-chat.png"
+                src="bubble-chat.png"
                 alt="chat"
               />
             </button>
@@ -131,7 +131,7 @@ function Admin() {
             <button className="btnPerfil">
               <img
                 className="btnDivDireita"
-                src="./src/assets/user.png"
+                src="user.png"
                 alt="user"
               />
             </button>
@@ -142,41 +142,41 @@ function Admin() {
       <aside className="asideAdmin">
         <img
           className="logoAdmin"
-          src="./src/assets/LogoFundoBranco.avif"
+          src="LogoFundoBranco.avif"
           alt="logo"
         />
         <button className="btnAdmin">
-          <img className="icon" src="./src/assets/home.png" alt="home" />
+          <img className="icon" src="home.png" alt="home" />
           Página inicial
         </button>
         <button className="btnAdmin">
-          <img className="icon" src="./src/assets/report.png" alt="relatorio" />
+          <img className="icon" src="report.png" alt="relatorio" />
           Relatórios
         </button>
         <button className="btnAdmin">
-          <img className="icon" src="./src/assets/verify.png" alt="cadastros" />
+          <img className="icon" src="verify.png" alt="cadastros" />
           Cadastros
         </button>
         <button className="btnAdmin">
-          <img className="icon" src="./src/assets/heart.png" alt="doacoes" />
+          <img className="icon" src="heart.png" alt="doacoes" />
           Doações
         </button>
         <button className="btnAdmin">
           <img
             className="icon"
-            src="./src/assets/restaurant.png"
+            src="restaurant.png"
             alt="alimentos"
           />
           Alimentos
         </button>
         <button className="btnAdmin">
-          <img className="icon" src="./src/assets/dollar.png" alt="dinheiro" />
+          <img className="icon" src="dollar.png" alt="dinheiro" />
           Dinheiro
         </button>
         <button className="btnAdmin">
           <img
             className="icon"
-            src="./src/assets/graduation.png"
+            src="graduation.png"
             alt="usuarios"
           />
           Usuários
@@ -184,7 +184,7 @@ function Admin() {
         <button className="btnAdmin">
           <img
             className="icon"
-            src="./src/assets/administrator.png"
+            src="administrator.png"
             alt="administrativo"
           />
           Administrativo
@@ -193,18 +193,18 @@ function Admin() {
           className="btnAdmin"
           onClick={() => console.log(localStorage.getItem("Usuario_ID"))}
         >
-          <img className="icon" src="./src/assets/suport.png" alt="suporte" />
+          <img className="icon" src="suport.png" alt="suporte" />
           Suporte
         </button>
         <button
           className="btnConfig"
           onClick={() => setModalConfig(!modalConfig)}
         >
-          <img className="icon" src="./src/assets/setting.png" alt="config" />
+          <img className="icon" src="setting.png" alt="config" />
           Configurações
         </button>
         <button className="btnSair" onClick={handleLogout}>
-          <img className="icon" src="./src/assets/logout.png" alt="sair" />
+          <img className="icon" src="logout.png" alt="sair" />
           Sair
         </button>
 
