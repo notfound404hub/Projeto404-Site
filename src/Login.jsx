@@ -70,7 +70,7 @@ function Login() {
 
             <button type="submit" className="botaoLogin">Login</button>
           </form>
-
+            <p>Não tem uma conta? <a href="cadastro">Cadastre-se</a></p>
           <p className="footer">&copy; 2025, 404 not found</p>
         </aside>
       </div>

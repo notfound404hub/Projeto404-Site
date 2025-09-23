@@ -37,7 +37,8 @@ function Home() {
           </div>
           <button className="navHomeBotoes">Notícias</button>
           <button className="navHomeBotoes">Contato</button>
-          <button className="btnConectar">Conecte-se</button>
+          <button className="btnConectar" onClick={()=> window.location.href = "login"}>Conecte-se</button>
+          
         </nav>
       </header>
     

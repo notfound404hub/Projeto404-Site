@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
+import Login from "./Login";
 
 function Register() {
     const [form, setForm] = useState({
@@ -23,6 +24,8 @@ function Register() {
             const res = await axios.post("https://projeto404-site-backend.vercel.app/api/users/register", form)
             console.log("Resposta do backend:", res.data)
             alert(res.data.msg)
+            window.location.href = "login";
+
         }
         catch (err) {
             console.error("Erro no cadastro:", err.response?.data || err.message)
@@ -93,9 +96,12 @@ function Register() {
                         />
                     </div>
 
-                    <button type="submit" className="btnProximo">Próximo</button>
+                    <button type="submit" className="btnProximo">Próximo</button>                 
+          
                 </form>
+                
             </aside>
+            
         </div>
     )
 }
