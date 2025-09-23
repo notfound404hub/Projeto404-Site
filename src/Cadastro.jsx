@@ -3,13 +3,13 @@ import axios from "axios"
 
 function Register() {
     const [form, setForm] = useState({
-        Aluno_Nome: "",
-        Aluno_RA: "",
-        Aluno_Email: "",
-        Aluno_Senha: "",
-        Aluno_CPF: "",
-        Aluno_DDD: "",
-        Aluno_Telefone: ""
+        Usuario_Nome: "",
+        Usuario_Email: "",
+        Usuario_Senha: "",
+        Usuario_RA: "",
+        Usuario_CPF: "",
+        Usuario_Cargo: "",
+        Usuario_Telefone: ""
     });
 
     const handleChange = (e) => {
@@ -40,7 +40,7 @@ function Register() {
                     <div className="inputGroupRow">
                         <input 
                           type="text" 
-                          name="Aluno_Nome" 
+                          name="Usuario_Nome" 
                           placeholder="Primeiro Nome*" 
                           className="inputCadastro"
                           onChange={handleChange}
@@ -48,7 +48,7 @@ function Register() {
                         />
                         <input 
                           type="text" 
-                          name="Aluno_RA" 
+                          name="Usuario_RA" 
                           placeholder="Matrícula*" 
                           className="inputCadastro"
                           onChange={handleChange}
@@ -58,7 +58,7 @@ function Register() {
 
                     <input 
                       type="email" 
-                      name="Aluno_Email" 
+                      name="Usuario_Email" 
                       placeholder="E-mail*" 
                       className="inputCadastro"
                       onChange={handleChange}
@@ -66,9 +66,9 @@ function Register() {
                     />
 
                     <input 
-                      type="text" 
-                      name="Aluno_CPF" 
-                      placeholder="CPF ou CNPJ*" 
+                      type="password" 
+                      name="Usuario_Senha" 
+                      placeholder="Senha*" 
                       className="inputCadastro"
                       onChange={handleChange}
                       required
@@ -77,15 +77,15 @@ function Register() {
                     <div className="inputGroupRow">
                         <input 
                           type="text" 
-                          name="Aluno_DDD" 
-                          placeholder="DDD*" 
+                          name="Usuario_Cargo" 
+                          placeholder="Cargo*" 
                           className="inputCadastro"
                           onChange={handleChange}
                           required
                         />
                         <input 
                           type="text" 
-                          name="Aluno_Telefone" 
+                          name="Usuario_Telefone" 
                           placeholder="Telefone*" 
                           className="inputCadastro"
                           onChange={handleChange}
