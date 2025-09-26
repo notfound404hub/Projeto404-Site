@@ -1,71 +1,19 @@
 import { useState } from "react";
+import Aluno from './components/Aluno.jsx';
+import SidebarAdmin from './components/SidebarAdmin.jsx';
+import HeaderAdmin from './components/HeaderAdmin.jsx';
+
 
 function Admin() {
-  const [modalConfig, setModalConfig] = useState(false);
-  const [modalEdit, setModalEdit] = useState(false);
   const [userData, setUserData] = useState({
     Usuario_Email: "",
     Usuario_Senha: "",
     Usuario_Cargo: ""
   });
 
-  const handleDeleteAccount = async () => {
-    const ID_Usuario = localStorage.getItem("ID_Usuario");
-    if (!ID_Usuario) {
-      alert("Usuário não identificado!");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
-        { method: "DELETE" }
-      );
-      const data = await response.json();
-      alert(data.msg || data.error);
-
-      if (response.ok) {
-        localStorage.removeItem("ID_Usuario");
-        window.location.href = "/";
-      }
-    } catch (err) {
-      console.error("Erro ao deletar conta:", err);
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("ID_Usuario");
     window.location.href = "/";
-  };
-
-  const handleOpenEdit = async () => {
-    const ID_Usuario = localStorage.getItem("ID_Usuario");
-    console.log("handleOpenEdit chamado - ID_Usuario salvo:", ID_Usuario);
-
-    if (!ID_Usuario) {
-      alert("Usuário não identificado!");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`
-      );
-      console.log("Response do backend:", response);
-
-      const data = await response.json();
-      console.log("Dados recebidos:", data);
-
-      if (response.ok) {
-        setUserData(data); 
-        setModalEdit(true);
-      } else {
-        alert(data.error || "Erro ao buscar usuário");
-      }
-    } catch (err) {
-      console.error("Erro ao buscar usuário:", err);
-      alert("Erro no servidor ao buscar usuário");
-    }
   };
 
   const handleUpdate = async () => {
@@ -81,9 +29,6 @@ function Admin() {
       );
       const data = await response.json();
       alert(data.msg || data.error);
-      if (response.ok) {
-        setModalEdit(false);
-      }
     } catch (err) {
       console.error("Erro ao atualizar usuário:", err);
     }
@@ -91,168 +36,19 @@ function Admin() {
 
   return (
     <div className="bodyAdmin">
-      <header className="headerAdmin">
-        <div className="linha"></div>
+      {/* Sidebar fixo à esquerda */}
+      <SidebarAdmin
+        onLogout={handleLogout}
+        onUpdate={handleUpdate}
+        userData={userData}
+        setUserData={setUserData}
+      />
 
-        <div className="divPesquisar">
-          <div className="divEsquerda">
-            <input
-              className="inputAdmin"
-              type="text"
-              id="pesquisa"
-              placeholder="Pesquisar "
-            />
-            <button className="btnPesquisa">
-              <img
-                className="iconPesquisa"
-                src="search.png"
-                alt="pesquisa"
-              />
-            </button>
-          </div>
-
-          <div className="divDireita">
-            <button className="btnNotif">
-              <img
-                className="btnDivDireita"
-                src="notification.png"
-                alt="notif"
-              />
-            </button>
-
-            <button className="btnChat">
-              <img
-                className="btnDivDireita"
-                src="bubble-chat.png"
-                alt="chat"
-              />
-            </button>
-
-            <button className="btnPerfil">
-              <img
-                className="btnDivDireita"
-                src="user.png"
-                alt="user"
-              />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <aside className="asideAdmin">
-        <img
-          className="logoAdmin"
-          src="LogoFundoBranco.avif"
-          alt="logo"
-        />
-        <button className="btnAdmin">
-          <img className="icon" src="home.png" alt="home" />
-          Página inicial
-        </button>
-        <button className="btnAdmin">
-          <img className="icon" src="report.png" alt="relatorio" />
-          Relatórios
-        </button>
-        <button className="btnAdmin">
-          <img className="icon" src="verify.png" alt="cadastros" />
-          Cadastros
-        </button>
-        <button className="btnAdmin">
-          <img className="icon" src="heart.png" alt="doacoes" />
-          Doações
-        </button>
-        <button className="btnAdmin">
-          <img
-            className="icon"
-            src="restaurant.png"
-            alt="alimentos"
-          />
-          Alimentos
-        </button>
-        <button className="btnAdmin">
-          <img className="icon" src="dollar.png" alt="dinheiro" />
-          Dinheiro
-        </button>
-        <button className="btnAdmin">
-          <img
-            className="icon"
-            src="graduation.png"
-            alt="usuarios"
-          />
-          Usuários
-        </button>
-        <button className="btnAdmin">
-          <img
-            className="icon"
-            src="administrator.png"
-            alt="administrativo"
-          />
-          Administrativo
-        </button>
-        <button
-          className="btnAdmin"
-          onClick={() => console.log(localStorage.getItem("ID_Usuario"))}
-        >
-          <img className="icon" src="suport.png" alt="suporte" />
-          Suporte
-        </button>
-        <button
-          className="btnConfig"
-          onClick={() => setModalConfig(!modalConfig)}
-        >
-          <img className="icon" src="setting.png" alt="config" />
-          Configurações
-        </button>
-        <button className="btnSair" onClick={handleLogout}>
-          <img className="icon" src="logout.png" alt="sair" />
-          Sair
-        </button>
-
-        {modalConfig && (
-          <div className="modalConfig">
-            <button className="btnModal" onClick={handleOpenEdit}>
-              Alterar Perfil
-            </button>
-            <button className="btnModal delete" onClick={handleDeleteAccount}>
-              Deletar Conta
-            </button>
-          </div>
-        )}
-
-        {modalEdit && (
-          <div className="modalEdit">
-            <h2>Editar Perfil</h2>
-            <input
-              type="email"
-              value={userData.Usuario_Email}
-              onChange={(e) =>
-                setUserData({ ...userData, Usuario_Email: e.target.value })
-              }
-              placeholder="Email"
-            />
-            <input
-              type="password"
-              value={userData.Usuario_Senha}
-              onChange={(e) =>
-                setUserData({ ...userData, Usuario_Senha: e.target.value })
-              }
-              placeholder="Senha"
-            />
-            <input
-              type="text"
-              value={userData.Usuario_Cargo}
-              onChange={(e) =>
-                setUserData({ ...userData, Usuario_Cargo: e.target.value })
-              }
-              placeholder="Cargo"
-            />
-            <div className="modalActions">
-              <button onClick={handleUpdate}>Alterar</button>
-              <button onClick={() => setModalEdit(false)}>Cancelar</button>
-            </div>
-          </div>
-        )}
-      </aside>
+      {/* Conteúdo principal */}
+      <div className="mainAdmin">
+        <HeaderAdmin />
+        <Aluno />
+      </div>
     </div>
   );
 }

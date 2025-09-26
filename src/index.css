@@ -696,3 +696,89 @@ form {
 }
 
 /* ADMIN */
+
+/* Aluno */
+.class-aluno {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* cabeçalho */
+.class-aluno .cabecalho-aluno {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* botões */
+.class-aluno .btn-aluno {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.class-aluno .adicionar-aluno,
+.class-aluno .formulario-aluno,
+.class-aluno .filtrar-aluno,
+.class-aluno .ordenar-aluno {
+  background: #00c853;
+  color: white;
+}
+
+.class-aluno .mais-opcoes {
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+}
+
+/* dropdown */
+.class-aluno .dropdown-aluno {
+  position: relative;
+  display: inline-block;
+}
+
+.class-aluno .dropdown-content-aluno {
+  display: none;
+  position: absolute;
+  background: white;
+  min-width: 160px;
+  border: 1px solid #ccc;
+  z-index: 1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.class-aluno .dropdown-aluno:hover .dropdown-content-aluno {
+  display: block;
+}
+
+.class-aluno .dropdown-content-aluno a {
+  padding: 8px 12px;
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.class-aluno .dropdown-content-aluno a:hover {
+  background: #f1f1f1;
+}
+
+/* tabela */
+.class-aluno .tabela-alunos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.class-aluno .tabela-alunos th,
+.class-aluno .tabela-alunos td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.class-aluno .tabela-alunos th {
+  background: #f9f9f9;
+}
