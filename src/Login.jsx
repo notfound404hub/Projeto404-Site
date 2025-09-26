@@ -1,45 +1,46 @@
 import { useState } from 'react';
 import './index.css'; 
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-
-  const[form,setForm] = useState({
+  const [form, setForm] = useState({
     Usuario_Email: "",
     Usuario_Senha: ""
-  })
-  const navigate = useNavigate()
+  });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value})
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
- const handleSubmit = async (e) =>{
-  e.preventDefault();
-  try{
-    const res = await axios.post("https://projeto404-site-backend.vercel.app/api/users/login", form);
-    console.log("Resposta do backend:", res.data);
-    
-    alert(res.data.msg);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:500/api/users/login", 
+        form
+      );
 
-    // Armazena no localStorage
-    if(res.data.ID_Usuario){
-      localStorage.setItem("ID_Usuario", res.data.ID_Usuario);
+      console.log("Resposta do backend:", res.data);
+      alert(res.data.msg);
+
+      // Armazena no localStorage
+      if (res.data.ID_Usuario) {
+        localStorage.setItem("ID_Usuario", res.data.ID_Usuario);
+        console.log("ID salvo no localStorage:", res.data.ID_Usuario);
+      }
+
+      navigate("/admin");
+    } catch (err) {
+      console.error("Erro no login:", err.response?.data || err.message);
+      alert("Erro no login: " + (err.response?.data?.error || err.message));
     }
-
-    navigate("/admin");
-  } catch(err){
-    console.error("Erro no login:", err.response?.data || err.message);
-    alert("Erro no login:"+(err.response?.data?.error || err.message));
-  }
-}
-
-}
+  };
 
   return (
     <div className="bodyImg"> 
-
       <div className="divLogin">
         <aside className="asideLogin">
           <img className="logo" src="logo.png" alt="Logo" />
@@ -53,10 +54,10 @@ function Login() {
           <form className="login" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
-                name='Usuario_Email'                
+                name="Usuario_Email"                
                 className="inputLogin"
                 type="email"
-                placeholder='Email'
+                placeholder="Email"
                 id="email"
                 required
                 onChange={handleChange}
@@ -65,10 +66,10 @@ function Login() {
 
             <div className="input-group">
               <input
-                name='Usuario_Senha'   
+                name="Usuario_Senha"   
                 className="inputLogin"
                 type="password"
-                placeholder='Senha'
+                placeholder="Senha"
                 id="senha"                          
                 required
                 onChange={handleChange}
@@ -77,11 +78,11 @@ function Login() {
 
             <button type="submit" className="botaoLogin">Login</button>
           </form>
-            <p>Não tem uma conta? <a href="cadastro">Cadastre-se</a></p>
+
+          <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
           <p className="footer">&copy; 2025, 404 not found</p>
         </aside>
       </div>
-
     </div>
   );
 }

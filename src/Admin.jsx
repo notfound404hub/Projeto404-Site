@@ -10,22 +10,22 @@ function Admin() {
   });
 
   const handleDeleteAccount = async () => {
-    const Usuario_ID = localStorage.getItem("Usuario_ID");
-    if (!Usuario_ID) {
+    const ID_Usuario = localStorage.getItem("ID_Usuario");
+    if (!ID_Usuario) {
       alert("Usuário não identificado!");
       return;
     }
 
     try {
       const response = await fetch(
-        `https://projeto404-site-backend.vercel.app/api/users/usuario/${Usuario_ID}`,
+        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
         { method: "DELETE" }
       );
       const data = await response.json();
       alert(data.msg || data.error);
 
       if (response.ok) {
-        localStorage.removeItem("Usuario_ID");
+        localStorage.removeItem("ID_Usuario");
         window.location.href = "/";
       }
     } catch (err) {
@@ -34,22 +34,22 @@ function Admin() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("Usuario_ID");
+    localStorage.removeItem("ID_Usuario");
     window.location.href = "/";
   };
 
   const handleOpenEdit = async () => {
-    const Usuario_ID = localStorage.getItem("Usuario_ID");
-    console.log("handleOpenEdit chamado - Usuario_ID salvo:", Usuario_ID);
+    const ID_Usuario = localStorage.getItem("ID_Usuario");
+    console.log("handleOpenEdit chamado - ID_Usuario salvo:", ID_Usuario);
 
-    if (!Usuario_ID) {
+    if (!ID_Usuario) {
       alert("Usuário não identificado!");
       return;
     }
 
     try {
       const response = await fetch(
-        `https://projeto404-site-backend.vercel.app/api/users/usuario/${Usuario_ID}`
+        `http://localhost:500/api/users/usuario/${ID_Usuario}`
       );
       console.log("Response do backend:", response);
 
@@ -69,10 +69,10 @@ function Admin() {
   };
 
   const handleUpdate = async () => {
-    const Usuario_ID = localStorage.getItem("Usuario_ID");
+    const ID_Usuario = localStorage.getItem("ID_Usuario");
     try {
       const response = await fetch(
-        `https://projeto404-site-backend.vercel.app/api/users/usuario/${Usuario_ID}`,
+        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -191,7 +191,7 @@ function Admin() {
         </button>
         <button
           className="btnAdmin"
-          onClick={() => console.log(localStorage.getItem("Usuario_ID"))}
+          onClick={() => console.log(localStorage.getItem("ID_Usuario"))}
         >
           <img className="icon" src="suport.png" alt="suporte" />
           Suporte
