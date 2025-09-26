@@ -666,7 +666,9 @@ form {
   justify-content: space-between;
   gap: 10px;
 }
-
+.tr-aluno{
+  margin: 100px;
+}
 .modalEdit .modalActions button {
   flex: 1;
   padding: 10px;
@@ -697,88 +699,131 @@ form {
 
 /* ADMIN */
 
-/* Aluno */
-.class-aluno {
+/* Estilos gerais */
+.main-container-aluno {
   padding: 20px;
   font-family: Arial, sans-serif;
+  width: calc(100%-250px);
+  margin-left: 250px;
+  box-sizing: border-box;
+  overflow-x: auto; /* evita quebra em telas menores */
 }
 
-/* cabeçalho */
-.class-aluno .cabecalho-aluno {
+/* Cabeçalho */
+.main-container-aluno .cabecalho-aluno {
   display: flex;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-/* botões */
-.class-aluno .btn-aluno {
+/* Indicador */
+.main-container-aluno .indicador-selecionados {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #00AB72;
+}
+
+/* Botões base */
+.main-container-aluno .btn-aluno {
   padding: 8px 14px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
-.class-aluno .adicionar-aluno,
-.class-aluno .formulario-aluno,
-.class-aluno .filtrar-aluno,
-.class-aluno .ordenar-aluno {
-  background: #00c853;
+/* Botões verdes (Adicionar, Formulário, Filtrar, Ordenar) */
+.main-container-aluno .adicionar-aluno,
+.main-container-aluno .formulario-aluno,
+.main-container-aluno .filtrar-aluno,
+.main-container-aluno .ordenar-aluno {
+  background: #00AB72;
+  border: 2px solid #fafafa;
   color: white;
 }
 
-.class-aluno .mais-opcoes {
-  background: #f1f1f1;
-  border: 1px solid #ccc;
+.main-container-aluno .adicionar-aluno:hover,
+.main-container-aluno .formulario-aluno:hover,
+.main-container-aluno .filtrar-aluno:hover,
+.main-container-aluno .ordenar-aluno:hover {
+  background: #fafafa;
+  border: 2px solid #00AB72;
+  color: #00AB72;
+ 
 }
 
-/* dropdown */
-.class-aluno .dropdown-aluno {
+/* Botão de mais opções */
+.main-container-aluno .mais-opcoes {
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.main-container-aluno .mais-opcoes:hover {
+  background: #e0e0e0;
+}
+
+/* Dropdown */
+.main-container-aluno .dropdown-aluno {
   position: relative;
   display: inline-block;
 }
 
-.class-aluno .dropdown-content-aluno {
+.main-container-aluno .dropdown-content-aluno {
   display: none;
   position: absolute;
   background: white;
-  min-width: 160px;
+  min-width: 180px;
   border: 1px solid #ccc;
   z-index: 1;
   border-radius: 6px;
   overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
-.class-aluno .dropdown-aluno:hover .dropdown-content-aluno {
+.main-container-aluno .dropdown-aluno:hover .dropdown-content-aluno {
   display: block;
 }
 
-.class-aluno .dropdown-content-aluno a {
-  padding: 8px 12px;
+.main-container-aluno .dropdown-content-aluno a {
+  padding: 10px 14px;
   display: block;
   text-decoration: none;
-  color: black;
+  color: #333;
   font-size: 14px;
 }
 
-.class-aluno .dropdown-content-aluno a:hover {
+.main-container-aluno .dropdown-content-aluno a:hover {
   background: #f1f1f1;
 }
 
-/* tabela */
-.class-aluno .tabela-alunos {
+/* Tabela */
+.main-container-aluno .tabela-alunos {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  font-size: 14px;
 }
 
-.class-aluno .tabela-alunos th,
-.class-aluno .tabela-alunos td {
-  border: 1px solid #ccc;
+.main-container-aluno .tabela-alunos th,
+.main-container-aluno .tabela-alunos td {
+  
   padding: 8px;
   text-align: center;
 }
 
-.class-aluno .tabela-alunos th {
+.main-container-aluno .tabela-alunos th {
   background: #f9f9f9;
+  font-weight: bold;
+}
+
+.main-container-aluno .tabela-alunos tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.main-container-aluno .tabela-alunos tr:hover {
+  background: #f1f1f1;
 }
