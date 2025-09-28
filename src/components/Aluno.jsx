@@ -1,8 +1,8 @@
-import { useState } from "react";
-
+import { useState, useEffect, useRef } from "react";
 
 function Aluno() {
   const [selected, setSelected] = useState([]);
+  const headerCheckboxRef = useRef(null);
 
   const alunos = [
     {
@@ -29,20 +29,39 @@ function Aluno() {
     },
   ];
 
+  // Alterna a seleção de um único aluno
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     );
   };
 
+  // Alterna a seleção de todos os alunos
+  const toggleSelectAll = () => {
+    if (selected.length === alunos.length) {
+      setSelected([]);
+    } else {
+      setSelected(alunos.map((a) => a.id));
+    }
+  };
+
+  // Verifica se todos os alunos estão selecionados
+  const isAllSelected = selected.length === alunos.length;
+
+  // Aplica o estado visual "indeterminado" no checkbox do cabeçalho
+  useEffect(() => {
+    if (headerCheckboxRef.current) {
+      const isPartial =
+        selected.length > 0 && selected.length < alunos.length;
+      headerCheckboxRef.current.indeterminate = isPartial;
+    }
+  }, [selected, alunos.length]);
+
   return (
     <div className="main-container-aluno">
       {/* Cabeçalho com botões */}
-
-
       <div className="cabecalho-aluno">
-        
-      <button className="btn-aluno adicionar-aluno">Adicionar +</button>
+        <button className="btn-aluno adicionar-aluno">Adicionar +</button>
         <button className="btn-aluno formulario-aluno">Formulário</button>
         <div className="dropdown-aluno">
           <button className="btn-aluno mais-opcoes">Mais opções ▾</button>
@@ -50,25 +69,33 @@ function Aluno() {
             <a href="#">Exportar alunos</a>
             <a href="#">Importar alunos</a>
             <a href="#">Excluir</a>
+            <a href="#">Editar</a>
           </div>
         </div>
-
         <button className="btn-aluno filtrar-aluno">Filtrar</button>
         <button className="btn-aluno ordenar-aluno">Ordenar</button>
       </div>
 
-      {/* Indicador de selecionados */}
-      {selected.length > 0 && (
+      {/* Indicador de alunos selecionados */}
+      
         <p className="indicador-selecionados">
           {selected.length} aluno(s) selecionado(s)
         </p>
-      )}
+    
 
-      {/* Tabela */}
-      <table className="tabela-alunos" >
-        <thead >
-          <tr >
-            <th></th>
+      {/* Tabela de alunos */}
+      <table className="tabela-alunos">
+        <thead>
+          <tr>
+            <th>
+              <input
+                className="chkalunos"
+                type="checkbox"
+                ref={headerCheckboxRef}
+                checked={isAllSelected}
+                onChange={toggleSelectAll}
+              />
+            </th>
             <th>ID</th>
             <th>RA</th>
             <th>Nome</th>
@@ -80,11 +107,13 @@ function Aluno() {
             <th>ID_Grupo</th>
           </tr>
         </thead>
+
         <tbody>
           {alunos.map((aluno) => (
             <tr key={aluno.id}>
               <td>
                 <input
+                    className="chkalunos"
                   type="checkbox"
                   checked={selected.includes(aluno.id)}
                   onChange={() => toggleSelect(aluno.id)}

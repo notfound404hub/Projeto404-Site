@@ -441,53 +441,91 @@ form {
   top: 0;
   flex-direction: column;
   height: 100vh;
-  width: 250px;
+  width: 220px;
   background-color: #e6e4e4;
-  border-radius: 10px;
+ 
   padding-bottom: 20px;
 }
 
-
-
-.btnAdmin {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  border: none;
-  width: 200px;
-  height: 40px;
-  background-color: #e6e4e4;
-  cursor: pointer;
-  margin-left: 20px;
+.menuAdmin {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+.menuAdmin li {
+  width: 100%;
+}
+
+.btnAdmin,
 .btnConfig,
 .btnSair {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  padding: 5px 25px;
+
   border: none;
-  width: 200px;
-  height: 30px;
-  background-color: #e6e4e4;
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
   cursor: pointer;
-  margin-left: 20px;
+  text-align: left;
+  transition: background 0.3s;
+}
+.submenu {
+  list-style: none;
+  padding-left: 20px;
+  margin: 5px 0;
+}
+.chkalunos{
+  accent-color: #00AB72;
+  color: #fafafa;
 }
 
-.icon{
+.chkalunos:checked{
+   color: #fafafa;
+}
+.chkalunos::after{
+   color: #fafafa;
+}
+.btnSub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 5px 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btnSub:hover {
+  background-color: #d1d1d1;
+}
+
+.btnConfig,
+.btnSair {
+  height: 35px;
+}
+
+.btnAdmin:hover,
+.btnConfig:hover,
+.btnSair:hover {
+  background-color: #d1d1d1;
+}
+
+.icon {
   width: 15px;
   height: 15px;
 }
 
-.logoAdmin{
+.logoAdmin {
   width: 100px;
   height: 100px;
   align-self: center;
@@ -495,28 +533,31 @@ form {
   margin-top: 10px;
 }
 
-.headerAdmin{
-  width: 100;
-  height: 100px;
-  margin-left: 250px;
-}
+
+
 
 .linha{
   width: 95%;          
   height: 1px;
   transform: translateY(100px);
+ 
   margin-left: 60px;
   background-color: #757575; 
   margin-top: 10px;   
 }
-
+.headerAdmin{
+  margin-left: 240px;
+   width: calc(100% - 240px);
+   
+}
 .divPesquisar {
+  box-sizing: border-box;
   display: flex;
   align-items: center;   
-  gap: 10px;             
-  margin-left: 50px;
+  gap: 10px;      
+  
   margin-top: 30px;
-  justify-content: space-between;
+  justify-content: space-between;   
 }
 
 .divEsquerda{
@@ -524,12 +565,7 @@ form {
   align-items: center;
 }
 
-.divDireita{
-  display: flex;
-  align-items: center;
-  gap:10px;
-  margin-right: 30px;  
-}
+
 
 .inputAdmin {
   border-radius: 5px 0 0 5px;
@@ -576,14 +612,14 @@ form {
   justify-self: center;
   align-self: center;
 }
-
-.btnDivDireita{
+.divDireita{
   display: flex;
-  justify-self: center;
-  align-self: center;
-  width: 25px;
-  height: 25px;
+  /* align-items: center; */
+  gap:10px;
+  margin-right: 30px;  
+  
 }
+
 .modalConfig {
   position: absolute;
   left: 260px; 
@@ -703,13 +739,17 @@ form {
 .main-container-aluno {
   padding: 20px;
   font-family: Arial, sans-serif;
-  width: calc(100%-250px);
-  margin-left: 250px;
+ width: calc(100% - 220px);
+
+  margin-left: 220px;
   box-sizing: border-box;
   overflow-x: auto; /* evita quebra em telas menores */
 }
 
 /* Cabeçalho */
+.cabecalho-aluno {
+    border-top: 1px solid #333;
+    padding-top: 10px;}
 .main-container-aluno .cabecalho-aluno {
   display: flex;
   gap: 10px;
@@ -741,7 +781,7 @@ form {
 .main-container-aluno .filtrar-aluno,
 .main-container-aluno .ordenar-aluno {
   background: #00AB72;
-  border: 2px solid #fafafa;
+      border: 2px solid #00AB72;
   color: white;
 }
 

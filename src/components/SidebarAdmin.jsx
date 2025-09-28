@@ -1,8 +1,13 @@
 import { useState } from "react";
 
+
 function SidebarAdmin({ onLogout, onUpdate, userData, setUserData }) {
   const [modalConfig, setModalConfig] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+
+  // estados para menus expansíveis
+  const [openCadastros, setOpenCadastros] = useState(false);
+  const [openDoacoes, setOpenDoacoes] = useState(false);
 
   const handleDeleteAccount = async () => {
     const ID_Usuario = localStorage.getItem("ID_Usuario");
@@ -57,47 +62,107 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData }) {
     <aside className="asideAdmin">
       <img className="logoAdmin" src="LogoFundoBranco.avif" alt="logo" />
 
-      <button className="btnAdmin">
-        <img className="icon" src="home.png" alt="home" /> Página inicial
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="report.png" alt="relatorio" /> Relatórios
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="verify.png" alt="cadastros" /> Cadastros
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="heart.png" alt="doacoes" /> Doações
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="restaurant.png" alt="alimentos" /> Alimentos
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="dollar.png" alt="dinheiro" /> Dinheiro
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="graduation.png" alt="usuarios" /> Usuários
-      </button>
-      <button className="btnAdmin">
-        <img className="icon" src="administrator.png" alt="administrativo" /> Administrativo
-      </button>
-      <button
-        className="btnAdmin"
-        onClick={() => console.log(localStorage.getItem("ID_Usuario"))}
-      >
-        <img className="icon" src="suport.png" alt="suporte" /> Suporte
-      </button>
+      <ul className="menuAdmin">
+        <li>
+          <button className="btnAdmin">
+            <img className="icon" src="home.png" alt="home" /> Página inicial
+          </button>
+        </li>
+        <li>
+          <button className="btnAdmin">
+            <img className="icon" src="report.png" alt="relatorio" /> Relatórios
+          </button>
+        </li>
 
-      <button
-        className="btnConfig"
-        onClick={() => setModalConfig(!modalConfig)}
-      >
-        <img className="icon" src="setting.png" alt="config" /> Configurações
-      </button>
+        {/* CADASTROS */}
+        <li>
+          <button
+            className="btnAdmin"
+            onClick={() => setOpenCadastros(!openCadastros)}
+          >
+            <img className="icon" src="verify.png" alt="cadastros" /> Cadastros
+          </button>
+          {openCadastros && (
+            <ul className="submenu">
+              <li>
+                <button className="btnSub">
+                    <img className="icon" src="graduation.png" alt="Alunos" />{" "}
+                    Aluno</button>
+              </li>
+              <li>
+                
+               
+                <button className="btnSub">
+                  <img className="icon"  src="groups.png" alt="Grupo" />{" "}Grupos</button>
+              </li>
+              <li>
+                <button className="btnSub">
+                   <img className="icon" src="campaign.png" alt="campanhas" /> CampanhasCampanhas</button>
+              </li>
+            </ul>
+          )}
+        </li>
 
-      <button className="btnSair" onClick={onLogout}>
-        <img className="icon" src="logout.png" alt="sair" /> Sair
-      </button>
+        {/* DOAÇÕES */}
+        <li>
+          <button
+            className="btnAdmin"
+            onClick={() => setOpenDoacoes(!openDoacoes)}
+          >
+            <img className="icon" src="heart.png" alt="doacoes" /> Doações
+          </button>
+          {openDoacoes && (
+            <ul className="submenu">
+              <li>
+                <button className="btnSub">
+                  <img className="icon" src="restaurant.png" alt="alimentos" />{" "}
+                  Alimentos
+                </button>
+              </li>
+              <li>
+                <button className="btnSub">
+                  <img className="icon" src="dollar.png" alt="dinheiro" /> Dinheiro
+                </button>
+              </li>
+            </ul>
+          )}
+        </li>
+
+        <li>
+          <button className="btnAdmin">
+            <img className="icon" src="graduation.png" alt="usuarios" /> Usuários
+          </button>
+        </li>
+        <li>
+          <button className="btnAdmin">
+            <img className="icon" src="administrator.png" alt="administrativo" /> Administrativo
+          </button>
+        </li>
+        <li>
+          <button
+            className="btnAdmin"
+            onClick={() => console.log(localStorage.getItem("ID_Usuario"))}
+          >
+            <img className="icon" src="suport.png" alt="suporte" /> Suporte
+          </button>
+        </li>
+      </ul>
+
+      <ul className="menuAdmin">
+        <li>
+          <button
+            className="btnConfig"
+            onClick={() => setModalConfig(!modalConfig)}
+          >
+            <img className="icon" src="setting.png" alt="config" /> Configurações
+          </button>
+        </li>
+        <li>
+          <button className="btnSair" onClick={onLogout}>
+            <img className="icon" src="logout.png" alt="sair" /> Sair
+          </button>
+        </li>
+      </ul>
 
       {/* Modal Configurações */}
       {modalConfig && (
