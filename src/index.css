@@ -474,22 +474,64 @@ form {
   text-align: left;
   transition: background 0.3s;
 }
+
 .submenu {
   list-style: none;
   padding-left: 20px;
   margin: 5px 0;
 }
-.chkalunos{
+.menuAdmin.bottomMenu {
+  margin-top: auto; /* Empurra para o final da sidebar */
+}
+
+.chk-tabela{
   accent-color: #00AB72;
   color: #fafafa;
 }
 
-.chkalunos:checked{
+.chk-tabela:checked{
    color: #fafafa;
 }
-.chkalunos::after{
+.chk-tabela::after{
    color: #fafafa;
 }
+
+  
+/* fixar cabeçalho */
+.tabela-container-tabela th {
+  position: sticky;
+  top: 0;
+  background: #f8f8f8;
+  z-index: 5;         
+}
+
+.tabela-alunos { 
+    min-width: 100%; 
+    border-collapse: collapse; 
+   
+} 
+
+.tabela-alunos th, .tabela-alunos td { 
+    white-space: nowrap; 
+} 
+
+.tabela {
+  width: 100%;
+  height: 420px;        /* altura fixa para aparecer scroll */
+  overflow-x: auto;     /* scroll horizontal se precisar */
+  overflow-y: auto;     /* scroll vertical */
+}
+
+.tabela-container-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.tabela-container-tabela th,
+.tabela-container-tabela td {
+  white-space: nowrap;   
+} 
 .btnSub {
   display: flex;
   align-items: center;
@@ -702,9 +744,7 @@ form {
   justify-content: space-between;
   gap: 10px;
 }
-.tr-aluno{
-  margin: 100px;
-}
+
 .modalEdit .modalActions button {
   flex: 1;
   padding: 10px;
@@ -736,7 +776,7 @@ form {
 /* ADMIN */
 
 /* Estilos gerais */
-.main-container-aluno {
+.main-container-tabela {
   padding: 20px;
   font-family: Arial, sans-serif;
  width: calc(100% - 220px);
@@ -747,17 +787,23 @@ form {
 }
 
 /* Cabeçalho */
-.cabecalho-aluno {
+.cabecalho-tabela {
     border-top: 1px solid #333;
     padding-top: 10px;}
-.main-container-aluno .cabecalho-aluno {
+.main-container-tabela .cabecalho-tabela {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
 }
+.rightMenu-tabela {
+  display: flex;
+  margin-left: auto; /* Empurra para o final da sidebar */
+  gap: 10px;
+  width: auto;
+}
 
 /* Indicador */
-.main-container-aluno .indicador-selecionados {
+.main-container-tabela .indicador-selecionados-tabela {
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: bold;
@@ -765,7 +811,7 @@ form {
 }
 
 /* Botões base */
-.main-container-aluno .btn-aluno {
+.main-container-tabela .btn-tabela {
   padding: 8px 14px;
   border: none;
   border-radius: 6px;
@@ -776,19 +822,19 @@ form {
 }
 
 /* Botões verdes (Adicionar, Formulário, Filtrar, Ordenar) */
-.main-container-aluno .adicionar-aluno,
-.main-container-aluno .formulario-aluno,
-.main-container-aluno .filtrar-aluno,
-.main-container-aluno .ordenar-aluno {
+.main-container-tabela .adicionar-tabela,
+.main-container-tabela .formulario-aluno,
+.main-container-tabela .filtrar-tabela,
+.main-container-tabela .ordenar-tabela {
   background: #00AB72;
       border: 2px solid #00AB72;
   color: white;
 }
 
-.main-container-aluno .adicionar-aluno:hover,
-.main-container-aluno .formulario-aluno:hover,
-.main-container-aluno .filtrar-aluno:hover,
-.main-container-aluno .ordenar-aluno:hover {
+.main-container-tabela .adicionar-tabela:hover,
+.main-container-tabela .formulario-aluno:hover,
+.main-container-tabela .filtrar-tabela:hover,
+.main-container-tabela .ordenar-tabela:hover {
   background: #fafafa;
   border: 2px solid #00AB72;
   color: #00AB72;
@@ -796,23 +842,23 @@ form {
 }
 
 /* Botão de mais opções */
-.main-container-aluno .mais-opcoes {
+.main-container-tabela .mais-opcoes-tabela {
   background: #f1f1f1;
   border: 1px solid #ccc;
   color: #333;
 }
 
-.main-container-aluno .mais-opcoes:hover {
+.main-container-tabela .mais-opcoes-tabela:hover {
   background: #e0e0e0;
 }
 
 /* Dropdown */
-.main-container-aluno .dropdown-aluno {
+.main-container-tabela .dropdown-tabela {
   position: relative;
   display: inline-block;
 }
 
-.main-container-aluno .dropdown-content-aluno {
+.main-container-tabela .dropdown-content-tabela {
   display: none;
   position: absolute;
   background: white;
@@ -824,11 +870,11 @@ form {
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
-.main-container-aluno .dropdown-aluno:hover .dropdown-content-aluno {
+.main-container-tabela .dropdown-tabela:hover .dropdown-content-tabela {
   display: block;
 }
 
-.main-container-aluno .dropdown-content-aluno a {
+.main-container-tabela .dropdown-content-tabela a {
   padding: 10px 14px;
   display: block;
   text-decoration: none;
@@ -836,34 +882,35 @@ form {
   font-size: 14px;
 }
 
-.main-container-aluno .dropdown-content-aluno a:hover {
+.main-container-tabela .dropdown-content-tabela a:hover {
   background: #f1f1f1;
 }
 
 /* Tabela */
-.main-container-aluno .tabela-alunos {
+.main-container-tabela .tabela-container-tabela {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
   font-size: 14px;
 }
 
-.main-container-aluno .tabela-alunos th,
-.main-container-aluno .tabela-alunos td {
+.main-container-tabela .tabela-container-tabela th,
+.main-container-tabela .tabela-container-tabela td {
   
   padding: 8px;
   text-align: center;
 }
 
-.main-container-aluno .tabela-alunos th {
+.main-container-tabela .tabela-container-tabela th {
   background: #f9f9f9;
   font-weight: bold;
 }
 
-.main-container-aluno .tabela-alunos tr:nth-child(even) {
+.main-container-tabela .tabela-container-tabela tr:nth-child(even) {
   background: #fafafa;
 }
 
-.main-container-aluno .tabela-alunos tr:hover {
+.main-container-tabela .tabela-container-tabela tr:hover {
   background: #f1f1f1;
 }
+

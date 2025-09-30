@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Aluno from './components/Aluno.jsx';
+import Grupo from './components/grupo.jsx';
 import SidebarAdmin from './components/SidebarAdmin.jsx';
 import HeaderAdmin from './components/HeaderAdmin.jsx';
-
 
 function Admin() {
   const [userData, setUserData] = useState({
@@ -10,6 +10,9 @@ function Admin() {
     Usuario_Senha: "",
     Usuario_Cargo: ""
   });
+
+  // controla qual tela está ativa
+  const [activeScreen, setActiveScreen] = useState("home");
 
   const handleLogout = () => {
     localStorage.removeItem("ID_Usuario");
@@ -36,18 +39,27 @@ function Admin() {
 
   return (
     <div className="bodyAdmin">
-      {/* Sidebar fixo à esquerda */}
       <SidebarAdmin
         onLogout={handleLogout}
         onUpdate={handleUpdate}
         userData={userData}
         setUserData={setUserData}
+        onSelectPage={(page) => setActiveScreen(page)} // <-- aqui
       />
 
-      {/* Conteúdo principal */}
       <div className="mainAdmin">
         <HeaderAdmin />
-        <Aluno />
+
+        {/* renderiza a tela conforme activeScreen */}
+        {activeScreen === "home" && <h2>Bem-vindo ao painel22222222</h2>}
+        {activeScreen === "aluno" && <Aluno />}
+        {activeScreen === "relatorios" && <div>Relatórios (placeholder)</div>}
+        {activeScreen === "grupos" && <Grupo />}
+        {activeScreen === "alimentos" && <div>Doações - Alimentos</div>}
+        {activeScreen === "dinheiro" && <div>Doações - Dinheiro</div>}
+        {activeScreen === "campanhas" && <div>Doações - Campanhas</div>}
+        {activeScreen === "usuarios" && <div>Usuários (placeholder)</div>}
+        {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}
       </div>
     </div>
   );

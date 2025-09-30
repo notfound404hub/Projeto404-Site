@@ -7,25 +7,16 @@ function Aluno() {
   const alunos = [
     {
       id: "0001",
-      ra: "22101923",
-      nome: "Bruno Gralco",
-      turma: "2",
-      turno: "Noturno",
-      curso: "Ciência da computação",
-      cargo: "Aluno",
-      grupo: "404",
-      id_grupo: "001",
-    },
-    {
-      id: "0002",
-      ra: "22101929",
-      nome: "Bruno Gralco",
-      turma: "2",
-      turno: "Noturno",
-      curso: "Ciência da computação",
-      cargo: "Aluno",
-      grupo: "404",
-      id_grupo: "001",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
     },
   ];
 
@@ -58,81 +49,88 @@ function Aluno() {
   }, [selected, alunos.length]);
 
   return (
-    <div className="main-container-aluno">
+    <div className="main-container-tabela">
       {/* Cabeçalho com botões */}
-      <div className="cabecalho-aluno">
-        <button className="btn-aluno adicionar-aluno">Adicionar +</button>
-        <button className="btn-aluno formulario-aluno">Formulário</button>
-        <div className="dropdown-aluno">
-          <button className="btn-aluno mais-opcoes">Mais opções ▾</button>
-          <div className="dropdown-content-aluno">
+      <div className="cabecalho-tabela">
+        <button className="btn-tabela adicionar-tabela">Adicionar +</button>
+        <button className="btn-tabela adicionar-tabela">Formulário</button>
+        <div className="dropdown-tabela">
+          <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
+          <div className="dropdown-content-tabela">
             <a href="#">Exportar alunos</a>
             <a href="#">Importar alunos</a>
             <a href="#">Excluir</a>
             <a href="#">Editar</a>
           </div>
         </div>
-        <button className="btn-aluno filtrar-aluno">Filtrar</button>
-        <button className="btn-aluno ordenar-aluno">Ordenar</button>
+        <div className="rightMenu-tabela">
+          <button className="btn-tabela filtrar-tabela">Filtrar</button>
+          <button className="btn-tabela ordenar-tabela">Ordenar</button>
+        </div>
       </div>
 
       {/* Indicador de alunos selecionados */}
-      
-        <p className="indicador-selecionados">
-          {selected.length} aluno(s) selecionado(s)
-        </p>
-    
+      <p className="indicador-selecionados-tabela">
+        {selected.length} aluno(s) selecionado(s)
+      </p>
 
-      {/* Tabela de alunos */}
-      <table className="tabela-alunos">
-        <thead>
-          <tr>
-            <th>
-              <input
-                className="chkalunos"
-                type="checkbox"
-                ref={headerCheckboxRef}
-                checked={isAllSelected}
-                onChange={toggleSelectAll}
-              />
-            </th>
-            <th>ID</th>
-            <th>RA</th>
-            <th>Nome</th>
-            <th>Turma</th>
-            <th>Turno</th>
-            <th>Curso</th>
-            <th>Cargo</th>
-            <th>Grupo</th>
-            <th>ID_Grupo</th>
-          </tr>
-        </thead>
+      <div className="tabela">
+        {/* Tabela de alunos */}
+        <div className="tabela-alunos">
+          <table className="tabela-container-tabela">
+            <thead>
+              <tr className="tr-aluno">
+                <th>
+                  <input
+                    className="chk-tabela"
+                    type="checkbox"
+                    ref={headerCheckboxRef}
+                    checked={isAllSelected}
+                    onChange={toggleSelectAll}
+                  />
+                </th>
+                <th>ID</th>
+                <th>RA</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Senha</th>
+                <th>CPF</th>
+                <th>Foto</th>
+                <th>Telefone</th>
+                <th>Grupo</th>
+                <th>Turma</th>
+              </tr>
+            </thead>
 
-        <tbody>
-          {alunos.map((aluno) => (
-            <tr key={aluno.id}>
-              <td>
-                <input
-                    className="chkalunos"
-                  type="checkbox"
-                  checked={selected.includes(aluno.id)}
-                  onChange={() => toggleSelect(aluno.id)}
-                />
-              </td>
-              <td>{aluno.id}</td>
-              <td>{aluno.ra}</td>
-              <td>{aluno.nome}</td>
-              <td>{aluno.turma}</td>
-              <td>{aluno.turno}</td>
-              <td>{aluno.curso}</td>
-              <td>{aluno.cargo}</td>
-              <td>{aluno.grupo}</td>
-              <td>{aluno.id_grupo}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            <tbody>
+              {alunos.map((aluno) => (
+                <tr className="tr-aluno" key={aluno.id}>
+                  <td>
+                    <input
+                      className="chk-tabela"
+                      type="checkbox"
+                      checked={selected.includes(aluno.id)}
+                      onChange={() => toggleSelect(aluno.id)}
+                    />
+                  </td>
+                  <td>{aluno.id}</td>
+                  <td>{aluno.ra}</td>
+                  <td>{aluno.nome}</td>
+                  <td>{aluno.email}</td>
+                  <td>{aluno.senha}</td>
+                  <td>{aluno.cpf}</td>
+                  <td>{aluno.foto}</td>
+                  <td>{aluno.telefone}</td>
+                  <td>{aluno.grupo}</td>
+                  <td>{aluno.Turma}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div >
   );
 }
 
