@@ -10,7 +10,7 @@ function Aluno() {
       ra: "22011029",
       nome: "Breno Groba",
       email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+        "brenogroba@gmail.com",
       senha: "12345",
       cpf: "49027706875",
       foto: "breno.png",
