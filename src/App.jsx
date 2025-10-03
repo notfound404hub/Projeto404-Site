@@ -10,6 +10,7 @@ import Admin from "./Admin";
 import Cadastro from "./Cadastro"
 import Verificar from "./Verificar"
 import Admin from "./Admin"
+import Forms from "./Forms"
 
 import Forms from "./Forms"
 
