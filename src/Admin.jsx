@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Aluno from './components/Aluno.jsx';
 import Grupo from './components/grupo.jsx';
+import PainelSuporte from './Dashboard.jsx';
 import SidebarAdmin from './components/SidebarAdmin.jsx';
 import HeaderAdmin from './components/HeaderAdmin.jsx';
 
@@ -60,6 +61,7 @@ function Admin() {
         {activeScreen === "campanhas" && <div>Doações - Campanhas</div>}
         {activeScreen === "usuarios" && <div>Usuários (placeholder)</div>}
         {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}
+        {activeScreen === "suporte" && <PainelSuporte />}
       </div>
     </div>
   );
