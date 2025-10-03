@@ -924,3 +924,211 @@ form {
   background: #f1f1f1;
 }
 
+/* suporte */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* LAYOUT PRINCIPAL */
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* ========== BARRA LATERAL ========== */
+.barra-lateral {
+  width: 250px;
+  background-color: #003366;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.barra-lateral ul {
+  list-style: none;
+}
+
+.barra-lateral li {
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.barra-lateral li:hover {
+  text-decoration: underline;
+}
+
+.barra-lateral li ul {
+  margin-top: 5px;
+  margin-left: 15px;
+  font-size: 0.95rem;
+}
+
+.botao-desconectar {
+  margin-top: 30px;
+  background-color: #cc0000;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botao-desconectar:hover {
+  background-color: #a30000;
+}
+
+/* ========== CONTEÚDO PRINCIPAL ========== */
+.conteudo-principal {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* BARRA SUPERIOR */
+.barra-superior {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.barra-superior input {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.barra-superior button {
+  padding: 8px 12px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.barra-superior button:hover {
+  background-color: #0055aa;
+}
+
+/* CONTEÚDO: SUPORTE + TUTORIAIS */
+.conteudo {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ========== PAINEL SUPORTE ========== */
+.painel-suporte {
+  background-color: white;
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.painel-suporte h2 {
+  margin-bottom: 15px;
+}
+
+.caixa-status {
+  padding: 15px;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.caixa-status span {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
+}
+
+.verde {
+  background-color: #28a745;
+}
+
+.amarelo {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.cinza {
+  background-color: #6c757d;
+}
+
+.botao-abrir-chamado {
+  margin-top: 15px;
+  background-color: #003366;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.botao-abrir-chamado:hover {
+  background-color: #0055aa;
+}
+
+/* ========== PAINEL TUTORIAIS ========== */
+.painel-tutoriais {
+  background-color: white;
+  padding: 20px;
+  flex: 2;
+  min-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.painel-tutoriais h2 {
+  margin-bottom: 15px;
+}
+
+.grade-tutoriais {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.cartao-tutorial {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.cartao-tutorial:hover {
+  background-color: #e0e0e0;
+}
+
+.miniatura {
+  background-color: #ccc;
+  height: 80px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}

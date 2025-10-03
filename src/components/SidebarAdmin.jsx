@@ -145,7 +145,7 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
         <li>
           <button
             className="btnAdmin"
-            onClick={() => console.log(localStorage.getItem("ID_Usuario"))}
+            onClick={() => onSelectPage("suporte")}
           >
             <img className="icon" src="suport.png" alt="suporte" /> Suporte
           </button>
