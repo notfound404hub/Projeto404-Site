@@ -1,6 +1,11 @@
 import { useState } from "react";
 import Aluno from './components/Aluno.jsx';
 import Grupo from './components/grupo.jsx';
+import Alimentos from './components/alimentos.jsx';
+import Dinheiro from './components/dinheiro.jsx';
+import Campanhas from './components/campanhas.jsx';
+import Usuarios from './components/usuarios.jsx';
+
 import SidebarAdmin from './components/SidebarAdmin.jsx';
 import HeaderAdmin from './components/HeaderAdmin.jsx';
 
@@ -55,11 +60,12 @@ function Admin() {
         {activeScreen === "aluno" && <Aluno />}
         {activeScreen === "relatorios" && <div>Relatórios (placeholder)</div>}
         {activeScreen === "grupos" && <Grupo />}
-        {activeScreen === "alimentos" && <div>Doações - Alimentos</div>}
-        {activeScreen === "dinheiro" && <div>Doações - Dinheiro</div>}
-        {activeScreen === "campanhas" && <div>Doações - Campanhas</div>}
-        {activeScreen === "usuarios" && <div>Usuários (placeholder)</div>}
+        {activeScreen === "alimentos" && <Alimentos />}
+        {activeScreen === "dinheiro" && <Dinheiro />}
+        {activeScreen === "campanhas" && <Campanhas />}
+        {activeScreen === "usuarios" && <Usuarios />}
         {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}
+       
       </div>
     </div>
   );

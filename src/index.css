@@ -497,13 +497,6 @@ form {
 }
 
   
-/* fixar cabeçalho */
-.tabela-container-tabela th {
-  position: sticky;
-  top: 0;
-  background: #f8f8f8;
-  z-index: 5;         
-}
 
 .tabela-alunos { 
     min-width: 100%; 
@@ -775,7 +768,7 @@ form {
 
 /* ADMIN */
 
-/* Estilos gerais */
+/* TABELAS */
 .main-container-tabela {
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -861,25 +854,42 @@ form {
 .main-container-tabela .dropdown-content-tabela {
   display: none;
   position: absolute;
-  background: white;
+  background: #fff;
   min-width: 180px;
   border: 1px solid #ccc;
-  z-index: 1;
-  border-radius: 6px;
+  z-index: 3;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  padding: 6px 0;
 }
+
+.main-container-tabela .dropdown-content-tabela a {
+  display: block;
+  padding: 10px 16px;    
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+  transition: background 0.2s, color 0.2s;
+}
+
+.main-container-tabela .dropdown-content-tabela a:hover {
+  background: #f0f0f0;  
+  color: #007B55;       
+  cursor: pointer;
+}
+
 
 .main-container-tabela .dropdown-tabela:hover .dropdown-content-tabela {
   display: block;
 }
 
-.main-container-tabela .dropdown-content-tabela a {
-  padding: 10px 14px;
-  display: block;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
+.main-container-tabela .tabela-container-tabela th {
+  background: #f9f9f9;
+  font-weight: bold;
+   position: sticky;
+  top: 0;            
+  z-index: 2;         
 }
 
 .main-container-tabela .dropdown-content-tabela a:hover {
@@ -896,7 +906,7 @@ form {
 
 .main-container-tabela .tabela-container-tabela th,
 .main-container-tabela .tabela-container-tabela td {
-  
+ 
   padding: 8px;
   text-align: center;
 }

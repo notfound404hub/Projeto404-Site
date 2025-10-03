@@ -18,6 +18,144 @@ function Aluno() {
       grupo: "404 NOT found",
       Turma: "2NACCOMP",
     },
+    {
+      id: "0002",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    },
+    {
+      id: "0003",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    },
+    {
+      id: "0004",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    },
+    {
+      id: "0005",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    },
+    {
+      id: "0006",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    },
+    {
+      id: "0007",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    }, {
+      id: "0008",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    }, {
+      id: "0009",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    },{
+      id: "0010",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    }, {
+      id: "0011",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    }, {
+      id: "0012",
+      ra: "22011029",
+      nome: "Breno Groba",
+      email:
+        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
+      senha: "12345",
+      cpf: "49027706875",
+      foto: "breno.png",
+      telefone: "11970691099",
+      grupo: "404 NOT found",
+      Turma: "2NACCOMP",
+    }
   ];
 
   // Alterna a seleção de um único aluno
@@ -77,9 +215,9 @@ function Aluno() {
       <div className="tabela">
         {/* Tabela de alunos */}
         <div className="tabela-alunos">
-          <table className="tabela-container-tabela">
+          <table className="tabela-container-tabela ">
             <thead>
-              <tr className="tr-aluno">
+              <tr >
                 <th>
                   <input
                     className="chk-tabela"
@@ -89,7 +227,7 @@ function Aluno() {
                     onChange={toggleSelectAll}
                   />
                 </th>
-                <th>ID</th>
+                <th className="teste">ID</th>
                 <th>RA</th>
                 <th>Nome</th>
                 <th>E-mail</th>
@@ -113,7 +251,7 @@ function Aluno() {
                       onChange={() => toggleSelect(aluno.id)}
                     />
                   </td>
-                  <td>{aluno.id}</td>
+                  <td className="teste">{aluno.id}</td>
                   <td>{aluno.ra}</td>
                   <td>{aluno.nome}</td>
                   <td>{aluno.email}</td>
