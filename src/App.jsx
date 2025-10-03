@@ -4,12 +4,8 @@ import Home from "./Home";
 import Cadastro from "./Cadastro";
 import Verificar from "./Verificar";
 import Admin from "./Admin";
-import Cadastro from "./Cadastro"
-import Verificar from "./Verificar"
-import Admin from "./Admin"
 import Forms from "./Forms"
 import Dashboard from "./Dashboard";
-import Forms from "./Forms"
 import CadastroAlunos from "./CadastroAlunos";
 
 function App() {
@@ -21,13 +17,9 @@ function App() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/verificar" element={<Verificar />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/forms" element={<Forms />} />
-        <Route path="/cadastro" element={<Cadastro />} />  
-        <Route path="/verificar" element={<Verificar/>} />     
-        <Route path="/admin" element={<Admin/>} />     
-        <Route path="/Dashboard" element={<Dashboard/>} />   
+        <Route path="/forms" element={<Forms />} />     
+        <Route path="/dashboard" element={<Dashboard/>} />   
         <Route path="/cadastroalunos" element={<CadastroAlunos />} />
-
       </Routes>
     </BrowserRouter>
   );
