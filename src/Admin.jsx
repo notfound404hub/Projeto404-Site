@@ -16,7 +16,6 @@ function Admin() {
     Usuario_Cargo: ""
   });
 
-  // controla qual tela está ativa
   const [activeScreen, setActiveScreen] = useState("home");
 
   const handleLogout = () => {

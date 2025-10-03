@@ -9,6 +9,8 @@ import Verificar from "./Verificar"
 import Admin from "./Admin"
 import Forms from "./Forms"
 import Dashboard from "./Dashboard";
+import Forms from "./Forms"
+import CadastroAlunos from "./CadastroAlunos";
 
 function App() {
   return (
@@ -23,7 +25,8 @@ function App() {
         <Route path="/cadastro" element={<Cadastro />} />  
         <Route path="/verificar" element={<Verificar/>} />     
         <Route path="/admin" element={<Admin/>} />     
-        <Route path="/Dashboard" element={<Dashboard/>} />     
+        <Route path="/Dashboard" element={<Dashboard/>} />   
+        <Route path="/cadastroalunos" element={<CadastroAlunos />} />
 
       </Routes>
     </BrowserRouter>
