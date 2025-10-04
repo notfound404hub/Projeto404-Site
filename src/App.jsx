@@ -7,7 +7,7 @@ import Admin from "./Admin";
 import Forms from "./Forms"
 import Dashboard from "./Dashboard";
 import CadastroAlunos from "./CadastroAlunos";
-
+import CadastroColaborador from "../src/components/cadastroUsuario";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +20,7 @@ function App() {
         <Route path="/forms" element={<Forms />} />     
         <Route path="/dashboard" element={<Dashboard/>} />   
         <Route path="/cadastroalunos" element={<CadastroAlunos />} />
+        <Route path="/CadastroColaborador" element={<CadastroColaborador />} />
       </Routes>
     </BrowserRouter>
   );

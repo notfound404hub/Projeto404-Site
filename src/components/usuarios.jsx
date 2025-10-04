@@ -1,13 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 
 function Usuarios() {
+  const [usuarios, setUsuarios] = useState([]);   // vem da API
   const [selected, setSelected] = useState([]);
   const headerCheckboxRef = useRef(null);
 
-  const usuarios = [
-    { id: "U001", usuario: "Admin", cargo: "Administrador", email: "admin@email.com", senha: "12345" },
-    { id: "U002", usuario: "João", cargo: "Professor", email: "joao@email.com", senha: "abc123" },
-  ];
+  // Função para carregar os usuários da rota
+  const carregarUsuarios = async () => {
+    try {
+      const response = await fetch("http://localhost:500/api/users/usuario"); // sua rota
+      const data = await response.json();
+
+      if (response.ok) {
+        setUsuarios(data);
+        console.log("Usuários carregados:", data);
+      } else {
+        alert(data.error || "Erro ao buscar usuários");
+      }
+    } catch (err) {
+      console.error("Erro ao buscar usuários:", err);
+      alert("Erro no servidor ao buscar usuário");
+    }
+  };
+
+  // Carrega os usuários ao montar o componente
+  useEffect(() => {
+    carregarUsuarios();
+  }, []);
 
   const toggleSelect = (id) => {
     setSelected((prev) =>
@@ -19,7 +38,7 @@ function Usuarios() {
     if (selected.length === usuarios.length) {
       setSelected([]);
     } else {
-      setSelected(usuarios.map((u) => u.id));
+      setSelected(usuarios.map((u) => u.ID_Usuario)); // campo do banco
     }
   };
 
@@ -33,9 +52,6 @@ function Usuarios() {
   }, [selected, usuarios.length]);
 
   return (
-  <>
- 
-
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">
         <button className="btn-tabela adicionar-tabela">Adicionar +</button>
@@ -64,36 +80,42 @@ function Usuarios() {
               </th>
               <th>ID</th>
               <th>Usuário</th>
-              <th>Cargo</th>
+              <th>CPF/CNPJ</th>
+              <th>Empresa</th>
               <th>E-mail</th>
+              <th>Telefone</th>
               <th>Senha</th>
+              <th>Criado em</th>
             </tr>
           </thead>
           <tbody>
             {usuarios.map((u) => (
-              <tr key={u.id}>
+              <tr key={u.ID_Usuario}>
                 <td>
                   <input
                     className="chk-tabela"
                     type="checkbox"
-                    checked={selected.includes(u.id)}
-                    onChange={() => toggleSelect(u.id)}
+                    checked={selected.includes(u.ID_Usuario)}
+                    onChange={() => toggleSelect(u.ID_Usuario)}
                   />
                 </td>
-                <td>{u.id}</td>
-                <td>{u.usuario}</td>
-                <td>{u.cargo}</td>
-                <td>{u.email}</td>
-                <td>{u.senha}</td>
+                <td>{u.ID_Usuario}</td>
+                <td>{u.Usuario_Nome}</td>
+                <td>{u.Usuario_CPF}</td>
+                <td>{u.Usuario_Empresa}</td>
+                <td>{u.Usuario_Email}</td>
+                <td>{u.Usuario_Telefone}</td>
+                <td>{u.Usuario_Senha}</td>
+                
+                
+                <td>{new Date(u.created_at).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
-  
-  </>
-  )
+  );
 }
 
 export default Usuarios;
