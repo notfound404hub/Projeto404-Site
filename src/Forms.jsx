@@ -9,37 +9,13 @@ function Forms() {
 
   const selecionar = (valor) => {
     setQtdIntegrantes(valor)
-    setIntegrantes(Array(valor).fill(""))
-  }
-
-  const criarInput = (index, valor) => {
-    const copia = [...integrantes]
-    copia[step] = valor
-    setIntegrantes(copia)
-  }
-
-  const proximo = () => {
-    if(step < qtdIntegrantes){
-      setStep(step+1)
-    }
-  }
-
-  const anterior = () => {
-    if(step > 0){
-      setStep(step - 1)
-    }
-  }
-
-  const finalizar = () => {
-    console.log("Dados finais:", integrantes)
-    alert("Cadastro concluído!")
-  }
+    setIntegrantes(Array(valor).fill("")) }
   
   const navigate = useNavigate()
 
-  const irParaCadastro = () =>{
+  const irParaCadastroMentor = () =>{
     localStorage.setItem("qtdIntegrantes", qtdIntegrantes)
-    navigate("/cadastroalunos")
+    navigate("/cadastroalunomentor")
   }
 
   return (
@@ -119,7 +95,7 @@ function Forms() {
       <div className="acoes">
         <button className="proximo"
         disabled={qtdIntegrantes===0}
-        onClick={irParaCadastro}
+        onClick={irParaCadastroMentor}
         >
           Próximo          
 

@@ -10,7 +10,7 @@ function CadastroAlunos() {
     if (valor) {
       const num = Number(valor);
       setQtd(num);
-      setAlunos(Array(num).fill("")); 
+      setAlunos(Array(num - 1).fill("")); 
     }
   }, []);
 
@@ -50,8 +50,26 @@ function CadastroAlunos() {
         value={alunos[step - 1] || ""}
         onChange={(e) => handleChange(e.target.value)}
       />
+      <input
+        type="text"
+        placeholder={`Nome do aluno ${step}`}
+        value={alunos[step - 1] || ""}
+        onChange={(e) => handleChange(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder={`Nome do aluno ${step}`}
+        value={alunos[step - 1] || ""}
+        onChange={(e) => handleChange(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder={`Nome do aluno ${step}`}
+        value={alunos[step - 1] || ""}
+        onChange={(e) => handleChange(e.target.value)}
+      />
 
-      <div style={{ marginTop: "10px" }}>
+      <div>
         {step > 1 && (
           <button onClick={anterior} style={{ marginRight: "5px" }}>
             Anterior
