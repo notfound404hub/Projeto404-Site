@@ -2,21 +2,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Forms() {
-  const [qtdIntegrantes, setQtdIntegrantes] = useState(0)
-  const [integrantes, setIntegrantes] = useState([])
-  const [step,setStep] = useState(0)
-  const opcoes = [5, 6, 7, 8, 9, 10]
+  const [qtdIntegrantes, setQtdIntegrantes] = useState(0);
+  const [integrantes, setIntegrantes] = useState([]);
+  const [step, setStep] = useState(0);
+  const opcoes = [5, 6, 7, 8, 9, 10];
 
   const selecionar = (valor) => {
-    setQtdIntegrantes(valor)
-    setIntegrantes(Array(valor).fill("")) }
-  
-  const navigate = useNavigate()
+    setQtdIntegrantes(valor);
+    setIntegrantes(Array(valor).fill(""));
+  };
 
-  const irParaCadastroMentor = () =>{
-    localStorage.setItem("qtdIntegrantes", qtdIntegrantes)
-    navigate("/cadastroalunomentor")
-  }
+  const navigate = useNavigate();
+
+  const irParaCadastroMentor = () => {
+    // aqui salva o número TOTAL de integrantes
+    localStorage.setItem("qtdIntegrantes", qtdIntegrantes);
+    navigate("/cadastroalunomentor"); // redireciona pro cadastro do mentor
+  };
 
   return (
     <div className="forms">
@@ -38,67 +40,57 @@ function Forms() {
         </p>
 
         <div className="pergunta">
-          <p className="p1Titulo">
-            1.0 Digite o nome do grupo: *
-          </p>
+          <p className="p1Titulo">1.0 Digite o nome do grupo: *</p>
           <div className="inputPergunta">
             <input type="text" placeholder="Nome do grupo" />
           </div>
         </div>
 
         {step === 0 && (
-
-        <div className="pergunta">
-          <p>2.0  Quantos integrante o seu grupo possui?</p>
-          <div className="inputPergunta">
-            {opcoes.map((opcao) => (
-              <label key={opcao}>
-                <input
-                  type="radio"
-                  name="qtdIntegrantes"
-                  value={opcao}
-                  checked={qtdIntegrantes === opcao}
-                  onChange={() => selecionar(opcao)}
-                />
-                {opcao}
-              </label>
-            ))}
-
+          <div className="pergunta">
+            <p>2.0 Quantos integrantes o seu grupo possui?</p>
+            <div className="inputPergunta">
+              {opcoes.map((opcao) => (
+                <label key={opcao}>
+                  <input
+                    type="radio"
+                    name="qtdIntegrantes"
+                    value={opcao}
+                    checked={qtdIntegrantes === opcao}
+                    onChange={() => selecionar(opcao)}
+                  />
+                  {opcao}
+                </label>
+              ))}
+            </div>
           </div>
-
-        </div>
-        
         )}
 
         <div className="pergunta">
-          <p>3.0  Digite o código do seu curso que se encontra no Moodle (Exemplo: 2NAADM/2MADM) </p>
+          <p>
+            3.0 Digite o código do seu curso que se encontra no Moodle (Exemplo:
+            2NAADM/2MADM)
+          </p>
           <div className="inputPergunta">
-            <input type="text"
-              placeholder="Curso"
-            />
+            <input type="text" placeholder="Curso" />
           </div>
         </div>
 
         <div className="pergunta">
-          <p>4.0  Digite a senha geral do grupo</p>
+          <p>4.0 Digite a senha geral do grupo</p>
           <div className="inputPergunta">
-            <input type="password"
-              placeholder="Senha"
-            />
-
+            <input type="password" placeholder="Senha" />
           </div>
-
         </div>
-
       </div>
 
       <div className="acoes">
-        <button className="proximo"
-        disabled={qtdIntegrantes===0}
-        onClick={irParaCadastroMentor}
+        <button
+          className="proximo"
+          disabled={qtdIntegrantes === 0}
+          onClick={irParaCadastroMentor}
         >
-          Próximo          
-
+          Próximo
         </button>
       </div>
     </div>
