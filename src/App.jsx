@@ -10,6 +10,7 @@ import CadastroAlunos from "./CadastroAlunos";
 import CadastroAlunoMentor from "./CadastroAlunoMentor"
 import CadastroColaborador from "../src/components/cadastroUsuario";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/cadastroalunos" element={<CadastroAlunos />} />
         <Route path="/cadastroalunomentor" element={<CadastroAlunoMentor />} />
         <Route path="/CadastroColaborador" element={<CadastroColaborador />} />
+      
       </Routes>
     </BrowserRouter>
   );
