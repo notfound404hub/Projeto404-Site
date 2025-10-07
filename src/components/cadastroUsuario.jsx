@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-function CadastroColaborador() {
+function CadastroUsuario() {
   const [formData, setFormData] = useState({
     id: "",
     nome: "",
@@ -59,39 +59,108 @@ function CadastroColaborador() {
   return (
     <div className="cadastro-container">
       <h2>Cadastro de Colaborador</h2>
+
       <form className="cadastro-form" onSubmit={handleSubmit}>
-        <div className="form-row">
+        {/* ID */}
+        <div className="form-group">
           <label>ID</label>
-          <input type="text" name="id" value={formData.id} onChange={handleChange} />
+          <input
+            type="text"
+            name="id"
+            value={formData.id}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Nome */}
+        <div className="form-group">
           <label>Nome</label>
-          <input type="text" name="nome" value={formData.nome} onChange={handleChange} />
+          <input
+            type="text"
+            name="nome"
+            value={formData.nome}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Empresa */}
+        <div className="form-group">
           <label>Empresa</label>
-          <input type="text" name="empresa" value={formData.empresa} onChange={handleChange} />
+          <input
+            type="text"
+            name="empresa"
+            value={formData.empresa}
+            onChange={handleChange}
+          />
         </div>
 
-        <div className="form-row">
+        {/* CPF/CNPJ */}
+        <div className="form-group">
           <label>CPF/CNPJ</label>
-          <input type="text" name="cpfCnpj" value={formData.cpfCnpj} onChange={handleChange} />
+          <input
+            type="text"
+            name="cpfCnpj"
+            value={formData.cpfCnpj}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Email */}
+        <div className="form-group">
           <label>E-mail</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Telefone */}
+        <div className="form-group">
           <label>Telefone</label>
-          <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} />
+          <input
+            type="text"
+            name="telefone"
+            value={formData.telefone}
+            onChange={handleChange}
+          />
         </div>
 
-        <div className="form-row">
+        {/* Senha */}
+        <div className="form-group">
           <label>Senha</label>
-          <input type="password" name="senha" value={formData.senha} onChange={handleChange} />
-          <label>Confirmação de senha</label>
-          <input type="password" name="confirmSenha" value={formData.confirmSenha} onChange={handleChange} />
+          <input
+            type="password"
+            name="senha"
+            value={formData.senha}
+            onChange={handleChange}
+          />
         </div>
 
+        {/* Confirmação de Senha */}
+        <div className="form-group">
+          <label>Confirmação de senha</label>
+          <input
+            type="password"
+            name="confirmSenha"
+            value={formData.confirmSenha}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Botões */}
         <div className="form-buttons">
-          <button type="submit" className="btn-confirmar">Confirmar Cadastro</button>
-          <button type="button" className="btn-cancelar">Cancelar Cadastro</button>
+          <button type="submit" className="btn-confirmar">
+            Confirmar Cadastro
+          </button>
+          <button type="button" className="btn-cancelar">
+            Cancelar Cadastro
+          </button>
         </div>
       </form>
     </div>
   );
 }
 
-export default CadastroColaborador;
+export default CadastroUsuario;

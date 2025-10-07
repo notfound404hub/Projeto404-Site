@@ -8,6 +8,7 @@ import Usuarios from './components/usuarios.jsx';
 import PainelSuporte from './Dashboard.jsx';
 import SidebarAdmin from './components/SidebarAdmin.jsx';
 import HeaderAdmin from './components/HeaderAdmin.jsx';
+import CadastroUsuario from './components/cadastroUsuario.jsx'
 
 function Admin() {
   const [userData, setUserData] = useState({
@@ -43,6 +44,7 @@ function Admin() {
 
   return (
     <div className="bodyAdmin">
+      
       <SidebarAdmin
         onLogout={handleLogout}
         onUpdate={handleUpdate}
@@ -50,8 +52,8 @@ function Admin() {
         setUserData={setUserData}
         onSelectPage={(page) => setActiveScreen(page)} // <-- aqui
       />
-
       <div className="mainAdmin">
+        
         <HeaderAdmin />
 
         {/* renderiza a tela conforme activeScreen */}
@@ -62,7 +64,8 @@ function Admin() {
         {activeScreen === "alimentos" && <Alimentos />}
         {activeScreen === "dinheiro" && <Dinheiro />}
         {activeScreen === "campanhas" && <Campanhas />}
-        {activeScreen === "usuarios" && <Usuarios />}
+        {activeScreen === "usuarios" && (<Usuarios onSelectPage={(page) => setActiveScreen(page)} />)}
+        {activeScreen === "CadastroUsuario" && <CadastroUsuario />}
         {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}  
         {activeScreen === "suporte" && <PainelSuporte />}
         

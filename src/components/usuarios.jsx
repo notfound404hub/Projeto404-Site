@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
-function Usuarios() {
-  const [usuarios, setUsuarios] = useState([]);   // vem da API
+function Usuarios({ onSelectPage }) {
+  const [usuarios, setUsuarios] = useState([]); // vem da API
   const [selected, setSelected] = useState([]);
   const headerCheckboxRef = useRef(null);
 
@@ -46,7 +46,8 @@ function Usuarios() {
 
   useEffect(() => {
     if (headerCheckboxRef.current) {
-      const isPartial = selected.length > 0 && selected.length < usuarios.length;
+      const isPartial =
+        selected.length > 0 && selected.length < usuarios.length;
       headerCheckboxRef.current.indeterminate = isPartial;
     }
   }, [selected, usuarios.length]);
@@ -54,7 +55,12 @@ function Usuarios() {
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">
-        <button className="btn-tabela adicionar-tabela">Adicionar +</button>
+        <button
+          className="btn-tabela adicionar-tabela"
+          onClick={() => onSelectPage("CadastroUsuario")}
+        >
+          Adicionar +
+        </button>
         <div className="rightMenu-tabela">
           <button className="btn-tabela filtrar-tabela">Filtrar</button>
           <button className="btn-tabela ordenar-tabela">Ordenar</button>
@@ -93,7 +99,7 @@ function Usuarios() {
               <tr key={u.ID_Usuario}>
                 <td>
                   <input
-                    className="chk-tabela"
+                    className="chk-tabela testechk"
                     type="checkbox"
                     checked={selected.includes(u.ID_Usuario)}
                     onChange={() => toggleSelect(u.ID_Usuario)}
@@ -106,9 +112,12 @@ function Usuarios() {
                 <td>{u.Usuario_Email}</td>
                 <td>{u.Usuario_Telefone}</td>
                 <td>{u.Usuario_Senha}</td>
-                
-                
-                <td>{new Date(u.created_at).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}</td>
+
+                <td>
+                  {new Date(u.created_at).toLocaleDateString("pt-BR", {
+                    timeZone: "America/Sao_Paulo",
+                  })}
+                </td>
               </tr>
             ))}
           </tbody>
