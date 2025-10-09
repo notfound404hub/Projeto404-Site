@@ -22,7 +22,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/forms" element={<Forms />} />     
         <Route path="/dashboard" element={<Dashboard/>} />   
-        <Route path="/cadastroalunos" element={<CadastroAlunos />} />
+        <Route path="/cadastroalunos" element={<CadastroAlunos/>} />      
         <Route path="/cadastroalunomentor" element={<CadastroAlunoMentor />} />
         <Route path="/CadastroColaborador" element={<CadastroColaborador />} />
       

@@ -3,21 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 function Forms() {
   const [qtdIntegrantes, setQtdIntegrantes] = useState(0);
-  const [integrantes, setIntegrantes] = useState([]);
-  const [step, setStep] = useState(0);
   const opcoes = [5, 6, 7, 8, 9, 10];
-
-  const selecionar = (valor) => {
-    setQtdIntegrantes(valor);
-    setIntegrantes(Array(valor).fill(""));
-  };
-
   const navigate = useNavigate();
 
+  const selecionar = (valor) => {
+    setQtdIntegrantes(valor)
+  };
+
   const irParaCadastroMentor = () => {
-    // aqui salva o número TOTAL de integrantes
-    localStorage.setItem("qtdIntegrantes", qtdIntegrantes);
-    navigate("/cadastroalunomentor"); // redireciona pro cadastro do mentor
+    if (!qtdIntegrantes || qtdIntegrantes <= 0) return
+    localStorage.setItem("qtdIntegrantes", String(qtdIntegrantes))
+    localStorage.removeItem("firstIntegrante")
+    navigate("/cadastroalunomentor")
   };
 
   return (
@@ -46,25 +43,24 @@ function Forms() {
           </div>
         </div>
 
-        {step === 0 && (
+        
           <div className="pergunta">
             <p>2.0 Quantos integrantes o seu grupo possui?</p>
             <div className="inputPergunta">
-              {opcoes.map((opcao) => (
-                <label key={opcao}>
+              {opcoes.map((op) => (
+                <label key={op}>
                   <input
                     type="radio"
                     name="qtdIntegrantes"
-                    value={opcao}
-                    checked={qtdIntegrantes === opcao}
-                    onChange={() => selecionar(opcao)}
+                    value={op}
+                    checked={qtdIntegrantes === op}
+                    onChange={() => selecionar(op)}
                   />
-                  {opcao}
+                  {op}
                 </label>
               ))}
             </div>
-          </div>
-        )}
+          </div>        
 
         <div className="pergunta">
           <p>
@@ -94,7 +90,7 @@ function Forms() {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Forms;
+export default Forms

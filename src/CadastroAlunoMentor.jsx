@@ -1,37 +1,67 @@
-// CadastroInicial.jsx
-import React, { useState } from "react";
+// CadastroAlunoMentor.jsx
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function CadastroInicial() {
-  const [nome, setNome] = useState("");
+export default function CadastroAlunoMentor() {
+  const [mentor, setMentor] = useState("");
+  const [mentorRA, setMentorRA] = useState("");
+  const [mentorEmail, setMentorEmail] = useState("");
+
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const qtd = Number(localStorage.getItem("qtdIntegrantes") || 0);
+    if (!qtd) {
+      navigate("/forms", { replace: true });
+    }
+  }, [navigate]);
+
   const continuar = () => {
-    if (!nome.trim()) {
-      alert("Preencha o nome do primeiro integrante.");
+    if (!mentor.trim()) {
+      alert("Preencha o nome do mentor.");
       return;
     }
-    localStorage.setItem("firstIntegrante", nome.trim());    
+    if (!mentorEmail.trim()) {
+      alert("Preencha o email do mentor.");
+      return;
+    }
+    if (!mentorRA.trim()) {
+      alert("Preencha o RA do mentor.");
+      return;
+    }    
+    localStorage.setItem("firstIntegrante", mentor.trim());
     navigate("/cadastroalunos");
   };
 
   return (
-    <div className="cadastro-inicial">
-      <h2>Cadastro do 1º integrante</h2>
+    <div style={{ padding: 12 }}>
+      <h2>Cadastro do 1º integrante (mentor)</h2>
       <input
         type="text"
-        placeholder="Nome completo"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
+        placeholder="Nome do mentor"
+        value={mentor}
+        onChange={(e) => setMentor(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="RA do mentor"
+        value={mentorRA}
+        onChange={(e) => setMentorRA(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email do mentor"
+        value={mentorEmail}
+        onChange={(e) => setMentorEmail(e.target.value)}
       />
       <div style={{ marginTop: 12 }}>
-        <button onClick={() => navigate(-1)} style={{ marginRight: 8 }}>
+        <button type="button" onClick={() => navigate(-1)} style={{ marginRight: 8 }}>
           Voltar
         </button>
-        <button onClick={continuar}>Continuar</button>
+        <button type="button" onClick={continuar}>
+          Continuar
+        </button>
       </div>
     </div>
   );
 }
-
-export default CadastroInicial;
