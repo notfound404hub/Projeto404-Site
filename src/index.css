@@ -1,16 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 * {
   font-family: Poppins, sans-serif;
   box-sizing: border-box;
 }
-body{
+body {
   margin: 0;
   padding: 0;
-width: 100%;
-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background: #fafafa;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
-
+.bodyAdmin{
+  height: 100%;
+}
 .bodyImg {
   display: flex;
   justify-content: center;
@@ -19,7 +24,7 @@ height: 100%;
   padding: 100px 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('../public/imagemFundo.jpg');
+  background-image: url("../public/imagemFundo.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -71,21 +76,22 @@ form {
 
 .botaoLogin {
   display: flex;
-  justify-content: center;   
+  justify-content: center;
   align-items: center;
   align-self: center;
   padding: 5px;
   border-radius: 10px;
-  border: 2px solid #00AB72;
+  border: 2px solid #00ab72;
   font-weight: bolder;
   font-size: 15px;
-  color: #00AB72;
+  color: #00ab72;
   width: 200px;
-  height: 40px;            
+  height: 40px;
   text-align: center;
   background-color: transparent;
   cursor: pointer;
-  margin-top: 30px;
+  margin: 30px 0 10px 0;
+  
 }
 
 .botaoLogin:hover {
@@ -127,12 +133,10 @@ form {
   font-size: 16px;
   cursor: pointer;
   padding: 10px 15px;
-
 }
 
-
 .btnConectar {
-  background-color: #00AB72;
+  background-color: #00ab72;
   font-weight: bolder;
   color: #fafafa;
   border: none;
@@ -147,18 +151,15 @@ form {
   height: 100px;
 }
 
-
 .dropdownHome {
   position: relative;
- 
 }
 
 .dropdown-menu-home1 {
-  
   position: absolute;
   top: 20px;
   left: 0;
-  background-color: #00AB72;
+  background-color: #00ab72;
   padding: 10px;
   border-radius: 10px;
   display: none;
@@ -192,7 +193,7 @@ form {
   position: absolute;
   top: 20px;
   left: 0;
-  background-color: #00AB72;
+  background-color: #00ab72;
   padding: 10px;
   border-radius: 10px;
   display: none;
@@ -218,39 +219,32 @@ form {
   display: flex;
 }
 
-.divTxt{
+.divTxt {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 600px;  
+  height: 600px;
 }
 
-.txt2Home{
+.txt2Home {
   display: block;
   font-weight: bolder;
   font-size: 70px;
-    text-shadow:
-    1px 1px 0 #000,
-    2px 2px 0 #000,
-    3px 3px 0 #000,
-    4px 4px 0 #000;
+  text-shadow: 1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000;
 }
 
-.txt3Home{
+.txt3Home {
   font-size: 30px;
   font-weight: bolder;
-    text-shadow:
-    1px 1px 0 #000,
-    2px 2px 0 #000,
+  text-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
 }
 
 /* HOME */
 
-
 /* CADASTRO */
 
-.asideCadastro{
+.asideCadastro {
   display: flex;
   height: 600px;
   width: 650px;
@@ -260,22 +254,22 @@ form {
   background-color: white;
   text-align: center;
   border-radius: 15px;
-  padding: 20px;  
+  padding: 20px;
 }
 
 .formCadastro {
   display: flex;
   flex-direction: column;
-  gap: 15px; 
+  gap: 15px;
   width: 100%;
-  max-width: 400px; 
-  margin: 0 auto; 
+  max-width: 400px;
+  margin: 0 auto;
   transform: translateY(20px);
 }
 
 .inputGroupRow {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .inputCadastro {
@@ -285,7 +279,7 @@ form {
   font-size: 14px;
 }
 
-.logoCadastro{
+.logoCadastro {
   display: flex;
   width: 90px;
   height: 90px;
@@ -294,9 +288,9 @@ form {
   margin-top: -150px;
 }
 
-.h1Cadastro{
+.h1Cadastro {
   display: flex;
-  align-self: flex-end ;
+  align-self: flex-end;
   transform: translateY(-50px);
   font-size: 23px;
   width: 450px;
@@ -307,32 +301,31 @@ form {
   margin: 20px 0;
 }
 
-.btnProximo{
+.btnProximo {
   width: 170px;
   height: 40px;
   border-radius: 10px;
-  color: #00AB72;
+  color: #00ab72;
   align-self: center;
   transform: translateY(50px);
   background-color: white;
-  border-color: #00AB72;
+  border-color: #00ab72;
   font-weight: bolder;
   font-size: 18px;
   margin-top: -20px;
   cursor: pointer;
 }
 
-.btnProximo:hover{
+.btnProximo:hover {
   background-color: rgb(243, 243, 243);
 }
-
 
 /* CADASTRO */
 
 /* VERIFICAÇÃO */
 
-.asideVerificar{
-  position:absolute;
+.asideVerificar {
+  position: absolute;
   right: 0;
   top: 0;
   height: 100;
@@ -341,16 +334,16 @@ form {
   background-color: white;
 }
 
-.logoVerificar{
+.logoVerificar {
   display: flex;
   justify-self: center;
-  align-self: center;  
+  align-self: center;
   width: 150px;
-  height: 150px;  
+  height: 150px;
   margin-top: 20px;
 }
 
-.h1Verificar{
+.h1Verificar {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -361,7 +354,7 @@ form {
   font-size: 22px;
 }
 
-.h1VerificarEmail{
+.h1VerificarEmail {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -371,20 +364,20 @@ form {
   margin-bottom: 20px;
 }
 
-.inputCodigo{
+.inputCodigo {
   display: flex;
   align-self: center;
   justify-self: center;
   width: 300px;
   height: 70px;
   color: black;
-  border-radius:10px;
+  border-radius: 10px;
 }
-.inputCodigo:placeholder{
-  color: black;  
+.inputCodigo:placeholder {
+  color: black;
 }
 
-.pVerificar{
+.pVerificar {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -392,11 +385,11 @@ form {
   margin-top: 30px;
 }
 
-.btnVerificar{
-  display: inline-flex;        
-  justify-content: center;     
-  align-items: center;         
-  align-self: center;          
+.btnVerificar {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
   width: 220px;
   height: 50px;
   display: flex;
@@ -410,11 +403,11 @@ form {
   cursor: pointer;
 }
 
-.btnVerificar:hover{
+.btnVerificar:hover {
   background-color: #d4d4d4;
 }
 
-.bodyVerificar{
+.bodyVerificar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -422,7 +415,7 @@ form {
   padding: 100px 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('../public/fundoverde.jpg');
+  background-image: url("../public/fundoverde.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -432,12 +425,13 @@ form {
 /* VERIFICAÇÃO */
 
 /* ADMIN */
-
-
-.mainAdmin{
+#root{
+  height: 100%;
+}
+.mainAdmin {
   background-color: transparent;
-  height: calc(100vh - 70px);
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background-color: #fafafa;
 }
 .asideAdmin {
@@ -446,10 +440,10 @@ form {
   left: 0;
   top: 0;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 220px;
   background-color: #e6e4e4;
- 
+
   padding-bottom: 20px;
 }
 
@@ -490,11 +484,10 @@ form {
   margin-top: auto; /* Empurra para o final da sidebar */
 }
 
-.chk-tabela{
-  accent-color: #00AB72;
-  
+.chk-tabela {
+  accent-color: #00ab72;
 }
-.testechk{
+.testechk {
   accent-color: #038a5d;
 }
 /* .chk-tabela:checked{
@@ -504,23 +497,21 @@ form {
    color: #fafafa;
 } */
 
-  
+.tabela-alunos {
+  min-width: 100%;
+  border-collapse: collapse;
+}
 
-.tabela-alunos { 
-    min-width: 100%; 
-    border-collapse: collapse; 
-   
-} 
-
-.tabela-alunos th, .tabela-alunos td { 
-    white-space: nowrap; 
-} 
+.tabela-alunos th,
+.tabela-alunos td {
+  white-space: nowrap;
+}
 
 .tabela {
   width: 100%;
-  height: 420px;        /* altura fixa para aparecer scroll */
-  overflow-x: auto;     /* scroll horizontal se precisar */
-  overflow-y: auto;     /* scroll vertical */
+  height: 420px; /* altura fixa para aparecer scroll */
+  overflow-x: auto; /* scroll horizontal se precisar */
+  overflow-y: auto; /* scroll vertical */
 }
 
 .tabela-container-tabela {
@@ -528,11 +519,10 @@ form {
   border-collapse: collapse;
 }
 
-
 .tabela-container-tabela th,
 .tabela-container-tabela td {
-  white-space: nowrap;   
-} 
+  white-space: nowrap;
+}
 .btnSub {
   display: flex;
   align-items: center;
@@ -566,6 +556,7 @@ form {
 .icon {
   width: 15px;
   height: 15px;
+  background-color: transparent;
 }
 
 .logoAdmin {
@@ -576,39 +567,34 @@ form {
   margin-top: 10px;
 }
 
-
-
-
-.linha{
-  width: 95%;          
+.linha {
+  width: 95%;
   height: 1px;
   transform: translateY(100px);
- 
+
   margin-left: 60px;
-  background-color: #757575; 
-  margin-top: 10px;   
+  background-color: #757575;
+  margin-top: 10px;
 }
-.headerAdmin{
-  margin-left: 240px;
-   width: calc(100% - 240px);
-   
+.headerAdmin {
+  margin-left: 220px;
+  width: calc(100% - 220px);
 }
 .divPesquisar {
   box-sizing: border-box;
   display: flex;
-  align-items: center;   
-  gap: 10px;      
-  
-  margin-top: 30px;
-  justify-content: space-between;   
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  padding: 30px;
+  justify-content: space-between;
 }
 
-.divEsquerda{
+.divEsquerda {
   display: flex;
   align-items: center;
 }
-
-
 
 .inputAdmin {
   border-radius: 5px 0 0 5px;
@@ -616,8 +602,8 @@ form {
   background-color: #ececec;
   width: 350px;
   height: 40px;
-  padding: 0 10px; 
-  font-size: 14px;  
+  padding: 0 10px;
+  font-size: 14px;
 }
 
 .inputAdmin::placeholder {
@@ -629,12 +615,21 @@ form {
   height: 40px;
   border-radius: 0px 5px 5px 0;
   border: none;
-  background-color: #00AB72;
+  background-color: #00ab72;
   cursor: pointer;
-  margin-left: -10px;
+ 
+}
+.inputAdmin:focus {
+  
+  outline: none; 
 }
 
-.iconPesquisa{
+.btnPesquisa:hover{
+  background: #029463;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  
+}
+.iconPesquisa {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -646,26 +641,29 @@ form {
 .btnNotif,
 .btnChat,
 .btnPerfil {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border: none;
-
+  background: #fafafa;
   cursor: pointer;
   display: flex;
   justify-self: center;
   align-self: center;
 }
-.divDireita{
+.divDireita {
   display: flex;
   /* align-items: center; */
-  gap:10px;
-  margin-right: 30px;  
+  gap: 10px;
+  margin-right: 30px;
+}
+.divDireita button:hover{
+  width: 30px;
+  height: 30px;
   
 }
-
 .modalConfig {
   position: absolute;
-  left: 260px; 
+  left: 260px;
   bottom: 70px;
   display: flex;
   flex-direction: column;
@@ -778,9 +776,9 @@ form {
 
 /* TABELAS */
 .main-container-tabela {
-  padding: 20px;
+  padding: 10px;
   font-family: Arial, sans-serif;
- width: calc(100% - 220px);
+  width: calc(100% - 220px);
 
   margin-left: 220px;
   box-sizing: border-box;
@@ -789,8 +787,9 @@ form {
 
 /* Cabeçalho */
 .cabecalho-tabela {
-    border-top: 1px solid #333;
-    padding-top: 10px;}
+  
+  padding-top: 10px;
+}
 .main-container-tabela .cabecalho-tabela {
   display: flex;
   gap: 10px;
@@ -808,7 +807,7 @@ form {
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: bold;
-  color: #00AB72;
+  color: #00ab72;
 }
 
 /* Botões base */
@@ -827,8 +826,8 @@ form {
 .main-container-tabela .formulario-aluno,
 .main-container-tabela .filtrar-tabela,
 .main-container-tabela .ordenar-tabela {
-  background: #00AB72;
-      border: 2px solid #00AB72;
+  background: #00ab72;
+  border: 2px solid #00ab72;
   color: white;
 }
 
@@ -837,9 +836,8 @@ form {
 .main-container-tabela .filtrar-tabela:hover,
 .main-container-tabela .ordenar-tabela:hover {
   background: #fafafa;
-  border: 2px solid #00AB72;
-  color: #00AB72;
- 
+  border: 2px solid #00ab72;
+  color: #00ab72;
 }
 
 /* Botão de mais opções */
@@ -868,13 +866,13 @@ form {
   z-index: 3;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   padding: 6px 0;
 }
 
 .main-container-tabela .dropdown-content-tabela a {
   display: block;
-  padding: 10px 16px;    
+  padding: 10px 16px;
   text-decoration: none;
   font-size: 14px;
   color: #333;
@@ -882,11 +880,10 @@ form {
 }
 
 .main-container-tabela .dropdown-content-tabela a:hover {
-  background: #f0f0f0;  
-  color: #007B55;       
+  background: #f0f0f0;
+  color: #007b55;
   cursor: pointer;
 }
-
 
 .main-container-tabela .dropdown-tabela:hover .dropdown-content-tabela {
   display: block;
@@ -895,9 +892,9 @@ form {
 .main-container-tabela .tabela-container-tabela th {
   background: #f9f9f9;
   font-weight: bold;
-   position: sticky;
-  top: 0;            
-  z-index: 2;         
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .main-container-tabela .dropdown-content-tabela a:hover {
@@ -914,20 +911,21 @@ form {
 
 .main-container-tabela .tabela-container-tabela th,
 .main-container-tabela .tabela-container-tabela td {
- 
   padding: 8px;
   text-align: center;
 }
 
 .main-container-tabela .tabela-container-tabela th {
-  background: #f9f9f9;
+  background: #e9e8e8;
   font-weight: bold;
 }
-
-.main-container-tabela .tabela-container-tabela tr:nth-child(even) {
-  background: #fafafa;
+.main-container-tabela .tabela-container-tabela tr:nth-child(odd) {
+  background: white;
 }
 
+.main-container-tabela .tabela-container-tabela tr:nth-child(even){
+  background: #e9e8e8;
+}
 .main-container-tabela .tabela-container-tabela tr:hover {
   background: #aaaaaa;
 }
@@ -937,11 +935,6 @@ form {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
 }
 
 /* LAYOUT PRINCIPAL */
@@ -1143,7 +1136,7 @@ body {
 /* Cadastro */
 .cadastro-container {
   width: 100%;
-height: 100%;
+  height: 100%;
   padding: 20px;
   background: #fafafa;
 }
@@ -1194,8 +1187,8 @@ height: 100%;
 }
 
 /* BOTÕES */
-.form-buttons {
-  grid-column: span 3; /* ocupa todas as colunas */
+/* .form-buttons {
+  grid-column: span 3;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -1213,7 +1206,7 @@ height: 100%;
   transition: all 0.2s ease-in-out;
 }
 
-/* Verde cheio */
+
 .btn-confirmar {
   background-color: #00ab72;
   color: #fff;
@@ -1223,7 +1216,7 @@ height: 100%;
   background-color: #00804b;
 }
 
-/* Verde contorno */
+
 .btn-cancelar {
   background-color: transparent;
   color: #00ab72;
@@ -1233,4 +1226,111 @@ height: 100%;
 .btn-cancelar:hover {
   background-color: #00ab72;
   color: #fff;
+} */
+
+/* Exportar aluno */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* leve sombra de fundo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
+
+.modal {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 650px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeInScale 0.25s ease;
+  align-items: center;
+}
+
+/* animação de entrada */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(3); }
+  to { opacity: 1; transform: scale(1); }
+}
+.inpRange{
+  width: 300px;
+}
+.inpNomeArquivo{
+  width: 610px;
+}
+.modal h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.modal label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  gap: 6px;
+}
+
+.modal input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal input:focus {
+  border-color: #00AB72;
+  box-shadow: 0 0 0 2px rgba(0,171,114,0.15);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* botões dentro do modal (usando seu estilo verde) */
+.modal-actions .botaoLogin {
+  padding: 10px 18px;
+
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-actions .botaoLogin:first-child {
+  background: #00AB72;
+  color: #fff;
+}
+
+.modal-actions .botaoLogin:first-child:hover {
+  background: #f1f1f1; 
+  color: #00AB72;
+}
+
+.modal-actions .botaoLogin:last-child {
+  background: #f1f1f1;
+  color: #00ab72;
+}
+
+.modal-actions .botaoLogin:last-child:hover {
+  background: #00ab72;
+color: #f1f1f1;
+}
+

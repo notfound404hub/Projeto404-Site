@@ -57,16 +57,16 @@ function Admin() {
         <HeaderAdmin />
 
         {/* renderiza a tela conforme activeScreen */}
-        {activeScreen === "home" && <h2>Bem-vindo ao painel22222222</h2>}
+        {/* {activeScreen === "home" && <h2>Bem-vindo ao painel22222222</h2>} */}
         {activeScreen === "aluno" && <Aluno />}
-        {activeScreen === "relatorios" && <div>Relatórios (placeholder)</div>}
+        {/* {activeScreen === "relatorios" && <div>Relatórios (placeholder)</div>} */}
         {activeScreen === "grupos" && <Grupo />}
         {activeScreen === "alimentos" && <Alimentos />}
         {activeScreen === "dinheiro" && <Dinheiro />}
         {activeScreen === "campanhas" && <Campanhas />}
         {activeScreen === "usuarios" && (<Usuarios onSelectPage={(page) => setActiveScreen(page)} />)}
         {activeScreen === "CadastroUsuario" && <CadastroUsuario />}
-        {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}  
+        {/* {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}   */}
         {activeScreen === "suporte" && <PainelSuporte />}
         
       </div>

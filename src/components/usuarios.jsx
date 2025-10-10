@@ -1,19 +1,24 @@
 import { useState, useEffect, useRef } from "react";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 function Usuarios({ onSelectPage }) {
-  const [usuarios, setUsuarios] = useState([]); // vem da API
+  const [usuarios, setUsuarios] = useState([]); 
   const [selected, setSelected] = useState([]);
+  const [showModal, setShowModal] = useState(false); // exportação
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // exclusão
+  const [fileName, setFileName] = useState("usuarios_exportados");
+  const [rangeStart, setRangeStart] = useState("");
+  const [rangeEnd, setRangeEnd] = useState("");
   const headerCheckboxRef = useRef(null);
-
-  // Função para carregar os usuários da rota
+  
   const carregarUsuarios = async () => {
     try {
-      const response = await fetch("http://localhost:500/api/users/usuario"); // sua rota
+      const response = await fetch("http://localhost:500/api/users/usuarios"); 
       const data = await response.json();
 
       if (response.ok) {
         setUsuarios(data);
-        console.log("Usuários carregados:", data);
       } else {
         alert(data.error || "Erro ao buscar usuários");
       }
@@ -23,7 +28,6 @@ function Usuarios({ onSelectPage }) {
     }
   };
 
-  // Carrega os usuários ao montar o componente
   useEffect(() => {
     carregarUsuarios();
   }, []);
@@ -38,7 +42,7 @@ function Usuarios({ onSelectPage }) {
     if (selected.length === usuarios.length) {
       setSelected([]);
     } else {
-      setSelected(usuarios.map((u) => u.ID_Usuario)); // campo do banco
+      setSelected(usuarios.map((u) => u.ID_Usuario));
     }
   };
 
@@ -52,6 +56,103 @@ function Usuarios({ onSelectPage }) {
     }
   }, [selected, usuarios.length]);
 
+  // 📌 Exporta com base no range
+  const gerarWorkbook = () => {
+    let dadosFiltrados = usuarios;
+
+    if (rangeStart && rangeEnd) {
+      const start = parseInt(rangeStart, 10);
+      const end = parseInt(rangeEnd, 10);
+
+      dadosFiltrados = usuarios.filter(
+        (u) => u.ID_Usuario >= start && u.ID_Usuario <= end
+      );
+    }
+
+    if (dadosFiltrados.length === 0) {
+      alert("Nenhum usuário encontrado no range informado!");
+      return null;
+    }
+
+    const worksheet = XLSX.utils.json_to_sheet(dadosFiltrados);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Usuarios");
+
+    return workbook;
+  };
+
+  const exportarUsuarios = () => {
+    const workbook = gerarWorkbook();
+    if (!workbook) return;
+
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+
+    saveAs(data, `${fileName}.xlsx`);
+    setShowModal(false);
+  };
+
+  // 📌 Exportar escolhendo o local
+  const exportarEscolhendoLocal = async () => {
+    const workbook = gerarWorkbook();
+    if (!workbook) return;
+
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+
+    try {
+      // API moderna
+      const fileHandle = await window.showSaveFilePicker({
+        suggestedName: `${fileName}.xlsx`,
+        types: [
+          {
+            description: "Planilha Excel",
+            accept: { "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"] },
+          },
+        ],
+      });
+
+      const writable = await fileHandle.createWritable();
+      await writable.write(excelBuffer);
+      await writable.close();
+
+      alert("Arquivo exportado com sucesso!");
+      setShowModal(false);
+    } catch (err) {
+      console.warn("Exportação cancelada ou não suportada:", err);
+      alert("Não foi possível salvar no local escolhido. Use o exportar normal.");
+    }
+  };
+
+  // 📌 Excluir usuários selecionados (API)
+  const excluirUsuarios = async () => {
+    if (selected.length === 0) {
+      alert("Nenhum usuário selecionado para exclusão!");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:500/api/users/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: selected }), // envia array de IDs
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.msg);
+        setUsuarios((prev) => prev.filter((u) => !selected.includes(u.ID_Usuario)));
+        setSelected([]);
+        setShowDeleteModal(false);
+      } else {
+        alert(data.error || "Erro ao excluir usuários!");
+      }
+    } catch (err) {
+      console.error("Erro ao excluir usuários:", err);
+      alert("Erro no servidor ao excluir usuários");
+    }
+  };
+
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">
@@ -61,6 +162,15 @@ function Usuarios({ onSelectPage }) {
         >
           Adicionar +
         </button>
+        <div className="dropdown-tabela">
+          <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
+          <div className="dropdown-content-tabela">
+            <a onClick={() => setShowModal(true)}>Exportar usuários</a>
+            <a href="#">Importar alunos</a>
+            <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
+            <a href="#">Editar</a>
+          </div>
+        </div>
         <div className="rightMenu-tabela">
           <button className="btn-tabela filtrar-tabela">Filtrar</button>
           <button className="btn-tabela ordenar-tabela">Ordenar</button>
@@ -112,7 +222,6 @@ function Usuarios({ onSelectPage }) {
                 <td>{u.Usuario_Email}</td>
                 <td>{u.Usuario_Telefone}</td>
                 <td>{u.Usuario_Senha}</td>
-
                 <td>
                   {new Date(u.created_at).toLocaleDateString("pt-BR", {
                     timeZone: "America/Sao_Paulo",
@@ -123,6 +232,63 @@ function Usuarios({ onSelectPage }) {
           </tbody>
         </table>
       </div>
+
+      {/* 📌 Modal de exportação */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Exportar Usuários</h2>
+            <label>
+              Nome do arquivo:
+              <input
+              className="inpNomeArquivo"
+                type="text"
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}
+              />
+            </label>
+            <label>
+              Digite o ID inicial e o ID final:
+              <div style={{ display: "flex", gap: "10px" }}>
+                <input
+                className="inpRange"
+                  type="number"
+                  placeholder="Início"
+                  value={rangeStart}
+                  onChange={(e) => setRangeStart(e.target.value)}
+                />
+                <input
+                className="inpRange"
+                  type="number"
+                  placeholder="Fim"
+                  value={rangeEnd}
+                  onChange={(e) => setRangeEnd(e.target.value)}
+                />
+              </div>
+            </label>
+            <div className="modal-actions">
+              <button onClick={exportarUsuarios} className="botaoLogin">Exportar</button>
+              
+              <button onClick={() => setShowModal(false)} className="botaoLogin">Cancelar</button>
+              <button onClick={exportarEscolhendoLocal} className="botaoLogin teste" >Escolher local</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 📌 Modal de exclusão */}
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Exclusão de Usuário</h2>
+            <p>Você deseja excluir <b>{selected.length}</b> usuário(s)?</p>
+            <div className="modal-actions">
+              <button onClick={excluirUsuarios} className="botaoLogin">Confirmar</button>
+              <button onClick={() => setShowDeleteModal(false)} className="botaoLogin">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

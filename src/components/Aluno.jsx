@@ -1,161 +1,18 @@
 import { useState, useEffect, useRef } from "react";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 function Aluno() {
   const [selected, setSelected] = useState([]);
   const headerCheckboxRef = useRef(null);
 
   const alunos = [
-    {
-      id: "0001",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },
-    {
-      id: "0002",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },
-    {
-      id: "0003",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },
-    {
-      id: "0004",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },
-    {
-      id: "0005",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },
-    {
-      id: "0006",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },
-    {
-      id: "0007",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    }, {
-      id: "0008",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    }, {
-      id: "0009",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    },{
-      id: "0010",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    }, {
-      id: "0011",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    }, {
-      id: "0012",
-      ra: "22011029",
-      nome: "Breno Groba",
-      email:
-        "brenogrobabrenogrobabrenogrobabrenogrobabrenogrobabrenogroba@gmail.com",
-      senha: "12345",
-      cpf: "49027706875",
-      foto: "breno.png",
-      telefone: "11970691099",
-      grupo: "404 NOT found",
-      Turma: "2NACCOMP",
-    }
+    { id: "0001", ra: "22011010", nome: "Breno Groba", email: "brenogroba@gmail.com", senha: "12345", cpf: "49027706875", foto: "breno.png", telefone: "11970691099", grupo: "404 NOT found", Turma: "2NACCOMP" },
+    { id: "0002", ra: "22011029", nome: "Outro Aluno", email: "teste@gmail.com", senha: "12345", cpf: "49027706875", foto: "teste.png", telefone: "11970691099", grupo: "Grupo X", Turma: "2NACCOMP" },
+    { id: "0003", ra: "22011029", nome: "Breno Groba", email: "brenogroba@gmail.com", senha: "12345", cpf: "49027706875", foto: "breno.png", telefone: "11970691099", grupo: "404 NOT found", Turma: "2NACCOMP" },
+    { id: "0004", ra: "22011029", nome: "Breno Groba", email: "brenogroba@gmail.com", senha: "12345", cpf: "49027706875", foto: "breno.png", telefone: "11970691099", grupo: "404 NOT found", Turma: "2NACCOMP" }
+   
+    // ... resto da lista
   ];
 
   // Alterna a seleção de um único aluno
@@ -177,14 +34,36 @@ function Aluno() {
   // Verifica se todos os alunos estão selecionados
   const isAllSelected = selected.length === alunos.length;
 
-  // Aplica o estado visual "indeterminado" no checkbox do cabeçalho
+  // Aplica o estado indeterminado no checkbox do cabeçalho
   useEffect(() => {
     if (headerCheckboxRef.current) {
-      const isPartial =
-        selected.length > 0 && selected.length < alunos.length;
+      const isPartial = selected.length > 0 && selected.length < alunos.length;
       headerCheckboxRef.current.indeterminate = isPartial;
     }
   }, [selected, alunos.length]);
+
+  // 📌 Função para exportar
+  const exportarAlunos = () => {
+    // Filtra só os alunos que estão nos selected
+    const alunosSelecionados = alunos.filter((a) => selected.includes(a.id));
+
+    if (alunosSelecionados.length === 0) {
+      alert("Nenhum aluno selecionado para exportar!");
+      return;
+    }
+
+    // Cria a planilha a partir do JSON
+    const worksheet = XLSX.utils.json_to_sheet(alunosSelecionados);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Alunos");
+
+    // Converte para array buffer
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+
+    // Baixa o arquivo
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(data, "alunos_selecionados.xlsx");
+  };
 
   return (
     <div className="main-container-tabela">
@@ -195,7 +74,7 @@ function Aluno() {
         <div className="dropdown-tabela">
           <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
           <div className="dropdown-content-tabela">
-            <a href="#">Exportar alunos</a>
+            <a onClick={exportarAlunos}>Exportar alunos</a> {/* ⬅ aqui */}
             <a href="#">Importar alunos</a>
             <a href="#">Excluir</a>
             <a href="#">Editar</a>
@@ -213,11 +92,10 @@ function Aluno() {
       </p>
 
       <div className="tabela">
-        {/* Tabela de alunos */}
         <div className="tabela-alunos">
           <table className="tabela-container-tabela ">
             <thead>
-              <tr >
+              <tr>
                 <th>
                   <input
                     className="chk-tabela"
@@ -227,7 +105,7 @@ function Aluno() {
                     onChange={toggleSelectAll}
                   />
                 </th>
-                <th className="teste">ID</th>
+                <th>ID</th>
                 <th>RA</th>
                 <th>Nome</th>
                 <th>E-mail</th>
@@ -251,7 +129,7 @@ function Aluno() {
                       onChange={() => toggleSelect(aluno.id)}
                     />
                   </td>
-                  <td className="teste">{aluno.id}</td>
+                  <td>{aluno.id}</td>
                   <td>{aluno.ra}</td>
                   <td>{aluno.nome}</td>
                   <td>{aluno.email}</td>
@@ -267,8 +145,7 @@ function Aluno() {
           </table>
         </div>
       </div>
-
-    </div >
+    </div>
   );
 }
 
