@@ -1,4 +1,3 @@
-// CadastroAlunoMentor.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -28,39 +27,70 @@ export default function CadastroAlunoMentor() {
     if (!mentorRA.trim()) {
       alert("Preencha o RA do mentor.");
       return;
-    }    
+    }
     localStorage.setItem("firstIntegrante", mentor.trim());
     navigate("/cadastroalunos");
   };
 
-  return (
-    <div style={{ padding: 12 }}>
-      <h2>Cadastro do 1º integrante (mentor)</h2>
-      <input
+  return (    
+    <div className="formsMentor">
+      <div className="formsTituloMentor">
+        <header className="headerFormsMentor">
+          <img className="logoForms" src="LogoFundoBranco.avif" alt="logo" />
+          <h1>Lideranças Empáticas</h1>
+        </header>
+        <div className="TituloFormsMentor">
+        <h2>
+          Este questionário foi desenvolvido para facilitar o cadastro de todos
+          os grupos da FECAP interessados em participar do projeto "Lideranças
+          Empáticas".
+        </h2>
+        <p>
+          As informações aqui coletadas serão tratadas de forma anônima e
+          protegida. Como o projeto é exclusivo para membros da Fundação,
+          pedimos que utilizem o e-mail institucional da FECAP para que possamos
+          realizar o controle dos alunos participantes.
+        </p>
+        </div>      
+      
+
+      <div className="perguntaMentor">
+        <p className="tituloPerguntaMentor">1.0  Nome do aluno mentor</p>
+      <input className="inputPerguntaMentor"
         type="text"
         placeholder="Nome do mentor"
         value={mentor}
         onChange={(e) => setMentor(e.target.value)}
       />
-      <input
+      </div>
+
+      <div className="perguntaMentor"> 
+        <p className="tituloPerguntaMentor">2.0  RA do aluno mentor</p>       
+      <input className="inputPerguntaMentor"
         type="text"
         placeholder="RA do mentor"
         value={mentorRA}
         onChange={(e) => setMentorRA(e.target.value)}
       />
-      <input
+      </div>
+
+      <div className="perguntaMentor">
+        <p className="tituloPerguntaMentor">3.0  Email do aluno mentor</p>
+      <input className="inputPerguntaMentor"
         type="email"
         placeholder="Email do mentor"
         value={mentorEmail}
         onChange={(e) => setMentorEmail(e.target.value)}
       />
-      <div style={{ marginTop: 12 }}>
-        <button type="button" onClick={() => navigate(-1)} style={{ marginRight: 8 }}>
+      </div>
+      <div className="divBotoesMentor">
+        <button className = "voltar" type="button" onClick={() => navigate(-1)}>
           Voltar
         </button>
-        <button type="button" onClick={continuar}>
-          Continuar
+        <button className="proximoMentor" type="button" onClick={continuar}>
+          Próximo
         </button>
+      </div>
       </div>
     </div>
   );

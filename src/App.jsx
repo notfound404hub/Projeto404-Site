@@ -21,10 +21,10 @@ function App() {
         <Route path="/verificar" element={<Verificar />} /> 
         <Route path="/admin" element={<Admin />} />
         <Route path="/forms" element={<Forms />} />     
-        {/* <Route path="/dashboard" element={<Dashboard/>} />   
+        <Route path="/dashboard" element={<Dashboard/>} />   
         <Route path="/cadastroalunos" element={<CadastroAlunos/>} />      
         <Route path="/cadastroalunomentor" element={<CadastroAlunoMentor />} />
-        <Route path="/CadastroColaborador" element={<CadastroColaborador />} /> */}
+        <Route path="/CadastroColaborador" element={<CadastroColaborador />} />
       
       </Routes>
     </BrowserRouter>

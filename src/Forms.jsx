@@ -39,7 +39,7 @@ function Forms() {
         </div>
 
         <div className="pergunta">
-          <p className="pTitulo">1.0 Digite o nome do grupo: *</p>
+          <p>1.0 Digite o nome do grupo: *</p>
           <div>
             <input className="inputPergunta" type="text" placeholder="Nome do grupo" />
           </div>
@@ -48,10 +48,10 @@ function Forms() {
         
           <div className="pergunta">
             <p className="pTitulo">2.0 Quantos integrantes o seu grupo possui?</p>
-            <div>
+            <div className="divInputTypeRadio">
               {opcoes.map((op) => (
                 <label key={op}>
-                  <input className="inputRadio"
+                  <input className="inputTypeRadio"
                     type="radio"
                     name="qtdIntegrantes"
                     value={op}
