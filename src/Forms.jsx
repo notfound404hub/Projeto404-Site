@@ -21,9 +21,10 @@ function Forms() {
     <div className="forms">
       <div className="formsTitulo">
         <header className="headerForms">
-          <img src="LogoFundoBranco.avif" alt="logo" />
+          <img className="logoForms" src="LogoFundoBranco.avif" alt="logo" />
           <h1>Lideranças Empáticas</h1>
         </header>
+        <div className="divTituloForms">
         <h2>
           Este questionário foi desenvolvido para facilitar o cadastro de todos
           os grupos da FECAP interessados em participar do projeto "Lideranças
@@ -35,21 +36,22 @@ function Forms() {
           pedimos que utilizem o e-mail institucional da FECAP para que possamos
           realizar o controle dos alunos participantes.
         </p>
+        </div>
 
         <div className="pergunta">
-          <p className="p1Titulo">1.0 Digite o nome do grupo: *</p>
-          <div className="inputPergunta">
-            <input type="text" placeholder="Nome do grupo" />
+          <p className="pTitulo">1.0 Digite o nome do grupo: *</p>
+          <div>
+            <input className="inputPergunta" type="text" placeholder="Nome do grupo" />
           </div>
         </div>
 
         
           <div className="pergunta">
-            <p>2.0 Quantos integrantes o seu grupo possui?</p>
-            <div className="inputPergunta">
+            <p className="pTitulo">2.0 Quantos integrantes o seu grupo possui?</p>
+            <div>
               {opcoes.map((op) => (
                 <label key={op}>
-                  <input
+                  <input className="inputRadio"
                     type="radio"
                     name="qtdIntegrantes"
                     value={op}
@@ -63,19 +65,19 @@ function Forms() {
           </div>        
 
         <div className="pergunta">
-          <p>
+          <p className="pTitulo">
             3.0 Digite o código do seu curso que se encontra no Moodle (Exemplo:
             2NAADM/2MADM)
           </p>
-          <div className="inputPergunta">
-            <input type="text" placeholder="Curso" />
+          <div>
+            <input className="inputPergunta" type="text" placeholder="Curso" />
           </div>
         </div>
 
         <div className="pergunta">
-          <p>4.0 Digite a senha geral do grupo</p>
-          <div className="inputPergunta">
-            <input type="password" placeholder="Senha" />
+          <p className="pTitulo">4.0 Digite a senha geral do grupo</p>
+          <div>
+            <input className="inputPergunta" type="password" placeholder="Senha" />
           </div>
         </div>
       </div>

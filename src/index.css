@@ -7,14 +7,8 @@
 body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #fafafa;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-.bodyAdmin{
-  height: 100%;
+width: 100%;
+height: 100%;
 }
 .bodyImg {
   display: flex;
@@ -782,10 +776,9 @@ form {
 
   margin-left: 220px;
   box-sizing: border-box;
-  overflow-x: auto; /* evita quebra em telas menores */
+  overflow-x: auto;
 }
 
-/* Cabeçalho */
 .cabecalho-tabela {
   
   padding-top: 10px;
@@ -797,12 +790,11 @@ form {
 }
 .rightMenu-tabela {
   display: flex;
-  margin-left: auto; /* Empurra para o final da sidebar */
+  margin-left: auto;
   gap: 10px;
   width: auto;
 }
 
-/* Indicador */
 .main-container-tabela .indicador-selecionados-tabela {
   margin-bottom: 10px;
   font-size: 14px;
@@ -810,7 +802,6 @@ form {
   color: #00ab72;
 }
 
-/* Botões base */
 .main-container-tabela .btn-tabela {
   padding: 8px 14px;
   border: none;
@@ -821,7 +812,6 @@ form {
   transition: background 0.3s ease;
 }
 
-/* Botões verdes (Adicionar, Formulário, Filtrar, Ordenar) */
 .main-container-tabela .adicionar-tabela,
 .main-container-tabela .formulario-aluno,
 .main-container-tabela .filtrar-tabela,
@@ -840,7 +830,6 @@ form {
   color: #00ab72;
 }
 
-/* Botão de mais opções */
 .main-container-tabela .mais-opcoes-tabela {
   background: #f1f1f1;
   border: 1px solid #ccc;
@@ -851,7 +840,6 @@ form {
   background: #e0e0e0;
 }
 
-/* Dropdown */
 .main-container-tabela .dropdown-tabela {
   position: relative;
   display: inline-block;
@@ -1187,8 +1175,8 @@ form {
 }
 
 /* BOTÕES */
-/* .form-buttons {
-  grid-column: span 3;
+.form-buttons {
+  grid-column: span 3; /* ocupa todas as colunas */
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -1226,111 +1214,4 @@ form {
 .btn-cancelar:hover {
   background-color: #00ab72;
   color: #fff;
-} */
-
-/* Exportar aluno */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* leve sombra de fundo */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
 }
-
-.modal {
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 12px;
-  width: 650px;
-  max-width: 90%;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  animation: fadeInScale 0.25s ease;
-  align-items: center;
-}
-
-/* animação de entrada */
-@keyframes fadeInScale {
-  from { opacity: 0; transform: scale(3); }
-  to { opacity: 1; transform: scale(1); }
-}
-.inpRange{
-  width: 300px;
-}
-.inpNomeArquivo{
-  width: 610px;
-}
-.modal h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.modal label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  font-weight: 500;
-  color: #444;
-  gap: 6px;
-}
-
-.modal input {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.modal input:focus {
-  border-color: #00AB72;
-  box-shadow: 0 0 0 2px rgba(0,171,114,0.15);
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* botões dentro do modal (usando seu estilo verde) */
-.modal-actions .botaoLogin {
-  padding: 10px 18px;
-
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.modal-actions .botaoLogin:first-child {
-  background: #00AB72;
-  color: #fff;
-}
-
-.modal-actions .botaoLogin:first-child:hover {
-  background: #f1f1f1; 
-  color: #00AB72;
-}
-
-.modal-actions .botaoLogin:last-child {
-  background: #f1f1f1;
-  color: #00ab72;
-}
-
-.modal-actions .botaoLogin:last-child:hover {
-  background: #00ab72;
-color: #f1f1f1;
-}
-
