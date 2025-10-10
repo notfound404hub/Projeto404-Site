@@ -1215,3 +1215,116 @@ form {
   background-color: #00ab72;
   color: #fff;
 }
+
+/* FORMS */
+.forms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: beige;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.logoForms{
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.headerForms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00AB72;
+  width: 900px;
+  border-radius: 10px 10px 0 0;
+}
+
+.divTituloForms{
+  text-align: start;
+  text-indent: 2em;
+  font-size: 10.5px;
+  justify-content: center;
+  padding: 10px;
+  background-color: #fafafa;
+  width: 900px;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 15px;
+}
+
+.pTitulo{
+  background-color: #fafafa;
+  width: 900px;
+  border-radius: 10px;
+  height: 50px;
+  line-height: 50px;
+  text-indent: 2em;
+  margin-bottom: 15px;
+}
+
+.inputPergunta{
+  width: 750px;
+  height: 40px; 
+  border: none; 
+  border-bottom: 1px solid rgb(88, 88, 88);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.pergunta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px; 
+  margin-bottom: 15px;
+  width: 900px;
+}
+
+.pergunta p{
+  background-color: #fafafa;
+  width: 100%;
+  border-radius: 10px;
+  height: 50px;
+  line-height: 50px;
+  text-indent: 2em;
+  margin: 0;
+}
+
+.pergunta > div {
+  background-color: #fafafa;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+.pergunta > div {
+  background-color: #fafafa;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  flex-wrap: wrap; 
+}
+
+.pergunta > div label {
+  display: flex;
+  align-items: center;
+  margin: 0 15px; 
+}
+
+.inputRadio{
+  margin-right: 8px; 
+  margin-left: 0; 
+  cursor: pointer;
+}
+
+/* FORMS */
