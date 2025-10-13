@@ -8,7 +8,9 @@ export default function CadastroAlunos() {
   const [first, setFirst] = useState(null);
   const [remaining, setRemaining] = useState(0);
   const [alunos, setAlunos] = useState([]);
-  const [step, setStep] = useState(0); 
+  const [alunoRA, setAlunoRA] = useState([])
+  const [alunoEmail, setAlunoEmail] = useState([])
+  const [step, setStep] = useState(0);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -45,6 +47,22 @@ export default function CadastroAlunos() {
     });
   };
 
+  const handleRAChange = (index, value) => {
+    setAlunoRA((prev) => {
+      const copy = [...prev]
+      copy[index] = value
+      return copy
+    })
+  }
+
+  const handleEmailChange = (index, value) => {
+    setAlunoEmail((prev) => {
+      const copy = [...prev]
+      copy[index] = value
+      return copy
+    })
+  }
+
   const proximo = () => {
     if (step < remaining - 1) setStep((s) => s + 1);
   };
@@ -54,10 +72,17 @@ export default function CadastroAlunos() {
 
   const finalizar = () => {
     const primeiro = localStorage.getItem("firstIntegrante");
-    const todos = primeiro ? [primeiro, ...alunos] : [...alunos];
-    console.log("Todos os integrantes (final):", todos);
+    const todosAlunos = primeiro ? [primeiro, ...alunos] : [...alunos];
+    const matriculas = [...alunoRA]
+    const email = [...alunoEmail]
+    const todosJuntos = todosAlunos.map((nome, i) => ({
+      nome,
+      alunoRA: [i],
+      alunoEmail: [i],
+    }))
+    console.log("Todos os integrantes (final):", todosJuntos);
     alert("Cadastro concluído!");
-    navigate("/"); 
+    navigate("/");
   };
 
   if (!ready) return <p>Carregando...</p>;
@@ -75,23 +100,75 @@ export default function CadastroAlunos() {
   }
 
   return (
-    <div>
-      <h2>Cadastro dos demais integrantes</h2>
-      <p>
-        Integrante {step + 2} de {qtd} 
-      </p>
+    <div className="formsAlunos">
+      <div className="formsTituloAlunos">
+        <header className="headerFormsAlunos">
+          <img className="logoForms" src="LogoFundoBranco.avif" alt="logo" />
+          <h1>Lideranças Empáticas</h1>
+        </header>
+        <div className="tituloFormsAlunos">
+          <h2>
+            Este questionário foi desenvolvido para facilitar o cadastro de todos
+            os grupos da FECAP interessados em participar do projeto "Lideranças
+            Empáticas".
+          </h2>
+          <p>
+            As informações aqui coletadas serão tratadas de forma anônima e
+            protegida. Como o projeto é exclusivo para membros da Fundação,
+            pedimos que utilizem o e-mail institucional da FECAP para que possamos
+            realizar o controle dos alunos participantes.
+          </p>
+        </div>
+      </div>
 
-      <input
-        type="text"
-        placeholder={`Nome do integrante ${step + 2}`}
-        value={alunos[step] || ""}
-        onChange={(e) => handleAlunoChange(step, e.target.value)}
-      />
+      <div className="perguntaAlunos">
+        <p className="tituloPerguntaAluno">1.0   Nome do {step + 2}° integrante</p>
+        <input className="inputPerguntaAluno"
+          type="text"
+          placeholder={`Nome do integrante ${step + 2}`}
+          value={alunos[step] || ""}
+          onChange={(e) => handleAlunoChange(step, e.target.value)}
+        />
+      </div>
 
-      <div style={{ marginTop: 12 }}>
-        {step > 0 && <button type="button" onClick={anterior}>Anterior</button>}
-        {step < remaining - 1 && <button type="button" onClick={proximo}>Próximo</button>}
-        {step === remaining - 1 && <button type="button" onClick={finalizar}>Finalizar</button>}
+      <div className="perguntaAlunos">
+        <p className="tituloPerguntaAluno">2.0   RA do {step + 2}° integrante</p>
+        <input className="inputPerguntaAluno"
+          type="text"
+          placeholder={`RA do integrante ${step + 2}`}
+          value={alunoRA[step] || ""}
+          onChange={(e) => handleRAChange(step, e.target.value)}
+        />
+      </div>
+
+      <div className="perguntaAlunos">
+        <p className="tituloPerguntaAluno">3.0   Email do {step + 2}° integrante</p>
+        <input className="inputPerguntaAluno"
+          type="email"
+          placeholder={`Email do integrante ${step + 2}`}
+          value={alunoEmail[step] || ""}
+          onChange={(e) => handleEmailChange(step, e.target.value)}
+        />
+      </div>
+
+      <div className={`botoesAluno ${step > 0 ? "dois-botoes" : "um-botao"}`}>
+        {step > 0 && (
+          <button className="voltarAluno" type="button" onClick={anterior}>
+            Anterior
+          </button>
+        )}
+
+        {step < remaining - 1 && (
+          <button className="proximoAluno" type="button" onClick={proximo}>
+            Próximo
+          </button>
+        )}
+
+        {step === remaining - 1 && (
+          <button className="finalizar" type="button" onClick={finalizar}>
+            Finalizar
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1447,11 +1447,11 @@ form {
   margin: 0; /* MUDE DE "20px" PARA "0" */
 }
 
-.inputPerguntamentor::placeholder {
+.inputPerguntaMentor::placeholder {
   color: #999; 
 }
 
-.divBotoesMentor {
+.divBotoesMentor{
   margin-top: 30px;
   margin-bottom: 30px;
   width: 900px;
@@ -1510,3 +1510,165 @@ form {
 
 
 /* CADASTRO ALUNO MENTOR */
+
+/* CADASTRO ALUNOS */
+
+.formsAlunos{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(196, 192, 192);
+  flex-direction: column;
+  padding: 20px 0;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.formsTituloAlunos {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerFormsAlunos{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00AB72;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  padding: 20px 0;
+}
+
+.headerFormsAlunos h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.tituloFormsAlunos{
+  text-align: start;
+  font-size: 13px;
+  padding: 25px 35px;
+  background-color: #fafafa;
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.tituloFormsAlunos h2 {
+  margin: 0 0 15px 0;
+  line-height: 1.6;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.tituloFormsAlunos p {
+  margin: 0 0 15px 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.tituloFormsAlunos p:last-child {
+  text-align: start;
+  text-indent: 2em;
+  margin: 5px 0 0 0;
+}
+
+.perguntaAlunos{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 900px;
+  gap: 10px; /* ADICIONE ISSO - cria o espaço entre título e input */
+  margin-bottom: 20px;
+}
+
+.tituloPerguntaAluno{
+  background-color: #fafafa;
+  width: 100%;
+  border-radius: 10px 10px 0 0 ;
+  padding: 15px 25px;
+  margin: 0; /* MUDE DE "0 0 20px 0" PARA "0" */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.inputPerguntaAluno{
+  width: 100%;
+  height: 50px;
+  border: none;  
+  border-bottom: 2px solid #888;
+  background-color: #fafafa;
+  border-radius: 0 0 10px 10px;
+  padding: 10px 25px;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0; /* MUDE DE "20px" PARA "0" */
+}
+
+.inputPerguntaAluno::placeholder {
+  color: #999; 
+}
+
+.botoesAluno {
+  position: relative;
+  width: 100%;
+  height: 80px;
+}
+
+/* estilo base dos botões */
+.botoesAluno button {
+  width: 220px;
+  height: 55px;
+  border-radius: 10px;
+  background-color: #00AB72;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* dois botões: anterior + próximo */
+.botoesAluno.dois-botoes .voltarAluno {
+  position: absolute;
+  left: 510px;
+}
+
+.botoesAluno.dois-botoes .proximoAluno {
+  position: absolute;
+  right: 510px;
+}
+
+/* último step (anterior + finalizar) */
+.botoesAluno.dois-botoes .finalizar {
+  position: absolute;
+  right: 510px; /* mesmo lugar do "Próximo" */
+}
+
+/* quando só tem um botão, centraliza */
+.botoesAluno.um-botao .proximoAluno,
+.botoesAluno.um-botao .finalizar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.proximoAluno:hover:not(:disabled) {
+  background-color: #009960;
+}
+
+.proximoAluno:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+/* CADASTRO ALUNOS */
