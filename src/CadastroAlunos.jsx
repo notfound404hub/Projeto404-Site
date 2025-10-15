@@ -12,6 +12,8 @@ export default function CadastroAlunos() {
   const [alunoEmail, setAlunoEmail] = useState([])
   const [step, setStep] = useState(0);
   const [ready, setReady] = useState(false);
+  const camposInvalidos = !alunos[step]?.trim() || !alunoEmail[step]?.trim() || !alunoRA[step]?.trim()
+  
 
   useEffect(() => {
     const totalStr = localStorage.getItem("qtdIntegrantes");
@@ -35,6 +37,8 @@ export default function CadastroAlunos() {
     const rem = Math.max(0, totalNum - 1);
     setRemaining(rem);
     setAlunos(Array(rem).fill(""));
+    setAlunoEmail(Array(rem).fill(""))
+    setAlunoRA(Array(rem).fill(""))
     setStep(0);
     setReady(true);
   }, [navigate]);
@@ -84,6 +88,7 @@ export default function CadastroAlunos() {
     alert("Cadastro concluído!");
     navigate("/");
   };
+
 
   if (!ready) return <p>Carregando...</p>;
 
@@ -159,13 +164,13 @@ export default function CadastroAlunos() {
         )}
 
         {step < remaining - 1 && (
-          <button className="proximoAluno" type="button" onClick={proximo}>
+          <button className="proximoAluno" type="button" disabled = {camposInvalidos}  onClick={proximo}>
             Próximo
           </button>
         )}
 
         {step === remaining - 1 && (
-          <button className="finalizar" type="button" onClick={finalizar}>
+          <button className="finalizar" type="button" disabled = {camposInvalidos}  onClick={finalizar}>
             Finalizar
           </button>
         )}

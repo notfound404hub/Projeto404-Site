@@ -7,8 +7,8 @@
 body {
   margin: 0;
   padding: 0;
-width: 100%;
-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .bodyImg {
   display: flex;
@@ -101,7 +101,7 @@ form {
 }
 
 .headerHome {
-  height: 130px;
+  height: 30px;
   width: 100vw;
   display: flex;
   justify-content: space-between;
@@ -109,6 +109,7 @@ form {
   padding-left: 80px;
   padding-right: 100px;
   color: white;
+  margin-bottom: 50px;
 }
 
 .navHome {
@@ -141,8 +142,8 @@ form {
 }
 
 .logoHome {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
 }
 
 .dropdownHome {
@@ -151,7 +152,7 @@ form {
 
 .dropdown-menu-home1 {
   position: absolute;
-  top: 20px;
+  top: 40px;
   left: 0;
   background-color: #00ab72;
   padding: 10px;
@@ -185,7 +186,7 @@ form {
 
 .dropdown-menu-home2 {
   position: absolute;
-  top: 20px;
+  top: 40px;
   left: 0;
   background-color: #00ab72;
   padding: 10px;
@@ -1338,6 +1339,7 @@ form {
 }
 .proximo:disabled{
   background-color: #00ab7277;
+  cursor: not-allowed;
 }
 .proximo:enabled{
   border: none;
@@ -1483,13 +1485,12 @@ form {
 
 .proximoMentor {
   width: 220px;
-  height: 55px;
+  height: 50px;
   border-radius: 10px;
   background-color: #00AB72;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: bolder;
   color: white;
-  border: none;
   cursor: pointer;
   transition: background-color 0.3s;
   display: flex;
@@ -1503,9 +1504,12 @@ form {
 }
 
 .proximoMentor:disabled {
-  background-color: #ccc;
+  background-color: #00ab7277;
   cursor: not-allowed;
-  opacity: 0.6;
+}
+
+.proximoMentor:enabled{
+  border: none;
 }
 
 
@@ -1583,7 +1587,7 @@ form {
   align-items: flex-start;
   flex-direction: column;
   width: 900px;
-  gap: 10px; /* ADICIONE ISSO - cria o espaço entre título e input */
+  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -1592,7 +1596,7 @@ form {
   width: 100%;
   border-radius: 10px 10px 0 0 ;
   padding: 15px 25px;
-  margin: 0; /* MUDE DE "0 0 20px 0" PARA "0" */
+  margin: 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -1610,7 +1614,7 @@ form {
   padding: 10px 25px;
   box-sizing: border-box;
   font-size: 14px;
-  margin: 0; /* MUDE DE "20px" PARA "0" */
+  margin: 0;
 }
 
 .inputPerguntaAluno::placeholder {
@@ -1623,21 +1627,19 @@ form {
   height: 80px;
 }
 
-/* estilo base dos botões */
 .botoesAluno button {
   width: 220px;
   height: 55px;
   border-radius: 10px;
   background-color: #00AB72;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: bolder;
   color: white;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-/* dois botões: anterior + próximo */
 .botoesAluno.dois-botoes .voltarAluno {
   position: absolute;
   left: 510px;
@@ -1648,13 +1650,11 @@ form {
   right: 510px;
 }
 
-/* último step (anterior + finalizar) */
 .botoesAluno.dois-botoes .finalizar {
   position: absolute;
-  right: 510px; /* mesmo lugar do "Próximo" */
+  right: 510px;
 }
 
-/* quando só tem um botão, centraliza */
 .botoesAluno.um-botao .proximoAluno,
 .botoesAluno.um-botao .finalizar {
   position: absolute;
@@ -1667,8 +1667,17 @@ form {
 }
 
 .proximoAluno:disabled {
-  background-color: #ccc;
+  background-color: #00ab7277;
   cursor: not-allowed;
-  opacity: 0.6;
 }
+
+.proximoAluno:enabled{
+  border: none;
+}
+
+.finalizar:disabled{
+  background-color: #00ab7277;
+  cursor: not-allowed;
+}
+
 /* CADASTRO ALUNOS */

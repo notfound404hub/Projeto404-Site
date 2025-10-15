@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 function Forms() {
   const [qtdIntegrantes, setQtdIntegrantes] = useState(0);
   const opcoes = [5, 6, 7, 8, 9, 10];
+  const [grupo,setGrupo] = useState("")
+  const [curso,setCurso] = useState("")
   const navigate = useNavigate();
 
   const selecionar = (valor) => {
@@ -41,7 +43,13 @@ function Forms() {
         <div className="pergunta">
           <p>1.0 Digite o nome do grupo: *</p>
           <div>
-            <input className="inputPergunta" type="text" placeholder="Nome do grupo" />
+            <input 
+            className="inputPergunta" 
+            type="text" 
+            placeholder="Nome do grupo"
+            value={grupo}
+            onChange = {(e)=> setGrupo(e.target.value)}            
+            />
           </div>
         </div>
 
@@ -70,7 +78,14 @@ function Forms() {
             2NAADM/2MADM)
           </p>
           <div>
-            <input className="inputPergunta" type="text" placeholder="Curso" />
+            <input 
+            className="inputPergunta" 
+            type="text" 
+            placeholder="Curso" 
+            value={curso}
+            onChange={(e) => setCurso(e.target.value)}
+            
+            />
           </div>
         </div>
 
@@ -85,7 +100,7 @@ function Forms() {
       <div className="acoes">
         <button
           className="proximo"
-          disabled={qtdIntegrantes === 0}
+          disabled={qtdIntegrantes === 0 || grupo === "" || curso === ""}
           onClick={irParaCadastroMentor}
         >
           Próximo

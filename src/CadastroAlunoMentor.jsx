@@ -87,7 +87,10 @@ export default function CadastroAlunoMentor() {
         <button className = "voltar" type="button" onClick={() => navigate(-1)}>
           Voltar
         </button>
-        <button className="proximoMentor" type="button" onClick={continuar}>
+        <button className="proximoMentor" 
+        type="button" 
+        disabled = {mentor === "" || mentorRA === "" ||  mentorEmail === "" } 
+        onClick={continuar}>
           Próximo
         </button>
       </div>
