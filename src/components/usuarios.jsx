@@ -3,18 +3,20 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
 function Usuarios({ onSelectPage }) {
-  const [usuarios, setUsuarios] = useState([]); 
+  const [usuarios, setUsuarios] = useState([]);
   const [selected, setSelected] = useState([]);
   const [showModal, setShowModal] = useState(false); // exportação
   const [showDeleteModal, setShowDeleteModal] = useState(false); // exclusão
   const [fileName, setFileName] = useState("usuarios_exportados");
   const [rangeStart, setRangeStart] = useState("");
   const [rangeEnd, setRangeEnd] = useState("");
+  const [exportType, setExportType] = useState("intervalo"); // novo estado
   const headerCheckboxRef = useRef(null);
-  
+
+  //  Carregar usuários
   const carregarUsuarios = async () => {
     try {
-      const response = await fetch("http://localhost:500/api/users/usuarios"); 
+      const response = await fetch("http://localhost:500/api/users/usuarios");
       const data = await response.json();
 
       if (response.ok) {
@@ -32,6 +34,7 @@ function Usuarios({ onSelectPage }) {
     carregarUsuarios();
   }, []);
 
+  // 📌 Seleção
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
@@ -56,35 +59,36 @@ function Usuarios({ onSelectPage }) {
     }
   }, [selected, usuarios.length]);
 
-  // 📌 Exporta com base no range
-  const gerarWorkbook = () => {
-    let dadosFiltrados = usuarios;
-
-    if (rangeStart && rangeEnd) {
-      const start = parseInt(rangeStart, 10);
-      const end = parseInt(rangeEnd, 10);
-
-      dadosFiltrados = usuarios.filter(
-        (u) => u.ID_Usuario >= start && u.ID_Usuario <= end
-      );
-    }
-
-    if (dadosFiltrados.length === 0) {
-      alert("Nenhum usuário encontrado no range informado!");
-      return null;
-    }
-
-    const worksheet = XLSX.utils.json_to_sheet(dadosFiltrados);
+  //  Gerar planilha
+  const gerarWorkbook = (dados) => {
+    const worksheet = XLSX.utils.json_to_sheet(dados);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Usuarios");
-
     return workbook;
   };
 
+  // Exportar por intervalo
   const exportarUsuarios = () => {
-    const workbook = gerarWorkbook();
-    if (!workbook) return;
+    let dadosFiltrados = usuarios;
 
+    if (exportType === "intervalo") {
+      if (!rangeStart || !rangeEnd) {
+        alert("Preencha o ID inicial e final!");
+        return;
+      }
+      const start = parseInt(rangeStart, 10);
+      const end = parseInt(rangeEnd, 10);
+      dadosFiltrados = usuarios.filter(
+        (u) => u.ID_Usuario >= start && u.ID_Usuario <= end
+      );
+
+      if (dadosFiltrados.length === 0) {
+        alert("Nenhum usuário encontrado no range informado!");
+        return;
+      }
+    }
+
+    const workbook = gerarWorkbook(dadosFiltrados);
     const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
     const data = new Blob([excelBuffer], { type: "application/octet-stream" });
 
@@ -92,15 +96,31 @@ function Usuarios({ onSelectPage }) {
     setShowModal(false);
   };
 
-  // 📌 Exportar escolhendo o local
+  // Exportar escolhendo local
   const exportarEscolhendoLocal = async () => {
-    const workbook = gerarWorkbook();
-    if (!workbook) return;
+    let dadosFiltrados = usuarios;
 
+    if (exportType === "intervalo") {
+      if (!rangeStart || !rangeEnd) {
+        alert("Preencha o ID inicial e final!");
+        return;
+      }
+      const start = parseInt(rangeStart, 10);
+      const end = parseInt(rangeEnd, 10);
+      dadosFiltrados = usuarios.filter(
+        (u) => u.ID_Usuario >= start && u.ID_Usuario <= end
+      );
+    }
+
+    if (dadosFiltrados.length === 0) {
+      alert("Nenhum usuário para exportar!");
+      return;
+    }
+
+    const workbook = gerarWorkbook(dadosFiltrados);
     const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
 
     try {
-      // API moderna
       const fileHandle = await window.showSaveFilePicker({
         suggestedName: `${fileName}.xlsx`,
         types: [
@@ -118,12 +138,12 @@ function Usuarios({ onSelectPage }) {
       alert("Arquivo exportado com sucesso!");
       setShowModal(false);
     } catch (err) {
-      console.warn("Exportação cancelada ou não suportada:", err);
-      alert("Não foi possível salvar no local escolhido. Use o exportar normal.");
+      console.warn("Exportação cancelada:", err);
+      alert("Não foi possível salvar no local escolhido.");
     }
   };
 
-  // 📌 Excluir usuários selecionados (API)
+  // Excluir usuários selecionados
   const excluirUsuarios = async () => {
     if (selected.length === 0) {
       alert("Nenhum usuário selecionado para exclusão!");
@@ -134,14 +154,16 @@ function Usuarios({ onSelectPage }) {
       const response = await fetch("http://localhost:500/api/users/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: selected }), // envia array de IDs
+        body: JSON.stringify({ ids: selected }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         alert(data.msg);
-        setUsuarios((prev) => prev.filter((u) => !selected.includes(u.ID_Usuario)));
+        setUsuarios((prev) =>
+          prev.filter((u) => !selected.includes(u.ID_Usuario))
+        );
         setSelected([]);
         setShowDeleteModal(false);
       } else {
@@ -233,7 +255,7 @@ function Usuarios({ onSelectPage }) {
         </table>
       </div>
 
-      {/* 📌 Modal de exportação */}
+      {/* Modal de Exportação */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -241,42 +263,79 @@ function Usuarios({ onSelectPage }) {
             <label>
               Nome do arquivo:
               <input
-              className="inpNomeArquivo"
+                className="inpNomeArquivo"
                 type="text"
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
               />
             </label>
-            <label>
-              Digite o ID inicial e o ID final:
-              <div style={{ display: "flex", gap: "10px" }}>
+
+            
+            {exportType === "intervalo" && (
+              <label>
+                Digite o ID inicial e o ID final:
+                <div className="inputs-Exportar">
+                  <input
+                    className="inpRange"
+                    type="number"
+                    placeholder="Início"
+                    value={rangeStart}
+                    onChange={(e) => setRangeStart(e.target.value)}
+                  />
+                  <input
+                    className="inpRange"
+                    type="number"
+                    placeholder="Fim"
+                    value={rangeEnd}
+                    onChange={(e) => setRangeEnd(e.target.value)}
+                  />
+                </div>
+              </label>
+            )}
+            <div className="export-options">
+              <label className="radio-option">
                 <input
-                className="inpRange"
-                  type="number"
-                  placeholder="Início"
-                  value={rangeStart}
-                  onChange={(e) => setRangeStart(e.target.value)}
+                  type="radio"
+                  name="exportType"
+                  value="intervalo"
+                  checked={exportType === "intervalo"}
+                  onChange={() => setExportType("intervalo")}
                 />
+                Exportar por intervalo de IDs
+              </label>
+
+              <label className="radio-option">
                 <input
-                className="inpRange"
-                  type="number"
-                  placeholder="Fim"
-                  value={rangeEnd}
-                  onChange={(e) => setRangeEnd(e.target.value)}
+                  type="radio"
+                  name="exportType"
+                  value="todos"
+                  checked={exportType === "todos"}
+                  onChange={() => setExportType("todos")}
                 />
-              </div>
-            </label>
+                Exportar todos os usuários
+              </label>
+            </div>
+
+
             <div className="modal-actions">
-              <button onClick={exportarUsuarios} className="botaoLogin">Exportar</button>
-              
-              <button onClick={() => setShowModal(false)} className="botaoLogin">Cancelar</button>
-              <button onClick={exportarEscolhendoLocal} className="botaoLogin teste" >Escolher local</button>
+              <button onClick={exportarUsuarios} className="botaoLogin">
+                Exportar
+              </button>
+              <button onClick={() => setShowModal(false)} className="botaoLogin">
+                Cancelar
+              </button>
+              <button
+                onClick={exportarEscolhendoLocal}
+                className="botaoLogin teste"
+              >
+                Escolher local
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* 📌 Modal de exclusão */}
+      {/* Modal de Exclusão */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -294,3 +353,4 @@ function Usuarios({ onSelectPage }) {
 }
 
 export default Usuarios;
+
