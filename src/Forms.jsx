@@ -6,6 +6,7 @@ function Forms() {
   const opcoes = [5, 6, 7, 8, 9, 10];
   const [grupo,setGrupo] = useState("")
   const [curso,setCurso] = useState("")
+  const [senha,setSenha] = useState("")
   const navigate = useNavigate();
 
   const selecionar = (valor) => {
@@ -18,6 +19,16 @@ function Forms() {
     localStorage.removeItem("firstIntegrante")
     navigate("/cadastroalunomentor")
   };
+
+  const handleSubmitSenha = async (e) =>{
+    e.preventDefault()
+
+    const response  = await fetch("http://localhost:3000/api/users",{
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({grupo,qtdIntegrantes, curso, senha})
+    })
+  }
 
   return (
     <div className="forms">
@@ -86,13 +97,6 @@ function Forms() {
             onChange={(e) => setCurso(e.target.value)}
             
             />
-          </div>
-        </div>
-
-        <div className="pergunta">
-          <p className="pTitulo">4.0 Digite a senha geral do grupo</p>
-          <div>
-            <input className="inputPergunta" type="password" placeholder="Senha" />
           </div>
         </div>
       </div>

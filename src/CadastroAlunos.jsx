@@ -156,6 +156,13 @@ export default function CadastroAlunos() {
         />
       </div>
 
+      <div className="pergunta">
+          <p className="pTitulo">4.0 Digite a senha</p>
+        <div>
+          <input className="inputPergunta" type="password" placeholder="Senha" />
+        </div>
+      </div>
+
       <div className={`botoesAluno ${step > 0 ? "dois-botoes" : "um-botao"}`}>
         {step > 0 && (
           <button className="voltarAluno" type="button" onClick={anterior}>

@@ -16,18 +16,6 @@ export default function CadastroAlunoMentor() {
   }, [navigate]);
 
   const continuar = () => {
-    if (!mentor.trim()) {
-      alert("Preencha o nome do mentor.");
-      return;
-    }
-    if (!mentorEmail.trim()) {
-      alert("Preencha o email do mentor.");
-      return;
-    }
-    if (!mentorRA.trim()) {
-      alert("Preencha o RA do mentor.");
-      return;
-    }
     localStorage.setItem("firstIntegrante", mentor.trim());
     navigate("/cadastroalunos");
   };
@@ -82,6 +70,15 @@ export default function CadastroAlunoMentor() {
         value={mentorEmail}
         onChange={(e) => setMentorEmail(e.target.value)}
       />
+      <div className="pergunta">
+          <p className="pTitulo">4.0 Digite a senha</p>
+        <div>
+          <input className="inputPergunta" type="password" placeholder="Senha" />
+        </div>
+      </div>
+
+      
+
       </div>
       <div className="divBotoesMentor">
         <button className = "voltar" type="button" onClick={() => navigate(-1)}>
