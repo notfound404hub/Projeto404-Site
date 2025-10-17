@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CadastroAlunoMentor() {
-  const [mentor, setMentor] = useState("");
-  const [mentorRA, setMentorRA] = useState("");
-  const [mentorEmail, setMentorEmail] = useState("");
+  const [mentor, setMentor] = useState("")
+  const [mentorRA, setMentorRA] = useState("")
+  const [mentorEmail, setMentorEmail] = useState("")
+  const [mentorSenha, setMentorSenha] = useState("")
 
   const navigate = useNavigate();
 
@@ -16,7 +17,13 @@ export default function CadastroAlunoMentor() {
   }, [navigate]);
 
   const continuar = () => {
-    localStorage.setItem("firstIntegrante", mentor.trim());
+    const mentorData ={
+      nome: mentor.trim(),
+      ra: mentorRA.trim(),
+      email: mentorEmail.trim(),
+      senha: mentorSenha.trim()
+    }
+    localStorage.setItem("firstIntegrante", JSON.stringify(mentorData));
     navigate("/cadastroalunos");
   };
 
@@ -73,7 +80,12 @@ export default function CadastroAlunoMentor() {
       <div className="pergunta">
           <p className="pTitulo">4.0 Digite a senha</p>
         <div>
-          <input className="inputPergunta" type="password" placeholder="Senha" />
+          <input 
+          className="inputPergunta" 
+          type="password"
+          value={mentorSenha} 
+          onChange={(e) => setMentorSenha(e.target.value)}
+          placeholder="Senha" />
         </div>
       </div>
 

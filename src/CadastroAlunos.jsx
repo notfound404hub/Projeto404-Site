@@ -10,9 +10,10 @@ export default function CadastroAlunos() {
   const [alunos, setAlunos] = useState([]);
   const [alunoRA, setAlunoRA] = useState([])
   const [alunoEmail, setAlunoEmail] = useState([])
+  const [alunoSenha, setAlunoSenha] = useState([])
   const [step, setStep] = useState(0);
   const [ready, setReady] = useState(false);
-  const camposInvalidos = !alunos[step]?.trim() || !alunoEmail[step]?.trim() || !alunoRA[step]?.trim()
+  const camposInvalidos = !alunos[step]?.trim() || !alunoEmail[step]?.trim() || !alunoRA[step]?.trim() || !alunoSenha[step]?.trim()
   
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function CadastroAlunos() {
     setAlunos(Array(rem).fill(""));
     setAlunoEmail(Array(rem).fill(""))
     setAlunoRA(Array(rem).fill(""))
+    setAlunoSenha(Array(rem).fill(""))
     setStep(0);
     setReady(true);
   }, [navigate]);
@@ -67,6 +69,14 @@ export default function CadastroAlunos() {
     })
   }
 
+  const handleSenhaChange = (index,value) =>{
+    setAlunoSenha ((prev)=>{
+      const copy = [...prev]
+      copy[index] = value
+      return copy
+    })
+  }
+
   const proximo = () => {
     if (step < remaining - 1) setStep((s) => s + 1);
   };
@@ -75,14 +85,16 @@ export default function CadastroAlunos() {
   };
 
   const finalizar = () => {
-    const primeiro = localStorage.getItem("firstIntegrante");
-    const todosAlunos = primeiro ? [primeiro, ...alunos] : [...alunos];
-    const matriculas = [...alunoRA]
-    const email = [...alunoEmail]
+    const primeiro = JSON.parse(localStorage.getItem("firstIntegrante"))
+    const todosAlunos = primeiro ? [primeiro.nome, ...alunos] : [...alunos]
+    const matriculas = primeiro ? [primeiro.ra, ...alunoRA] : [...alunoRA]
+    const email = primeiro ? [primeiro.email, ...alunoEmail] : [...alunoEmail]
+    const senha = primeiro ? [primeiro.senha, ...alunoSenha] : [alunoSenha]
     const todosJuntos = todosAlunos.map((nome, i) => ({
       nome,
-      alunoRA: [i],
-      alunoEmail: [i],
+      matriculas: matriculas[i],
+      email: email[i],
+      senha: senha[i]
     }))
     console.log("Todos os integrantes (final):", todosJuntos);
     alert("Cadastro concluído!");
@@ -157,9 +169,14 @@ export default function CadastroAlunos() {
       </div>
 
       <div className="pergunta">
-          <p className="pTitulo">4.0 Digite a senha</p>
+          <p className="pTitulo">4.0 Digite a senha do {step+2}° integrante</p>
         <div>
-          <input className="inputPergunta" type="password" placeholder="Senha" />
+          <input 
+          className="inputPergunta" 
+          type="password" 
+          value={alunoSenha[step]}
+          onChange={(e) => handleSenhaChange(step, e.target.value)}
+          placeholder={`Senha do integrante ${step+2}`} />
         </div>
       </div>
 
