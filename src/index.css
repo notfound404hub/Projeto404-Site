@@ -3400,6 +3400,8 @@ form {
   color: #005945;
   font-weight: 600;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .modal label {
@@ -3520,3 +3522,34 @@ form {
 
 
 /* Exportar aluno */
+
+/* Filtrar */
+
+.footerModal{
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+.sectionfilter{
+  display: flex;
+  gap: 10px;
+}
+.modal select{
+  width: 150px;
+}
+.btnFilter{
+  margin-top: 10px;
+  background: #00ab72;
+  color: #fafafa;
+  width: 150px;
+  height: 50px;
+  border: none;
+  font-size: 18px;
+  font-weight: bolder;
+ border-radius: 10px;
+}
+.btnFilter:hover{
+  background: #fafafa;
+  color: #00ab72;
+  border: 1px solid #00AB72;
+}

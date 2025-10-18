@@ -3,15 +3,43 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
 function Usuarios({ onSelectPage }) {
+  const [filterSelecionado, setFilterSelecionado] = useState("igual");
   const [usuarios, setUsuarios] = useState([]);
+  const [usuariosOriginais, setUsuariosOriginais] = useState([]); // 🔹 Guarda lista completa
   const [selected, setSelected] = useState([]);
-  const [showModal, setShowModal] = useState(false); // exportação
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // exclusão
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showModalOrdenar, setshowModalOrdenar] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
   const [fileName, setFileName] = useState("usuarios_exportados");
   const [rangeStart, setRangeStart] = useState("");
   const [rangeEnd, setRangeEnd] = useState("");
-  const [exportType, setExportType] = useState("intervalo"); // novo estado
+  const [exportType, setExportType] = useState("intervalo");
   const headerCheckboxRef = useRef(null);
+  const [valorSelecionado, setValorSelecionado] = useState("nome");
+
+  // 🔹 Estados do sistema de filtros
+  const [filtros, setFiltros] = useState([]);
+  const [valorFiltro, setValorFiltro] = useState("");
+
+  const opcoesNumericas = [
+    { value: "igual", label: "é igual a" },
+    { value: "maior", label: "é maior que" },
+    { value: "menor", label: "é menor que" },
+  ];
+
+  const opcoesTextuais = [
+    { value: "igual", label: "é igual a" },
+    { value: "contem", label: "contém" },
+    { value: "naoContem", label: "não contém" },
+  ];
+
+  const handleChange = (event) => {
+    setValorSelecionado(event.target.value);
+    if (event.target.value === "id") {
+      setFilterSelecionado("igual");
+    }
+  };
 
   //  Carregar usuários
   const carregarUsuarios = async () => {
@@ -21,6 +49,7 @@ function Usuarios({ onSelectPage }) {
 
       if (response.ok) {
         setUsuarios(data);
+        setUsuariosOriginais(data); // 🔹 Salva a lista original
       } else {
         alert(data.error || "Erro ao buscar usuários");
       }
@@ -126,7 +155,11 @@ function Usuarios({ onSelectPage }) {
         types: [
           {
             description: "Planilha Excel",
-            accept: { "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"] },
+            accept: {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+                ".xlsx",
+              ],
+            },
           },
         ],
       });
@@ -184,6 +217,7 @@ function Usuarios({ onSelectPage }) {
         >
           Adicionar +
         </button>
+
         <div className="dropdown-tabela">
           <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
           <div className="dropdown-content-tabela">
@@ -193,9 +227,10 @@ function Usuarios({ onSelectPage }) {
             <a href="#">Editar</a>
           </div>
         </div>
+
         <div className="rightMenu-tabela">
-          <button className="btn-tabela filtrar-tabela">Filtrar</button>
-          <button className="btn-tabela ordenar-tabela">Ordenar</button>
+          <button className="btn-tabela filtrar-tabela" onClick={() => setShowFilterModal(true)}>Filtrar</button>
+          <button className="btn-tabela ordenar-tabela" onClick={() => setshowModalOrdenar(true)}>Ordenar</button>
         </div>
       </div>
 
@@ -231,7 +266,7 @@ function Usuarios({ onSelectPage }) {
               <tr key={u.ID_Usuario}>
                 <td>
                   <input
-                    className="chk-tabela testechk"
+                    className="chk-tabela"
                     type="checkbox"
                     checked={selected.includes(u.ID_Usuario)}
                     onChange={() => toggleSelect(u.ID_Usuario)}
@@ -270,7 +305,6 @@ function Usuarios({ onSelectPage }) {
               />
             </label>
 
-            
             {exportType === "intervalo" && (
               <label>
                 Digite o ID inicial e o ID final:
@@ -292,6 +326,7 @@ function Usuarios({ onSelectPage }) {
                 </div>
               </label>
             )}
+
             <div className="export-options">
               <label className="radio-option">
                 <input
@@ -316,7 +351,6 @@ function Usuarios({ onSelectPage }) {
               </label>
             </div>
 
-
             <div className="modal-actions">
               <button onClick={exportarUsuarios} className="botaoLogin">
                 Exportar
@@ -335,15 +369,213 @@ function Usuarios({ onSelectPage }) {
         </div>
       )}
 
-      {/* Modal de Exclusão */}
+      {/* Modal de Filtro */}
+      {showFilterModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Filtrar Usuários</h2>
+            <p>Adicionar novo filtro:</p>
+
+            <div className="sectionfilter">
+              <select
+                name="selectFilter"
+                value={valorSelecionado}
+                onChange={handleChange}
+              >
+                <option value="Usuario_Nome">Nome</option>
+                <option value="ID_Usuario">ID do usuário</option>
+                <option value="Usuario_CPF">CPF</option>
+                <option value="Usuario_Empresa">Empresa</option>
+                <option value="Usuario_Email">Email</option>
+                <option value="Usuario_Telefone">Telefone</option>
+                <option value="created_at">Data de criação</option>
+              </select>
+
+              <select
+                value={filterSelecionado}
+                onChange={(e) => setFilterSelecionado(e.target.value)}
+              >
+                {(valorSelecionado === "ID_Usuario"
+                  ? opcoesNumericas
+                  : opcoesTextuais
+                ).map((op) => (
+                  <option key={op.value} value={op.value}>
+                    {op.label}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                type="text"
+                placeholder="Digite o valor..."
+                value={valorFiltro}
+                onChange={(e) => setValorFiltro(e.target.value)}
+              />
+
+              <button
+                className="btnFilter"
+                onClick={() => {
+                  if (!valorFiltro.trim()) return alert("Digite um valor!");
+                  const novoFiltro = {
+                    campo: valorSelecionado,
+                    condicao: filterSelecionado,
+                    valor: valorFiltro.trim(),
+                  };
+                  setFiltros((prev) => [...prev, novoFiltro]);
+                  setValorFiltro("");
+                }}
+              >
+                Adicionar
+              </button>
+            </div>
+
+            {/* Lista de filtros adicionados */}
+            {filtros.length > 0 && (
+              <div className="lista-filtros">
+                <h4>Filtros adicionados:</h4>
+                {filtros.map((f, i) => (
+                  <div key={i} className="filtro-item">
+                    <span>
+                      {f.campo.replace("Usuario_", "")} {f.condicao} "{f.valor}"
+                    </span>
+                    <button
+                      className="btnRemoverFiltro"
+                      onClick={() =>
+                        setFiltros((prev) => prev.filter((_, idx) => idx !== i))
+                      }
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="footerModal">
+              <button
+                className="btnFilter"
+                onClick={() => {
+                  let filtrados = [...usuariosOriginais];
+                  filtros.forEach((f) => {
+                    filtrados = filtrados.filter((u) => {
+                      const val = String(u[f.campo]).toLowerCase();
+                      const comp = f.valor.toLowerCase();
+
+                      if (f.condicao === "igual") return val === comp;
+                      if (f.condicao === "contem") return val.includes(comp);
+                      if (f.condicao === "naoContem")
+                        return !val.includes(comp);
+                      if (f.condicao === "maior")
+                        return parseFloat(val) > parseFloat(comp);
+                      if (f.condicao === "menor")
+                        return parseFloat(val) < parseFloat(comp);
+                      return true;
+                    });
+                  });
+                  setUsuarios(filtrados);
+                  setShowFilterModal(false);
+                }}
+              >
+                Aplicar Filtros
+              </button>
+
+              <button
+                className="btnFilter"
+                onClick={() => {
+                  setUsuarios(usuariosOriginais);
+                  setFiltros([]);
+                  setShowFilterModal(false);
+                }}
+              >
+                Limpar Filtros
+              </button>
+
+              <button
+                className="btnFilter"
+                onClick={() => setShowFilterModal(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Ordenação */}
+      {showModalOrdenar && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Ordenar Usuários</h2>
+
+            <div className="sectionfilter">
+              <select
+                onChange={(e) => setValorSelecionado(e.target.value)}
+                value={valorSelecionado}
+              >
+                <option value="ID_Usuario">ID do usuário</option>
+                <option value="Usuario_Nome">Nome</option>
+                <option value="Usuario_CPF">CPF</option>
+                <option value="Usuario_Empresa">Empresa</option>
+                <option value="Usuario_Email">Email</option>
+                <option value="Usuario_Telefone">Telefone</option>
+                <option value="created_at">Data de criação</option>
+              </select>
+
+              <select
+                onChange={(e) => setFilterSelecionado(e.target.value)}
+                value={filterSelecionado}
+              >
+                <option value="asc">Crescente</option>
+                <option value="desc">Decrescente</option>
+              </select>
+            </div>
+
+            <div className="footerModal">
+              <button
+                className="btnFilter"
+                onClick={() => {
+                  const ordenado = [...usuarios].sort((a, b) => {
+                    const campo = valorSelecionado;
+                    if (filterSelecionado === "asc") {
+                      return a[campo] > b[campo] ? 1 : -1;
+                    } else {
+                      return a[campo] < b[campo] ? 1 : -1;
+                    }
+                  });
+                  setUsuarios(ordenado);
+                  setshowModalOrdenar(false);
+                }}
+              >
+                Ordenar
+              </button>
+              <button
+                className="btnFilter"
+                onClick={() => setshowModalOrdenar(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Excluir */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h2>Exclusão de Usuário</h2>
-            <p>Você deseja excluir <b>{selected.length}</b> usuário(s)?</p>
-            <div className="modal-actions">
-              <button onClick={excluirUsuarios} className="botaoLogin">Confirmar</button>
-              <button onClick={() => setShowDeleteModal(false)} className="botaoLogin">Cancelar</button>
+            <h2>Confirmar exclusão</h2>
+            <p>Deseja realmente excluir os usuários selecionados?</p>
+
+            <div className="footerModal">
+              <button className="btnFilter" onClick={excluirUsuarios}>
+                Confirmar
+              </button>
+              <button
+                className="btnFilter"
+                onClick={() => setShowDeleteModal(false)}
+              >
+                Cancelar
+              </button>
             </div>
           </div>
         </div>
@@ -353,4 +585,3 @@ function Usuarios({ onSelectPage }) {
 }
 
 export default Usuarios;
-
