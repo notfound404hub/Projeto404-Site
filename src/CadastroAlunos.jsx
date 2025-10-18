@@ -1,19 +1,22 @@
 // CadastroAlunos.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 export default function CadastroAlunos() {
   const navigate = useNavigate();
   const [qtd, setQtd] = useState(0);
   const [first, setFirst] = useState(null);
   const [remaining, setRemaining] = useState(0);
-  const [alunos, setAlunos] = useState([]);
-  const [alunoRA, setAlunoRA] = useState([])
-  const [alunoEmail, setAlunoEmail] = useState([])
-  const [alunoSenha, setAlunoSenha] = useState([])
+  const [alunos, setAlunos] = useState({
+    Aluno_Nome: [],
+    Aluno_RA: [],
+    Aluno_Email: [],
+    Aluno_Senha: []
+  })
   const [step, setStep] = useState(0);
   const [ready, setReady] = useState(false);
-  const camposInvalidos = !alunos[step]?.trim() || !alunoEmail[step]?.trim() || !alunoRA[step]?.trim() || !alunoSenha[step]?.trim()
+  const camposInvalidos = !alunos.Aluno_Nome[step]?.trim() || !alunos.Aluno_Email[step]?.trim() || !alunos.Aluno_RA[step]?.trim() || !alunos.Aluno_Senha[step]?.trim()
   
 
   useEffect(() => {
@@ -37,45 +40,38 @@ export default function CadastroAlunos() {
     setFirst(firstSaved);
     const rem = Math.max(0, totalNum - 1);
     setRemaining(rem);
-    setAlunos(Array(rem).fill(""));
-    setAlunoEmail(Array(rem).fill(""))
-    setAlunoRA(Array(rem).fill(""))
-    setAlunoSenha(Array(rem).fill(""))
+    setAlunos({
+      Aluno_Nome: Array(rem).fill(""),
+      Aluno_RA:   Array(rem).fill(""),
+      Aluno_Email:Array(rem).fill(""),
+      Aluno_Senha:Array(rem).fill("")
+    });
     setStep(0);
     setReady(true);
   }, [navigate]);
 
-  const handleAlunoChange = (index, value) => {
-    setAlunos((prev) => {
-      const copy = [...prev];
-      copy[index] = value;
-      return copy;
-    });
+  const handleChange = (e) => {
+    setAlunos({...alunos, [e.target.name]: e.target.value })
+  }
+  
+  const handleSubmit = async (e) => {
+    e.PreventDefault()
+    try{
+      const res = await axios.post("http://localhost:500/api/users/alunos", alunos)
+      console.log("Resposta do backend: ", res.data)
+      alert(res.data.msg)      
+    }catch (err){
+      console.error("Erro no cadastro:", err.response?.data || err.message)
+      alert("Erro no cadastro:" + (err.response?.data?.error || err.message))
+    }
+  }
+
+  const handleAlunosChange = (field, index, value) => {
+    setAlunos(prev => ({
+      ...prev,
+      [field]: prev[field].map((item,i) => (i === index ? value : item))
+    }))   
   };
-
-  const handleRAChange = (index, value) => {
-    setAlunoRA((prev) => {
-      const copy = [...prev]
-      copy[index] = value
-      return copy
-    })
-  }
-
-  const handleEmailChange = (index, value) => {
-    setAlunoEmail((prev) => {
-      const copy = [...prev]
-      copy[index] = value
-      return copy
-    })
-  }
-
-  const handleSenhaChange = (index,value) =>{
-    setAlunoSenha ((prev)=>{
-      const copy = [...prev]
-      copy[index] = value
-      return copy
-    })
-  }
 
   const proximo = () => {
     if (step < remaining - 1) setStep((s) => s + 1);
@@ -143,8 +139,8 @@ export default function CadastroAlunos() {
         <input className="inputPerguntaAluno"
           type="text"
           placeholder={`Nome do integrante ${step + 2}`}
-          value={alunos[step] || ""}
-          onChange={(e) => handleAlunoChange(step, e.target.value)}
+          value={alunos.Aluno_Nome[step] || ""}
+          onChange={(e) => handleAlunosChange("Aluno_Nome", step, e.target.value)}
         />
       </div>
 
@@ -153,8 +149,8 @@ export default function CadastroAlunos() {
         <input className="inputPerguntaAluno"
           type="text"
           placeholder={`RA do integrante ${step + 2}`}
-          value={alunoRA[step] || ""}
-          onChange={(e) => handleRAChange(step, e.target.value)}
+          value={alunos.Aluno_RA[step] || ""}
+          onChange={(e) => handleAlunosChange("Aluno_RA", step, e.target.value)}
         />
       </div>
 
@@ -163,8 +159,8 @@ export default function CadastroAlunos() {
         <input className="inputPerguntaAluno"
           type="email"
           placeholder={`Email do integrante ${step + 2}`}
-          value={alunoEmail[step] || ""}
-          onChange={(e) => handleEmailChange(step, e.target.value)}
+          value={alunos.Aluno_Email[step] || ""}
+          onChange={(e) => handleAlunosChange("Aluno_Email", step, e.target.value)}
         />
       </div>
 
@@ -174,8 +170,8 @@ export default function CadastroAlunos() {
           <input 
           className="inputPergunta" 
           type="password" 
-          value={alunoSenha[step]}
-          onChange={(e) => handleSenhaChange(step, e.target.value)}
+          value={alunos.Aluno_Senha[step]}
+          onChange={(e) => handleAlunosChange("Aluno_Senha", step, e.target.value)}
           placeholder={`Senha do integrante ${step+2}`} />
         </div>
       </div>
