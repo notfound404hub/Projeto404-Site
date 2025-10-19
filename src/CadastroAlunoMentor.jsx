@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 export default function CadastroAlunoMentor() {
-  const [mentor, setMentor] = useState("")
-  const [mentorRA, setMentorRA] = useState("")
-  const [mentorEmail, setMentorEmail] = useState("")
-  const [mentorSenha, setMentorSenha] = useState("")
+  const [mentor, setMentor] = useState({
+    Mentor_Nome: "",
+    Mentor_RA: "", 
+    Mentor_Email: "",
+    Mentor_Senha: ""
+  })
 
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("Enviando dados do mentor", mentor)
+    try{
+      const res =  await axios.post("http://localhost:500/api/users/mentores", mentor)
+      console.log("Resposta do backend", res.data)
+      alert(res.data.msg)
+
+    }catch(err){
+      console.error("Erro no cadastro do mentor:", err.response?.data || err.message)
+      alert("Erro no cadastro do mentor" + (err.response?.data?.error || err.message))
+    }    
+  } 
 
   useEffect(() => {
     const qtd = Number(localStorage.getItem("qtdIntegrantes") || 0);
@@ -18,10 +35,10 @@ export default function CadastroAlunoMentor() {
 
   const continuar = () => {
     const mentorData ={
-      nome: mentor.trim(),
-      ra: mentorRA.trim(),
-      email: mentorEmail.trim(),
-      senha: mentorSenha.trim()
+      nome: mentor.Mentor_Nome.trim(),
+      ra: mentor.Mentor_RA.trim(),
+      email: mentor.Mentor_Email.trim(),
+      senha: mentor.Mentor_Senha.trim()
     }
     localStorage.setItem("firstIntegrante", JSON.stringify(mentorData));
     navigate("/cadastroalunos");
@@ -48,14 +65,14 @@ export default function CadastroAlunoMentor() {
         </p>
         </div>      
       
-
+      <form onSubmit={handleSubmit}>
       <div className="perguntaMentor">
         <p className="tituloPerguntaMentor">1.0  Nome do aluno mentor</p>
       <input className="inputPerguntaMentor"
         type="text"
         placeholder="Nome do mentor"
-        value={mentor}
-        onChange={(e) => setMentor(e.target.value)}
+        value={mentor.Mentor_Nome}
+        onChange={(e) => setMentor({...mentor, Mentor_Nome: e.target.value})}
       />
       </div>
 
@@ -64,8 +81,8 @@ export default function CadastroAlunoMentor() {
       <input className="inputPerguntaMentor"
         type="text"
         placeholder="RA do mentor"
-        value={mentorRA}
-        onChange={(e) => setMentorRA(e.target.value)}
+        value={mentor.Mentor_RA}
+        onChange={(e) => setMentor({...mentor, Mentor_RA: e.target.value})}
       />
       </div>
 
@@ -74,8 +91,8 @@ export default function CadastroAlunoMentor() {
       <input className="inputPerguntaMentor"
         type="email"
         placeholder="Email do mentor"
-        value={mentorEmail}
-        onChange={(e) => setMentorEmail(e.target.value)}
+        value={mentor.MentorEmail}
+        onChange={(e) => setMentor({...mentor, Mentor_Email: e.target.value})}
       />
       <div className="pergunta">
           <p className="pTitulo">4.0 Digite a senha</p>
@@ -83,8 +100,8 @@ export default function CadastroAlunoMentor() {
           <input 
           className="inputPergunta" 
           type="password"
-          value={mentorSenha} 
-          onChange={(e) => setMentorSenha(e.target.value)}
+          value={mentor.MentorSenha} 
+          onChange={(e) => setMentor({...mentor, Mentor_Senha: e.target.value})}
           placeholder="Senha" />
         </div>
       </div>
@@ -97,12 +114,13 @@ export default function CadastroAlunoMentor() {
           Voltar
         </button>
         <button className="proximoMentor" 
-        type="button" 
-        disabled = {mentor === "" || mentorRA === "" ||  mentorEmail === "" } 
+        type="submit" 
+        disabled = {mentor.Mentor_Nome === "" || mentor.Mentor_RA === "" ||  mentor.Mentor_Email === "" || mentor.Mentor_Senha === "" } 
         onClick={continuar}>
           Próximo
         </button>
       </div>
+      </form>
       </div>
     </div>
   );

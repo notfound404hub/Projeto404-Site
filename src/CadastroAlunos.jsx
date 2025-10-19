@@ -10,14 +10,13 @@ export default function CadastroAlunos() {
   const [remaining, setRemaining] = useState(0);
   const [alunos, setAlunos] = useState({
     Aluno_Nome: [],
-    Aluno_RA: [],
     Aluno_Email: [],
+    Aluno_RA: [],
     Aluno_Senha: []
   })
   const [step, setStep] = useState(0);
   const [ready, setReady] = useState(false);
-  const camposInvalidos = !alunos.Aluno_Nome[step]?.trim() || !alunos.Aluno_Email[step]?.trim() || !alunos.Aluno_RA[step]?.trim() || !alunos.Aluno_Senha[step]?.trim()
-  
+  const camposInvalidos = !alunos.Aluno_Nome[step]?.trim() || !alunos.Aluno_Email[step]?.trim() || !alunos.Aluno_RA[step]?.trim() || !alunos.Aluno_Senha[step]?.trim()  
 
   useEffect(() => {
     const totalStr = localStorage.getItem("qtdIntegrantes");
@@ -42,29 +41,13 @@ export default function CadastroAlunos() {
     setRemaining(rem);
     setAlunos({
       Aluno_Nome: Array(rem).fill(""),
-      Aluno_RA:   Array(rem).fill(""),
-      Aluno_Email:Array(rem).fill(""),
-      Aluno_Senha:Array(rem).fill("")
-    });
+      Aluno_Email: Array(rem).fill(""),
+      Aluno_RA: Array(rem).fill(""),
+      Aluno_Senha: Array(rem).fill("")
+    })
     setStep(0);
     setReady(true);
   }, [navigate]);
-
-  const handleChange = (e) => {
-    setAlunos({...alunos, [e.target.name]: e.target.value })
-  }
-  
-  const handleSubmit = async (e) => {
-    e.PreventDefault()
-    try{
-      const res = await axios.post("http://localhost:500/api/users/alunos", alunos)
-      console.log("Resposta do backend: ", res.data)
-      alert(res.data.msg)      
-    }catch (err){
-      console.error("Erro no cadastro:", err.response?.data || err.message)
-      alert("Erro no cadastro:" + (err.response?.data?.error || err.message))
-    }
-  }
 
   const handleAlunosChange = (field, index, value) => {
     setAlunos(prev => ({
@@ -78,39 +61,37 @@ export default function CadastroAlunos() {
   };
   const anterior = () => {
     if (step > 0) setStep((s) => s - 1);
-  };
-
-  const finalizar = () => {
-    const primeiro = JSON.parse(localStorage.getItem("firstIntegrante"))
-    const todosAlunos = primeiro ? [primeiro.nome, ...alunos] : [...alunos]
-    const matriculas = primeiro ? [primeiro.ra, ...alunoRA] : [...alunoRA]
-    const email = primeiro ? [primeiro.email, ...alunoEmail] : [...alunoEmail]
-    const senha = primeiro ? [primeiro.senha, ...alunoSenha] : [alunoSenha]
+  };  
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+    const mentorData = JSON.parse(localStorage.getItem("firstIntegrante"))
+    const todosAlunos = mentorData ? [mentorData.nome, ...alunos.Aluno_Nome] : [...alunos.Aluno_Nome]
+    const matriculas = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
+    const email = mentorData ? [mentorData.email, ...alunos.Aluno_Email] : [...alunos.Aluno_Email]
+    const senha = mentorData ? [mentorData.senha, ...alunos.Aluno_Senha] : [...alunos.Aluno_Senha]
     const todosJuntos = todosAlunos.map((nome, i) => ({
-      nome,
-      matriculas: matriculas[i],
-      email: email[i],
-      senha: senha[i]
+      Aluno_Nome: nome,
+      Aluno_RA: matriculas[i],
+      Aluno_Email: email[i],
+      Aluno_Senha: senha[i]
     }))
-    console.log("Todos os integrantes (final):", todosJuntos);
-    alert("Cadastro concluído!");
-    navigate("/");
-  };
-
+    
+    try{
+      console.log("Dados enviados para o backend:", todosJuntos);
+      const res = await axios.post("http://localhost:500/api/users/alunos", todosJuntos)
+      console.log("Resposta do backend: ", res.data)
+      alert("Cadastro concluído!")
+      alert(res.data.msg) 
+      navigate("/login")     
+    }catch (err){
+      console.error("Erro no cadastro:", err.response?.data || err.message)
+      alert("Erro no cadastro:" + (err.response?.data?.error || err.message))      
+    }
+  }
 
   if (!ready) return <p>Carregando...</p>;
-
-  if (remaining === 0) {
-    return (
-      <div>
-        <h2>Somente o 1º integrante</h2>
-        <p>Primeiro integrante: {first}</p>
-        <button type="button" onClick={finalizar}>
-          Finalizar (concluir cadastro)
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className="formsAlunos">
@@ -134,6 +115,7 @@ export default function CadastroAlunos() {
         </div>
       </div>
 
+      <form onSubmit={handleSubmit}>
       <div className="perguntaAlunos">
         <p className="tituloPerguntaAluno">1.0   Nome do {step + 2}° integrante</p>
         <input className="inputPerguntaAluno"
@@ -190,11 +172,12 @@ export default function CadastroAlunos() {
         )}
 
         {step === remaining - 1 && (
-          <button className="finalizar" type="button" disabled = {camposInvalidos}  onClick={finalizar}>
+          <button className="finalizar" type="submit" disabled = {camposInvalidos}>
             Finalizar
           </button>
         )}
       </div>
+      </form>
     </div>
   );
 }
