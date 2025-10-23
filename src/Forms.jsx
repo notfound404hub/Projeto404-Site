@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 function Forms() {
   const [qtdIntegrantes, setQtdIntegrantes] = useState(0);
   const opcoes = [5, 6, 7, 8, 9, 10];
-  const [grupo,setGrupo] = useState("")
-  const [curso,setCurso] = useState("")
+  const [grupo,setGrupo] = useState({
+    Grupo_Nome: "",
+    Grupo_Curso: ""
+  })  
   const navigate = useNavigate();
 
   const selecionar = (valor) => {
@@ -14,7 +16,12 @@ function Forms() {
 
   const irParaCadastroMentor = () => {
     if (!qtdIntegrantes || qtdIntegrantes <= 0) return
-    localStorage.setItem("qtdIntegrantes", String(qtdIntegrantes))
+    const grupoData = {
+      Grupo_Nome:grupo.Grupo_Nome.trim(),
+      Grupo_Curso: grupo.Grupo_Curso.trim()
+    }
+    localStorage.setItem("grupo", JSON.stringify(grupoData))    
+    localStorage.setItem("qtdIntegrantes", String(qtdIntegrantes))    
     localStorage.removeItem("firstIntegrante")
     navigate("/cadastroalunomentor")
   };
@@ -47,8 +54,8 @@ function Forms() {
             className="inputPergunta" 
             type="text" 
             placeholder="Nome do grupo"
-            value={grupo}
-            onChange = {(e)=> setGrupo(e.target.value)}            
+            value={grupo.Grupo_Nome}
+            onChange = {(e) => setGrupo({...grupo, Grupo_Nome: e.target.value})}            
             />
           </div>
         </div>
@@ -82,9 +89,8 @@ function Forms() {
             className="inputPergunta" 
             type="text" 
             placeholder="Curso" 
-            value={curso}
-            onChange={(e) => setCurso(e.target.value)}
-            
+            value={grupo.Grupo_Curso}
+            onChange={(e) => setGrupo({...grupo,Grupo_Curso: e.target.value})}            
             />
           </div>
         </div>
@@ -93,7 +99,7 @@ function Forms() {
       <div className="acoes">
         <button
           className="proximo"
-          disabled={qtdIntegrantes === 0 || grupo === "" || curso === ""}
+          disabled={qtdIntegrantes === 0 || grupo.Grupo_Nome === "" || grupo.Grupo_Curso === ""}
           onClick={irParaCadastroMentor}
         >
           Próximo

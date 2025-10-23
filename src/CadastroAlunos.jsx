@@ -67,6 +67,8 @@ export default function CadastroAlunos() {
     e.preventDefault()
     
     const mentorData = JSON.parse(localStorage.getItem("firstIntegrante"))
+    const grupoData = JSON.parse(localStorage.getItem("grupo"))
+
     const todosAlunos = mentorData ? [mentorData.nome, ...alunos.Aluno_Nome] : [...alunos.Aluno_Nome]
     const matriculas = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
     const email = mentorData ? [mentorData.email, ...alunos.Aluno_Email] : [...alunos.Aluno_Email]
@@ -75,11 +77,15 @@ export default function CadastroAlunos() {
       Aluno_Nome: nome,
       Aluno_RA: matriculas[i],
       Aluno_Email: email[i],
-      Aluno_Senha: senha[i]
+      Aluno_Senha: senha[i],
+      Grupo_Nome: grupoData?.Grupo_Nome,
+      Grupo_Curso: grupoData?.Grupo_Curso
     }))
     
     try{
       console.log("Dados enviados para o backend:", todosJuntos);
+      const grupoResponse = await axios.post("http://localhost:500/api/users/grupos", grupoData)
+      console.log("Resposta do backend", grupoResponse.data)
       const res = await axios.post("http://localhost:500/api/users/alunos", todosJuntos)
       console.log("Resposta do backend: ", res.data)
       alert("Cadastro concluído!")
