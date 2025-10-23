@@ -17,7 +17,7 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
 
     try {
       const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
+        `http://localhost:500/api/users/usuarioPrincipal/${ID_Usuario}`,
         { method: "DELETE" }
       );
       const data = await response.json();

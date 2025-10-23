@@ -16,10 +16,12 @@ function Usuarios({ onSelectPage }) {
   const [rangeEnd, setRangeEnd] = useState("");
   const [exportType, setExportType] = useState("intervalo");
   const headerCheckboxRef = useRef(null);
-  const [valorSelecionado, setValorSelecionado] = useState("nome");
+  const [valorSelecionado, setValorSelecionado] = useState("ID_Usuario");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [usuarioEdit, setUsuarioEdit] = useState(null);
 
-  // 🔹 Estados do sistema de filtros
   const [filtros, setFiltros] = useState([]);
+  filtros[0] = "Usuários";
   const [valorFiltro, setValorFiltro] = useState("");
 
   const opcoesNumericas = [
@@ -40,8 +42,29 @@ function Usuarios({ onSelectPage }) {
       setFilterSelecionado("igual");
     }
   };
+  const abrirModalEdicao = async () => {
+    if (selected.length !== 1) {
+      alert("Selecione exatamente 1 usuário para editar!");
+      return;
+    }
 
-  //  Carregar usuários
+    const id = selected[0];
+
+    try {
+      const response = await fetch(
+        `http://localhost:500/api/users/usuario/${id}`
+      );
+      if (!response.ok) throw new Error("Erro ao buscar usuário");
+
+      const data = await response.json();
+      setUsuarioEdit(data);
+      setShowEditModal(true);
+    } catch (err) {
+      console.error("Erro ao buscar usuário:", err);
+      alert("Erro ao buscar dados do usuário");
+    }
+  };
+
   const carregarUsuarios = async () => {
     try {
       const response = await fetch("http://localhost:500/api/users/usuarios");
@@ -63,7 +86,6 @@ function Usuarios({ onSelectPage }) {
     carregarUsuarios();
   }, []);
 
-  // 📌 Seleção
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
@@ -118,7 +140,10 @@ function Usuarios({ onSelectPage }) {
     }
 
     const workbook = gerarWorkbook(dadosFiltrados);
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
     const data = new Blob([excelBuffer], { type: "application/octet-stream" });
 
     saveAs(data, `${fileName}.xlsx`);
@@ -147,7 +172,10 @@ function Usuarios({ onSelectPage }) {
     }
 
     const workbook = gerarWorkbook(dadosFiltrados);
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
 
     try {
       const fileHandle = await window.showSaveFilePicker({
@@ -156,9 +184,8 @@ function Usuarios({ onSelectPage }) {
           {
             description: "Planilha Excel",
             accept: {
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
-                ".xlsx",
-              ],
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                [".xlsx"],
             },
           },
         ],
@@ -219,18 +246,30 @@ function Usuarios({ onSelectPage }) {
         </button>
 
         <div className="dropdown-tabela">
-          <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
+          <button className="btn-tabela mais-opcoes-tabela">
+            Mais opções ▾
+          </button>
           <div className="dropdown-content-tabela">
             <a onClick={() => setShowModal(true)}>Exportar usuários</a>
             <a href="#">Importar alunos</a>
             <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
-            <a href="#">Editar</a>
+            <a onClick={abrirModalEdicao}>Editar</a>
           </div>
         </div>
 
         <div className="rightMenu-tabela">
-          <button className="btn-tabela filtrar-tabela" onClick={() => setShowFilterModal(true)}>Filtrar</button>
-          <button className="btn-tabela ordenar-tabela" onClick={() => setshowModalOrdenar(true)}>Ordenar</button>
+          <button
+            className="btn-tabela filtrar-tabela"
+            onClick={() => setShowFilterModal(true)}
+          >
+            Filtrar
+          </button>
+          <button
+            className="btn-tabela ordenar-tabela"
+            onClick={() => setshowModalOrdenar(true)}
+          >
+            Ordenar
+          </button>
         </div>
       </div>
 
@@ -355,7 +394,10 @@ function Usuarios({ onSelectPage }) {
               <button onClick={exportarUsuarios} className="botaoLogin">
                 Exportar
               </button>
-              <button onClick={() => setShowModal(false)} className="botaoLogin">
+              <button
+                onClick={() => setShowModal(false)}
+                className="botaoLogin"
+              >
                 Cancelar
               </button>
               <button
@@ -433,47 +475,56 @@ function Usuarios({ onSelectPage }) {
             {filtros.length > 0 && (
               <div className="lista-filtros">
                 <h4>Filtros adicionados:</h4>
-                {filtros.map((f, i) => (
-                  <div key={i} className="filtro-item">
-                    <span>
-                      {f.campo.replace("Usuario_", "")} {f.condicao} "{f.valor}"
-                    </span>
-                    <button
-                      className="btnRemoverFiltro"
-                      onClick={() =>
-                        setFiltros((prev) => prev.filter((_, idx) => idx !== i))
-                      }
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
+                {filtros
+                  .filter((f) => f && f.campo) // garante que só passa filtro válido
+                  .map((f, i) => (
+                    <div key={i} className="filtro-item">
+                      <span>
+                        {(f.campo || "").replace("Usuario_", "")} {f.condicao} "
+                        {f.valor}"
+                      </span>
+                      <button
+                        className="btnRemoverFiltro"
+                        onClick={() =>
+                          setFiltros((prev) =>
+                            prev.filter((_, idx) => idx !== i)
+                          )
+                        }
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
               </div>
             )}
 
             <div className="footerModal">
               <button
                 className="btnFilter"
-                onClick={() => {
-                  let filtrados = [...usuariosOriginais];
-                  filtros.forEach((f) => {
-                    filtrados = filtrados.filter((u) => {
-                      const val = String(u[f.campo]).toLowerCase();
-                      const comp = f.valor.toLowerCase();
+                onClick={async () => {
+                  try {
+                    const response = await fetch(
+                      "http://localhost:500/api/users/filtrar",
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ filtros }),
+                      }
+                    );
 
-                      if (f.condicao === "igual") return val === comp;
-                      if (f.condicao === "contem") return val.includes(comp);
-                      if (f.condicao === "naoContem")
-                        return !val.includes(comp);
-                      if (f.condicao === "maior")
-                        return parseFloat(val) > parseFloat(comp);
-                      if (f.condicao === "menor")
-                        return parseFloat(val) < parseFloat(comp);
-                      return true;
-                    });
-                  });
-                  setUsuarios(filtrados);
-                  setShowFilterModal(false);
+                    if (!response.ok) {
+                      throw new Error("Erro ao buscar dados do servidor");
+                    }
+
+                    const data = await response.json();
+                    setUsuarios(data);
+                    setShowFilterModal(false);
+                  } catch (error) {
+                    console.error("Erro ao aplicar filtros:", error);
+                    alert(
+                      "Erro ao aplicar filtros. Veja o console para detalhes."
+                    );
+                  }
                 }}
               >
                 Aplicar Filtros
@@ -533,21 +584,41 @@ function Usuarios({ onSelectPage }) {
             <div className="footerModal">
               <button
                 className="btnFilter"
-                onClick={() => {
-                  const ordenado = [...usuarios].sort((a, b) => {
-                    const campo = valorSelecionado;
-                    if (filterSelecionado === "asc") {
-                      return a[campo] > b[campo] ? 1 : -1;
-                    } else {
-                      return a[campo] < b[campo] ? 1 : -1;
+                onClick={async () => {
+                  try {
+                    // corpo da requisição enviado ao backend
+                    const body = {
+                      campo: valorSelecionado,
+                      direcao: filterSelecionado, // "asc" ou "desc"
+                    };
+
+                    const response = await fetch(
+                      "http://localhost:500/api/users/ordenar",
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(body),
+                      }
+                    );
+
+                    if (!response.ok) {
+                      throw new Error("Erro ao buscar dados do servidor");
                     }
-                  });
-                  setUsuarios(ordenado);
-                  setshowModalOrdenar(false);
+
+                    const data = await response.json();
+                    setUsuarios(data);
+                    setshowModalOrdenar(false);
+                  } catch (error) {
+                    console.error("Erro ao aplicar ordenação:", error);
+                    alert(
+                      "Erro ao aplicar ordenação. Veja o console para detalhes."
+                    );
+                  }
                 }}
               >
                 Ordenar
               </button>
+
               <button
                 className="btnFilter"
                 onClick={() => setshowModalOrdenar(false)}
@@ -575,6 +646,147 @@ function Usuarios({ onSelectPage }) {
                 onClick={() => setShowDeleteModal(false)}
               >
                 Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 🔹 Modal de Edição */}
+      {showEditModal && usuarioEdit && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Editar Usuário</h2>
+
+            <div className="formEdit">
+              <label>ID:</label>
+              <input type="text" value={usuarioEdit.ID_Usuario} readOnly />
+
+              <label>Nome:</label>
+              <input
+                type="text"
+                value={usuarioEdit.Usuario_Nome || ""}
+                onChange={(e) =>
+                  setUsuarioEdit({
+                    ...usuarioEdit,
+                    Usuario_Nome: e.target.value,
+                  })
+                }
+              />
+
+              <label>CPF/CNPJ:</label>
+              <input
+                type="text"
+                value={usuarioEdit.Usuario_CPF || ""}
+                readOnly
+              />
+
+              <label>Empresa:</label>
+              <input
+                type="text"
+                value={usuarioEdit.Usuario_Empresa || ""}
+                onChange={(e) =>
+                  setUsuarioEdit({
+                    ...usuarioEdit,
+                    Usuario_Empresa: e.target.value,
+                  })
+                }
+              />
+
+              <label>Email:</label>
+              <input
+                type="text"
+                value={usuarioEdit.Usuario_Email || ""}
+                readOnly
+              />
+
+              <label>Telefone:</label>
+              <input
+                type="text"
+                value={usuarioEdit.Usuario_Telefone || ""}
+                onChange={(e) =>
+                  setUsuarioEdit({
+                    ...usuarioEdit,
+                    Usuario_Telefone: e.target.value,
+                  })
+                }
+              />
+
+              <label>Senha:</label>
+              <input
+                type="text"
+                value={usuarioEdit.Usuario_Senha || ""}
+                onChange={(e) =>
+                  setUsuarioEdit({
+                    ...usuarioEdit,
+                    Usuario_Senha: e.target.value,
+                  })
+                }
+              />
+
+              <label>Criado em:</label>
+              <input
+                type="text"
+                value={
+                  new Date(usuarioEdit.created_at).toLocaleDateString("pt-BR", {
+                    timeZone: "America/Sao_Paulo",
+                  }) || ""
+                }
+                readOnly
+              />
+            </div>
+
+            <div className="footerModal">
+              <button
+                className="btnFilter"
+                onClick={() => setShowEditModal(false)}
+              >
+                Fechar
+              </button>
+
+              <button
+                className="btnFilter"
+                onClick={async () => {
+                  try {
+                    const response = await fetch(
+                      `http://localhost:500/api/users/usuario/${usuarioEdit.ID_Usuario}`,
+                      {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          Usuario_Nome: usuarioEdit.Usuario_Nome,
+                          Usuario_Empresa: usuarioEdit.Usuario_Empresa,
+                          Usuario_Telefone: usuarioEdit.Usuario_Telefone,
+                          Usuario_Senha: usuarioEdit.Usuario_Senha,
+                        }),
+                      }
+                    );
+
+                    let data = {};
+                    try {
+                      data = await response.json();
+                    } catch (e) {
+                      console.warn(
+                        "⚠️ Resposta sem corpo JSON, ignorando parse:",
+                        e
+                      );
+                    }
+
+                    if (!response.ok) {
+                      alert(data.error || "Erro ao atualizar usuário");
+                      return;
+                    }
+
+                    alert("✅ Usuário atualizado com sucesso!");
+                    setShowEditModal(false);
+                    fetchUsuarios();
+                  } catch (error) {
+                    console.error("💥 Erro no update:", error);
+                    alert("Erro no servidor ao atualizar usuário");
+                  }
+                }}
+              >
+                Salvar
               </button>
             </div>
           </div>
