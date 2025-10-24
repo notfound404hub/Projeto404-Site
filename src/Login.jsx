@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [form, setForm] = useState({
-    Usuario_Email: "",
-    Usuario_Senha: ""
+    Aluno_Email: "",
+    Aluno_Senha: ""
   });
 
   const navigate = useNavigate();
@@ -26,10 +26,9 @@ function Login() {
       console.log("Resposta do backend:", res.data);
       alert(res.data.msg);
 
-      // Armazena no localStorage
-      if (res.data.ID_Usuario) {
-        localStorage.setItem("ID_Usuario", res.data.ID_Usuario);
-        console.log("ID salvo no localStorage:", res.data.ID_Usuario);
+      if (res.data.ID_Aluno) {
+        localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
+        console.log("ID salvo no localStorage:", res.data.ID_Aluno);
       }
 
       navigate("/admin");
@@ -54,7 +53,7 @@ function Login() {
           <form className="login" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
-                name="Usuario_Email"                
+                name="Aluno_Email"                
                 className="inputLogin"
                 type="email"
                 placeholder="Email"
@@ -66,7 +65,7 @@ function Login() {
 
             <div className="input-group">
               <input
-                name="Usuario_Senha"   
+                name="Aluno_Senha"   
                 className="inputLogin"
                 type="password"
                 placeholder="Senha"
