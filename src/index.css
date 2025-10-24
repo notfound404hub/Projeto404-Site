@@ -1033,7 +1033,7 @@ form {
   flex: 1;
   min-width: 300px;
   max-width: 400px;
-  border-radius: 8px;
+ 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -1089,8 +1089,7 @@ form {
   padding: 20px;
   flex: 2;
   min-width: 300px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+ 
 }
 
 .painel-tutoriais h2 {
@@ -1961,7 +1960,7 @@ form {
 .suporte-container {
   width: 100%;
   max-height: calc(100vh - 300px); /* Ajusta para o header */
-  padding: 20px;
+
   background: #f5f5f5;
   margin-top: 0;
 }
@@ -2000,7 +1999,7 @@ form {
 .caixa-status {
   background: white;
   border-radius: 8px;
-  padding: 25px 20px;
+
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
@@ -2019,7 +2018,7 @@ form {
 
 .caixa-status .numero {
   display: block;
-  font-size: 52px;
+  font-size: 30px;
   font-weight: bold;
   color: white;
   line-height: 1;
@@ -2067,14 +2066,13 @@ form {
 .grade-tutoriais {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
 }
 
 /* Cartão de tutorial */
 .cartao-tutorial {
   background: white;
   border-radius: 8px;
-  padding: 15px;
+  
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
