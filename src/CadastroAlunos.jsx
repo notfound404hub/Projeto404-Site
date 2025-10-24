@@ -73,24 +73,31 @@ export default function CadastroAlunos() {
     const matriculas = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
     const email = mentorData ? [mentorData.email, ...alunos.Aluno_Email] : [...alunos.Aluno_Email]
     const senha = mentorData ? [mentorData.senha, ...alunos.Aluno_Senha] : [...alunos.Aluno_Senha]
-    const todosJuntos = todosAlunos.map((nome, i) => ({
-      Aluno_Nome: nome,
-      Aluno_RA: matriculas[i],
-      Aluno_Email: email[i],
-      Aluno_Senha: senha[i],
-      Grupo_Nome: grupoData?.Grupo_Nome,
-      Grupo_Curso: grupoData?.Grupo_Curso
-    }))
+    
+    let Id_Grupo = null
+    let todosJuntos = []
     
     try{
       console.log("Dados enviados para o backend:", todosJuntos);
       const grupoResponse = await axios.post("http://localhost:500/api/users/grupos", grupoData)
+      Id_Grupo = grupoResponse.data.id
       console.log("Resposta do backend", grupoResponse.data)
+      
+      todosJuntos = todosAlunos.map((nome, i) => ({
+        Aluno_Nome: nome,
+        Aluno_RA: matriculas[i],
+        Aluno_Email: email[i],
+        Aluno_Senha: senha[i],
+        Grupo_Nome: grupoData?.Grupo_Nome,
+        Grupo_Curso: grupoData?.Grupo_Curso,
+        Id_Grupo: Id_Grupo
+      }))
+      
       const res = await axios.post("http://localhost:500/api/users/alunos", todosJuntos)
       console.log("Resposta do backend: ", res.data)
       alert("Cadastro concluído!")
-      alert(res.data.msg) 
-      navigate("/login")     
+      alert(res.data.msg)  
+      navigate("/login") 
     }catch (err){
       console.error("Erro no cadastro:", err.response?.data || err.message)
       alert("Erro no cadastro:" + (err.response?.data?.error || err.message))      
