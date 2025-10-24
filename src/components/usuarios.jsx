@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { data } from "react-router-dom";
+
 
 function Usuarios({ onSelectPage }) {
+  const [selectedFile, setSelectedFile] = useState(null);
   const [filterSelecionado, setFilterSelecionado] = useState("igual");
   const [usuarios, setUsuarios] = useState([]);
-  const [usuariosOriginais, setUsuariosOriginais] = useState([]); // 🔹 Guarda lista completa
+  const [usuariosOriginais, setUsuariosOriginais] = useState([]); 
   const [selected, setSelected] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -14,11 +17,12 @@ function Usuarios({ onSelectPage }) {
   const [fileName, setFileName] = useState("usuarios_exportados");
   const [rangeStart, setRangeStart] = useState("");
   const [rangeEnd, setRangeEnd] = useState("");
-  const [exportType, setExportType] = useState("intervalo");
+  const [exportType, setExportType] = useState("Todos");
   const headerCheckboxRef = useRef(null);
   const [valorSelecionado, setValorSelecionado] = useState("ID_Usuario");
   const [showEditModal, setShowEditModal] = useState(false);
   const [usuarioEdit, setUsuarioEdit] = useState(null);
+  const [showImportModal, setShowImportModal] = useState(false);
 
   const [filtros, setFiltros] = useState([]);
   filtros[0] = "Usuários";
@@ -72,7 +76,7 @@ function Usuarios({ onSelectPage }) {
 
       if (response.ok) {
         setUsuarios(data);
-        setUsuariosOriginais(data); // 🔹 Salva a lista original
+        setUsuariosOriginais(data); 
       } else {
         alert(data.error || "Erro ao buscar usuários");
       }
@@ -110,7 +114,7 @@ function Usuarios({ onSelectPage }) {
     }
   }, [selected, usuarios.length]);
 
-  //  Gerar planilha
+
   const gerarWorkbook = (dados) => {
     const worksheet = XLSX.utils.json_to_sheet(dados);
     const workbook = XLSX.utils.book_new();
@@ -118,7 +122,6 @@ function Usuarios({ onSelectPage }) {
     return workbook;
   };
 
-  // Exportar por intervalo
   const exportarUsuarios = () => {
     let dadosFiltrados = usuarios;
 
@@ -150,7 +153,6 @@ function Usuarios({ onSelectPage }) {
     setShowModal(false);
   };
 
-  // Exportar escolhendo local
   const exportarEscolhendoLocal = async () => {
     let dadosFiltrados = usuarios;
 
@@ -203,7 +205,22 @@ function Usuarios({ onSelectPage }) {
     }
   };
 
-  // Excluir usuários selecionados
+  const handleExportarUsuarios = async () => {
+    try {
+      console.log("🧾 Iniciando exportação de todos os usuários...");
+
+      setExportType("Todos");
+      
+      await exportarUsuarios();
+
+      console.log("✅ Planilha exportada com sucesso!");
+      alert("✅ Planilha exportada com sucesso!");
+    } catch (erro) {
+      console.error("❌ Erro ao exportar usuários:", erro);
+      alert("Erro ao exportar planilha");
+    }
+  };
+
   const excluirUsuarios = async () => {
     if (selected.length === 0) {
       alert("Nenhum usuário selecionado para exclusão!");
@@ -229,6 +246,7 @@ function Usuarios({ onSelectPage }) {
       } else {
         alert(data.error || "Erro ao excluir usuários!");
       }
+      carregarUsuarios()
     } catch (err) {
       console.error("Erro ao excluir usuários:", err);
       alert("Erro no servidor ao excluir usuários");
@@ -251,7 +269,8 @@ function Usuarios({ onSelectPage }) {
           </button>
           <div className="dropdown-content-tabela">
             <a onClick={() => setShowModal(true)}>Exportar usuários</a>
-            <a href="#">Importar alunos</a>
+            <a onClick={() => setShowImportModal(true)}>Importar usuários</a>
+
             <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
             <a onClick={abrirModalEdicao}>Editar</a>
           </div>
@@ -476,7 +495,7 @@ function Usuarios({ onSelectPage }) {
               <div className="lista-filtros">
                 <h4>Filtros adicionados:</h4>
                 {filtros
-                  .filter((f) => f && f.campo) // garante que só passa filtro válido
+                  .filter((f) => f && f.campo)
                   .map((f, i) => (
                     <div key={i} className="filtro-item">
                       <span>
@@ -586,10 +605,9 @@ function Usuarios({ onSelectPage }) {
                 className="btnFilter"
                 onClick={async () => {
                   try {
-                    // corpo da requisição enviado ao backend
                     const body = {
                       campo: valorSelecionado,
-                      direcao: filterSelecionado, // "asc" ou "desc"
+                      direcao: filterSelecionado, 
                     };
 
                     const response = await fetch(
@@ -767,7 +785,7 @@ function Usuarios({ onSelectPage }) {
                       data = await response.json();
                     } catch (e) {
                       console.warn(
-                        "⚠️ Resposta sem corpo JSON, ignorando parse:",
+                        " Resposta sem corpo JSON, ignorando parse:",
                         e
                       );
                     }
@@ -777,16 +795,94 @@ function Usuarios({ onSelectPage }) {
                       return;
                     }
 
-                    alert("✅ Usuário atualizado com sucesso!");
+                    alert(" Usuário atualizado com sucesso!");
                     setShowEditModal(false);
-                    fetchUsuarios();
+                    carregarUsuarios();
                   } catch (error) {
-                    console.error("💥 Erro no update:", error);
+                    console.error("Erro no update:", error);
                     alert("Erro no servidor ao atualizar usuário");
                   }
                 }}
               >
                 Salvar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Importação */}
+      {showImportModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Importar Usuários</h2>
+            <p>
+              Baixe o molde abaixo, preencha as informações e envie a planilha
+              para importar os usuários.
+            </p>
+
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <button className="export botaoLogin" onClick={handleExportarUsuarios}>
+                Baixar molde (todos usuários)
+              </button>
+
+              <input
+                type="file"
+                accept=".xlsx, .xls"
+                onChange={(e) => setSelectedFile(e.target.files[0])}
+              />
+            </div>
+
+            <div className="footerModal">
+              <button
+                className="btnFilter"
+                onClick={() => setShowImportModal(false)}
+              >
+                Fechar
+              </button>
+
+              <button
+                className="btnFilter"
+                onClick={async () => {
+                  if (!selectedFile) {
+                    alert("Selecione um arquivo primeiro!");
+                    return;
+                  }
+
+                  const formData = new FormData();
+                  formData.append("file", selectedFile);
+
+                  try {
+                    console.log("📤 Enviando arquivo Excel para o backend...");
+                    const response = await fetch(
+                      "http://localhost:500/api/users/importarUsuarios",
+                      {
+                        method: "POST",
+                        body: formData,
+                      }
+                    );
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                      throw new Error(
+                        data.error || "Erro ao importar planilha"
+                      );
+                    }
+
+                    alert(`${data.msg}`);
+                    console.log("Detalhes:", data);
+                    setShowImportModal(false);
+                  carregarUsuarios()
+                  } catch (error) {
+                    console.error("Erro no envio da planilha:", error);
+                    alert("Erro ao importar planilha");
+                  }
+                }}
+              >
+                Enviar
               </button>
             </div>
           </div>
