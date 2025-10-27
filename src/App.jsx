@@ -3,6 +3,7 @@ import Login from "./Login";
 import Home from "./Home";
 import Cadastro from "./Cadastro";
 import Verificar from "./Verificar";
+import EsqueciMinhaSenha from "./EsqueciMinhaSenha";
 import Admin from "./Admin";
 import Forms from "./Forms"
 import Dashboard from "./Dashboard";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/verificar" element={<Verificar />} /> 
+        <Route path="/reset-senha" element={<EsqueciMinhaSenha />} /> 
         <Route path="/admin" element={<Admin />} />
         <Route path="/forms" element={<Forms />} />     
         <Route path="/dashboard" element={<Dashboard/>} />   

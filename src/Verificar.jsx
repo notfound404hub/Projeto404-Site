@@ -2,7 +2,7 @@ import{useState} from "react"
 
 function Verificar(){
     return(
-        <body className="bodyVerificar">
+        <div className="divVerificar">
             
         <aside className="asideVerificar">
             <img className="logoVerificar" src="LogoFundoBranco.avif" alt="logo" />
@@ -20,7 +20,7 @@ function Verificar(){
 
         </aside>
         
-        </body>
+        </div>
         
 
     )
