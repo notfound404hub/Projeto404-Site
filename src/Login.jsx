@@ -37,7 +37,7 @@ function Login() {
       alert("Erro no login: " + (err.response?.data?.error || err.message));
     }
   };
-
+  
   return (
     <div className="bodyImg"> 
       <div className="divLogin">
@@ -50,6 +50,8 @@ function Login() {
             Lideranças Empáticas
           </p>
 
+    <p>Não tem uma conta? <a href="/forms">Cadastre-se</a></p>
+    
           <form className="login" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
@@ -78,8 +80,8 @@ function Login() {
             <button type="submit" className="botaoLogin">Login</button>
           </form>
 
-          <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
-          <p className="footer">&copy; 2025, 404 not found</p>
+          <a href="">Esqueci minha senha</a>
+          <p className="footerLogin">&copy; 2025, 404 not found</p>
         </aside>
       </div>
     </div>
