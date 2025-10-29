@@ -3,8 +3,6 @@ import { useState } from "react";
 function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage }) {
   const [modalConfig, setModalConfig] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
-
-  // estados para menus expansíveis
   const [openCadastros, setOpenCadastros] = useState(false);
   const [openDoacoes, setOpenDoacoes] = useState(false);
 
@@ -17,7 +15,7 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
 
     try {
       const response = await fetch(
-        `http://localhost:500/api/users/usuarioPrincipal/${ID_Usuario}`,
+        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
         { method: "DELETE" }
       );
       const data = await response.json();

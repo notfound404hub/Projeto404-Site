@@ -40,7 +40,6 @@ function CadastroUsuario() {
     setLoading(true);
 
     try {
-      // Envia dados para o backend (sem confirmSenha)
       const dadosEnvio = {
         nome: formData.nome,
         empresa: formData.empresa,
@@ -61,8 +60,7 @@ function CadastroUsuario() {
 
       if (response.ok) {
         alert(data.msg || "Usuário cadastrado com sucesso!");
-        
-        // Limpa o formulário
+
         setFormData({
           nome: "",
           empresa: "",
@@ -104,7 +102,6 @@ function CadastroUsuario() {
       <h2>Cadastro de Colaborador</h2>
 
       <form className="cadastro-form" onSubmit={handleSubmit}>
-        {/* Nome */}
         <div className="form-group">
           <label>Nome *</label>
           <input
@@ -116,7 +113,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* Empresa */}
         <div className="form-group">
           <label>Empresa</label>
           <input
@@ -127,7 +123,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* CPF/CNPJ */}
         <div className="form-group">
           <label>CPF/CNPJ</label>
           <input
@@ -139,7 +134,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* Email */}
         <div className="form-group">
           <label>E-mail *</label>
           <input
@@ -151,7 +145,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* Telefone */}
         <div className="form-group">
           <label>Telefone</label>
           <input
@@ -163,7 +156,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* Senha */}
         <div className="form-group">
           <label>Senha *</label>
           <input
@@ -176,7 +168,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* Confirmação de Senha */}
         <div className="form-group">
           <label>Confirmação de senha *</label>
           <input
@@ -188,7 +179,6 @@ function CadastroUsuario() {
           />
         </div>
 
-        {/* Botões */}
         <div className="form-buttons">
           <button 
             type="submit" 

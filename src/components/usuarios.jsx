@@ -228,8 +228,8 @@ function Usuarios({ onSelectPage }) {
     }
 
     try {
-      const response = await fetch("http://localhost:500/api/users/delete", {
-        method: "POST",
+      const response = await fetch("http://localhost:500/api/users/deleteFromTable", {
+        method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ids: selected }),
       });
