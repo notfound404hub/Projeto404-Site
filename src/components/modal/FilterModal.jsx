@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+
+const opcoesNumericas = [
+  { value: "igual", label: "é igual a" },
+  { value: "maior", label: "é maior que" },
+  { value: "menor", label: "é menor que" },
+];
+
+const opcoesTextuais = [
+  { value: "igual", label: "é igual a" },
+  { value: "contem", label: "contém" },
+  { value: "naoContem", label: "não contém" },
+];
 
 function FiltroModal({
-
   isOpen,
   onClose,
   filtros,
@@ -10,13 +21,14 @@ function FiltroModal({
   setValorSelecionado,
   filterSelecionado,
   setFilterSelecionado,
-  valorFiltro,
-  setValorFiltro,
-  opcoesNumericas,
-  opcoesTextuais,
   usuariosOriginais,
-  setUsuarios,
+  setResponse,
+  campos,
+  tabela,
 }) {
+  // ✅ Mover useState pra dentro do componente
+  const [valorFiltro, setValorFiltro] = useState("");
+
   if (!isOpen) return null;
 
   const aplicarFiltros = async () => {
@@ -24,11 +36,11 @@ function FiltroModal({
       const response = await fetch("http://localhost:500/api/users/filtrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ filtros }),
+        body: JSON.stringify({ filtros, tabela }),
       });
       if (!response.ok) throw new Error("Erro ao buscar dados do servidor");
       const data = await response.json();
-      setUsuarios(data);
+      setResponse(data);
       onClose();
     } catch (err) {
       console.error("Erro ao aplicar filtros:", err);
@@ -40,26 +52,30 @@ function FiltroModal({
     <div className="modal-overlay">
       <div className="modal">
         <h2>Filtrar Usuários</h2>
+
         <div className="sectionfilter">
+          {/* Select de campo */}
           <select
             name="selectFilter"
             value={valorSelecionado}
             onChange={(e) => setValorSelecionado(e.target.value)}
           >
-            <option value="Usuario_Nome">Nome</option>
-            <option value="ID_Usuario">ID do usuário</option>
-            <option value="Usuario_CPF">CPF</option>
-            <option value="Usuario_Empresa">Empresa</option>
-            <option value="Usuario_Email">Email</option>
-            <option value="Usuario_Telefone">Telefone</option>
-            <option value="created_at">Data de criação</option>
+            {campos.map((campo) => (
+              <option key={campo.value} value={campo.value}>
+                {campo.label}
+              </option>
+            ))}
           </select>
 
+          {/* Select de condição */}
           <select
             value={filterSelecionado}
             onChange={(e) => setFilterSelecionado(e.target.value)}
           >
-            {(valorSelecionado === "ID_Usuario"
+            {(valorSelecionado === "ID_Usuario" ||
+            valorSelecionado === "Campanha_Meta" ||
+            valorSelecionado === "Campanha_Quantidade" ||
+            valorSelecionado === "ID_Campanha"
               ? opcoesNumericas
               : opcoesTextuais
             ).map((op) => (
@@ -69,6 +85,7 @@ function FiltroModal({
             ))}
           </select>
 
+          {/* Input de valor */}
           <input
             type="text"
             placeholder="Digite o valor..."
@@ -99,8 +116,7 @@ function FiltroModal({
             {filtros.map((f, i) => (
               <div key={i} className="filtro-item">
                 <span>
-                  {(f.campo || "").replace("Usuario_", "")} {f.condicao} "
-                  {f.valor}"
+                  {f.campo?.replace("Usuario_", "")} {f.condicao} "{f.valor}"
                 </span>
                 <button
                   className="btnRemoverFiltro"
@@ -122,7 +138,7 @@ function FiltroModal({
           <button
             className="btnFilter"
             onClick={() => {
-              setUsuarios(usuariosOriginais);
+              setResponse(usuariosOriginais);
               setFiltros([]);
               onClose();
             }}

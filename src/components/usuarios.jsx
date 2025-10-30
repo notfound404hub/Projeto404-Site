@@ -23,11 +23,20 @@ function Usuarios({ onSelectPage }) {
   const [rangeEnd, setRangeEnd] = useState("");
   const [exportType, setExportType] = useState("Todos");
   const [valorSelecionado, setValorSelecionado] = useState("ID_Usuario");
-  const [valorFiltro, setValorFiltro] = useState("");
+
   const [usuarioEdit, setUsuarioEdit] = useState(null);
   const [filtros, setFiltros] = useState([]);
   const headerCheckboxRef = useRef(null);
 
+  const camposUsuario = [
+    { value: "ID_Usuario", label: "ID do usuário" },
+    { value: "Usuario_Nome", label: "Nome" },
+    { value: "Usuario_CPF", label: "CPF" },
+    { value: "Usuario_Empresa", label: "Empresa" },
+    { value: "Usuario_Email", label: "Email" },
+    { value: "Usuario_Telefone", label: "Telefone" },
+    { value: "created_at", label: "Data de criação" },
+  ];
   // Controle dos modais
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -35,21 +44,10 @@ function Usuarios({ onSelectPage }) {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
-
+  const teste = "Usuario ";
   filtros[0] = "Usuários";
 
   // Opções dos filtros
-  const opcoesNumericas = [
-    { value: "igual", label: "é igual a" },
-    { value: "maior", label: "é maior que" },
-    { value: "menor", label: "é menor que" },
-  ];
-
-  const opcoesTextuais = [
-    { value: "igual", label: "é igual a" },
-    { value: "contem", label: "contém" },
-    { value: "naoContem", label: "não contém" },
-  ];
 
   // Manipulação de filtros
   const handleChange = (event) => {
@@ -60,7 +58,12 @@ function Usuarios({ onSelectPage }) {
   // Função: carregar usuários
   const carregarUsuarios = async () => {
     try {
-      const response = await fetch("http://localhost:500/api/users/usuarios");
+      const response = await fetch(`http://localhost:500/api/users/tabela`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ teste: teste }),
+      });
+
       const data = await response.json();
 
       if (response.ok) {
@@ -156,37 +159,7 @@ function Usuarios({ onSelectPage }) {
   };
 
   // Exclusão de usuários
-  const excluirUsuarios = async () => {
-    if (selected.length === 0) {
-      alert("Nenhum usuário selecionado para exclusão!");
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:500/api/users/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: selected }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(data.msg);
-        setUsuarios((prev) =>
-          prev.filter((u) => !selected.includes(u.ID_Usuario))
-        );
-        setSelected([]);
-        setShowDeleteModal(false);
-      } else {
-        alert(data.error || "Erro ao excluir usuários!");
-      }
-      carregarUsuarios();
-    } catch (err) {
-      console.error("Erro ao excluir usuários:", err);
-      alert("Erro no servidor ao excluir usuários");
-    }
-  };
+ 
 
   // Abrir modal de edição
   const abrirModalEdicao = async () => {
@@ -332,8 +305,13 @@ function Usuarios({ onSelectPage }) {
       <ExcluirModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
-        onConfirm={excluirUsuarios}
+        selected={selected}
+        setItens={setUsuarios} 
+        idField="ID_Usuario"
+        carregarItens={carregarUsuarios}
+        tabela="Usuario "
       />
+
       <FiltroModal
         isOpen={showFilterModal}
         onClose={() => setShowFilterModal(false)}
@@ -343,12 +321,10 @@ function Usuarios({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        valorFiltro={valorFiltro}
-        setValorFiltro={setValorFiltro}
-        opcoesNumericas={opcoesNumericas}
-        opcoesTextuais={opcoesTextuais}
         usuariosOriginais={usuariosOriginais}
-        setUsuarios={setUsuarios}
+        setResponse={setUsuarios}
+        campos={camposUsuario}
+        tabela="Usuario "
       />
 
       <OrdenarModal
@@ -359,6 +335,8 @@ function Usuarios({ onSelectPage }) {
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
         setUsuarios={setUsuarios}
+        tabela="Usuario "
+        campos={camposUsuario}
       />
 
       <EditarModal

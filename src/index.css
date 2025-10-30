@@ -164,7 +164,7 @@ form {
   display: none;
   flex-direction: column;
   list-style: none;
-  min-width: 180px;
+  min-width: 190px;
   z-index: 10;
 }
 
@@ -198,7 +198,7 @@ form {
   display: none;
   flex-direction: column;
   list-style: none;
-  min-width: 180px;
+  min-width: 190px;
   z-index: 10;
 }
 
@@ -959,7 +959,7 @@ form {
   display: none;
   position: absolute;
   background: #fff;
-  min-width: 180px;
+  min-width: 190px;
   border: 1px solid #ccc;
   z-index: 3;
   border-radius: 8px;
@@ -1164,33 +1164,8 @@ form {
   margin-top: 5px;
 }
 
-.verde {
-  background-color: #28a745;
-}
 
-.amarelo {
-  background-color: #ffc107;
-  color: #333;
-}
 
-.cinza {
-  background-color: #6c757d;
-}
-
-.botao-abrir-chamado {
-  margin-top: 15px;
-  background-color: #003366;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.botao-abrir-chamado:hover {
-  background-color: #0055aa;
-}
 
 /* ========== PAINEL TUTORIAIS ========== */
 .painel-tutoriais {
@@ -1208,6 +1183,8 @@ form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
+  overflow-x: auto;
+  height: 400px;
 }
 
 .cartao-tutorial {
@@ -1982,7 +1959,7 @@ form {
   grid-template-columns: 280px 1fr;
   gap: 20px;
   max-width: calc(100% - 220px);
-
+  background-color: transparent;
   margin-left: 220px;
 }
 
@@ -2309,3 +2286,8 @@ form {
 }
 
 /* Chat */
+
+/* GERAL */
+.lista-filtros > div:first-child {
+  display: none;
+}
