@@ -7,7 +7,7 @@ function OrderModal({
   setValorSelecionado,
   filterSelecionado,
   setFilterSelecionado,
-  setUsuarios,
+  setItens,
   tabela,
   campos,
 }) {
@@ -39,7 +39,7 @@ function OrderModal({
       const data = await response.json();
       console.log("✅ Dados recebidos:", data);
 
-      setUsuarios(data);
+      setItens(data);
       onClose();
     } catch (error) {
       console.error("❌ Erro ao aplicar ordenação:", error);

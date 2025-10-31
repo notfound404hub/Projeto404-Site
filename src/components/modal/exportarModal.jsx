@@ -72,7 +72,7 @@ function ExportModal({
               checked={exportType === "todos"}
               onChange={() => setExportType("todos")}
             />
-            Exportar todos os usuários
+            Exportar todos
           </label>
         </div>
 

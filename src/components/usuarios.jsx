@@ -9,7 +9,7 @@ import ExportarModal from "./modal/exportarModal.jsx";
 import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
 import ExcluirModal from "./modal/excluirModal.jsx";
-import EditarModal from "./modal/editarModal.jsx";
+import EditarModal from "./modal/editarModalUsuario.jsx";
 
 function Usuarios({ onSelectPage }) {
   // Estados principais
@@ -300,6 +300,7 @@ function Usuarios({ onSelectPage }) {
         onClose={() => setShowImportModal(false)}
         onImportSuccess={carregarUsuarios}
         handleExportarUsuarios={handleExportarUsuarios}
+        tabela="Usuario "
       />
 
       <ExcluirModal
@@ -334,7 +335,7 @@ function Usuarios({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        setUsuarios={setUsuarios}
+        setItens={setUsuarios}
         tabela="Usuario "
         campos={camposUsuario}
       />

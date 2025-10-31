@@ -5,7 +5,18 @@ function ImportarModal({
   onClose,
   onImportSuccess,
   handleExportarUsuarios,
+  tabela
 }) {
+  let rota = ""
+  switch (tabela) {
+    case 'Usuario ':
+      rota = "http://localhost:500/api/users/importarUsuarios"
+    break
+    case 'Campanha ':
+      rota = "http://localhost:500/api/users/importarCampanha"
+    break
+  }
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   if (!isOpen) return null;
@@ -22,7 +33,7 @@ function ImportarModal({
     try {
       console.log(" Enviando arquivo Excel para o backend...");
       const response = await fetch(
-        "http://localhost:500/api/users/importarUsuarios",
+        rota,
         {
           method: "POST",
           body: formData,

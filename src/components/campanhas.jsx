@@ -3,16 +3,14 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { data } from "react-router-dom";
 
-// 🔹 Imports dos modais
 import ImportModal from "./modal/importarModal.jsx";
 import ExportarModal from "./modal/exportarModal.jsx";
 import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
 import ExcluirModal from "./modal/excluirModal.jsx";
-import EditarModal from "./modal/editarModal.jsx";
+import EditCampanhaModal from "./modal/editarModalCampanha.jsx";
 
 function Campanhas({ onSelectPage }) {
-  // Estados principais
   const [selectedFile, setSelectedFile] = useState(null);
   const [filterSelecionado, setFilterSelecionado] = useState("igual");
   const [campanhas, setCampanhas] = useState([]);
@@ -24,7 +22,7 @@ function Campanhas({ onSelectPage }) {
   const [exportType, setExportType] = useState("Todos");
   const [valorSelecionado, setValorSelecionado] = useState("ID_Campanha");
 
-  const [usuarioEdit, setUsuarioEdit] = useState(null);
+  const [campanhaEdit, setCampanhaEdit] = useState(null);
   const [filtros, setFiltros] = useState([]);
   const headerCheckboxRef = useRef(null);
 
@@ -38,7 +36,7 @@ function Campanhas({ onSelectPage }) {
     { value: "created_at", label: "Data de criação" },
     { value: "finish_at", label: "Data de Finalização" },
   ];
-  // Controle dos modais
+
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showModalOrdenar, setshowModalOrdenar] = useState(false);
@@ -48,13 +46,11 @@ function Campanhas({ onSelectPage }) {
   const teste = "Campanha ";
   filtros[0] = "Campanhas";
 
-  // Manipulação de filtros
   const handleChange = (event) => {
     setValorSelecionado(event.target.value);
     if (event.target.value === "id") setFilterSelecionado("igual");
   };
 
-  // Função: carregar campanhas (defensiva)
   const carregarCampanhas = async () => {
     try {
       const response = await fetch(`http://localhost:500/api/users/tabela`, {
@@ -69,7 +65,6 @@ function Campanhas({ onSelectPage }) {
         setCampanhas(data);
         setCampanhasOriginais(data);
       } else {
-        // se a API retornar { error: ... } ou objeto qualquer, protege o estado
         console.error("Resposta inválida ao carregar campanhas:", data);
         setCampanhas([]);
         setCampanhasOriginais([]);
@@ -87,7 +82,6 @@ function Campanhas({ onSelectPage }) {
     carregarCampanhas();
   }, []);
 
-  // Seleção de usuários/campanhas
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
@@ -102,7 +96,6 @@ function Campanhas({ onSelectPage }) {
     }
   };
 
-  // protege contra campanhas undefined
   const isAllSelected =
     (campanhas?.length || 0) > 0 && selected.length === campanhas.length;
 
@@ -114,7 +107,6 @@ function Campanhas({ onSelectPage }) {
     }
   }, [selected, campanhas?.length]);
 
-  // Exportação (mantive sua lógica)
   const gerarWorkbook = (dados) => {
     const worksheet = XLSX.utils.json_to_sheet(dados);
     const workbook = XLSX.utils.book_new();
@@ -166,9 +158,6 @@ function Campanhas({ onSelectPage }) {
     }
   };
 
-  // Exclusão de campanhas
-
-  // Abrir modal de edição
   const abrirModalEdicao = async () => {
     if (selected.length !== 1) {
       alert("Selecione exatamente 1 campanha para editar!");
@@ -178,12 +167,12 @@ function Campanhas({ onSelectPage }) {
     const id = selected[0];
     try {
       const response = await fetch(
-        `http://localhost:500/api/users/usuario/${id}`
+        `http://localhost:500/api/users/campanhas/${id}`
       );
       if (!response.ok) throw new Error("Erro ao buscar campanha");
 
       const data = await response.json();
-      setUsuarioEdit(data);
+      setCampanhaEdit(data);
       setShowEditModal(true);
     } catch (err) {
       console.error("Erro ao buscar campanha:", err);
@@ -191,7 +180,6 @@ function Campanhas({ onSelectPage }) {
     }
   };
 
-  // 🔹 JSX
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">
@@ -295,7 +283,6 @@ function Campanhas({ onSelectPage }) {
         </table>
       </div>
 
-      {/* 🔹 Modais importados e controlados por estado */}
       <ExportarModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
@@ -315,16 +302,16 @@ function Campanhas({ onSelectPage }) {
         onClose={() => setShowImportModal(false)}
         onImportSuccess={carregarCampanhas}
         handleExportarUsuarios={handleExportarUsuarios}
-      />
+        tabela="Campanha "      />
 
       <ExcluirModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
         selected={selected}
-        setItens={setUsuarios} 
-        idField="ID_Campanha" 
-        carregarItens={carregarCampanhas} 
-          tabela="Campanha "
+        setItens={setCampanhas}
+        idField="ID_Campanha"
+        carregarItens={carregarCampanhas}
+        tabela="Campanha "
       />
 
       <FiltroModal
@@ -336,11 +323,9 @@ function Campanhas({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        usuariosOriginais={campanhasOriginais} 
-        setUsuarios={setCampanhas} 
-        setResponse={
-          setCampanhas
-        } 
+        usuariosOriginais={campanhasOriginais}
+        setItens={setCampanhas}
+        setResponse={setCampanhas}
         campos={camposCampanhas}
         tabela="Campanha "
       />
@@ -352,17 +337,16 @@ function Campanhas({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        setUsuarios={setCampanhas} // compatibilidade com OrdenarModal que espera esse nome
-        setCampanhas={setCampanhas} // caso outra versão espere este
+        setItens={setCampanhas}
         tabela="Campanha "
         campos={camposCampanhas}
       />
 
-      <EditarModal
+      <EditCampanhaModal
         isOpen={showEditModal}
         onClose={() => setShowEditModal(false)}
-        usuarioEdit={usuarioEdit}
-        setUsuarioEdit={setUsuarioEdit}
+        campanhaEdit={campanhaEdit}
+        setCampanhaEdit={setCampanhaEdit}
         carregarCampanhas={carregarCampanhas}
       />
     </div>
