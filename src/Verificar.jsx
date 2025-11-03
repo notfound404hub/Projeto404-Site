@@ -1,6 +1,7 @@
 import{useState} from "react"
+import { useParams } from "react-router-dom";
 
-function Verificar(){
+function Verificar(){ 
     return(
         <div className="divVerificar">
             

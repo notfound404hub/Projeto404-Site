@@ -3,7 +3,7 @@ import axios from "axios"
 
 function EsqueciMinhaSenha() {
   const [email, setEmail] = useState("")
-  const [mensagem, setMensagem] = useState("")
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -48,8 +48,7 @@ function EsqueciMinhaSenha() {
         <p className="pEsqueciSenha">
           Não recebeu? <a href="">Reenviar E-mail</a>
         </p>
-
-        {mensagem && <p>{mensagem}</p>}
+        
       </aside>
     </div>
   )

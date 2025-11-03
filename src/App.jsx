@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard";
 import CadastroAlunos from "./CadastroAlunos";
 import CadastroAlunoMentor from "./CadastroAlunoMentor"
 import CadastroColaborador from "../src/components/cadastroUsuario";
+import ResetSenha from "./ResetSenha";
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/verificar" element={<Verificar />} /> 
-        <Route path="/reset-senha" element={<EsqueciMinhaSenha />} /> 
+        <Route path="/esquecer-senha" element={<EsqueciMinhaSenha />} /> 
+        <Route path="/reset-senha/:token" element={<ResetSenha />} /> 
         <Route path="/admin" element={<Admin />} />
         <Route path="/forms" element={<Forms />} />     
         <Route path="/dashboard" element={<Dashboard/>} />   

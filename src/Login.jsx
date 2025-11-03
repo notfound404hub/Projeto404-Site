@@ -4,24 +4,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [form, setForm] = useState({
-    Aluno_Email: "",
-    Aluno_Senha: ""
-  });
+  const[email, setEmail] = useState("")
+  const[senha, setSenha] = useState("")
 
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
         "http://localhost:500/api/users/login", 
-        form
-      );
+        {email, senha}
+      )
+      console.log("Resposta recebida", res)
 
       console.log("Resposta do backend:", res.data);
       alert(res.data.msg);
@@ -61,7 +56,7 @@ function Login() {
                 placeholder="Email"
                 id="email"
                 required
-                onChange={handleChange}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -73,14 +68,14 @@ function Login() {
                 placeholder="Senha"
                 id="senha"                          
                 required
-                onChange={handleChange}
+                onChange={(e) => setSenha(e.target.value)}
               />
             </div>
 
             <button type="submit" className="botaoLogin">Login</button>
           </form>
 
-          <a href="">Esqueci minha senha</a>
+          <a href="/esquecer-senha">Esqueci minha senha</a>
           <p className="footerLogin">&copy; 2025, 404 not found</p>
         </aside>
       </div>
