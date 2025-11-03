@@ -324,106 +324,80 @@ form {
 
 /* VERIFICAÇÃO */
 
-.asideVerificar {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 450px;
-  margin-right: 0 auto;
-  background-color: white;
-  border-radius: 10px 0 0 10px ;
+.divVerificar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../public/fundoverde.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.logoVerificar {
+/* Centraliza o aside no meio da tela */
+.asideVerificar {
   display: flex;
-  justify-self: center;
-  align-self: center;
+  flex-direction: column; /* organiza os elementos em coluna */
+  align-items: center; /* centraliza horizontalmente */
+  justify-content: center; /* centraliza verticalmente */
+  width: 450px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Elementos internos seguem a ordem do CSS e estão centralizados */
+.logoVerificar {
   width: 150px;
   height: 150px;
-  margin-top: 20px;
+  margin-bottom: -20px;
 }
 
 .h1Verificar {
-  display: flex;
-  align-self: center;
-  justify-self: center;
-  width: 400px;
   color: black;
   text-align: center;
   font-weight: lighter;
   font-size: 22px;
-  margin-bottom: 90px;
+  margin: 20px 0 40px 0;
+  width: 80%;
 }
 
 .h1VerificarEmail {
-  display: flex;
-  align-self: center;
-  justify-self: center;
   color: black;
   font-weight: bold;
-  margin-top: 80px;
-  margin-bottom: 60px;
-}
-
-.inputCodigo {
-  display: flex;
-  align-self: center;
-  justify-self: center;
-  width: 300px;
-  height: 70px;
-  color: black;
-  border-radius: 10px;
-  margin-bottom: -20px;
-}
-.inputCodigo:placeholder {
-  color: black;
+  margin: 40px 0 30px 0;
+  text-align: center;
 }
 
 .pVerificar {
-  display: flex;
-  align-self: center;
-  justify-self: center;
   font-size: 15px;
-  margin-top: 30px;
+  margin-top: -10px;
+  text-align: center;
 }
 
 .btnVerificar {
-  justify-content: center;
-  align-items: center;
-  align-self: center;
   width: 220px;
   height: 50px;
-  display: flex;
-  justify-self: center;
   border-radius: 10px;
-  margin-top: 30px;
   border: none;
   font-weight: bold;
   font-size: 18px;
   background-color: #e7e6e6;
   cursor: pointer;
-  margin-top: 50px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .btnVerificar:hover {
   background-color: #d4d4d4;
 }
 
-.divVerificar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  padding: 100px 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url("../public/fundoverde.jpg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
 
 /* VERIFICAÇÃO */
 

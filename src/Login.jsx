@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const res = await axios.post(
         "http://localhost:500/api/users/login", 
@@ -26,7 +26,7 @@ function Login() {
         console.log("ID salvo no localStorage:", res.data.ID_Aluno);
       }
 
-      navigate("/admin");
+      navigate("/verificar");
     } catch (err) {
       console.error("Erro no login:", err.response?.data || err.message);
       alert("Erro no login: " + (err.response?.data?.error || err.message));
