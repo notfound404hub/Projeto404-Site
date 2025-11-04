@@ -1917,6 +1917,14 @@ form {
   display: flex;
   gap: 10px;
 }
+
+.modal .sectionfilter2 select{
+  width: 300px;
+}
+.sectionfilter2 {
+  display: flex;
+  gap: 10px;
+}
 .modal select {
   width: 150px;
 }

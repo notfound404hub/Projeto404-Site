@@ -53,7 +53,7 @@ function OrderModal({
       <div className="modal">
         <h2>Ordenar Usuários</h2>
 
-        <div className="sectionfilter">
+        <div className="sectionfilter2">
           <select
             onChange={(e) => setValorSelecionado(e.target.value)}
             value={valorSelecionado}

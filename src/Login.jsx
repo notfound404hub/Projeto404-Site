@@ -28,10 +28,10 @@ function Login() {
           console.log("Resposta do backend:", res.data);
           alert(res.data.msg);
     
-          // if (res.data.ID_Aluno) {
-          //   localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
-          //   console.log("ID salvo no localStorage:", res.data.ID_Aluno);
-          // }
+          if (res.data.ID_Aluno) {
+            localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
+            console.log("ID salvo no localStorage:", res.data.ID_Aluno);
+          }
 
           
           navigate(`${res.data.tela}`);
