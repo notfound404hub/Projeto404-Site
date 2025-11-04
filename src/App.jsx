@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/verificar" element={<Verificar />} /> 
+        <Route path="/verificar/:token" element={<Verificar />} /> 
         <Route path="/esquecer-senha" element={<EsqueciMinhaSenha />} /> 
         <Route path="/reset-senha/:token" element={<ResetSenha />} /> 
         <Route path="/admin" element={<Admin />} />

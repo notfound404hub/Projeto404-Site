@@ -16,17 +16,19 @@ function Login() {
         "http://localhost:500/api/users/login", 
         {email, senha}
       )
+      const token = res.data.token
       console.log("Resposta recebida", res)
 
       console.log("Resposta do backend:", res.data);
       alert(res.data.msg);
+      localStorage.setItem("alunoEmail", email)
 
       if (res.data.ID_Aluno) {
         localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
         console.log("ID salvo no localStorage:", res.data.ID_Aluno);
       }
 
-      navigate("/verificar");
+      navigate(`/verificar/${token}`);
     } catch (err) {
       console.error("Erro no login:", err.response?.data || err.message);
       alert("Erro no login: " + (err.response?.data?.error || err.message));
