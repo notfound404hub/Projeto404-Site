@@ -7,8 +7,11 @@ function OrderModal({
   setValorSelecionado,
   filterSelecionado,
   setFilterSelecionado,
-  setUsuarios,
+  setItens,
+  tabela,
+  campos,
 }) {
+  console.log(campos)
   // 🔸 Se o modal estiver fechado, não renderiza nada
   if (!isOpen) return null;
 
@@ -18,6 +21,7 @@ function OrderModal({
       const body = {
         campo: valorSelecionado,
         direcao: filterSelecionado,
+        tabela: tabela
       };
 
       console.log("📤 Enviando para backend:", body);
@@ -35,7 +39,7 @@ function OrderModal({
       const data = await response.json();
       console.log("✅ Dados recebidos:", data);
 
-      setUsuarios(data);
+      setItens(data);
       onClose();
     } catch (error) {
       console.error("❌ Erro ao aplicar ordenação:", error);
@@ -49,18 +53,16 @@ function OrderModal({
       <div className="modal">
         <h2>Ordenar Usuários</h2>
 
-        <div className="sectionfilter">
+        <div className="sectionfilter2">
           <select
             onChange={(e) => setValorSelecionado(e.target.value)}
             value={valorSelecionado}
           >
-            <option value="ID_Usuario">ID do usuário</option>
-            <option value="Usuario_Nome">Nome</option>
-            <option value="Usuario_CPF">CPF</option>
-            <option value="Usuario_Empresa">Empresa</option>
-            <option value="Usuario_Email">Email</option>
-            <option value="Usuario_Telefone">Telefone</option>
-            <option value="created_at">Data de criação</option>
+            {campos.map((campo) => (
+              <option key={campo.value} value={campo.value}>
+                {campo.label}
+              </option>
+            ))}
           </select>
 
           <select

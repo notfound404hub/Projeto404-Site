@@ -66,7 +66,7 @@ function Admin() {
         {activeScreen === "campanhas" && <Campanhas />}
         {activeScreen === "usuarios" && (<Usuarios onSelectPage={(page) => setActiveScreen(page)} />)}
         {activeScreen === "CadastroUsuario" && <CadastroUsuario />}
-        {/* {activeScreen === "administrativo" && <div>Administrativo (placeholder)</div>}   */}
+       
         {activeScreen === "suporte" && <PainelSuporte />}
         
       </div>
