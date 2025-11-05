@@ -10,7 +10,7 @@ function Verificar(){
         e.preventDefault()
         try{
             const res = await axios.post(
-                `http://localhost:500/api/users/verificar/${token}`,
+                `http://localhost:500/api/users/enviaremail/${token}`,
                 {email}
              )
              console.log("Requisição recebida", res)

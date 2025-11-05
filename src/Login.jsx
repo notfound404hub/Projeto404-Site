@@ -16,7 +16,7 @@ function Login() {
         "http://localhost:500/api/users/login", 
         {email, senha}
       )
-      const token = res.data.token
+      const {token, verificado} = res.data
       console.log("Resposta recebida", res)
 
       console.log("Resposta do backend:", res.data);
@@ -26,9 +26,13 @@ function Login() {
       if (res.data.ID_Aluno) {
         localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
         console.log("ID salvo no localStorage:", res.data.ID_Aluno);
+      } 
+      
+      if(verificado != 1){
+        navigate(`/enviaremail/${token}`);
+      }else{
+        navigate("/")
       }
-
-      navigate(`/verificar/${token}`);
     } catch (err) {
       console.error("Erro no login:", err.response?.data || err.message);
       alert("Erro no login: " + (err.response?.data?.error || err.message));
