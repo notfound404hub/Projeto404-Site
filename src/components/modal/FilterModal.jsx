@@ -51,7 +51,7 @@ function FiltroModal({
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Filtrar Usuários</h2>
+        <h2>Filtrar</h2>
 
         <div className="sectionfilter">
           {/* Select de campo */}
@@ -75,7 +75,9 @@ function FiltroModal({
             {(valorSelecionado === "ID_Usuario" ||
             valorSelecionado === "Campanha_Meta" ||
             valorSelecionado === "Campanha_Quantidade" ||
-            valorSelecionado === "ID_Campanha"
+            valorSelecionado === "ID_Campanha" ||
+            valorSelecionado === "ID_transacao" ||
+            valorSelecionado === "transacao_Valor"
               ? opcoesNumericas
               : opcoesTextuais
             ).map((op) => (

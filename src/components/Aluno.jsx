@@ -326,7 +326,7 @@ function Alunos({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        alunosOriginais={alunosOriginais}
+        usuariosOriginais={alunosOriginais}
         setResponse={setAlunos}
         campos={camposAluno}
         tabela="Aluno "

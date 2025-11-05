@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import { data } from "react-router-dom";
+
 
 // 🔹 Imports dos modais
 import ImportModal from "./modal/importarModal.jsx";
@@ -10,6 +10,7 @@ import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
 import ExcluirModal from "./modal/excluirModal.jsx";
 import EditarModal from "./modal/editarModalTransacoes.jsx";
+import ModalTipoTransacao from "./modal/ModalTipoTransacao.jsx";
 
 function trasacoes({ onSelectPage }) {
   // Estados principais
@@ -22,21 +23,20 @@ function trasacoes({ onSelectPage }) {
   const [rangeStart, setRangeStart] = useState("");
   const [rangeEnd, setRangeEnd] = useState("");
   const [exportType, setExportType] = useState("Todos");
-  const [valorSelecionado, setValorSelecionado] = useState("ID_trasacao");
+  const [valorSelecionado, setValorSelecionado] = useState("ID_transacao");
+  const [tipoTransacao, setTipoTransacao] = useState("");
+  const [showModalTipo, setshowModalTipo] = useState(true);
 
-  const [trasacaoEdit, settrasacaoEdit] = useState(null);
+  const [transacaoEdit, settransacaoEdit] = useState(null);
   const [filtros, setFiltros] = useState([]);
   const headerCheckboxRef = useRef(null);
 
-  const campostrasacao = [
-    { value: "ID_trasacao", label: "ID do trasacoes" },
-    { value: "trasacao_RA", label: "RA do trasacao" },
-    { value: "trasacao_Nome", label: "Nome" },
-    { value: "trasacao_Email", label: "Email" },
-    { value: "trasacao_CPF", label: "CPF" },
-    { value: "trasacao_Telefone", label: "Telefone" },
-    { value: "trasacao_Grupo", label: "Grupo" },
-    { value: "trasacao_Turma", label: "Turma" },
+  const campostransacao = [
+    { value: "ID_transacao", label: "ID da transação" },
+    { value: "transacao_Grupo", label: "Grupo da transacao" },
+    { value: "transacao_Aluno", label: "Aluno" },
+    { value: "transacao_Valor", label: "Valor" },
+    { value: "transacao_Tipo", label: "Tipo" },
     { value: "created_at", label: "Data de criação" },
   ];
   // Controle dos modais
@@ -46,20 +46,34 @@ function trasacoes({ onSelectPage }) {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
-  const teste = "Transacao ";
+  const teste =
+  tipoTransacao === "entrada"
+    ? "TransacaoEntrada"
+    : tipoTransacao === "saida"
+    ? "TransacaoSaida"
+    : "";
+
+
   filtros[0] = "trasacoes";
 
   // Opções dos filtros
-
+  const handleSelect = (tipoEscolhido) => {
+    setTipo(tipoEscolhido);
+    setShowModal(false);
+    console.log("Tipo escolhido:", tipoEscolhido);
+  };
   // Manipulação de filtros
   const handleChange = (event) => {
     setValorSelecionado(event.target.value);
     if (event.target.value === "id") setFilterSelecionado("igual");
   };
 
+  
+
   // Função: carregar trasacoess
   const carregartrasacoes = async () => {
     try {
+      if (!teste) return;
       const response = await fetch(`http://localhost:500/api/users/tabela`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -95,7 +109,7 @@ function trasacoes({ onSelectPage }) {
     if (selected.length === trasacoes.length) {
       setSelected([]);
     } else {
-      setSelected(trasacoes.map((u) => u.ID_trasacao));
+      setSelected(trasacoes.map((u) => u.ID_transacao));
     }
   };
 
@@ -128,11 +142,11 @@ function trasacoes({ onSelectPage }) {
       const start = parseInt(rangeStart, 10);
       const end = parseInt(rangeEnd, 10);
       dadosFiltrados = trasacoes.filter(
-        (u) => u.ID_trasacao >= start && u.ID_trasacao <= end
+        (u) => u.ID_transacao >= start && u.ID_transacao <= end
       );
 
       if (dadosFiltrados.length === 0) {
-        alert("Nenhum trasacao encontrado no range informado!");
+        alert("Nenhum transacao encontrado no range informado!");
         return;
       }
     }
@@ -170,12 +184,12 @@ function trasacoes({ onSelectPage }) {
     const id = selected[0];
     try {
       const response = await fetch(
-        `http://localhost:500/api/users/trasacao/${id}`
+        `http://localhost:500/api/users/transacao/${id}`
       );
       if (!response.ok) throw new Error("Erro ao buscar trasacoes");
 
       const data = await response.json();
-      settrasacaoEdit(data);
+      settransacaoEdit(data);
       setShowEditModal(true);
     } catch (err) {
       console.error("Erro ao buscar trasacoes:", err);
@@ -184,12 +198,17 @@ function trasacoes({ onSelectPage }) {
   };
 
   // 🔹 JSX
+  
   return (
+
+
     <div className="main-container-tabela">
+      {showModalTipo && <ModalTipoTransacao onSelect={handleSelect} />}
+     
       <div className="cabecalho-tabela">
         <button
           className="btn-tabela adicionar-tabela"
-          onClick={() => onSelectPage("Cadastrotrasacao")}
+          onClick={() => onSelectPage("Cadastrotransacao")}
         >
           Adicionar +
         </button>
@@ -205,6 +224,7 @@ function trasacoes({ onSelectPage }) {
             <a onClick={abrirModalEdicao}>Editar</a>
           </div>
         </div>
+
 
         <div className="rightMenu-tabela">
           <button
@@ -242,10 +262,8 @@ function trasacoes({ onSelectPage }) {
               <th>ID</th>
               <th>Grupo</th>
               <th>Aluno</th>
-              <th>ID_Grupo</th>
               <th>Valor</th>
               <th>Tipo</th>
-              <th>Data</th>
               <th>Comprovante</th>
               <th>Criado em</th>
             </tr>
@@ -253,23 +271,21 @@ function trasacoes({ onSelectPage }) {
 
           <tbody>
             {trasacoes.map((u) => (
-              <tr key={u.ID_trasacao}>
+              <tr key={u.ID_transacao}>
                 <td>
                   <input
                     className="chk-tabela"
                     type="checkbox"
-                    checked={selected.includes(u.ID_trasacao)}
-                    onChange={() => toggleSelect(u.ID_trasacao)}
+                    checked={selected.includes(u.ID_transacao)}
+                    onChange={() => toggleSelect(u.ID_transacao)}
                   />
                 </td>
-                <td>{u.ID_Pagamento}</td>
-                <td>{u.Grupo}</td>
-                <td>{u.Aluno}</td>
-                <td>{u.ID_Grupo}</td>
-                <td>{u.Valor}</td>
-                <td>{u.Tipo}</td>
-                <td>{new Date(u.Data).toLocaleDateString("pt-BR")}</td>
-                <td>{u.Comprovante}</td>
+                <td>{u.ID_Transacao}</td>
+                <td>{u.transacao_Grupo}</td>
+                <td>{u.transacao_Aluno}</td>
+                <td>{u.transacao_Valor}</td>
+                <td>{u.transacao_Tipo}</td>
+                <td>{u.transacao_Comprovante}</td>
                 <td>
                   {new Date(u.created_at).toLocaleDateString("pt-BR", {
                     timeZone: "America/Sao_Paulo",
@@ -301,7 +317,7 @@ function trasacoes({ onSelectPage }) {
         onClose={() => setShowImportModal(false)}
         onImportSuccess={carregartrasacoes}
         handleExportartrasacoes={handleExportartrasacoes}
-        tabela="Trasacao "
+        tabela={teste}
       />
 
       <ExcluirModal
@@ -309,9 +325,9 @@ function trasacoes({ onSelectPage }) {
         onClose={() => setShowDeleteModal(false)}
         selected={selected}
         setItens={settrasacoes}
-        idField="ID_trasacao"
+        idField="ID_transacao"
         carregarItens={carregartrasacoes}
-        tabela="Trasacao "
+        tabela={teste}
       />
 
       <FiltroModal
@@ -323,10 +339,10 @@ function trasacoes({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        trasacoesOriginais={trasacoesOriginais}
+        usuariosOriginais={trasacoesOriginais}
         setResponse={settrasacoes}
-        campos={campostrasacao}
-        tabela="Trasacao "
+        campos={campostransacao}
+        tabela={teste}
       />
 
       <OrdenarModal
@@ -337,15 +353,15 @@ function trasacoes({ onSelectPage }) {
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
         setItens={settrasacoes}
-        tabela="Trasacao "
-        campos={campostrasacao}
+        tabela={teste}
+        campos={campostransacao}
       />
 
       <EditarModal
         isOpen={showEditModal}
         onClose={() => setShowEditModal(false)}
-        trasacaoEdit={trasacaoEdit}
-        settrasacaoEdit={settrasacaoEdit}
+        transacaoEdit={transacaoEdit}
+        settransacaoEdit={settransacaoEdit}
         carregartrasacoes={carregartrasacoes}
       />
     </div>
