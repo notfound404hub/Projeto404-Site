@@ -6,6 +6,10 @@ const Suporte = () => {
     { titulo: "Como cadastrar alimentos?" },
     { titulo: "Como cadastrar fornecedores?" },
     { titulo: "Como cadastrar alimentos?" },
+    { titulo: "Como cadastrar fornecedores?" },
+    { titulo: "Como cadastrar alimentos?" },
+    { titulo: "Como cadastrar fornecedores?" },
+    { titulo: "Como cadastrar alimentos?" },
     { titulo: "Como cadastrar fornecedores?" }
   ];
 

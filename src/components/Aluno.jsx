@@ -1,40 +1,106 @@
 import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { data } from "react-router-dom";
 
-function Aluno() {
+// 🔹 Imports dos modais
+import ImportModal from "./modal/importarModal.jsx";
+import ExportarModal from "./modal/exportarModal.jsx";
+import FiltroModal from "./modal/FilterModal.jsx";
+import OrdenarModal from "./modal/ordenarModal.jsx";
+import ExcluirModal from "./modal/excluirModal.jsx";
+import EditarModal from "./modal/editarModalAluno.jsx";
+
+function Alunos({ onSelectPage }) {
+  // Estados principais
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [filterSelecionado, setFilterSelecionado] = useState("igual");
+  const [alunos, setAlunos] = useState([]);
+  const [alunosOriginais, setAlunosOriginais] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [fileName, setFileName] = useState("alunos_exportados");
+  const [rangeStart, setRangeStart] = useState("");
+  const [rangeEnd, setRangeEnd] = useState("");
+  const [exportType, setExportType] = useState("Todos");
+  const [valorSelecionado, setValorSelecionado] = useState("ID_Aluno");
+
+  const [alunoEdit, setAlunoEdit] = useState(null);
+  const [filtros, setFiltros] = useState([]);
   const headerCheckboxRef = useRef(null);
 
-  const alunos = [
-    { id: "0001", ra: "22011010", nome: "Breno Groba", email: "brenogroba@gmail.com", senha: "12345", cpf: "49027706875", foto: "breno.png", telefone: "11970691099", grupo: "404 NOT found", Turma: "2NACCOMP" },
-    { id: "0002", ra: "22011029", nome: "Outro Aluno", email: "teste@gmail.com", senha: "12345", cpf: "49027706875", foto: "teste.png", telefone: "11970691099", grupo: "Grupo X", Turma: "2NACCOMP" },
-    { id: "0003", ra: "22011029", nome: "Breno Groba", email: "brenogroba@gmail.com", senha: "12345", cpf: "49027706875", foto: "breno.png", telefone: "11970691099", grupo: "404 NOT found", Turma: "2NACCOMP" },
-    { id: "0004", ra: "22011029", nome: "Breno Groba", email: "brenogroba@gmail.com", senha: "12345", cpf: "49027706875", foto: "breno.png", telefone: "11970691099", grupo: "404 NOT found", Turma: "2NACCOMP" }
-   
-    // ... resto da lista
+  const camposAluno = [
+    { value: "ID_Aluno", label: "ID do alunos" },
+    { value: "Aluno_RA", label: "RA do aluno" },
+    { value: "Aluno_Nome", label: "Nome" },
+    { value: "Aluno_Email", label: "Email" },
+    { value: "Aluno_CPF", label: "CPF" },
+    { value: "Aluno_Telefone", label: "Telefone" },
+    { value: "Aluno_Grupo", label: "Grupo" },
+    { value: "Aluno_Turma", label: "Turma" },
+    { value: "created_at", label: "Data de criação" },
   ];
+  // Controle dos modais
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showModalOrdenar, setshowModalOrdenar] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showImportModal, setShowImportModal] = useState(false);
+  const teste = "aluno ";
+  filtros[0] = "Alunos";
 
-  // Alterna a seleção de um único aluno
+  // Opções dos filtros
+
+  // Manipulação de filtros
+  const handleChange = (event) => {
+    setValorSelecionado(event.target.value);
+    if (event.target.value === "id") setFilterSelecionado("igual");
+  };
+
+  // Função: carregar alunoss
+  const carregarAlunos = async () => {
+    try {
+      const response = await fetch(`http://localhost:500/api/users/tabela`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ teste: teste }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setAlunos(data);
+        setAlunosOriginais(data);
+      } else {
+        alert(data.error || "Erro ao buscar alunoss");
+      }
+    } catch (err) {
+      console.error("Erro ao buscar alunoss:", err);
+      alert("Erro no servidor ao buscar alunos");
+    }
+  };
+
+  useEffect(() => {
+    carregarAlunos();
+  }, []);
+
+  // Seleção de alunoss
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     );
   };
 
-  // Alterna a seleção de todos os alunos
   const toggleSelectAll = () => {
     if (selected.length === alunos.length) {
       setSelected([]);
     } else {
-      setSelected(alunos.map((a) => a.id));
+      setSelected(alunos.map((u) => u.ID_Aluno));
     }
   };
 
-  // Verifica se todos os alunos estão selecionados
   const isAllSelected = selected.length === alunos.length;
 
-  // Aplica o estado indeterminado no checkbox do cabeçalho
   useEffect(() => {
     if (headerCheckboxRef.current) {
       const isPartial = selected.length > 0 && selected.length < alunos.length;
@@ -42,111 +108,251 @@ function Aluno() {
     }
   }, [selected, alunos.length]);
 
-  // 📌 Função para exportar
-  const exportarAlunos = () => {
-    // Filtra só os alunos que estão nos selected
-    const alunosSelecionados = alunos.filter((a) => selected.includes(a.id));
+  // Exportação
+  const gerarWorkbook = (dados) => {
+    const worksheet = XLSX.utils.json_to_sheet(dados);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Alunos");
+    return workbook;
+  };
 
-    if (alunosSelecionados.length === 0) {
-      alert("Nenhum aluno selecionado para exportar!");
+  const exportarAlunos = () => {
+    let dadosFiltrados = alunos;
+
+    if (exportType === "intervalo") {
+      if (!rangeStart || !rangeEnd) {
+        alert("Preencha o ID inicial e final!");
+        return;
+      }
+      const start = parseInt(rangeStart, 10);
+      const end = parseInt(rangeEnd, 10);
+      dadosFiltrados = alunos.filter(
+        (u) => u.ID_Aluno >= start && u.ID_Aluno <= end
+      );
+
+      if (dadosFiltrados.length === 0) {
+        alert("Nenhum aluno encontrado no range informado!");
+        return;
+      }
+    }
+
+    const workbook = gerarWorkbook(dadosFiltrados);
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+
+    saveAs(data, `${fileName}.xlsx`);
+    setShowModal(false);
+  };
+
+  const handleExportarAlunos = async () => {
+    try {
+      console.log("🧾 Iniciando exportação de todos os alunoss...");
+      setExportType("Todos");
+      await exportarAlunos();
+      alert("✅ Planilha exportada com sucesso!");
+    } catch (erro) {
+      console.error("❌ Erro ao exportar alunoss:", erro);
+      alert("Erro ao exportar planilha");
+    }
+  };
+
+  // Abrir modal de edição
+  const abrirModalEdicao = async () => {
+    if (selected.length !== 1) {
+      alert("Selecione exatamente 1 alunos para editar!");
       return;
     }
 
-    // Cria a planilha a partir do JSON
-    const worksheet = XLSX.utils.json_to_sheet(alunosSelecionados);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Alunos");
+    const id = selected[0];
+    try {
+      const response = await fetch(
+        `http://localhost:500/api/users/aluno/${id}`
+      );
+      if (!response.ok) throw new Error("Erro ao buscar alunos");
 
-    // Converte para array buffer
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
-
-    // Baixa o arquivo
-    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
-    saveAs(data, "alunos_selecionados.xlsx");
+      const data = await response.json();
+      setAlunoEdit(data);
+      setShowEditModal(true);
+    } catch (err) {
+      console.error("Erro ao buscar alunos:", err);
+      alert("Erro ao buscar dados do alunos");
+    }
   };
 
+  // 🔹 JSX
   return (
     <div className="main-container-tabela">
-      {/* Cabeçalho com botões */}
       <div className="cabecalho-tabela">
-        <button className="btn-tabela adicionar-tabela">Adicionar +</button>
-        <button className="btn-tabela adicionar-tabela">Formulário</button>
+        <button
+          className="btn-tabela adicionar-tabela"
+          onClick={() => onSelectPage("CadastroAluno")}
+        >
+          Adicionar +
+        </button>
+
         <div className="dropdown-tabela">
-          <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
+          <button className="btn-tabela mais-opcoes-tabela">
+            Mais opções ▾
+          </button>
           <div className="dropdown-content-tabela">
-            <a onClick={exportarAlunos}>Exportar alunos</a> {/* ⬅ aqui */}
-            <a href="#">Importar alunos</a>
-            <a href="#">Excluir</a>
-            <a href="#">Editar</a>
+            <a onClick={() => setShowModal(true)}>Exportar alunoss</a>
+            <a onClick={() => setShowImportModal(true)}>Importar alunoss</a>
+            <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
+            <a onClick={abrirModalEdicao}>Editar</a>
           </div>
         </div>
+
         <div className="rightMenu-tabela">
-          <button className="btn-tabela filtrar-tabela">Filtrar</button>
-          <button className="btn-tabela ordenar-tabela">Ordenar</button>
+          <button
+            className="btn-tabela filtrar-tabela"
+            onClick={() => setShowFilterModal(true)}
+          >
+            Filtrar
+          </button>
+          <button
+            className="btn-tabela ordenar-tabela"
+            onClick={() => setshowModalOrdenar(true)}
+          >
+            Ordenar
+          </button>
         </div>
       </div>
 
-      {/* Indicador de alunos selecionados */}
       <p className="indicador-selecionados-tabela">
-        {selected.length} aluno(s) selecionado(s)
+        {selected.length} alunos(s) selecionado(s)
       </p>
 
       <div className="tabela">
-        <div className="tabela-alunos">
-          <table className="tabela-container-tabela ">
-            <thead>
-              <tr>
-                <th>
+        <table className="tabela-container-tabela">
+          <thead>
+            <tr>
+              <th>
+                <input
+                  className="chk-tabela"
+                  type="checkbox"
+                  ref={headerCheckboxRef}
+                  checked={isAllSelected}
+                  onChange={toggleSelectAll}
+                />
+              </th>
+              <th>ID</th>
+              <th>RA</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Senha</th>
+              <th>CPF</th>
+              <th>Foto</th>
+              <th>Telefone</th>
+              <th>Grupo</th>
+              <th>Turma</th>
+              <th>Criado em</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {alunos.map((u) => (
+              <tr key={u.ID_Aluno}>
+                <td>
                   <input
                     className="chk-tabela"
                     type="checkbox"
-                    ref={headerCheckboxRef}
-                    checked={isAllSelected}
-                    onChange={toggleSelectAll}
+                    checked={selected.includes(u.ID_Aluno)}
+                    onChange={() => toggleSelect(u.ID_Aluno)}
                   />
-                </th>
-                <th>ID</th>
-                <th>RA</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Senha</th>
-                <th>CPF</th>
-                <th>Foto</th>
-                <th>Telefone</th>
-                <th>Grupo</th>
-                <th>Turma</th>
+                </td>
+                <td>{u.ID_Aluno}</td>
+                <td>{u.Aluno_RA}</td>
+                <td>{u.Aluno_Nome}</td>
+                <td>{u.Aluno_Email}</td>
+                <td>{u.Aluno_Senha}</td>
+                <td>{u.Aluno_Cpf}</td>
+                <td>{u.Aluno_Foto}</td>
+                <td>{u.Aluno_Telefone}</td>
+                <td>{u.Aluno_Grupo}</td>
+                <td>{u.Aluno_Turma}</td>
+                <td>
+                  {new Date(u.created_at).toLocaleDateString("pt-BR", {
+                    timeZone: "America/Sao_Paulo",
+                  })}
+                </td>
               </tr>
-            </thead>
-
-            <tbody>
-              {alunos.map((aluno) => (
-                <tr className="tr-aluno" key={aluno.id}>
-                  <td>
-                    <input
-                      className="chk-tabela"
-                      type="checkbox"
-                      checked={selected.includes(aluno.id)}
-                      onChange={() => toggleSelect(aluno.id)}
-                    />
-                  </td>
-                  <td>{aluno.id}</td>
-                  <td>{aluno.ra}</td>
-                  <td>{aluno.nome}</td>
-                  <td>{aluno.email}</td>
-                  <td>{aluno.senha}</td>
-                  <td>{aluno.cpf}</td>
-                  <td>{aluno.foto}</td>
-                  <td>{aluno.telefone}</td>
-                  <td>{aluno.grupo}</td>
-                  <td>{aluno.Turma}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
+
+      {/* 🔹 Modais importados e controlados por estado */}
+      <ExportarModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        exportType={exportType}
+        setExportType={setExportType}
+        fileName={fileName}
+        setFileName={setFileName}
+        rangeStart={rangeStart}
+        rangeEnd={rangeEnd}
+        setRangeStart={setRangeStart}
+        setRangeEnd={setRangeEnd}
+        exportarUsuarios={exportarAlunos}
+      />
+
+      <ImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onImportSuccess={carregarAlunos}
+        handleExportarAlunos={handleExportarAlunos}
+        tabela="Aluno "
+      />
+
+      <ExcluirModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        selected={selected}
+        setItens={setAlunos}
+        idField="ID_Aluno"
+        carregarItens={carregarAlunos}
+        tabela="Aluno "
+      />
+
+      <FiltroModal
+        isOpen={showFilterModal}
+        onClose={() => setShowFilterModal(false)}
+        filtros={filtros}
+        setFiltros={setFiltros}
+        valorSelecionado={valorSelecionado}
+        setValorSelecionado={setValorSelecionado}
+        filterSelecionado={filterSelecionado}
+        setFilterSelecionado={setFilterSelecionado}
+        usuariosOriginais={alunosOriginais}
+        setResponse={setAlunos}
+        campos={camposAluno}
+        tabela="Aluno "
+      />
+
+      <OrdenarModal
+        isOpen={showModalOrdenar}
+        onClose={() => setshowModalOrdenar(false)}
+        valorSelecionado={valorSelecionado}
+        setValorSelecionado={setValorSelecionado}
+        filterSelecionado={filterSelecionado}
+        setFilterSelecionado={setFilterSelecionado}
+        setItens={setAlunos}
+        tabela="Aluno "
+        campos={camposAluno}
+      />
+
+      <EditarModal
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        alunoEdit={alunoEdit}
+        setAlunoEdit={setAlunoEdit}
+        carregarAlunos={carregarAlunos}
+      />
     </div>
   );
 }
 
-export default Aluno;
+export default Alunos;

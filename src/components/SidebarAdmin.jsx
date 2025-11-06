@@ -135,11 +135,7 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
             <img className="icon" src="graduation.png" alt="usuarios" /> Usuários
           </button>
         </li>
-        <li>
-          <button className="btnAdmin" onClick={() => onSelectPage("administrativo")}>
-            <img className="icon" src="administrator.png" alt="administrativo" /> Administrativo
-          </button>
-        </li>
+        
         <li>
           <button
             className="btnAdmin"

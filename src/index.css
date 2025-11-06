@@ -15,10 +15,10 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding: 100px 0;
+  padding: 50px 0;
   width: 100vw;
   height: 100vh;
-  background-image: url("../public/imagemFundo.jpg");
+  background-image: url("./imagemFundo.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -86,10 +86,40 @@ form {
   background-color: transparent;
   cursor: pointer;
   margin: 30px 0 10px 0;
-  
 }
 
-.footerLogin{
+.bntTiposEntrada {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding: 5px;
+  border: 2px solid #00ab72;
+  color: #00ab72;
+  border-radius: 6px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: 0.3s;
+
+  width: 100px;
+  height: 40px;
+}
+
+.bntTiposEntrada:hover {
+  background-color: #eaeaea;
+}
+
+.bntTiposEntradaSelecionado {
+  background: #00ab72;
+  color: #fafafa;
+}
+
+
+.bntTiposEntrada:hover{
+  scale: 1.1;
+
+}
+.footerLogin {
   margin-top: 20px;
 }
 
@@ -165,7 +195,7 @@ form {
   display: none;
   flex-direction: column;
   list-style: none;
-  min-width: 180px;
+  min-width: 190px;
   z-index: 10;
 }
 
@@ -199,7 +229,7 @@ form {
   display: none;
   flex-direction: column;
   list-style: none;
-  min-width: 180px;
+  min-width: 190px;
   z-index: 10;
 }
 
@@ -412,7 +442,7 @@ form {
   width: 450px;
   margin-right: 0 auto;
   background-color: white;
-  border-radius: 10px 0 0 10px ;
+  border-radius: 10px 0 0 10px;
 }
 
 .logoEsqueciSenha {
@@ -508,6 +538,9 @@ form {
 /* ESQUECI MINHA SENHA  */
 
 /* RESET SENHA */
+/* VERIFICAÇÃO */
+
+/* ESQUECI MINHA SENHA */
 
 .asideResetSenha {
   position: absolute;
@@ -517,7 +550,7 @@ form {
   width: 450px;
   margin-right: 0 auto;
   background-color: white;
-  border-radius: 10px 0 0 10px ;
+  border-radius: 10px 0 0 10px;
 }
 
 .logoResetSenha {
@@ -566,6 +599,7 @@ form {
 }
 
 .pResetSenha{
+.pEsqueciSenha {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -612,9 +646,8 @@ form {
 
 /* RESET SENHA */
 
-
 /* ADMIN */
-#root{
+#root {
   height: 100%;
 }
 .mainAdmin {
@@ -695,14 +728,16 @@ form {
 .tabela-alunos td {
   white-space: nowrap;
 }
-
-.tabela {
-  width: 100%;
-  height: 420px; 
-  overflow-x: auto; 
-  overflow-y: auto; 
+.tbody tr{
+  transition: 0.3s;
 }
-
+.tabela {
+  transition: 0.3s;
+  width: 100%;
+  height: 420px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
 
 .tabela-container-tabela {
   width: 100%;
@@ -774,11 +809,14 @@ form {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* gap: 10px; */
+ 
 
   padding: 30px;
   justify-content: space-between;
+}
+.chat-modal .divPesquisar{
+ padding: 10px;
 }
 
 .divEsquerda {
@@ -807,17 +845,14 @@ form {
   border: none;
   background-color: #00ab72;
   cursor: pointer;
- 
 }
 .inputAdmin:focus {
-  
-  outline: none; 
+  outline: none;
 }
 
-.btnPesquisa:hover{
+.btnPesquisa:hover {
   background: #029463;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 .iconPesquisa {
   display: flex;
@@ -846,10 +881,8 @@ form {
   gap: 10px;
   margin-right: 30px;
 }
-.divDireita button:hover{
-  width: 30px;
-  height: 30px;
-  
+.divDireita button:hover {
+ scale: 1.1;
 }
 .modalConfig {
   position: absolute;
@@ -975,7 +1008,6 @@ form {
 }
 
 .cabecalho-tabela {
-  
   padding-top: 10px;
 }
 .main-container-tabela .cabecalho-tabela {
@@ -988,6 +1020,10 @@ form {
   margin-left: auto;
   gap: 10px;
   width: auto;
+}
+.tiposEntrada{
+  gap: 10px;
+  display: flex;
 }
 
 .main-container-tabela .indicador-selecionados-tabela {
@@ -1044,7 +1080,7 @@ form {
   display: none;
   position: absolute;
   background: #fff;
-  min-width: 180px;
+  min-width: 190px;
   border: 1px solid #ccc;
   z-index: 3;
   border-radius: 8px;
@@ -1106,7 +1142,7 @@ form {
   background: white;
 }
 
-.main-container-tabela .tabela-container-tabela tr:nth-child(even){
+.main-container-tabela .tabela-container-tabela tr:nth-child(even) {
   background: #e9e8e8;
 }
 .main-container-tabela .tabela-container-tabela tr:hover {
@@ -1227,7 +1263,7 @@ form {
   flex: 1;
   min-width: 300px;
   max-width: 400px;
-  border-radius: 8px;
+
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -1249,33 +1285,8 @@ form {
   margin-top: 5px;
 }
 
-.verde {
-  background-color: #28a745;
-}
 
-.amarelo {
-  background-color: #ffc107;
-  color: #333;
-}
 
-.cinza {
-  background-color: #6c757d;
-}
-
-.botao-abrir-chamado {
-  margin-top: 15px;
-  background-color: #003366;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.botao-abrir-chamado:hover {
-  background-color: #0055aa;
-}
 
 /* ========== PAINEL TUTORIAIS ========== */
 .painel-tutoriais {
@@ -1283,8 +1294,6 @@ form {
   padding: 20px;
   flex: 2;
   min-width: 300px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .painel-tutoriais h2 {
@@ -1295,6 +1304,8 @@ form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
+  overflow-x: auto;
+  height: 400px;
 }
 
 .cartao-tutorial {
@@ -1324,7 +1335,6 @@ form {
   margin-left: 220px;
 }
 
-
 /* GRUPO DE INPUT */
 .form-group {
   display: flex;
@@ -1352,7 +1362,6 @@ form {
   background: #fff;
 }
 
-
 .form-buttons {
   grid-column: span 3; /* ocupa todas as colunas */
   display: flex;
@@ -1372,7 +1381,6 @@ form {
   transition: all 0.2s ease-in-out;
 }
 
-
 .btn-confirmar {
   background-color: #00ab72;
   color: #fff;
@@ -1381,7 +1389,6 @@ form {
 .btn-confirmar:hover {
   background-color: #00804b;
 }
-
 
 .btn-cancelar {
   background-color: transparent;
@@ -1395,7 +1402,7 @@ form {
 }
 
 /* FORMS */
-.forms{
+.forms {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1405,7 +1412,7 @@ form {
   height: 100vh;
 }
 
-.logoForms{
+.logoForms {
   width: 90px;
   height: 90px;
   display: flex;
@@ -1414,17 +1421,17 @@ form {
   margin-right: 20px;
 }
 
-.headerForms{
+.headerForms {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00AB72;
+  background-color: #00ab72;
   width: 900px;
   border-radius: 10px 10px 0 0;
   height: 120px;
 }
 
-.divTituloForms{
+.divTituloForms {
   text-align: start;
   text-indent: 2em;
   font-size: 13px;
@@ -1436,26 +1443,26 @@ form {
   margin-bottom: 20px;
 }
 
-.inputPergunta{
+.inputPergunta {
   width: 900px;
-  height: 50px; 
-  border: none; 
+  height: 50px;
+  border: none;
   border-bottom: 1px solid rgb(88, 88, 88);
   border-radius: 10px;
   padding: 10px;
 }
 
-.pergunta{
+.pergunta {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px; 
+  gap: 15px;
   margin-bottom: 10px;
   width: 900px;
 }
 
-.pergunta p{
+.pergunta p {
   background-color: #fafafa;
   width: 100%;
   height: 50px;
@@ -1475,7 +1482,7 @@ form {
   gap: 20px;
 }
 
-.inputPergunta{
+.inputPergunta {
   border-radius: 0 0 10px 10px;
 }
 
@@ -1485,40 +1492,40 @@ form {
   align-items: center;
   padding: 20px;
   border-radius: 0 0 10px 10px;
-  background-color: #fafafa;  
+  background-color: #fafafa;
   width: 900px;
   height: 50px;
 }
 
-.inputTypeRadio{
-  margin-right: 8px; 
-  margin-left: 0; 
+.inputTypeRadio {
+  margin-right: 8px;
+  margin-left: 0;
   cursor: pointer;
 }
 .pergunta > div label {
   display: flex;
   align-items: center;
-  margin: 0 15px; 
+  margin: 0 15px;
 }
 
-.proximo{
+.proximo {
   width: 220px;
   height: 50px;
   border-radius: 10px;
-  background-color: #00AB72;
+  background-color: #00ab72;
   font-size: 20px;
   font-weight: bolder;
-  color: white;  
+  color: white;
   margin-top: 20px;
 }
-.proximo:hover{
-  background-color: #01885b ;
+.proximo:hover {
+  background-color: #01885b;
 }
-.proximo:disabled{
+.proximo:disabled {
   background-color: #00ab7277;
   cursor: not-allowed;
 }
-.proximo:enabled{
+.proximo:enabled {
   border: none;
 }
 
@@ -1526,7 +1533,7 @@ form {
 
 /* CADASTRO ALUNO MENTOR */
 
-.formsMentor{
+.formsMentor {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1543,11 +1550,11 @@ form {
   flex-direction: column;
 }
 
-.headerFormsMentor{
+.headerFormsMentor {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00AB72;
+  background-color: #00ab72;
   width: 100%;
   border-radius: 10px 10px 0 0;
   padding: 20px 0;
@@ -1560,7 +1567,7 @@ form {
   font-weight: bold;
 }
 
-.TituloFormsMentor{
+.TituloFormsMentor {
   text-align: start;
   font-size: 13px;
   padding: 25px 35px;
@@ -1590,7 +1597,7 @@ form {
   margin: 5px 0 0 0;
 }
 
-.perguntaMentor{
+.perguntaMentor {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1600,10 +1607,10 @@ form {
   margin-bottom: 20px;
 }
 
-.tituloPerguntaMentor{
+.tituloPerguntaMentor {
   background-color: #fafafa;
   width: 100%;
-  border-radius: 10px 10px 0 0 ;
+  border-radius: 10px 10px 0 0;
   padding: 15px 25px;
   margin: 0; /* MUDE DE "0 0 20px 0" PARA "0" */
   box-sizing: border-box;
@@ -1613,10 +1620,10 @@ form {
   font-weight: 500;
 }
 
-.inputPerguntaMentor{
+.inputPerguntaMentor {
   width: 100%;
   height: 50px;
-  border: none;  
+  border: none;
   border-bottom: 2px solid #888;
   background-color: #fafafa;
   border-radius: 0 0 10px 10px;
@@ -1627,10 +1634,10 @@ form {
 }
 
 .inputPerguntaMentor::placeholder {
-  color: #999; 
+  color: #999;
 }
 
-.divBotoesMentor{
+.divBotoesMentor {
   margin-top: 30px;
   margin-bottom: 30px;
   width: 900px;
@@ -1643,7 +1650,7 @@ form {
   width: 220px;
   height: 55px;
   border-radius: 10px;
-  background-color: #00AB72;
+  background-color: #00ab72;
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -1664,7 +1671,7 @@ form {
   width: 220px;
   height: 50px;
   border-radius: 10px;
-  background-color: #00AB72;
+  background-color: #00ab72;
   font-size: 20px;
   font-weight: bolder;
   color: white;
@@ -1685,16 +1692,15 @@ form {
   cursor: not-allowed;
 }
 
-.proximoMentor:enabled{
+.proximoMentor:enabled {
   border: none;
 }
-
 
 /* CADASTRO ALUNO MENTOR */
 
 /* CADASTRO ALUNOS */
 
-.formsAlunos{
+.formsAlunos {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1711,11 +1717,11 @@ form {
   flex-direction: column;
 }
 
-.headerFormsAlunos{
+.headerFormsAlunos {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00AB72;
+  background-color: #00ab72;
   width: 100%;
   border-radius: 10px 10px 0 0;
   padding: 20px 0;
@@ -1728,7 +1734,7 @@ form {
   font-weight: bold;
 }
 
-.tituloFormsAlunos{
+.tituloFormsAlunos {
   text-align: start;
   font-size: 13px;
   padding: 25px 35px;
@@ -1758,7 +1764,7 @@ form {
   margin: 5px 0 0 0;
 }
 
-.perguntaAlunos{
+.perguntaAlunos {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1768,10 +1774,10 @@ form {
   margin-bottom: 20px;
 }
 
-.tituloPerguntaAluno{
+.tituloPerguntaAluno {
   background-color: #fafafa;
   width: 100%;
-  border-radius: 10px 10px 0 0 ;
+  border-radius: 10px 10px 0 0;
   padding: 15px 25px;
   margin: 0;
   box-sizing: border-box;
@@ -1781,10 +1787,10 @@ form {
   font-weight: 500;
 }
 
-.inputPerguntaAluno{
+.inputPerguntaAluno {
   width: 100%;
   height: 50px;
-  border: none;  
+  border: none;
   border-bottom: 2px solid #888;
   background-color: #fafafa;
   border-radius: 0 0 10px 10px;
@@ -1795,7 +1801,7 @@ form {
 }
 
 .inputPerguntaAluno::placeholder {
-  color: #999; 
+  color: #999;
 }
 
 .botoesAluno {
@@ -1808,7 +1814,7 @@ form {
   width: 220px;
   height: 55px;
   border-radius: 10px;
-  background-color: #00AB72;
+  background-color: #00ab72;
   font-size: 20px;
   font-weight: bolder;
   color: white;
@@ -1848,17 +1854,16 @@ form {
   cursor: not-allowed;
 }
 
-.proximoAluno:enabled{
+.proximoAluno:enabled {
   border: none;
 }
 
-.finalizar:disabled{
+.finalizar:disabled {
   background-color: #00ab7277;
   cursor: not-allowed;
 }
 
 /* CADASTRO ALUNOS */
-
 
 /* Exportar aluno */
 
@@ -1869,7 +1874,7 @@ form {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1882,7 +1887,7 @@ form {
   width: 600px;
   padding: 40px 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -1916,8 +1921,8 @@ form {
 }
 
 .modal input:focus {
-  border-color: #00AB72;
-  box-shadow: 0 0 0 2px rgba(0,171,114,0.1);
+  border-color: #00ab72;
+  box-shadow: 0 0 0 2px rgba(0, 171, 114, 0.1);
 }
 
 /* === CAMPOS DO RANGE === */
@@ -1950,7 +1955,7 @@ form {
 }
 
 .radio-option input[type="radio"] {
-  accent-color: #00AB72;
+  accent-color: #00ab72;
   width: 18px;
   height: 18px;
   cursor: pointer;
@@ -1973,7 +1978,7 @@ form {
   width: 450px;
   padding: 25px 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -2005,33 +2010,46 @@ form {
 }
 
 .modal-editar input:focus {
-  border-color: #00AB72;
+  border-color: #00ab72;
 }
 
 /* === ANIMAÇÃO === */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 
 /* Exportar aluno */
 
 /* Filtrar */
 
-.footerModal{
+.footerModal {
   display: flex;
   gap: 30px;
   justify-content: center;
 }
-.sectionfilter{
+.sectionfilter {
   display: flex;
   gap: 10px;
 }
-.modal select{
+
+.modal .sectionfilter2 select{
+  width: 300px;
+}
+.sectionfilter2 {
+  display: flex;
+  gap: 10px;
+}
+.modal select {
   width: 150px;
 }
-.btnFilter{
+.btnFilter {
   margin-top: 10px;
   background: #00ab72;
   color: #fafafa;
@@ -2040,18 +2058,18 @@ form {
   border: none;
   font-size: 18px;
   font-weight: bolder;
- border-radius: 10px;
+  border-radius: 10px;
 }
-.btnFilter:hover{
+.btnFilter:hover {
   background: #fafafa;
   color: #00ab72;
-  border: 1px solid #00AB72;
+  border: 1px solid #00ab72;
 }
 
-.formEdit{
+.formEdit {
   display: grid;
 }
-.export{
+.export {
   width: 300px;
 }
 
@@ -2060,7 +2078,7 @@ form {
 .suporte-container {
   width: 100%;
   max-height: calc(100vh - 300px); /* Ajusta para o header */
-  padding: 20px;
+
   background: #f5f5f5;
   margin-top: 0;
 }
@@ -2070,7 +2088,7 @@ form {
   grid-template-columns: 280px 1fr;
   gap: 20px;
   max-width: calc(100% - 220px);
- 
+  background-color: transparent;
   margin-left: 220px;
 }
 
@@ -2098,7 +2116,7 @@ form {
 .caixa-status {
   background: white;
   border-radius: 8px;
-  padding: 25px 20px;
+
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
@@ -2117,7 +2135,7 @@ form {
 
 .caixa-status .numero {
   display: block;
-  font-size: 52px;
+  font-size: 30px;
   font-weight: bold;
   color: white;
   line-height: 1;
@@ -2165,14 +2183,13 @@ form {
 .grade-tutoriais {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
 }
 
 /* Cartão de tutorial */
 .cartao-tutorial {
   background: white;
   border-radius: 8px;
-  padding: 15px;
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
@@ -2219,7 +2236,7 @@ form {
   .suporte-content {
     grid-template-columns: 1fr;
   }
-  
+
   .grade-tutoriais {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2231,3 +2248,218 @@ form {
   }
 }
 /* SUPORTE */
+
+/* Chat */
+
+.chat-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.chat-modal {
+  background: white;
+  width: 800px;
+  height: 500px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.chat-header {
+  background-color: #008c73;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.chat-container {
+  display: flex;
+  flex: 1;
+}
+
+.contacts {
+  width: 35%;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact:hover {
+  background: #e4f5f1;
+}
+
+.contact.selected {
+  border: 2px solid #008c73;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #008c73;
+  margin-right: 10px;
+}
+
+.contact-info .name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.contact-info .preview {
+  font-size: 12px;
+  color: #555;
+}
+
+.conversation {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.message p {
+  margin: 0;
+}
+
+.message span {
+  font-size: 10px;
+  color: gray;
+  display: block;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.message.received {
+  background: #f0f0f0;
+  align-self: flex-start;
+}
+
+.message.sent {
+  background: #d1f3e0;
+  align-self: flex-end;
+}
+
+.message-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.send-btn {
+  background: #008c73;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Chat */
+
+/* GERAL */
+.lista-filtros > div:first-child {
+  display: none;
+}
+.tipo-modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.tipo-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: white;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  
+}
+
+.tipo-btn.entrada {
+  background-color: #00ab72; 
+}
+
+.tipo-btn.entrada:hover {
+  background-color: #fafafa;
+  color: #00ab72;
+  
+  transform: scale(1.05);
+  
+}
+
+.tipo-btn.saida {
+  background-color: #fafafa;
+  color: #00ab72;
+}
+
+.tipo-btn.saida:hover {
+  background-color: #00ab72; 
+  color: #fafafa;
+  transform: scale(1.05);
+}
+
+

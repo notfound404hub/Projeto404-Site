@@ -38,6 +38,36 @@ function Login() {
       alert("Erro no login: " + (err.response?.data?.error || err.message));
     }
   };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+
+      
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const res = await axios.post(
+            "http://localhost:500/api/users/login", 
+            form
+          );
+    
+          console.log("Resposta do backend:", res.data);
+          alert(res.data.msg);
+    
+          if (res.data.ID_Aluno) {
+            localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
+            console.log("ID salvo no localStorage:", res.data.ID_Aluno);
+          }
+
+          
+          navigate(`${res.data.tela}`);
+    
+        } catch (err) {
+          console.error("Erro no login:", err.response?.data || err.message);
+          alert("Erro no login: " + (err.response?.data?.error || err.message));
+        }
+      };
   
   return (
     <div className="bodyImg"> 
@@ -56,7 +86,7 @@ function Login() {
           <form className="login" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
-                name="Aluno_Email"                
+                name="Email"                
                 className="inputLogin"
                 type="email"
                 placeholder="Email"
@@ -68,7 +98,7 @@ function Login() {
 
             <div className="input-group">
               <input
-                name="Aluno_Senha"   
+                name="Senha"   
                 className="inputLogin"
                 type="password"
                 placeholder="Senha"
