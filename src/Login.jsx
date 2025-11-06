@@ -40,34 +40,8 @@ function Login() {
   };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  };      
 
-
-      
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-          const res = await axios.post(
-            "http://localhost:500/api/users/login", 
-            form
-          );
-    
-          console.log("Resposta do backend:", res.data);
-          alert(res.data.msg);
-    
-          if (res.data.ID_Aluno) {
-            localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
-            console.log("ID salvo no localStorage:", res.data.ID_Aluno);
-          }
-
-          
-          navigate(`${res.data.tela}`);
-    
-        } catch (err) {
-          console.error("Erro no login:", err.response?.data || err.message);
-          alert("Erro no login: " + (err.response?.data?.error || err.message));
-        }
-      };
   
   return (
     <div className="bodyImg"> 

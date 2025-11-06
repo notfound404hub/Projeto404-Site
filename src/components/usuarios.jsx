@@ -187,28 +187,28 @@ function Usuarios({ onSelectPage }) {
   // Exclusão de usuários
  
 
-  // Abrir modal de edição
-  const abrirModalEdicao = async () => {
-    if (selected.length !== 1) {
-      alert("Selecione exatamente 1 usuário para editar!");
-      return;
-    }
+  // // Abrir modal de edição
+  // const abrirModalEdicao = async () => {
+  //   if (selected.length !== 1) {
+  //     alert("Selecione exatamente 1 usuário para editar!");
+  //     return;
+  //   }
 
-    const id = selected[0];
-    try {
-      const response = await api.delete("/deleteFromTable", {
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: selected }),
-      });
+  //   const id = selected[0];
+  //   try {
+  //     const response = await api.delete("/deleteFromTable", {
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ ids: selected }),
+  //     });
 
-      const data = await response.json();
-      setUsuarioEdit(data);
-      setShowEditModal(true);
-    } catch (err) {
-      console.error("Erro ao buscar usuário:", err);
-      alert("Erro ao buscar dados do usuário");
-    }
-  };
+  //     const data = await response.json();
+  //     setUsuarioEdit(data);
+  //     setShowEditModal(true);
+  //   } catch (err) {
+  //     console.error("Erro ao buscar usuário:", err);
+  //     alert("Erro ao buscar dados do usuário");
+  //   }
+  // };
 
   // 🔹 JSX
   return (

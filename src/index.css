@@ -597,8 +597,6 @@ form {
 .inputResetSenha:placeholder {
   color: black;
 }
-
-.pResetSenha{
 .pEsqueciSenha {
   display: flex;
   align-self: center;
