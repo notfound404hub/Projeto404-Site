@@ -4,7 +4,7 @@ import { saveAs } from "file-saver";
 
 
 // 🔹 Imports dos modais
-import ImportModal from "./modal/importarModal.jsx";
+
 import ExportarModal from "./modal/exportarModal.jsx";
 import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
@@ -45,7 +45,7 @@ function trasacoes({ onSelectPage }) {
   const [showModalOrdenar, setshowModalOrdenar] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showImportModal, setShowImportModal] = useState(false);
+  
   const teste =
   tipoTransacao === "entrada"
     ? "TransacaoEntrada"
@@ -58,10 +58,11 @@ function trasacoes({ onSelectPage }) {
 
   // Opções dos filtros
   const handleSelect = (tipoEscolhido) => {
-    setTipo(tipoEscolhido);
-    setShowModal(false);
+    setTipoTransacao(tipoEscolhido);
+    setshowModalTipo(false); // Fecha o modal de tipo
     console.log("Tipo escolhido:", tipoEscolhido);
   };
+  
   // Manipulação de filtros
   const handleChange = (event) => {
     setValorSelecionado(event.target.value);
@@ -95,8 +96,11 @@ function trasacoes({ onSelectPage }) {
   };
 
   useEffect(() => {
-    carregartrasacoes();
-  }, []);
+    if (tipoTransacao) {
+      carregartrasacoes();
+    }
+  }, [tipoTransacao]);
+  
 
   // Seleção de trasacoess
   const toggleSelect = (id) => {
@@ -219,7 +223,7 @@ function trasacoes({ onSelectPage }) {
           </button>
           <div className="dropdown-content-tabela">
             <a onClick={() => setShowModal(true)}>Exportar trasacoess</a>
-            <a onClick={() => setShowImportModal(true)}>Importar trasacoess</a>
+           
             <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
             <a onClick={abrirModalEdicao}>Editar</a>
           </div>
@@ -312,13 +316,7 @@ function trasacoes({ onSelectPage }) {
         exportarUsuarios={exportartrasacoes}
       />
 
-      <ImportModal
-        isOpen={showImportModal}
-        onClose={() => setShowImportModal(false)}
-        onImportSuccess={carregartrasacoes}
-        handleExportartrasacoes={handleExportartrasacoes}
-        tabela={teste}
-      />
+      
 
       <ExcluirModal
         isOpen={showDeleteModal}

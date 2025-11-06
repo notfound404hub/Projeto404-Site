@@ -89,9 +89,9 @@ export default function CadastroAlunos() {
         Aluno_RA: matriculas[i],
         Aluno_Email: email[i],
         Aluno_Senha: senha[i],
-        Grupo_Nome: grupoData?.Grupo_Nome,
-        Grupo_Curso: grupoData?.Grupo_Curso,
-        Id_Grupo: Id_Grupo
+        Grupo_Nome: grupoData?.nome,
+        Grupo_Curso: grupoData?.curso,
+        Id_Grupo: grupoResponse?.Id_Grupo
       }))
       
       const res = await axios.post("http://localhost:500/api/users/alunos", todosJuntos)
