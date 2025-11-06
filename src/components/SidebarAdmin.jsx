@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../api.js"
 
 function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage }) {
   const [modalConfig, setModalConfig] = useState(false);
@@ -14,9 +15,8 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
-        { method: "DELETE" }
+      const response = await api.delete(
+        `/usuario/${ID_Usuario}`
       );
       const data = await response.json();
       alert(data.msg || data.error);
@@ -38,8 +38,8 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`
+      const response = await api.get(
+        `/usuario/${ID_Usuario}`
       );
       const data = await response.json();
 

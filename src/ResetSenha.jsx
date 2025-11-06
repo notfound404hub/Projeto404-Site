@@ -1,14 +1,13 @@
 import { useState } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
+import api from "./api"
 
 function ResetSenha() {
   console.log("Componente ResetSenha renderizado")
   const [senha, setSenha] = useState("")
   const [confirmarSenha, setConfirmarSenha] = useState("")
   const [mensagem, setMensagem] = useState("")
-  const { token } = useParams()
-  console.log("Token recebido:", token)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,9 +15,9 @@ function ResetSenha() {
 
     try {
       console.log("Enviando requisição...");
-      const response = await axios.put(
-        "http://localhost:500/api/users/auth/resetPassword",
-        { token, senha, confirmarSenha }
+      const response = await api.put(
+        "/auth/resetPassword",
+        {senha, confirmarSenha }
       )
       console.log("Resposta recebida:", response.data);
       setMensagem(response.data.message)

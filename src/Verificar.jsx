@@ -1,16 +1,15 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import api from "./api";
 
 function Verificar(){ 
-
     const email = localStorage.getItem("alunoEmail")
-    const{token} = useParams()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            const res = await axios.post(
-                `http://localhost:500/api/users/enviaremail/${token}`,
+            const res = await api.post(
+                `/enviaremail`,
                 {email}
              )
              console.log("Requisição recebida", res)

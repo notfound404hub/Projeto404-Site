@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { data } from "react-router-dom";
+import api from "../api.js"
 
 
 function Usuarios({ onSelectPage }) {
@@ -55,8 +56,8 @@ function Usuarios({ onSelectPage }) {
     const id = selected[0];
 
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${id}`
+      const response = await api.get(
+        `/usuario/${id}`
       );
       if (!response.ok) throw new Error("Erro ao buscar usuário");
 
@@ -71,7 +72,7 @@ function Usuarios({ onSelectPage }) {
 
   const carregarUsuarios = async () => {
     try {
-      const response = await fetch("http://localhost:500/api/users/usuarios");
+      const response = await api.get("/usuarios");
       const data = await response.json();
 
       if (response.ok) {
@@ -228,8 +229,7 @@ function Usuarios({ onSelectPage }) {
     }
 
     try {
-      const response = await fetch("http://localhost:500/api/users/deleteFromTable", {
-        method: "DELETE",
+      const response = await api.delete("/deleteFromTable", {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ids: selected }),
       });
@@ -522,10 +522,9 @@ function Usuarios({ onSelectPage }) {
                 className="btnFilter"
                 onClick={async () => {
                   try {
-                    const response = await fetch(
-                      "http://localhost:500/api/users/filtrar",
-                      {
-                        method: "POST",
+                    const response = await api.post(
+                      "/filtrar",
+                      {                        
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ filtros }),
                       }
@@ -610,10 +609,9 @@ function Usuarios({ onSelectPage }) {
                       direcao: filterSelecionado, 
                     };
 
-                    const response = await fetch(
-                      "http://localhost:500/api/users/ordenar",
-                      {
-                        method: "POST",
+                    const response = await api.post(
+                      "/ordenar",
+                      {        
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(body),
                       }
@@ -766,10 +764,9 @@ function Usuarios({ onSelectPage }) {
                 className="btnFilter"
                 onClick={async () => {
                   try {
-                    const response = await fetch(
-                      `http://localhost:500/api/users/usuario/${usuarioEdit.ID_Usuario}`,
+                    const response = await api.put(
+                      `/usuario/${usuarioEdit.ID_Usuario}`,
                       {
-                        method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                           Usuario_Nome: usuarioEdit.Usuario_Nome,
@@ -856,12 +853,11 @@ function Usuarios({ onSelectPage }) {
 
                   try {
                     console.log("📤 Enviando arquivo Excel para o backend...");
-                    const response = await fetch(
-                      "http://localhost:500/api/users/importarUsuarios",
+                    const response = await api.post(
+                      "/importarUsuarios",
                       {
-                        method: "POST",
                         body: formData,
-                      }
+                      } 
                     );
 
                     const data = await response.json();

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../api";
 
 function CadastroUsuario() {
   const [formData, setFormData] = useState({
@@ -50,8 +51,7 @@ function CadastroUsuario() {
         tabela: "Usuario"
       };
 
-      const response = await fetch("http://localhost:500/api/users/cadastroUsuario", {
-        method: "POST",
+      const response = await api.post("/cadastroUsuario",{ 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosEnvio),
       });
