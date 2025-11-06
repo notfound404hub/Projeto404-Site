@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "./api.js"
 import Aluno from './components/Aluno.jsx';
 import Grupo from './components/grupo.jsx';
 import Alimentos from './components/alimentos.jsx';
@@ -27,10 +28,8 @@ function Admin() {
   const handleUpdate = async () => {
     const ID_Usuario = localStorage.getItem("ID_Usuario");
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`,
+      const response = await api.put(`/usuario/${ID_Usuario}`,
         {
-          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData)
         }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import Login from "./Login";
+import api from "./api.js"
 
 function Register() {
     const [form, setForm] = useState({
