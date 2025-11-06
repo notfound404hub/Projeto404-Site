@@ -17,8 +17,8 @@ function Forms() {
   const irParaCadastroMentor = () => {
     if (!qtdIntegrantes || qtdIntegrantes <= 0) return
     const grupoData = {
-      Grupo_Nome:grupo.Grupo_Nome.trim(),
-      Grupo_Curso: grupo.Grupo_Curso.trim()
+      nome:grupo.Grupo_Nome.trim(),
+      curso: grupo.Grupo_Curso.trim()
     }
     localStorage.setItem("grupo", JSON.stringify(grupoData))    
     localStorage.setItem("qtdIntegrantes", String(qtdIntegrantes))    

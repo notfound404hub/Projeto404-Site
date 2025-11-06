@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './index.css'; 
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "./api.js"
 
 function Login() {
   const[email, setEmail] = useState("")
@@ -12,20 +12,20 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(
+      const res = await api.post(
         "http://localhost:500/api/users/login", 
         {email, senha}
       )
-      const {token, verificado} = res.data
-      console.log("Resposta recebida", res)
+      const {verificado} = res.data
+      sessionStorage.setItem("token", res.data.token)
 
       console.log("Resposta do backend:", res.data);
       alert(res.data.msg);
-      localStorage.setItem("alunoEmail", email)
+      sessionStorage.setItem("alunoEmail", email)
 
       if (res.data.ID_Aluno) {
-        localStorage.setItem("ID_Aluno", res.data.ID_Aluno);
-        console.log("ID salvo no localStorage:", res.data.ID_Aluno);
+        sessionStorage.setItem("ID_Aluno", res.data.ID_Aluno);
+        console.log("ID salvo no sessionStorage:", res.data.ID_Aluno);
       } 
       
       if(verificado != 1){
@@ -38,16 +38,12 @@ function Login() {
       alert("Erro no login: " + (err.response?.data?.error || err.message));
     }
   };
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };      
-
   
   return (
     <div className="bodyImg"> 
       <div className="divLogin">
         <aside className="asideLogin">
-          <img className="logo" src="logo.png" alt="Logo" />
+          <img className="logo" src="./public/logo.png" alt="Logo" />
 
           <p className="lbl_Bemvindo">
             Seja bem-vindo ao

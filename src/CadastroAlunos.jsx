@@ -71,7 +71,7 @@ export default function CadastroAlunos() {
     const grupoData = JSON.parse(localStorage.getItem("grupo"))
 
     const todosAlunos = mentorData ? [mentorData.nome, ...alunos.Aluno_Nome] : [...alunos.Aluno_Nome]
-    const matriculas = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
+    const ra = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
     const email = mentorData ? [mentorData.email, ...alunos.Aluno_Email] : [...alunos.Aluno_Email]
     const senha = mentorData ? [mentorData.senha, ...alunos.Aluno_Senha] : [...alunos.Aluno_Senha]
     
@@ -86,7 +86,7 @@ export default function CadastroAlunos() {
       
       todosJuntos = todosAlunos.map((nome, i) => ({
         Aluno_Nome: nome,
-        Aluno_RA: matriculas[i],
+        Aluno_RA: ra[i],
         Aluno_Email: email[i],
         Aluno_Senha: senha[i],
         Grupo_Nome: grupoData?.nome,
