@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import api from "../../api";
 
 const opcoesNumericas = [
   { value: "igual", label: "é igual a" },
@@ -26,21 +27,15 @@ function FiltroModal({
   campos,
   tabela,
 }) {
-  // ✅ Mover useState pra dentro do componente
   const [valorFiltro, setValorFiltro] = useState("");
 
   if (!isOpen) return null;
 
   const aplicarFiltros = async () => {
     try {
-      const response = await fetch("http://localhost:500/api/users/filtrar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ filtros, tabela }),
-      });
-      if (!response.ok) throw new Error("Erro ao buscar dados do servidor");
-      const data = await response.json();
-      setResponse(data);
+      console.log("tabela definida", tabela)
+      const response = await api.post("/filtrar", {filtros, tabela})
+      setResponse(response.data);
       onClose();
     } catch (err) {
       console.error("Erro ao aplicar filtros:", err);

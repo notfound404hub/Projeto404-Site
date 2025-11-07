@@ -1,4 +1,5 @@
 import React from "react";
+import api from "../../api";
 
 function EditModal({
   isOpen,
@@ -11,26 +12,15 @@ function EditModal({
 
   const salvarEdicao = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${usuarioEdit.ID_Usuario}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            Usuario_Nome: usuarioEdit.Usuario_Nome,
-            Usuario_Empresa: usuarioEdit.Usuario_Empresa,
-            Usuario_Telefone: usuarioEdit.Usuario_Telefone,
-            Usuario_Senha: usuarioEdit.Usuario_Senha,
-          }),
-        }
-      );
-
-      const data = await response.json();
-      if (!response.ok) {
-        alert(data.error || "Erro ao atualizar usuário");
-        return;
+      const dadosEditaveis = {
+        Usuario_Nome: usuarioEdit.Usuario_Nome,
+        Usuario_Empresa: usuarioEdit.Usuario_Empresa,
+        Usuario_Telefone: usuarioEdit.Usuario_Telefone,
+        Usuario_Senha: usuarioEdit.Usuario_Senha
       }
-
+      console.log(usuarioEdit)
+      const response = await api.put( `/usuario/${usuarioEdit.ID_Usuario}`, dadosEditaveis);
+      setUsuarioEdit(response.data)
       alert("Usuário atualizado com sucesso!");
       onClose();
       carregarUsuarios();
