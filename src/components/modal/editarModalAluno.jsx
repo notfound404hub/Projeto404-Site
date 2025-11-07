@@ -1,39 +1,28 @@
 import React from "react";
+import api from "../../api";
 
 function EditModal({
   isOpen,
-  usuarioEdit,
-  setUsuarioEdit,
+  alunoEdit,
+  setAlunoEdit,
   onClose,
-  carregarUsuarios,
+  carregarAlunos
 }) {
-  if (!isOpen || !usuarioEdit) return null;
+  if (!isOpen || !alunoEdit) return null;
 
-  const salvarEdicao = async () => {
+  const salvarEdicaoAlunos = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${usuarioEdit.ID_Usuario}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            Usuario_Nome: usuarioEdit.Usuario_Nome,
-            Usuario_Empresa: usuarioEdit.Usuario_Empresa,
-            Usuario_Telefone: usuarioEdit.Usuario_Telefone,
-            Usuario_Senha: usuarioEdit.Usuario_Senha,
-          }),
-        }
-      );
-
-      const data = await response.json();
-      if (!response.ok) {
-        alert(data.error || "Erro ao atualizar usuário");
-        return;
-      }
-
+      const dadosEditaveis = {
+        Aluno_Nome: alunoEdit.Aluno_Nome,
+        Aluno_Telefone: alunoEdit.Aluno_Telefone,
+        Aluno_Senha: alunoEdit.Aluno_Senha,
+      };
+      console.log(alunoEdit)
+      const response = await api.put(`/alunos/${alunoEdit.ID_Aluno}`, dadosEditaveis);
+      setAlunoEdit(response.data)
       alert("Usuário atualizado com sucesso!");
       onClose();
-      carregarUsuarios();
+      carregarAlunos();
     } catch (error) {
       console.error("Erro no update:", error);
       alert("Erro no servidor ao atualizar usuário");
@@ -43,41 +32,29 @@ function EditModal({
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Editar Usuário</h2>
+        <h2>Editar Aluno</h2>
 
         <div className="formEdit">
           <label>ID:</label>
-          <input type="text" value={usuarioEdit.ID_Usuario} readOnly />
+          <input type="text" value={alunoEdit.ID_Aluno} readOnly />
 
           <label>Nome:</label>
           <input
             type="text"
-            value={usuarioEdit.Usuario_Nome || ""}
+            value={alunoEdit.Aluno_Nome || ""}
             onChange={(e) =>
-              setUsuarioEdit({ ...usuarioEdit, Usuario_Nome: e.target.value })
-            }
-          />
-
-          <label>Empresa:</label>
-          <input
-            type="text"
-            value={usuarioEdit.Usuario_Empresa || ""}
-            onChange={(e) =>
-              setUsuarioEdit({
-                ...usuarioEdit,
-                Usuario_Empresa: e.target.value,
-              })
+              setAlunoEdit({ ...alunoEdit, Aluno_Nome: e.target.value })
             }
           />
 
           <label>Telefone:</label>
           <input
             type="text"
-            value={usuarioEdit.Usuario_Telefone || ""}
+            value={alunoEdit.Aluno_Telefone || ""}
             onChange={(e) =>
-              setUsuarioEdit({
-                ...usuarioEdit,
-                Usuario_Telefone: e.target.value,
+              setAlunoEdit({
+                ...alunoEdit,
+                Aluno_Telefone: e.target.value,
               })
             }
           />
@@ -85,11 +62,11 @@ function EditModal({
           <label>Senha:</label>
           <input
             type="text"
-            value={usuarioEdit.Usuario_Senha || ""}
+            value={alunoEdit.Aluno_Senha || ""}
             onChange={(e) =>
-              setUsuarioEdit({
-                ...usuarioEdit,
-                Usuario_Senha: e.target.value,
+              setAlunoEdit({
+                ...alunoEdit,
+                Aluno_Senha: e.target.value,
               })
             }
           />
@@ -99,7 +76,7 @@ function EditModal({
           <button className="btnFilter" onClick={onClose}>
             Fechar
           </button>
-          <button className="btnFilter" onClick={salvarEdicao}>
+          <button className="btnFilter" onClick={salvarEdicaoAlunos}>
             Salvar
           </button>
         </div>

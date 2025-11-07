@@ -1,13 +1,14 @@
 import { useState } from "react"
 import axios from "axios"
-import { useParams } from "react-router-dom"
-import api from "./api"
+import { useNavigate, useParams } from "react-router-dom"
 
 function ResetSenha() {
   console.log("Componente ResetSenha renderizado")
   const [senha, setSenha] = useState("")
   const [confirmarSenha, setConfirmarSenha] = useState("")
   const [mensagem, setMensagem] = useState("")
+  const {token} = useParams()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,12 +16,13 @@ function ResetSenha() {
 
     try {
       console.log("Enviando requisição...");
-      const response = await api.put(
-        "/auth/resetPassword",
+      const response = await axios.put(
+      `http://localhost:500/api/users/auth/resetPassword/${token}`,
         {senha, confirmarSenha }
       )
       console.log("Resposta recebida:", response.data);
       setMensagem(response.data.message)
+      navigate("/login")
     } catch (err) {
       console.error({ err: "Erro ao mudar a senha", details: err.message })
       setMensagem("Erro ao redefinir senha.");

@@ -51,15 +51,9 @@ function CadastroUsuario() {
         tabela: "Usuario"
       };
 
-      const response = await api.post("/cadastroUsuario",{ 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dadosEnvio),
-      });
+      const response = await api.post("/cadastroUsuario", dadosEnvio)
 
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(data.msg || "Usuário cadastrado com sucesso!");
+      alert(response.data.msg || "Usuário cadastrado com sucesso!")
 
         setFormData({
           nome: "",
@@ -70,12 +64,10 @@ function CadastroUsuario() {
           senha: "",
           confirmSenha: "",
         });
-      } else {
-        alert(data.error || "Erro ao cadastrar usuário");
-      }
+
     } catch (err) {
       console.error("Erro no cadastro:", err);
-      alert("Erro ao conectar com o servidor. Verifique se o backend está rodando.");
+      alert( err.response?.data?.error|| "Erro ao conectar com o servidor.");
     } finally {
       setLoading(false);
     }

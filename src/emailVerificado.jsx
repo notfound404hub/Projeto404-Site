@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import api from "./api";
 
 function VerificandoEmail() {
   const navigate = useNavigate();
+  const {tokenVerifyMail} = useParams()
 
   useEffect(() => {
     const emailVerificado = async () => {
         try{
-            const response = await api.get(`/verificar`)
+            const response = await axios.get(`http://localhost:500/api/users/verificar/${tokenVerifyMail}`)
             alert(response.data.msg || "Email verificado com sucesso!")
             navigate("/")
 

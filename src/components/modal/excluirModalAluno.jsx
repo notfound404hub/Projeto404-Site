@@ -1,31 +1,31 @@
 import React from "react";
 import api from "../../api";
 
-function DeleteModal({
+function ExcluirModal({
   isOpen,
   onClose,
-  selected,
-  setItens, 
-  idField,
-  carregarItens, 
-  tabela
+  selectedAluno,
+  setAlunosExcluir, 
+  carregarAlunosExcluir,
+  tabelaAluno
 }) {
   if (!isOpen) return null;
 
-  const excluirItens = async () => {
-    if (selected.length === 0) {
+  const excluirAlunos = async () => {
+    if (selectedAluno.length === 0) {
       alert("Nenhum item selecionado para exclusão!");
       return;
     }
-    try {
-      const response = await api.delete('/usuario', {
-        data:{ids:selected, tabela: tabela}
-      });
-        alert(response.data.msg || "Itens excluídos com sucesso!");
-        setItens((prev) => prev.filter((item) => !selected.includes(item[idField])));
-        carregarItens();
-        onClose();
 
+    try {
+      const response = await api.delete('/alunos', {
+        data:{ids: selectedAluno, tabela: tabelaAluno}
+      });
+        alert(response.data.msg || "Alunos excluídos com sucesso!")
+        setAlunosExcluir((prev) =>
+        prev.filter((item) => !selectedAluno.includes(item.ID_Aluno)))
+        carregarAlunosExcluir();
+        onClose();
     } catch (err) {
       console.error("Erro ao excluir:", err);
       alert("Erro no servidor ao excluir itens");
@@ -36,10 +36,10 @@ function DeleteModal({
     <div className="modal-overlay">
       <div className="modal">
         <h2>Confirmar exclusão</h2>
-        <p>Deseja realmente excluir os itens selecionados?</p>
+        <p>Deseja realmente excluir os alunos selecionados?</p>
 
         <div className="footerModal">
-          <button className="btnFilter" onClick={excluirItens}>
+          <button className="btnFilter" onClick={excluirAlunos}>
             Confirmar
           </button>
           <button className="btnFilter" onClick={onClose}>
@@ -51,4 +51,4 @@ function DeleteModal({
   );
 }
 
-export default DeleteModal;
+export default ExcluirModal;

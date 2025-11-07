@@ -13,15 +13,15 @@ function Login() {
     e.preventDefault()
     try {
       const res = await api.post(
-        "http://localhost:500/api/users/login", 
+        "/login", 
         {email, senha}
       )
       const {verificado} = res.data
-      sessionStorage.setItem("token", res.data.token)
+      localStorage.setItem("token", res.data.token)
 
       console.log("Resposta do backend:", res.data);
       alert(res.data.msg);
-      sessionStorage.setItem("alunoEmail", email)
+      localStorage.setItem("alunoEmail", email)
 
       if (res.data.ID_Aluno) {
         sessionStorage.setItem("ID_Aluno", res.data.ID_Aluno);
@@ -29,7 +29,7 @@ function Login() {
       } 
       
       if(verificado != 1){
-        navigate(`/enviaremail/${token}`);
+        navigate(`/enviaremail/${res.data.token}`);
       }else{
         navigate("/")
       }

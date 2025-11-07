@@ -66,13 +66,8 @@ function Usuarios({ onSelectPage }) {
     const id = selected[0];
 
     try {
-      const response = await api.get(
-        `/usuario/${id}`
-      );
-      if (!response.ok) throw new Error("Erro ao buscar usuário");
-
-      const data = await response.json();
-      setUsuarioEdit(data);
+      const response = await api.get(`/usuario/${id}`);
+      setUsuarioEdit(response.data);
       setShowEditModal(true);
     } catch (err) {
       console.error("Erro ao buscar usuário:", err);
@@ -84,20 +79,10 @@ function Usuarios({ onSelectPage }) {
   // Função: carregar usuários
   const carregarUsuarios = async () => {
     try {
-      const response = await fetch(`http://localhost:500/api/users/tabela`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teste: teste }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setUsuarios(data);
-        setUsuariosOriginais(data);
-      } else {
-        alert(data.error || "Erro ao buscar usuários");
-      }
+      console.log("body: ", teste)
+      const response = await api.post('/tabela', {teste} )
+        setUsuarios(response.data);
+        setUsuariosOriginais(response.data);
     } catch (err) {
       console.error("Erro ao buscar usuários:", err);
       alert("Erro no servidor ao buscar usuário");
@@ -210,7 +195,6 @@ function Usuarios({ onSelectPage }) {
   //   }
   // };
 
-  // 🔹 JSX
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">

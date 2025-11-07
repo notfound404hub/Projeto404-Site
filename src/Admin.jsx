@@ -28,12 +28,7 @@ function Admin() {
   const handleUpdate = async () => {
     const ID_Usuario = localStorage.getItem("ID_Usuario");
     try {
-      const response = await api.put(`/usuario/${ID_Usuario}`,
-        {
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData)
-        }
-      );
+      const response = await api.put(`/usuario/${ID_Usuario}`);
       const data = await response.json();
       alert(data.msg || data.error);
     } catch (err) {

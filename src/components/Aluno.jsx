@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { data } from "react-router-dom";
+import api from "../api.js"
 
 // 🔹 Imports dos modais
 import ImportModal from "./modal/importarModal.jsx";
 import ExportarModal from "./modal/exportarModal.jsx";
 import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
-import ExcluirModal from "./modal/excluirModal.jsx";
+import ExcluirModal from "./modal/excluirModalAluno.jsx";
 import EditarModal from "./modal/editarModalAluno.jsx";
 
 function Alunos({ onSelectPage }) {
@@ -60,23 +61,13 @@ function Alunos({ onSelectPage }) {
   // Função: carregar alunoss
   const carregarAlunos = async () => {
     try {
-      const response = await fetch(`http://localhost:500/api/users/tabela`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teste: teste }),
-      });
+      const response = await api.post("/usuarios", { teste });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setAlunos(data);
-        setAlunosOriginais(data);
-      } else {
-        alert(data.error || "Erro ao buscar alunoss");
-      }
+      setAlunos(response.data);
+      setAlunosOriginais(response.data);
     } catch (err) {
-      console.error("Erro ao buscar alunoss:", err);
-      alert("Erro no servidor ao buscar alunos");
+      console.error("Erro ao buscar alunos:", err);
+      alert(err.response?.data?.error || "Erro ao buscar alunos");
     }
   };
 
@@ -159,30 +150,26 @@ function Alunos({ onSelectPage }) {
     }
   };
 
-  // Abrir modal de edição
-  const abrirModalEdicao = async () => {
-    if (selected.length !== 1) {
-      alert("Selecione exatamente 1 alunos para editar!");
-      return;
-    }
+const abrirModalEdicao = async () => {
+  if (selected.length !== 1) {
+    alert("Selecione exatamente 1 aluno para editar!");
+    return;
+  }
+  const id = selected[0];
+  try {
+    const response = await api.get(`/alunos/${id}`);
 
-    const id = selected[0];
-    try {
-      const response = await fetch(
-        `http://localhost:500/api/users/aluno/${id}`
-      );
-      if (!response.ok) throw new Error("Erro ao buscar alunos");
+    const aluno = response.data.rows[0]
 
-      const data = await response.json();
-      setAlunoEdit(data);
-      setShowEditModal(true);
-    } catch (err) {
-      console.error("Erro ao buscar alunos:", err);
-      alert("Erro ao buscar dados do alunos");
-    }
-  };
-
-  // 🔹 JSX
+    console.log(aluno)
+  
+    setAlunoEdit(aluno);
+    setShowEditModal(true);
+  } catch (err) {
+    console.error("Erro ao buscar aluno:", err);
+    alert("Erro ao buscar dados do aluno");
+  }
+};
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">
@@ -310,11 +297,10 @@ function Alunos({ onSelectPage }) {
       <ExcluirModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
-        selected={selected}
-        setItens={setAlunos}
-        idField="ID_Aluno"
-        carregarItens={carregarAlunos}
-        tabela="Aluno "
+        selectedAluno={selected}
+        setAlunosExcluir={setAlunos}        
+        carregarAlunosExcluir={carregarAlunos}
+        tabelaAluno="Aluno "
       />
 
       <FiltroModal
