@@ -6,7 +6,7 @@ import Alimentos from './components/alimentos.jsx';
 import Dinheiro from './components/dinheiro.jsx';
 import Campanhas from './components/campanhas.jsx';
 import Usuarios from './components/usuarios.jsx';
-import PainelSuporte from './Dashboard.jsx';
+import PainelSuporte from './Suporte.jsx';
 import SidebarAdmin from './components/SidebarAdmin.jsx';
 import HeaderAdmin from './components/HeaderAdmin.jsx';
 import CadastroUsuario from './components/cadastroUsuario.jsx'
