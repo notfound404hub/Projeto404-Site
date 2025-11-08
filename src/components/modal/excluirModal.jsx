@@ -18,7 +18,7 @@ function DeleteModal({
       return;
     }
     try {
-      const response = await api.delete('/usuario', {
+      const response = await api.delete('/deleteFromTable', {
         data:{ids:selected, tabela: tabela}
       });
         alert(response.data.msg || "Itens excluídos com sucesso!");

@@ -37,7 +37,7 @@ const Chamados = ({ tipo, chamados, onVoltar, carregarChamados }) => {
   return (
     <div className="chamados-tela">
       <div className="chamados-header">
-        <h2>{tipo}</h2>
+        <h2>{`Chamados ${tipo}`}</h2>
         <button className="btn-voltar" onClick={onVoltar}>
           <FaArrowLeft /> Voltar
         </button>

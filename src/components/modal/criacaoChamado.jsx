@@ -85,7 +85,7 @@ export default function CriacaoChamado({
           type="button"
           className="tipo-btn saida"
           onClick={() => {
-            onClose;
+            onClose();
             carregarChamados();
           }}
         >

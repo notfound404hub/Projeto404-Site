@@ -28,17 +28,19 @@ const ModalChamado = ({ chamado, onClose }) => {
       setLoading(false);
     }
   };
-
+  
   const enviarMensagem = async () => {
     if (!novaMensagem.trim()) return alert("Digite uma mensagem antes de enviar.");
+    const ID_Usuario = localStorage.getItem("ID_Usuario");
 
     try {
-      const response = await fetch("http://localhost:500/api/users/enviarMensagemChamado", {
+      const response = await fetch("http://localhost:500/api/users/enviarMensagem", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ID_Chamado: chamado.ID_Chamado,
           Mensagem: novaMensagem,
+          Remetente: ID_Usuario
         }),
       });
 

@@ -18,7 +18,7 @@ function ExcluirModal({
     }
 
     try {
-      const response = await api.delete('/alunos', {
+      const response = await api.delete('/deleteFromTable', {
         data:{ids: selectedAluno, tabela: tabelaAluno}
       });
         alert(response.data.msg || "Alunos excluídos com sucesso!")

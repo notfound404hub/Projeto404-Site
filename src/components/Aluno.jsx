@@ -50,15 +50,6 @@ function Alunos({ onSelectPage }) {
   const teste = "aluno ";
   filtros[0] = "Alunos";
 
-  // Opções dos filtros
-
-  // Manipulação de filtros
-  const handleChange = (event) => {
-    setValorSelecionado(event.target.value);
-    if (event.target.value === "id") setFilterSelecionado("igual");
-  };
-
-  // Função: carregar alunoss
   const carregarAlunos = async () => {
     try {
       const response = await api.post("/usuarios", { teste });
