@@ -4,43 +4,46 @@ import { useNavigate } from "react-router-dom";
 import api from "./api.js"
 
 function Login() {
-  const[email, setEmail] = useState("")
-  const[senha, setSenha] = useState("")
-
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
     try {
-      const res = await api.post(
-        "/login", 
-        {email, senha}
-      )
-      const {verificado} = res.data
-      localStorage.setItem("token", res.data.token)
+      const res = await api.post("/login", { email, senha });
+      const { msg, token, verificado, tipo, ID, error } = res.data;
 
-      console.log("Resposta do backend:", res.data);
-      alert(res.data.msg);
-      localStorage.setItem("alunoEmail", email)
+      if (error) {
+        alert(error);
+        return;
+      }
 
-      if (res.data.ID_Aluno) {
-        sessionStorage.setItem("ID_Aluno", res.data.ID_Aluno);
-        console.log("ID salvo no sessionStorage:", res.data.ID_Aluno);
-      } 
-      
-      if(verificado != 1){
-        navigate(`/enviaremail/${res.data.token}`);
-      }else{
-        navigate("/")
+      localStorage.setItem("Tipo_Usuario", tipo);
+     
+      localStorage.setItem("token", token);
+      localStorage.setItem("Email", email);
+      localStorage.setItem("ID_Usuario", ID);
+
+      alert(msg);
+
+      console.log("Tipo:", tipo);
+      console.log("ID:", ID);
+
+      if (verificado != 1) {
+        navigate(`/enviaremail/${token}`);
+      } else {
+        navigate("/");
       }
     } catch (err) {
       console.error("Erro no login:", err.response?.data || err.message);
       alert("Erro no login: " + (err.response?.data?.error || err.message));
     }
   };
-  
+
   return (
-    <div className="bodyImg"> 
+    <div className="bodyImg">
       <div className="divLogin">
         <aside className="asideLogin">
           <img className="logo" src="./public/logo.png" alt="Logo" />
@@ -51,16 +54,16 @@ function Login() {
             Lideranças Empáticas
           </p>
 
-    <p>Não tem uma conta? <a href="/forms">Cadastre-se</a></p>
-    
+          <p>
+            Não tem uma conta? <a href="/forms">Cadastre-se</a>
+          </p>
+
           <form className="login" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
-                name="Email"                
                 className="inputLogin"
                 type="email"
                 placeholder="Email"
-                id="email"
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -68,17 +71,17 @@ function Login() {
 
             <div className="input-group">
               <input
-                name="Senha"   
                 className="inputLogin"
                 type="password"
                 placeholder="Senha"
-                id="senha"                          
                 required
                 onChange={(e) => setSenha(e.target.value)}
               />
             </div>
 
-            <button type="submit" className="botaoLogin">Login</button>
+            <button type="submit" className="botaoLogin">
+              Login
+            </button>
           </form>
 
           <a href="/esquecer-senha">Esqueci minha senha</a>
@@ -88,5 +91,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;

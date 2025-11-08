@@ -1,16 +1,19 @@
 import React, { useState } from "react";
+import api from "../../api.js";
 
 export default function CriacaoChamado({
   onClose,
   onChamadoAdicionado,
   carregarChamados,
 }) {
-  const [titulo, setTitulo] = useState("");
-  const [descricao, setDescricao] = useState("");
+  const [Chamado_Titulo, setChamado_Titulo] = useState("");
+  const [Mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
+  const Criador_Tipo = localStorage.getItem("Tipo_Usuario");
+  console.log("tipo: ", Criador_Tipo);
 
   const adicionarChamado = async () => {
-    if (!titulo || !descricao) {
+    if (!Chamado_Titulo || !Mensagem) {
       alert("Preencha o título e a descrição!");
       return;
     }
@@ -19,32 +22,22 @@ export default function CriacaoChamado({
     const Chamado_Criador = localStorage.getItem("ID_Usuario");
 
     try {
-      const response = await fetch(
-        "http://localhost:500/api/users/AdicionarChamados",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            Chamado_Titulo: titulo,
-            Mensagem: descricao,
-            Chamado_Criador,
-          }),
-        }
-      );
+      const res = await api.post("/AdicionarChamados", {
+        Chamado_Titulo,
+        Mensagem,
+        Chamado_Criador,
+        Criador_Tipo,
+      });
 
-      const data = await response.json();
+      alert(res.data?.msg || "Chamado criado com sucesso!");
 
-      if (response.ok) {
-        alert("Chamado criado com sucesso!");
-        if (onChamadoAdicionado) onChamadoAdicionado(data);
-        if (carregarChamados) carregarChamados(); // <-- chama aqui!
-        onClose();
-      } else {
-        alert(data.error || "Erro ao criar chamado.");
-      }
+      if (onChamadoAdicionado) onChamadoAdicionado(res.data);
+      if (carregarChamados) carregarChamados();
+
+      onClose();
     } catch (err) {
       console.error("Erro ao criar chamado:", err);
-      alert("Erro no servidor ao criar chamado.");
+      alert(err.response?.data?.error || "Erro no servidor ao criar chamado.");
     } finally {
       setLoading(false);
     }
@@ -58,39 +51,43 @@ export default function CriacaoChamado({
         <p>Digite o título do chamado abaixo!</p>
         <input
           type="text"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
+          value={Chamado_Titulo}
+          onChange={(e) => setChamado_Titulo(e.target.value)}
           placeholder="Título do chamado"
+          disabled={loading}
         />
 
         <p>Descreva de forma detalhada o problema encontrado!</p>
         <textarea
           rows="8"
           cols="50"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
+          value={Mensagem}
+          onChange={(e) => setMensagem(e.target.value)}
           placeholder="Descreva o chamado aqui..."
+          disabled={loading}
         ></textarea>
 
-        <button
-          type="button"
-          className="tipo-btn entrada"
-          onClick={adicionarChamado}
-          disabled={loading}
-        >
-          {loading ? "Enviando..." : "Adicionar +"}
-        </button>
+        <div className="botoes-modal">
+          <button
+            type="button"
+            className="tipo-btn entrada"
+            onClick={adicionarChamado}
+            disabled={loading}
+          >
+            {loading ? "Enviando..." : "Adicionar +"}
+          </button>
 
-        <button
-          type="button"
-          className="tipo-btn saida"
-          onClick={() => {
-            onClose();
-            carregarChamados();
-          }}
-        >
-          Cancelar +
-        </button>
+          <button
+            type="button"
+            className="tipo-btn saida"
+            onClick={() => {
+              onClose();
+              carregarChamados();
+            }}
+          >
+            Cancelar
+          </button>
+        </div>
       </div>
     </div>
   );

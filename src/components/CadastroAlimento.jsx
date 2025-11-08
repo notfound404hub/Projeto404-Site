@@ -12,24 +12,53 @@ function CadastroAlimento({ onSelectPage }) {
   });
 
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(true); // modal para novo alimento
-  const [eanValido, setEanValido] = useState(false); // controla se EAN existe
+  const [showModal, setShowModal] = useState(false);
+  const [eanValido, setEanValido] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  // 🔹 Validação EAN-13
+  const validarEAN13 = (codigo) => {
+    if (!/^\d{13}$/.test(codigo)) return false;
+    const digits = codigo.split("").map(Number);
+    const checkDigit = digits.pop();
+    const soma = digits.reduce(
+      (acc, num, idx) => acc + num * (idx % 2 === 0 ? 1 : 3),
+      0
+    );
+    const resto = soma % 10;
+    const digitoCalculado = resto === 0 ? 0 : 10 - resto;
+    return digitoCalculado === checkDigit;
   };
 
-  // Quando o usuário digitar o código EAN e sair do campo
-  const handleEanBlur = async () => {
-    if (!formData.Alimento_Cod) return;
+  // 🔸 Detecta quando o usuário completa os 13 dígitos
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+
+    // Impede letras no campo EAN
+    if (name === "Alimento_Cod" && /[^0-9]/.test(value)) return;
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Se for o campo EAN e atingir 13 dígitos → busca automática
+    if (name === "Alimento_Cod" && value.length === 13) {
+      await buscarAlimento(value);
+    }
+  };
+
+  // 🔹 Busca alimento no banco de dados
+  const buscarAlimento = async (ean) => {
+    if (!validarEAN13(ean)) {
+      alert(
+        "❌ Código EAN inválido! Deve conter 13 dígitos numéricos válidos."
+      );
+      setEanValido(false);
+      return;
+    }
 
     try {
       setLoading(true);
-      const res = await api.get(`/codigoAlimento/${formData.Alimento_Cod}`);
+      const res = await api.get(`/codigoAlimento/${ean}`);
 
       if (res.data) {
-        // Produto encontrado: preencher automaticamente
         setFormData((prev) => ({
           ...prev,
           Alimento_Nome: res.data.Alimento_Nome,
@@ -38,7 +67,6 @@ function CadastroAlimento({ onSelectPage }) {
         }));
         setEanValido(true);
       } else {
-        // Produto não encontrado: abrir modal
         setShowModal(true);
       }
     } catch (err) {
@@ -55,14 +83,15 @@ function CadastroAlimento({ onSelectPage }) {
 
   const handleNovoAlimento = async (e) => {
     e.preventDefault();
+    const { Alimento_Cod, Alimento_Nome, Alimento_Marca, Alimento_Peso } =
+      formData;
+
+    if (!Alimento_Cod || !Alimento_Nome || !Alimento_Marca || !Alimento_Peso) {
+      alert("Preencha todos os campos obrigatórios!");
+      return;
+    }
+
     try {
-      const { Alimento_Cod, Alimento_Nome, Alimento_Marca, Alimento_Peso } = formData;
-
-      if (!Alimento_Cod || !Alimento_Nome || !Alimento_Marca || !Alimento_Peso) {
-        alert("Preencha todos os campos obrigatórios!");
-        return;
-      }
-
       const res = await api.post("/cadastroAlimento", {
         Alimento_Cod,
         Alimento_Nome,
@@ -93,13 +122,12 @@ function CadastroAlimento({ onSelectPage }) {
 
     try {
       setLoading(true);
-      const dadosEnvio = {
+      const response = await api.post("/doacoes", {
         Alimento_Cod: formData.Alimento_Cod,
         Alimento_Validade: formData.Alimento_Validade,
         Alimento_Quantidade: formData.Alimento_Quantidade,
-      };
+      });
 
-      const response = await api.post("/doacoes", dadosEnvio);
       alert(response.data.msg || "Doação registrada com sucesso!");
 
       setFormData({
@@ -111,6 +139,7 @@ function CadastroAlimento({ onSelectPage }) {
         Alimento_Quantidade: "",
       });
       setEanValido(false);
+
       if (onSelectPage) onSelectPage("alimentos");
     } catch (err) {
       console.error("Erro no envio:", err);
@@ -126,13 +155,13 @@ function CadastroAlimento({ onSelectPage }) {
 
       <form className="cadastro-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Código EAN *</label>
+          <label>Código EAN (13 dígitos) *</label>
           <input
             type="text"
             name="Alimento_Cod"
             value={formData.Alimento_Cod}
             onChange={handleChange}
-            onBlur={handleEanBlur}
+            maxLength={13}
             required
           />
         </div>
@@ -192,14 +221,24 @@ function CadastroAlimento({ onSelectPage }) {
           />
         </div>
 
-        <button type="submit" className="btn-confirmar" disabled={!eanValido || loading}>
+        <button
+          type="submit"
+          className="btn-confirmar"
+          disabled={!eanValido || loading}
+        >
           {loading ? "Enviando..." : "Confirmar Doação"}
         </button>
       </form>
 
-      {/* MODAL para cadastro de novo alimento */}
+      {/* 🔹 Modal para cadastro de novo alimento */}
       {showModal && (
-        <div className="modal-overlay">
+        <div
+          className="modal-overlay"
+          onClick={(e) => {
+            if (e.target.classList.contains("modal-overlay"))
+              setShowModal(false);
+          }}
+        >
           <div className="modal">
             <h3>Novo Alimento</h3>
             <form onSubmit={handleNovoAlimento}>
@@ -210,6 +249,7 @@ function CadastroAlimento({ onSelectPage }) {
                 value={formData.Alimento_Cod}
                 disabled
               />
+
               <label>Nome *</label>
               <input
                 type="text"
@@ -218,6 +258,7 @@ function CadastroAlimento({ onSelectPage }) {
                 onChange={handleChange}
                 required
               />
+
               <label>Marca *</label>
               <input
                 type="text"
@@ -226,6 +267,7 @@ function CadastroAlimento({ onSelectPage }) {
                 onChange={handleChange}
                 required
               />
+
               <label>Peso *</label>
               <input
                 type="text"

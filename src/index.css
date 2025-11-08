@@ -1208,11 +1208,25 @@ form {
   background: #fafafa;
   border: 2px solid #00ab72;
 }
+
+
 .mensagem-item {
   background-color: #f4f4f4;
   padding: 12px 16px;
   border-radius: 8px;
-  border-left: 5px solid #00ab72;
+ 
+}
+.aluno-mensagem {
+  background: #e9ffe9;
+  align-self: flex-end;
+  border-right: 4px solid #28a745;
+  min-width: 250px;
+}
+.suporte-mensagem {
+  min-width: 250px;
+  background: #cce5ff;
+  align-self: flex-start;
+  border-left: 4px solid #007bff;
 }
 
 .mensagem-item p {

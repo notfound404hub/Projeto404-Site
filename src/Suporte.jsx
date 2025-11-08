@@ -3,12 +3,12 @@ import PainelSuporte from "./components/PainelSuporte";
 import PainelTutoriais from "./components/PainelTutoriais";
 import CriacaoChamado from "./components/modal/criacaoChamado";
 import Chamados from "./components/chamados.jsx";
- 
-const tutoriais=[
+import api from "./api.js";
+const tutoriais = [
   { titulo: "Como abrir um chamado" },
   { titulo: "Acompanhar o status de um chamado" },
   { titulo: "Finalizar chamados resolvidos" },
-]
+];
 
 const Suporte = () => {
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -17,21 +17,20 @@ const Suporte = () => {
   const [chamados, setChamados] = useState([]);
 
   const Chamado_Criador = localStorage.getItem("ID_Usuario");
-
+  const Criador_Tipo = localStorage.getItem("Tipo_Usuario");
+  console.log("tipo: ", Criador_Tipo);
+  console.log("ID: ", Chamado_Criador);
   const carregarChamados = async () => {
     try {
-      const response = await fetch("http://localhost:500/api/users/chamados", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Chamado_Criador }),
+      const res = await api.post("/chamados", {
+        Chamado_Criador,
+        Criador_Tipo,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setChamados(data);
+      if (res.data) {
+        setChamados(res.data);
       } else {
-        alert(data.error || "Erro ao buscar chamados.");
+        alert(res.error || "Erro ao buscar chamados.");
       }
     } catch (err) {
       console.error(err);
@@ -65,8 +64,7 @@ const Suporte = () => {
               setTela("chamados");
             }}
           />
-          <PainelTutoriais 
-          tutoriais={tutoriais}/>
+          <PainelTutoriais tutoriais={tutoriais} />
         </div>
       )}
 

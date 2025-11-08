@@ -162,7 +162,7 @@ function Alimentos({ onSelectPage }) {
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">
-        <button className="btn-tabela adicionar-tabela">Adicionar +</button>
+   
         <button
           className="btn-tabela adicionar-tabela"
           onClick={() => onSelectPage("CadastroAlimento")}
