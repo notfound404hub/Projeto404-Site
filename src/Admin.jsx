@@ -10,6 +10,9 @@ import PainelSuporte from './Suporte.jsx';
 import SidebarAdmin from './components/SidebarAdmin.jsx';
 import HeaderAdmin from './components/HeaderAdmin.jsx';
 import CadastroUsuario from './components/cadastroUsuario.jsx'
+import CadastroCampanha from './components/cadastroCampanha.jsx'
+import CadastroGrupo from './components/CadastroGrupo.jsx'
+import CadastroAlimento from './components/CadastroAlimento.jsx'
 
 function Admin() {
   const [userData, setUserData] = useState({
@@ -44,7 +47,7 @@ function Admin() {
         onUpdate={handleUpdate}
         userData={userData}
         setUserData={setUserData}
-        onSelectPage={(page) => setActiveScreen(page)} // <-- aqui
+        onSelectPage={(page) => setActiveScreen(page)} 
       />
       <div className="mainAdmin">
         
@@ -52,15 +55,18 @@ function Admin() {
 
         {/* renderiza a tela conforme activeScreen */}
         {/* {activeScreen === "home" && <h2>Bem-vindo ao painel22222222</h2>} */}
-        {activeScreen === "aluno" && <Aluno />}
+        {activeScreen === "aluno" && <Aluno onSelectPage={(page) => setActiveScreen(page)} />}
         {/* {activeScreen === "relatorios" && <div>Relatórios (placeholder)</div>} */}
-        {activeScreen === "grupos" && <Grupo />}
-        {activeScreen === "alimentos" && <Alimentos />}
+        {activeScreen === "grupos" && <Grupo onSelectPage={(page) => setActiveScreen(page)} />}
+        {activeScreen === "alimentos" && <Alimentos onSelectPage={(page) => setActiveScreen(page)}/>}
         {activeScreen === "dinheiro" && <Dinheiro />}
-        {activeScreen === "campanhas" && <Campanhas />}
+        {activeScreen === "campanhas" && <Campanhas onSelectPage={(page) => setActiveScreen(page)}/>}
         {activeScreen === "usuarios" && (<Usuarios onSelectPage={(page) => setActiveScreen(page)} />)}
         {activeScreen === "CadastroUsuario" && <CadastroUsuario />}
-       
+        {activeScreen === "CadastroAluno" && <CadastroAluno />}
+        {activeScreen === "CadastroGrupo" && <CadastroGrupo />}
+        {activeScreen === "CadastroAlimento" && <CadastroAlimento />}
+        {activeScreen === "CadastroCampanha" && <CadastroCampanha />}
         {activeScreen === "suporte" && <PainelSuporte />}
         
       </div>
