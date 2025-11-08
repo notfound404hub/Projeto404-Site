@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function Grupo() {
+function Grupo({ onSelectPage }) {
   const [selected, setSelected] = useState([]);
   const headerCheckboxRef = useRef(null);
 
@@ -125,7 +125,12 @@ function Grupo() {
     <div className="main-container-tabela">
       {/* Cabeçalho com botões */}
       <div className="cabecalho-tabela">
-        <button className="btn-tabela adicionar-tabela">Adicionar +</button>
+      <button
+          className="btn-tabela adicionar-tabela"
+          onClick={() => onSelectPage("CadastroGrupo")}
+        >
+          Adicionar +
+        </button>
         <button className="btn-tabela formulario-aluno">Formulário</button>
         <div className="dropdown-tabela">
           <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
