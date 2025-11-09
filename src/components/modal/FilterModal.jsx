@@ -49,7 +49,6 @@ function FiltroModal({
         <h2>Filtrar</h2>
 
         <div className="sectionfilter">
-          {/* Select de campo */}
           <select
             name="selectFilter"
             value={valorSelecionado}
@@ -62,7 +61,6 @@ function FiltroModal({
             ))}
           </select>
 
-          {/* Select de condição */}
           <select
             value={filterSelecionado}
             onChange={(e) => setFilterSelecionado(e.target.value)}
@@ -82,7 +80,6 @@ function FiltroModal({
             ))}
           </select>
 
-          {/* Input de valor */}
           <input
             type="text"
             placeholder="Digite o valor..."

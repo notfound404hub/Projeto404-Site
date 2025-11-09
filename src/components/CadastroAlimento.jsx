@@ -15,38 +15,23 @@ function CadastroAlimento({ onSelectPage }) {
   const [showModal, setShowModal] = useState(false);
   const [eanValido, setEanValido] = useState(false);
 
-  // 🔹 Validação EAN-13
-  const validarEAN13 = (codigo) => {
-    if (!/^\d{13}$/.test(codigo)) return false;
-    const digits = codigo.split("").map(Number);
-    const checkDigit = digits.pop();
-    const soma = digits.reduce(
-      (acc, num, idx) => acc + num * (idx % 2 === 0 ? 1 : 3),
-      0
-    );
-    const resto = soma % 10;
-    const digitoCalculado = resto === 0 ? 0 : 10 - resto;
-    return digitoCalculado === checkDigit;
-  };
+  const validarEAN13 = (codigo) => /^\d{13}$/.test(codigo);
 
-  // 🔸 Detecta quando o usuário completa os 13 dígitos
+
   const handleChange = async (e) => {
     const { name, value } = e.target;
 
-    // Impede letras no campo EAN
     if (name === "Alimento_Cod" && /[^0-9]/.test(value)) return;
 
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Se for o campo EAN e atingir 13 dígitos → busca automática
     if (name === "Alimento_Cod" && value.length === 13) {
       await buscarAlimento(value);
     }
   };
 
-  // 🔹 Busca alimento no banco de dados
   const buscarAlimento = async (ean) => {
-    if (!validarEAN13(ean)) {
+    if (!validarEAN13(ean.trim())) {
       alert(
         "❌ Código EAN inválido! Deve conter 13 dígitos numéricos válidos."
       );
@@ -57,6 +42,7 @@ function CadastroAlimento({ onSelectPage }) {
     try {
       setLoading(true);
       const res = await api.get(`/codigoAlimento/${ean}`);
+      console.log("resposta front: ",res)
 
       if (res.data) {
         setFormData((prev) => ({
@@ -66,8 +52,7 @@ function CadastroAlimento({ onSelectPage }) {
           Alimento_Peso: res.data.Alimento_Peso,
         }));
         setEanValido(true);
-      } else {
-        setShowModal(true);
+        setShowModal(false);
       }
     } catch (err) {
       if (err.response?.status === 404) {

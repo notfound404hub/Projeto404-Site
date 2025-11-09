@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../api";
 
 function CadastroGrupo({ onSelectPage }) {
-  const [formData, setFormData] = useState({
+  const [grupoData, setGrupoData] = useState({
     Grupo_Nome: "",
     Grupo_Curso: "",
   });
@@ -11,14 +11,13 @@ function CadastroGrupo({ onSelectPage }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setGrupoData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validações simples
-    if (!formData.Grupo_Nome || !formData.Grupo_Curso) {
+    if (!grupoData.Grupo_Nome || !grupoData.Grupo_Curso) {
       alert("Preencha todos os campos obrigatórios!");
       return;
     }
@@ -27,21 +26,17 @@ function CadastroGrupo({ onSelectPage }) {
 
     try {
       const dadosEnvio = {
-        Grupo_Nome: formData.Grupo_Nome,
-        Grupo_Curso: formData.Grupo_Curso,
-        tabela: "Grupo",
+        Grupo_Nome: grupoData.Grupo_Nome,
+        Grupo_Curso: grupoData.Grupo_Curso,
+        tabela: "Grupo"
       };
 
       const response = await api.post("/cadastroGrupo", dadosEnvio);
       alert(response.data.msg || "Grupo cadastrado com sucesso!");
 
-      setFormData({
-        Grupo_Nome: "",
-        Grupo_Curso: "",
-      });
+      setGrupoData(response.data)
 
-      // Retorna para a tela de grupos
-      if (onSelectPage) onSelectPage("grupos");
+      if (onSelectPage) onSelectPage("grupo");
 
     } catch (err) {
       console.error("Erro no cadastro:", err);
@@ -53,12 +48,13 @@ function CadastroGrupo({ onSelectPage }) {
 
   const handleCancel = () => {
     if (window.confirm("Deseja cancelar o cadastro? Os dados serão perdidos.")) {
-      setFormData({
+      setGrupoData({
         Grupo_Nome: "",
         Grupo_Curso: "",
       });
-
-      if (onSelectPage) onSelectPage("grupos");
+      
+      if (onSelectPage) onSelectPage("grupo");
+      console.log(onSelectPage)
     }
   };
 
@@ -72,7 +68,7 @@ function CadastroGrupo({ onSelectPage }) {
           <input
             type="text"
             name="Grupo_Nome"
-            value={formData.Grupo_Nome}
+            value={grupoData.Grupo_Nome}
             onChange={handleChange}
             required
           />
@@ -83,7 +79,7 @@ function CadastroGrupo({ onSelectPage }) {
           <input
             type="text"
             name="Grupo_Curso"
-            value={formData.Grupo_Curso}
+            value={grupoData.Grupo_Curso}
             onChange={handleChange}
             required
           />

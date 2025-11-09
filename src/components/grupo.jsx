@@ -1,101 +1,58 @@
 import { useState, useEffect, useRef } from "react";
+import api from "../api.js";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
+import ImportModal from "./modal/importarModal.jsx";
+import ExportarModal from "./modal/exportarModal.jsx";
+import FiltroModal from "./modal/FilterModal.jsx";
+import OrdenarModal from "./modal/ordenarModal.jsx";
+import ExcluirModal from "./modal/excluirModal.jsx";
+import EditarModal from "./modal/editarModalAluno.jsx";
+
 
 function Grupo({ onSelectPage }) {
+  const [filterSelecionado, setFilterSelecionado] = useState("igual");
+  const [grupos, setGrupos] = useState([]);
+  const [gruposOriginais, setGruposOriginais] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [fileName, setFileName] = useState("grupos_exportados");
+  const [rangeStart, setRangeStart] = useState("");
+  const [rangeEnd, setRangeEnd] = useState("");
+  const [exportType, setExportType] = useState("Todos");
+  const [valorSelecionado, setValorSelecionado] = useState("ID_Grupo");
+  const [grupoEdit, setGrupoEdit] = useState(null);
+  const [filtros, setFiltros] = useState([]);
   const headerCheckboxRef = useRef(null);
 
-  const grupos = [
-    {
-      id: "G001",
-      nome: "Grupo Alpha",
-      mentor: "Prof. Carlos",
-      alunos: ["Breno Groba", "João Silva", "Maria Souza", "Pedro Santos", "Ana Lima", "Ricardo Alves", "Juliana Costa", "Lucas Pereira", "Fernanda Dias"],
-    },
-    {
-      id: "G002",
-      nome: "Grupo Beta",
-      mentor: "Prof. João",
-      alunos: ["André Silva", "Beatriz Santos", "Clara Mendes", "Diego Rocha", "Elisa Martins", "Fabio Ferreira", "Gabriela Souza", "Hugo Barbosa", "Isabela Costa"],
-    },
-    {
-      id: "G003",
-      nome: "Grupo Gama",
-      mentor: "Prof. Fernanda",
-      alunos: ["Caio Almeida", "Diana Prado", "Eduardo Ramos", "Felipe Lima", "Giovana Costa", "Henrique Silva", "Igor Martins", "Julia Rocha", "Karina Lopes"],
-    },
-    {
-      id: "G004",
-      nome: "Grupo Delta",
-      mentor: "Prof. Ricardo",
-      alunos: ["Laura Souza", "Marcelo Dias", "Nathalia Costa", "Otávio Lima", "Paula Rocha", "Rafael Nunes", "Sofia Mendes", "Thiago Almeida", "Vinicius Silva"],
-    },
-    {
-      id: "G005",
-      nome: "Grupo Epsilon",
-      mentor: "Prof. Ana",
-      alunos: ["Alex Rocha", "Bruna Souza", "Caio Nunes", "Daniela Costa", "Eduardo Lima", "Fernanda Alves", "Gabriel Mendes", "Helena Dias", "Isac Pereira"],
-    },
-    {
-      id: "G006",
-      nome: "Grupo Zeta",
-      mentor: "Prof. Marcos",
-      alunos: ["Joana Alves", "Kleber Rocha", "Larissa Silva", "Mateus Costa", "Nicolas Dias", "Olivia Rocha", "Pedro Mendes", "Quésia Lima", "Roberto Souza"],
-    },
-    {
-      id: "G007",
-      nome: "Grupo Eta",
-      mentor: "Prof. Paula",
-      alunos: ["Samara Rocha", "Tiago Lima", "Ursula Costa", "Victor Nunes", "William Souza", "Xuxa Pereira", "Yasmin Mendes", "Zeca Rocha", "Arthur Dias"],
-    },
-    {
-      id: "G008",
-      nome: "Grupo Theta",
-      mentor: "Prof. Felipe",
-      alunos: ["Alice Rocha", "Bruno Dias", "Carla Souza", "Diego Martins", "Ellen Rocha", "Fábio Silva", "Gustavo Costa", "Heloisa Rocha", "Isabela Nunes"],
-    },
-    {
-      id: "G009",
-      nome: "Grupo Iota",
-      mentor: "Prof. Marina",
-      alunos: ["João Pedro", "Karol Lima", "Luan Rocha", "Mariana Dias", "Nathalia Silva", "Otto Nunes", "Patrícia Rocha", "Quintino Costa", "Renata Souza"],
-    },
-    {
-      id: "G010",
-      nome: "Grupo Kappa",
-      mentor: "Prof. Lucas",
-      alunos: ["Sérgio Rocha", "Tatiane Dias", "Ulisses Costa", "Vanessa Lima", "Wellington Souza", "Xandão Nunes", "Yuri Mendes", "Zilda Rocha", "Alan Dias"],
-    },
-    {
-      id: "G011",
-      nome: "Grupo Lambda",
-      mentor: "Prof. Roberto",
-      alunos: ["Amanda Rocha", "Bianca Dias", "Carlos Souza", "Débora Nunes", "Elton Rocha", "Fernanda Costa", "Guilherme Mendes", "Hugo Lima", "Iara Silva"],
-    },
-    {
-      id: "G012",
-      nome: "Grupo Mu",
-      mentor: "Prof. Juliana",
-      alunos: ["Jonas Rocha", "Katia Dias", "Leonardo Silva", "Melissa Costa", "Natanael Nunes", "Olga Rocha", "Paulo Mendes", "Quitéria Souza", "Rodrigo Lima"],
-    },
-    {
-      id: "G013",
-      nome: "Grupo Nu",
-      mentor: "Prof. Eduardo",
-      alunos: ["Samantha Rocha", "Tobias Lima", "Ulysses Costa", "Valéria Souza", "Wesley Rocha", "Ximena Dias", "Yago Silva", "Zuleica Nunes", "Arthur Mendes"],
-    },
-    {
-      id: "G014",
-      nome: "Grupo Xi",
-      mentor: "Prof. Bianca",
-      alunos: ["Alexandre Rocha", "Brenda Dias", "Caue Souza", "Daniel Rocha", "Elisa Mendes", "Felipe Nunes", "Gabriela Silva", "Heloise Costa", "Igor Rocha"],
-    },
-    {
-      id: "G015",
-      nome: "Grupo Omicron",
-      mentor: "Prof. Thiago",
-      alunos: ["Jessica Rocha", "Kaique Lima", "Larissa Mendes", "Mateus Souza", "Nicole Rocha", "Oscar Silva", "Paula Dias", "Quirino Costa", "Rafaela Nunes"],
-    },
+  const camposGrupo = [
+    { value: "ID_Grupo", label: "ID do grupo" },
+    { value: "Grupo_Nome", label: "Nome do grupo" },
+    { value: "Grupo_Curso", label: "Curso do grupo" }
   ];
+
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showModalOrdenar, setshowModalOrdenar] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showImportModal, setShowImportModal] = useState(false);
+  filtros[0] = "Grupos";
+
+  const carregarGrupos = async () => {
+    try {
+      const response = await api.post("/grupos");
+      setGrupos(response.data);
+      setGruposOriginais(response.data);
+    } catch (err) {
+      console.error("Erro ao buscar grupos:", err);
+      alert(err.response?.data?.error || "Erro ao buscar grupos");
+    }
+  };
+
+  useEffect(() => {
+    carregarGrupos();
+  }, []);
 
   const toggleSelect = (id) => {
     setSelected((prev) =>
@@ -107,7 +64,7 @@ function Grupo({ onSelectPage }) {
     if (selected.length === grupos.length) {
       setSelected([]);
     } else {
-      setSelected(grupos.map((g) => g.id));
+      setSelected(grupos.map((g) => g.ID_Grupo));
     }
   };
 
@@ -121,11 +78,78 @@ function Grupo({ onSelectPage }) {
     }
   }, [selected, grupos.length]);
 
+  const gerarWorkbook = (dados) => {
+    const worksheet = XLSX.utils.json_to_sheet(dados);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Grupos");
+    return workbook;
+  };
+
+  const exportarGrupos = () => {
+    let dadosFiltrados = grupos;
+    if (exportType === "intervalo") {
+      if (!rangeStart || !rangeEnd) {
+        alert("Preencha o ID inicial e final!");
+        return;
+      }
+      const start = parseInt(rangeStart, 10);
+      const end = parseInt(rangeEnd, 10);
+      dadosFiltrados = grupos.filter(
+        (u) => u.ID_Grupo >= start && u.ID_Grupo <= end
+      );
+
+      if (dadosFiltrados.length === 0) {
+        alert("Nenhum grupo encontrado no range informado!");
+        return;
+      }
+    }
+
+    const workbook = gerarWorkbook(dadosFiltrados);
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(data, `${fileName}.xlsx`);
+    setShowModal(false);
+  };
+
+  const handleExportarGrupos = async () => {
+    try {
+      console.log("Iniciando exportação de todos os grupos...");
+      setExportType("Todos");
+      await exportarGrupos();
+      alert("Planilha exportada com sucesso!");
+    } catch (erro) {
+      console.error("Erro ao exportar grupos:", erro);
+      alert("Erro ao exportar planilha");
+    }
+  };
+
+  const abrirModalEdicao = async () => {
+    if (selected.length !== 1) {
+      alert("Selecione exatamente 1 grupo para editar!");
+      return;
+    }
+    const id = selected[0];
+    try {
+      const response = await api.get(`/grupos/${id}`);
+
+      const grupo = response.data.rows[0]
+
+      setAlunoEdit(grupo);
+      setShowEditModal(true);
+    } catch (err) {
+      console.error("Erro ao buscar grupo:", err);
+      alert("Erro ao buscar dados do grupo");
+    }
+  };
+
+
   return (
     <div className="main-container-tabela">
-      {/* Cabeçalho com botões */}
       <div className="cabecalho-tabela">
-      <button
+        <button
           className="btn-tabela adicionar-tabela"
           onClick={() => onSelectPage("CadastroGrupo")}
         >
@@ -135,19 +159,27 @@ function Grupo({ onSelectPage }) {
         <div className="dropdown-tabela">
           <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
           <div className="dropdown-content-tabela">
-            <a href="#">Exportar grupos</a>
-            <a href="#">Importar grupos</a>
-            <a href="#">Excluir</a>
-            <a href="#">Editar</a>
+            <a onClick={() => setShowModal(true)}>Exportar grupos</a>
+            <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
+            <a onClick={abrirModalEdicao}>Editar</a>
           </div>
         </div>
         <div className="rightMenu-tabela">
-          <button className="btn-tabela filtrar-tabela">Filtrar</button>
-          <button className="btn-tabela ordenar-tabela">Ordenar</button>
+          <button
+            className="btn-tabela filtrar-tabela"
+            onClick={() => setShowFilterModal(true)}
+          >
+            Filtrar
+          </button>
+          <button
+            className="btn-tabela ordenar-tabela"
+            onClick={() => setshowModalOrdenar(true)}
+          >
+            Ordenar
+          </button>
         </div>
       </div>
 
-      {/* Indicador de grupos selecionados */}
       <p className="indicador-selecionados-tabela">
         {selected.length} grupo(s) selecionado(s)
       </p>
@@ -167,7 +199,7 @@ function Grupo({ onSelectPage }) {
               </th>
               <th>ID</th>
               <th>Nome</th>
-              <th>Mentor</th>
+              <th>Curso</th>
               <th>Aluno 1</th>
               <th>Aluno 2</th>
               <th>Aluno 3</th>
@@ -181,26 +213,92 @@ function Grupo({ onSelectPage }) {
           </thead>
           <tbody>
             {grupos.map((grupo) => (
-              <tr className="tr-aluno" key={grupo.id}>
+              <tr key={grupo.ID_Grupo}>
                 <td>
                   <input
                     className="chk-tabela"
                     type="checkbox"
-                    checked={selected.includes(grupo.id)}
-                    onChange={() => toggleSelect(grupo.id)}
+                    checked={selected.includes(grupo.ID_Grupo)}
+                    onChange={() => toggleSelect(grupo.ID_Grupo)}
                   />
                 </td>
-                <td>{grupo.id}</td>
-                <td>{grupo.nome}</td>
-                <td>{grupo.mentor}</td>
-                {grupo.alunos.map((aluno, index) => (
-                  <td key={index}>{aluno}</td>
+                <td>{grupo.ID_Grupo}</td>
+                <td>{grupo.Grupo_Nome}</td>
+                <td>{grupo.Grupo_Curso}</td>
+                {Array.from({ length: 9 }, (_, i) => (
+                  <td key={i}>{grupo[`Aluno_${i + 1}`] || ""}</td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      <ExportarModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        exportType={exportType}
+        setExportType={setExportType}
+        fileName={fileName}
+        setFileName={setFileName}
+        rangeStart={rangeStart}
+        rangeEnd={rangeEnd}
+        setRangeStart={setRangeStart}
+        setRangeEnd={setRangeEnd}
+        exportarUsuarios={exportarGrupos}
+      />
+
+      <ImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onImportSuccess={carregarGrupos}
+        handleExportarGrupos={handleExportarGrupos}
+        tabela="Grupo "
+      />
+
+      <ExcluirModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        selected={selected}
+        setItens={setGrupos}
+        carregarItens={carregarGrupos}
+        tabela="Grupo "
+      />
+
+      <FiltroModal
+        isOpen={showFilterModal}
+        onClose={() => setShowFilterModal(false)}
+        filtros={filtros}
+        setFiltros={setFiltros}
+        valorSelecionado={valorSelecionado}
+        setValorSelecionado={setValorSelecionado}
+        filterSelecionado={filterSelecionado}
+        setFilterSelecionado={setFilterSelecionado}
+        usuariosOriginais={gruposOriginais}
+        setResponse={setGrupos}
+        campos={camposGrupo}
+        tabela="Grupo "
+      />
+
+      <OrdenarModal
+        isOpen={showModalOrdenar}
+        onClose={() => setshowModalOrdenar(false)}
+        valorSelecionado={valorSelecionado}
+        setValorSelecionado={setValorSelecionado}
+        filterSelecionado={filterSelecionado}
+        setFilterSelecionado={setFilterSelecionado}
+        setItens={setGrupos}
+        tabela="Grupo "
+        campos={camposGrupo}
+      />
+
+      <EditarModal
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        grupoEdit={grupoEdit}
+        setGrupoEdit={setGrupoEdit}
+        carregarGrupos={carregarGrupos}
+      />
     </div>
   );
 }

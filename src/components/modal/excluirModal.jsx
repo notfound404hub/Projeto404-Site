@@ -13,14 +13,9 @@ function DeleteModal({
   if (!isOpen) return null;
 
   const excluirItens = async () => {
-    if (selected.length === 0) {
-      alert("Nenhum item selecionado para exclusão!");
-      return;
-    }
-    try {
+    try {   
       const response = await api.delete('/deleteFromTable', {
-        data:{ids:selected, tabela: tabela}
-      });
+        data:{ids:selected, tabela: tabela}});
         alert(response.data.msg || "Itens excluídos com sucesso!");
         setItens((prev) => prev.filter((item) => !selected.includes(item[idField])));
         carregarItens();

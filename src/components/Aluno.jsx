@@ -151,8 +151,6 @@ const abrirModalEdicao = async () => {
     const response = await api.get(`/alunos/${id}`);
 
     const aluno = response.data.rows[0]
-
-    console.log(aluno)
   
     setAlunoEdit(aluno);
     setShowEditModal(true);
@@ -176,8 +174,8 @@ const abrirModalEdicao = async () => {
             Mais opções ▾
           </button>
           <div className="dropdown-content-tabela">
-            <a onClick={() => setShowModal(true)}>Exportar alunoss</a>
-            <a onClick={() => setShowImportModal(true)}>Importar alunoss</a>
+            <a onClick={() => setShowModal(true)}>Exportar alunos</a>
+            <a onClick={() => setShowImportModal(true)}>Importar alunos</a>
             <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
             <a onClick={abrirModalEdicao}>Editar</a>
           </div>
@@ -262,7 +260,6 @@ const abrirModalEdicao = async () => {
         </table>
       </div>
 
-      {/* 🔹 Modais importados e controlados por estado */}
       <ExportarModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
@@ -281,7 +278,7 @@ const abrirModalEdicao = async () => {
         isOpen={showImportModal}
         onClose={() => setShowImportModal(false)}
         onImportSuccess={carregarAlunos}
-        handleExportarAlunos={handleExportarAlunos}
+        handleExportarUsuarios={handleExportarAlunos}
         tabela="Aluno "
       />
 

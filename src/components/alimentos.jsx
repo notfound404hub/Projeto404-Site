@@ -3,17 +3,14 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import api from "../api.js";
 
-// 🔹 Imports dos modais
 import ImportModal from "./modal/importarModal.jsx";
 import ExportarModal from "./modal/exportarModal.jsx";
 import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
-import ExcluirModal from "./modal/excluirModalAluno.jsx";
-import EditarModal from "./modal/editarModalAluno.jsx";
+import ExcluirModal from "./modal/excluirModal.jsx";
+import EditarModal from "./modal/editarModalAlimento.jsx";
 
 function Alimentos({ onSelectPage }) {
-  // Estados principais
-  const [selectedFile, setSelectedFile] = useState(null);
   const [filterSelecionado, setFilterSelecionado] = useState("igual");
   const [alimentos, setAlimentos] = useState([]);
   const [alimentosOriginais, setAlimentosOriginais] = useState([]);
@@ -39,7 +36,6 @@ function Alimentos({ onSelectPage }) {
     { value: "Alimento_Total", label: "Peso Total (g)" },
   ];
 
-  // Controle dos modais
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showModalOrdenar, setShowModalOrdenar] = useState(false);
@@ -47,7 +43,7 @@ function Alimentos({ onSelectPage }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
 
-  const tabela = "Alimentos";
+  const tabela = "Alimento";
   filtros[0] = tabela;
 
   const carregarAlimentos = async () => {
@@ -148,10 +144,8 @@ function Alimentos({ onSelectPage }) {
     }
     const id = selected[0];
     try {
-      const response = await api.get(`/alimentos/${id}`);
-      const alimento = response.data.rows[0];
-
-      setAlimentoEdit(alimento);
+      const response = await api.get(`/alimentos/${id}`);  
+      setAlimentoEdit(response.data);
       setShowEditModal(true);
     } catch (err) {
       console.error("Erro ao buscar alimento:", err);
@@ -175,7 +169,6 @@ function Alimentos({ onSelectPage }) {
           </button>
           <div className="dropdown-content-tabela">
             <a onClick={() => setShowModal(true)}>Exportar alimentos</a>
-            <a onClick={() => setShowImportModal(true)}>Importar alimentos</a>
             <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
             <a onClick={abrirModalEdicao}>Editar</a>
           </div>
@@ -274,16 +267,16 @@ function Alimentos({ onSelectPage }) {
         onClose={() => setShowImportModal(false)}
         onImportSuccess={carregarAlimentos}
         handleExportarAlimentos={handleExportarAlimentos}
-        tabela="Alimentos"
+        tabela="Alimento"
       />
 
       <ExcluirModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
-        selectedAluno={selected}
-        setAlimentosExcluir={setAlimentos}
-        carregarAlimentosExcluir={carregarAlimentos}
-        tabelaAlimentos="Alimentos"
+        selected={selected}
+        setItens={setAlimentos}
+        carregarItens={carregarAlimentos}
+        tabela="Alimento"
       />
 
       <FiltroModal
@@ -298,7 +291,7 @@ function Alimentos({ onSelectPage }) {
         usuariosOriginais={alimentosOriginais}
         setResponse={setAlimentos}
         campos={camposAlimento}
-        tabela="Alimentos"
+        tabela="Alimento"
       />
 
       <OrdenarModal
@@ -309,7 +302,7 @@ function Alimentos({ onSelectPage }) {
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
         setItens={setAlimentos}
-        tabela="Alimentos"
+        tabela="Alimento"
         campos={camposAlimento}
       />
 

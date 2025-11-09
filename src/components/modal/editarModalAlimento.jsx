@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../api";
 
-function EditModal({
+function editarModalAlimento({
   isOpen,
   alimentoEdit,
   setAlimentoEdit,
@@ -10,13 +10,13 @@ function EditModal({
 }) {
   if (!isOpen || !alimentoEdit) return null;
 
-  const salvarEdicaoAlunos = async () => {
+  const salvarEdicaoAlimentos = async () => {
     try {
       const dadosEditaveis = {
         Alimento_Validade: alimentoEdit.Alimento_Validade,
-        Aluno_Quantidade: alimentoEdit.Aluno_Quantidade
+        Alimento_Quantidade: alimentoEdit.Alimento_Quantidade
       };
-      console.log(alimentoEdit)
+      console.log("log de alimento:", dadosEditaveis)
       const response = await api.put(`/alimentos/${alimentoEdit.ID_Alimento}`, dadosEditaveis);
       setAlimentoEdit(response.data)
       alert("Alimento atualizado com sucesso!");
@@ -24,7 +24,7 @@ function EditModal({
       carregarAlimentos();
     } catch (error) {
       console.error("Erro no update:", error);
-      alert("Erro no servidor ao atualizar usuário");
+      alert("Erro no servidor ao atualizar alimento");
     }
   };
 
@@ -35,47 +35,36 @@ function EditModal({
 
         <div className="formEdit">
           <label>ID:</label>
-          <input type="text" value={alimentoEdit.ID_Alimentos} readOnly />
+          <input type="text" value={alimentoEdit.ID_Alimento} readOnly />
 
-          <label>Nome:</label>
+          <label>Validade:</label>
           <input
             type="text"
             value={alimentoEdit.Alimento_Validade || ""}
             onChange={(e) =>
-              setAlunoEdit({ ...alimentoEdit, Alimento_Validade: e.target.value })
+              setAlimentoEdit({ ...alimentoEdit, Alimento_Validade: e.target.value })
             }
           />
 
-          <label>Telefone:</label>
+          <label>Quantidade:</label>
           <input
             type="text"
-            value={alimentoEdit.Aluno_Telefone || ""}
+            value={alimentoEdit.Alimento_Quantidade || ""}
             onChange={(e) =>
-              setAlunoEdit({
+              setAlimentoEdit({
                 ...alimentoEdit,
-                Aluno_Telefone: e.target.value,
+                Alimento_Quantidade: e.target.value,
               })
             }
           />
-
-          <label>Senha:</label>
-          <input
-            type="text"
-            value={alimentoEdit.Aluno_Senha || ""}
-            onChange={(e) =>
-              setAlunoEdit({
-                ...alimentoEdit,
-                Aluno_Senha: e.target.value,
-              })
-            }
-          />
+        
         </div>
 
         <div className="footerModal">
           <button className="btnFilter" onClick={onClose}>
             Fechar
           </button>
-          <button className="btnFilter" onClick={salvarEdicaoAlunos}>
+          <button className="btnFilter" onClick={salvarEdicaoAlimentos}>
             Salvar
           </button>
         </div>
@@ -84,4 +73,4 @@ function EditModal({
   );
 }
 
-export default EditModal;
+export default editarModalAlimento;
