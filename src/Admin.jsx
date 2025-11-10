@@ -18,17 +18,11 @@ import Campanhas from "./components/campanhas.jsx";
 import Usuarios from "./components/usuarios.jsx";
 import PainelSuporte from "./Suporte.jsx";
 import SidebarAdmin from "./components/SidebarAdmin.jsx";
-
 import CadastroUsuario from "./components/cadastroUsuario.jsx";
 import CadastroCampanha from "./components/cadastroCampanha.jsx";
 import CadastroGrupo from "./components/CadastroGrupo.jsx";
 import CadastroAlimento from "./components/CadastroAlimento.jsx";
-
-
 import Relatorios from "./components/Relatorios.jsx";
-
-
-  
 
 function Admin() {
   const [userData, setUserData] = useState({
@@ -38,7 +32,7 @@ function Admin() {
   });
 
   const [activeScreen, setActiveScreen] = useState("home");
- 
+
 
   const handleLogout = () => {
     localStorage.removeItem("ID_Usuario");
@@ -64,13 +58,8 @@ function Admin() {
         userData={userData}
         setUserData={setUserData}
 
+        onSelectPage={(page) => setActiveScreen(page)} // <-- aqui   
 
-        onSelectPage={(page) => setActiveScreen(page)} // <-- aqui
-
-        
-        onSelectPage={(page) => setActiveScreen(page)}
-
-        
       />
       <div className="mainAdmin">
         <HeaderAdmin />
@@ -81,6 +70,7 @@ function Admin() {
           <Aluno onSelectPage={(page) => setActiveScreen(page)} />
         )}
         {/* {activeScreen === "relatorios" && <div>Relatórios (placeholder)</div>} */}
+        {activeScreen === "relatorios" && (<Relatorios onSelectPage={(page) => setActiveScreen(page)} />)}
         {activeScreen === "grupos" && <Grupo />}
         {activeScreen === "alimentos" && <Alimentos />}
         {activeScreen === "grupos" && (

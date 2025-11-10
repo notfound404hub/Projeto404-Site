@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-* {@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-
 * {
   font-family: Poppins, sans-serif;
   box-sizing: border-box;
@@ -11,9 +9,8 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;  
-overflow-x: hidden;
-
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .bodyImg {
@@ -396,7 +393,7 @@ form {
   /* centraliza horizontalmente */
   justify-content: center;
   /* centraliza verticalmente */
-  
+
   width: 450px;
   margin-right: 0 auto;
   background-color: white;
@@ -444,11 +441,12 @@ form {
   border-radius: 10px;
   margin-bottom: -20px;
 }
+
 .inputEsqueciSenha:placeholder {
   color: black;
 }
 
-.pEsqueciSenha{
+.pEsqueciSenha {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -553,13 +551,10 @@ form {
   margin-bottom: 40px;
 }
 
-
-.inputEsqueciSenha:placeholder {
-
 .inputResetSenha:placeholder {
-
   color: black;
 }
+
 .pEsqueciSenha {
   display: flex;
   align-self: center;
@@ -607,8 +602,8 @@ form {
 
 /* RESET SENHA */
 
-  
-  
+
+
 /* RESET SENHA */
 /* VERIFICAÇÃO */
 
@@ -718,7 +713,7 @@ form {
 
 /* RESET SENHA */
 
-  
+
 /* ADMIN */
 #root {
   height: 100%;
@@ -728,7 +723,7 @@ form {
   background-color: transparent;
   height: 100%;
   width: calc(100% - 220px);
-  margin-left: 220px ;
+  margin-left: 220px;
   background-color: #fafafa;
 }
 
@@ -1095,9 +1090,9 @@ form {
 .main-container-tabela {
   padding: 10px;
   font-family: Arial, sans-serif;
-  width:100%;
+  width: 100%;
 
-  
+
   box-sizing: border-box;
   overflow-x: auto;
 }
@@ -1250,11 +1245,7 @@ form {
 }
 
 /* suporte */
-  
-  
-  
-  
- >> main
+
 /* === MODAL DE CHAMADO === */
 .modal-overlay {
   position: fixed;
@@ -1262,11 +1253,8 @@ form {
   left: 0;
   width: 100%;
   height: 100%;
-  
   background-color: rgba(0, 0, 0, 0.6);
-  
-  background-color: rgba(0,0,0,0.6);
- >> main
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1281,19 +1269,17 @@ form {
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
-  
+
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-fechar-modal {
 
-  
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-fechar-modal {
- 
- >> main
   top: 10px;
   right: 10px;
   background: transparent;
@@ -1309,19 +1295,17 @@ form {
   flex-direction: column;
   gap: 15px;
 }
-  
+
+
+.input-mensagem {
+  width: 80%;
+}
 
 .input-mensagem {
   width: 80%;
 }
 
 .btn-enviar {
-  
-.input-mensagem{
-  width: 80%;
-}
-.btn-enviar{
- >> main
   margin: 5px;
   width: 90px;
   height: 40px;
@@ -1330,12 +1314,9 @@ form {
   color: #fafafa;
   background: #00ab72;
 }
-  
+
 
 .btn-enviar:hover {
-  
-.btn-enviar:hover{
- >> main
   scale: 1.03;
   color: #00ab72;
   background: #fafafa;
@@ -1347,24 +1328,15 @@ form {
   background-color: #f4f4f4;
   padding: 12px 16px;
   border-radius: 8px;
-  
-
 }
 
-  
- 
-}
- >> main
 .aluno-mensagem {
   background: #e9ffe9;
   align-self: flex-end;
   border-right: 4px solid #28a745;
   min-width: 250px;
 }
-  
 
-  
- >> main
 .suporte-mensagem {
   min-width: 250px;
   background: #cce5ff;
@@ -1382,23 +1354,14 @@ form {
 }
 
 .chamados-tela {
-  
-
-  
-  
- >> main
   background: white;
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   width: 90%;
   max-width: calc(100% - 220px);
-  
   margin-left: 220px;
-  
-  margin-left:  220px;
- >> main
-
+  margin-left: 220px;
 }
 
 .chamados-header {
@@ -1472,10 +1435,6 @@ form {
   font-size: 1.1rem;
 }
 
-  
-  
-  
- >> main
 * {
   margin: 0;
   padding: 0;
@@ -1595,15 +1554,14 @@ form {
 }
 
 .caixa-status {
-  
-  
-  padding: 15px;
-  
 
-  
-  
-  
- >> main
+
+  padding: 15px;
+
+
+
+
+
   border-radius: 5px;
   color: white;
   margin-bottom: 10px;
@@ -1668,10 +1626,6 @@ form {
 }
 
 /* GRUPO DE INPUT */
-  
-  
-.form-group {
-  
 .cadastro-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1682,18 +1636,18 @@ form {
   font-weight: 500;
   color: #333;
   font-size: 0.95rem;
-  
+
   display: flex;
   flex-direction: column;
-  
-.cadastro-form{
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  gap: 10px
- >> main
 }
 
-.form-group label{
+.cadastro-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px
+}
+
+.form-group label {
   font-weight: 500;
   color: #333;
   font-size: 0.95rem;
@@ -1703,58 +1657,37 @@ form {
 }
 
 .form-group input {
-  
-  
   padding: 10px;
-  
   width: 100%;
   padding: 10px;
-
   margin-bottom: 12px;
-  
-  
- width: 100%;
+  width: 100%;
   padding: 10px;
-  
   margin-bottom: 12px;
- >> main
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
 }
-  
 
-  
+
+
 .form-group input:focus {
   border-color: #00ab72;
   background: #fff;
 }
 
 .form-buttons {
-  grid-column: span 3; /* ocupa todas as colunas */
-  
-.form-buttons {
-  
-  
-.form-buttons{
- >> main
+  grid-column: span 3;
   display: flex;
   gap: 5px;
 }
+
 .btn-confirmar,
 .btn-cancelar {
-  
-  
-  
   width: 50%;
   margin-top: 20px;
-
-  
-  
   width: 50%;
   margin-top: 20px;
-  
- >> main
   padding: 12px 25px;
   border: none;
   border-radius: 6px;
@@ -2863,7 +2796,7 @@ form {
   transform: scale(1.05);
 }
 
-.btnChamados{
+.btnChamados {
 
   padding: 15px;
   background: transparent;
@@ -2890,9 +2823,10 @@ textarea {
   padding: 20px 20px;
   font-family: "Poppins", sans-serif;
   color: #1f2937;
- 
+
 }
-.selectsDash{
+
+.selectsDash {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2936,7 +2870,7 @@ select:focus {
 
 /* ====== CARDS RESUMO ====== */
 .resumo-grid {
- padding: 10px; 
+  padding: 10px;
 }
 
 .resumo-grid {
@@ -3008,7 +2942,7 @@ select:focus {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
-  
+
 }
 
 .grafico-card {
@@ -3100,14 +3034,17 @@ select:focus {
   font-size: 24px;
   font-weight: bold;
 }
-.dashboard-top{
+
+.dashboard-top {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.dashboard-top select{
+
+.dashboard-top select {
   height: 50px;
 }
+
 /* ====== RESPONSIVIDADE ====== */
 @media (max-width: 1400px) {
   .graficos-container {
@@ -3144,16 +3081,13 @@ select:focus {
     flex: 0 0 160px;
   }
 }
-  font-family: Poppins, sans-serif;
-  box-sizing: border-box;
-}
 
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;  
-overflow-x: hidden;
+  height: 100vh;
+  overflow-x: hidden;
 
 }
 
@@ -3537,7 +3471,7 @@ form {
   /* centraliza horizontalmente */
   justify-content: center;
   /* centraliza verticalmente */
-  
+
   width: 450px;
   margin-right: 0 auto;
   background-color: white;
@@ -3585,11 +3519,12 @@ form {
   border-radius: 10px;
   margin-bottom: -20px;
 }
+
 .inputEsqueciSenha:placeholder {
   color: black;
 }
 
-.pEsqueciSenha{
+.pEsqueciSenha {
   display: flex;
   align-self: center;
   justify-self: center;
@@ -3694,13 +3629,10 @@ form {
   margin-bottom: 40px;
 }
 
-
-.inputEsqueciSenha:placeholder {
-
 .inputResetSenha:placeholder {
-
   color: black;
 }
+
 .pEsqueciSenha {
   display: flex;
   align-self: center;
@@ -3748,8 +3680,8 @@ form {
 
 /* RESET SENHA */
 
-  
-  
+
+
 /* RESET SENHA */
 /* VERIFICAÇÃO */
 
@@ -3859,7 +3791,7 @@ form {
 
 /* RESET SENHA */
 
-  
+
 /* ADMIN */
 #root {
   height: 100%;
@@ -3869,7 +3801,7 @@ form {
   background-color: transparent;
   height: 100%;
   width: calc(100% - 220px);
-  margin-left: 220px ;
+  margin-left: 220px;
   background-color: #fafafa;
 }
 
@@ -4236,9 +4168,9 @@ form {
 .main-container-tabela {
   padding: 10px;
   font-family: Arial, sans-serif;
-  width:100%;
+  width: 100%;
 
-  
+
   box-sizing: border-box;
   overflow-x: auto;
 }
@@ -4391,11 +4323,7 @@ form {
 }
 
 /* suporte */
-  
-  
-  
-  
- >> main
+
 /* === MODAL DE CHAMADO === */
 .modal-overlay {
   position: fixed;
@@ -4403,11 +4331,11 @@ form {
   left: 0;
   width: 100%;
   height: 100%;
-  
+
   background-color: rgba(0, 0, 0, 0.6);
-  
-  background-color: rgba(0,0,0,0.6);
- >> main
+
+  background-color: rgba(0, 0, 0, 0.6);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4422,19 +4350,17 @@ form {
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
-  
+
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-fechar-modal {
 
-  
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-fechar-modal {
- 
- >> main
   top: 10px;
   right: 10px;
   background: transparent;
@@ -4450,19 +4376,17 @@ form {
   flex-direction: column;
   gap: 15px;
 }
-  
+
+
+.input-mensagem {
+  width: 80%;
+}
 
 .input-mensagem {
   width: 80%;
 }
 
 .btn-enviar {
-  
-.input-mensagem{
-  width: 80%;
-}
-.btn-enviar{
- >> main
   margin: 5px;
   width: 90px;
   height: 40px;
@@ -4471,12 +4395,9 @@ form {
   color: #fafafa;
   background: #00ab72;
 }
-  
+
 
 .btn-enviar:hover {
-  
-.btn-enviar:hover{
- >> main
   scale: 1.03;
   color: #00ab72;
   background: #fafafa;
@@ -4488,24 +4409,15 @@ form {
   background-color: #f4f4f4;
   padding: 12px 16px;
   border-radius: 8px;
-  
-
 }
 
-  
- 
-}
- >> main
 .aluno-mensagem {
   background: #e9ffe9;
   align-self: flex-end;
   border-right: 4px solid #28a745;
   min-width: 250px;
 }
-  
 
-  
- >> main
 .suporte-mensagem {
   min-width: 250px;
   background: #cce5ff;
@@ -4523,23 +4435,14 @@ form {
 }
 
 .chamados-tela {
-  
-
-  
-  
- >> main
   background: white;
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   width: 90%;
   max-width: calc(100% - 220px);
-  
   margin-left: 220px;
-  
-  margin-left:  220px;
- >> main
-
+  margin-left: 220px;
 }
 
 .chamados-header {
@@ -4613,10 +4516,6 @@ form {
   font-size: 1.1rem;
 }
 
-  
-  
-  
- >> main
 * {
   margin: 0;
   padding: 0;
@@ -4736,15 +4635,7 @@ form {
 }
 
 .caixa-status {
-  
-  
   padding: 15px;
-  
-
-  
-  
-  
- >> main
   border-radius: 5px;
   color: white;
   margin-bottom: 10px;
@@ -4809,1480 +4700,1455 @@ form {
 }
 
 /* GRUPO DE INPUT */
-  
-  
-.form-group {
-  
-.cadastro-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px
-}
-
-.form-group label {
-  font-weight: 500;
-  color: #333;
-  font-size: 0.95rem;
-  
-  display: flex;
-  flex-direction: column;
-  
-.cadastro-form{
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  gap: 10px
- >> main
-}
-
-.form-group label{
-  font-weight: 500;
-  color: #333;
-  font-size: 0.95rem;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.form-group input {
-  
-  
-  padding: 10px;
-  
-  width: 100%;
-  padding: 10px;
-
-  margin-bottom: 12px;
-  
-  
- width: 100%;
-  padding: 10px;
-  
-  margin-bottom: 12px;
- >> main
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-}
-  
-
-  
-.form-group input:focus {
-  border-color: #00ab72;
-  background: #fff;
-}
-
-.form-buttons {
-  grid-column: span 3; /* ocupa todas as colunas */
-  
-.form-buttons {
-  
-  
-.form-buttons{
- >> main
-  display: flex;
-  gap: 5px;
-}
-.btn-confirmar,
-.btn-cancelar {
-  
-  
-  
-  width: 50%;
-  margin-top: 20px;
-
-  
-  
-  width: 50%;
-  margin-top: 20px;
-  
- >> main
-  padding: 12px 25px;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-confirmar {
-  background-color: #00ab72;
-  color: #fff;
-}
-
-.btn-confirmar:hover {
-  background-color: #00804b;
-}
-
-.btn-cancelar {
-  background-color: transparent;
-  color: #00ab72;
-  border: 2px solid #00ab72;
-}
-
-.btn-cancelar:hover {
-  background-color: #00ab72;
-  color: #fff;
-}
-
-/* FORMS */
-.forms {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(196, 192, 192);
-  flex-direction: column;
-  padding: 20px 0;
-  height: 100vh;
-}
-
-.logoForms {
-  width: 90px;
-  height: 90px;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  margin-right: 20px;
-}
-
-.headerForms {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00ab72;
-  width: 900px;
-  border-radius: 10px 10px 0 0;
-  height: 120px;
-}
-
-.divTituloForms {
-  text-align: start;
-  text-indent: 2em;
-  font-size: 13px;
-  justify-content: center;
-  padding: 10px;
-  background-color: #fafafa;
-  width: 900px;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 20px;
-}
-
-.inputPergunta {
-  width: 900px;
-  height: 50px;
-  border: none;
-  border-bottom: 1px solid rgb(88, 88, 88);
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.pergunta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 10px;
-  width: 900px;
-}
-
-.pergunta p {
-  background-color: #fafafa;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  text-indent: 2em;
-  margin: 0;
-  margin-bottom: -5px;
-  border-radius: 10px 10px 0 0;
-}
-
-.pergunta>div:not(.divInputTypeRadio) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  height: 50px;
-  gap: 20px;
-}
-
-.inputPergunta {
-  border-radius: 0 0 10px 10px;
-}
-
-.divInputTypeRadio {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  border-radius: 0 0 10px 10px;
-  background-color: #fafafa;
-  width: 900px;
-  height: 50px;
-}
-
-.inputTypeRadio {
-  margin-right: 8px;
-  margin-left: 0;
-  cursor: pointer;
-}
-
-.pergunta>div label {
-  display: flex;
-  align-items: center;
-  margin: 0 15px;
-}
-
-.proximo {
-  width: 220px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #00ab72;
-  font-size: 20px;
-  font-weight: bolder;
-  color: white;
-  margin-top: 20px;
-}
-
-.proximo:hover {
-  background-color: #01885b;
-}
-
-.proximo:disabled {
-  background-color: #00ab7277;
-  cursor: not-allowed;
-}
-
-.proximo:enabled {
-  border: none;
-}
-
-/* FORMS */
-
-/* CADASTRO ALUNO MENTOR */
-
-.formsMentor {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: rgb(196, 192, 192);
-  flex-direction: column;
-  padding: 20px 0;
-  min-height: 100vh;
-  overflow-y: auto;
-}
-
-.formsTituloMentor {
-  width: 900px;
-  display: flex;
-  flex-direction: column;
-}
-
-.headerFormsMentor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00ab72;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  padding: 20px 0;
-}
-
-.headerFormsMentor h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  color: white;
-  font-weight: bold;
-}
-
-.TituloFormsMentor {
-  text-align: start;
-  font-size: 13px;
-  padding: 25px 35px;
-  background-color: #fafafa;
-  width: 100%;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-}
-
-.TituloFormsMentor h2 {
-  margin: 0 0 15px 0;
-  line-height: 1.6;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.TituloFormsMentor p {
-  margin: 0 0 15px 0;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.TituloFormsMentor p:last-child {
-  text-align: start;
-  text-indent: 2em;
-  margin: 5px 0 0 0;
-}
-
-.perguntaMentor {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 900px;
-  gap: 10px;
-  /* ADICIONE ISSO - cria o espaço entre título e input */
-  margin-bottom: 20px;
-}
-
-.tituloPerguntaMentor {
-  background-color: #fafafa;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  padding: 15px 25px;
-  margin: 0;
-  /* MUDE DE "0 0 20px 0" PARA "0" */
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.inputPerguntaMentor {
-  width: 100%;
-  height: 50px;
-  border: none;
-  border-bottom: 2px solid #888;
-  background-color: #fafafa;
-  border-radius: 0 0 10px 10px;
-  padding: 10px 25px;
-  box-sizing: border-box;
-  font-size: 14px;
-  margin: 0;
-  /* MUDE DE "20px" PARA "0" */
-}
-
-.inputPerguntaMentor::placeholder {
-  color: #999;
-}
-
-.divBotoesMentor {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 900px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.voltar {
-  width: 220px;
-  height: 55px;
-  border-radius: 10px;
-  background-color: #00ab72;
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.voltar:hover {
-  background-color: #009960;
-}
-
-.proximoMentor {
-  width: 220px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #00ab72;
-  font-size: 20px;
-  font-weight: bolder;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.proximoMentor:hover:not(:disabled) {
-  background-color: #009960;
-}
-
-.proximoMentor:disabled {
-  background-color: #00ab7277;
-  cursor: not-allowed;
-}
-
-.proximoMentor:enabled {
-  border: none;
-}
-
-/* CADASTRO ALUNO MENTOR */
-
-/* CADASTRO ALUNOS */
-
-.formsAlunos {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: rgb(196, 192, 192);
-  flex-direction: column;
-  padding: 20px 0;
-  min-height: 100vh;
-  overflow-y: auto;
-}
-
-.formsTituloAlunos {
-  width: 900px;
-  display: flex;
-  flex-direction: column;
-}
-
-.headerFormsAlunos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00ab72;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  padding: 20px 0;
-}
-
-.headerFormsAlunos h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  color: white;
-  font-weight: bold;
-}
-
-.tituloFormsAlunos {
-  text-align: start;
-  font-size: 13px;
-  padding: 25px 35px;
-  background-color: #fafafa;
-  width: 100%;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-}
-
-.tituloFormsAlunos h2 {
-  margin: 0 0 15px 0;
-  line-height: 1.6;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.tituloFormsAlunos p {
-  margin: 0 0 15px 0;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.tituloFormsAlunos p:last-child {
-  text-align: start;
-  text-indent: 2em;
-  margin: 5px 0 0 0;
-}
-
-.perguntaAlunos {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 900px;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.tituloPerguntaAluno {
-  background-color: #fafafa;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  padding: 15px 25px;
-  margin: 0;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.inputPerguntaAluno {
-  width: 100%;
-  height: 50px;
-  border: none;
-  border-bottom: 2px solid #888;
-  background-color: #fafafa;
-  border-radius: 0 0 10px 10px;
-  padding: 10px 25px;
-  box-sizing: border-box;
-  font-size: 14px;
-  margin: 0;
-}
-
-.inputPerguntaAluno::placeholder {
-  color: #999;
-}
-
-.botoesAluno {
-  position: relative;
-  width: 100%;
-  height: 80px;
-}
-
-.botoesAluno button {
-  width: 220px;
-  height: 55px;
-  border-radius: 10px;
-  background-color: #00ab72;
-  font-size: 20px;
-  font-weight: bolder;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.botoesAluno.dois-botoes .voltarAluno {
-  position: absolute;
-  left: 510px;
-}
-
-.botoesAluno.dois-botoes .proximoAluno {
-  position: absolute;
-  right: 510px;
-}
-
-.botoesAluno.dois-botoes .finalizar {
-  position: absolute;
-  right: 510px;
-}
-
-.botoesAluno.um-botao .proximoAluno,
-.botoesAluno.um-botao .finalizar {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.proximoAluno:hover:not(:disabled) {
-  background-color: #009960;
-}
-
-.proximoAluno:disabled {
-  background-color: #00ab7277;
-  cursor: not-allowed;
-}
-
-.proximoAluno:enabled {
-  border: none;
-}
-
-.finalizar:disabled {
-  background-color: #00ab7277;
-  cursor: not-allowed;
-}
-
-/* CADASTRO ALUNOS */
-
-/* Exportar aluno */
-
-/* === MODAL OVERLAY (FUNDO) === */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-/* === MODAL EXPORTAR === */
-.modal {
-  background: #fff;
-  width: 600px;
-  padding: 40px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal h2 {
-  font-size: 1.4rem;
-  color: #005945;
-  font-weight: 600;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.modal label {
-  font-weight: 500;
-  color: #333;
-  font-size: 0.95rem;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.modal input {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  outline: none;
-  transition: border 0.2s;
-}
-
-.modal input:focus {
-  border-color: #00ab72;
-  box-shadow: 0 0 0 2px rgba(0, 171, 114, 0.1);
-}
-
-/* === CAMPOS DO RANGE === */
-.inputs-Exportar {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.inpRange {
-  width: 50%;
-}
-
-/* === OPÇÕES DE EXPORTAÇÃO === */
-.export-options {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin-top: 10px;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  color: #333;
-  cursor: pointer;
-}
-
-.radio-option input[type="radio"] {
-  accent-color: #00ab72;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  transition: 0.2s;
-  outline: none;
-  box-shadow: none;
-  border: none;
-}
-
-/* === AÇÕES DO MODAL === */
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-/* === MODAL EDITAR === */
-.modal-editar {
-  background: #fff;
-  width: 450px;
-  padding: 25px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal-editar h2 {
-  font-size: 1.4rem;
-  color: #005945;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.modal-editar label {
-  font-weight: 500;
-  color: #333;
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.modal-editar input {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  outline: none;
-  transition: border 0.2s;
-}
-
-.modal-editar input:focus {
-  border-color: #00ab72;
-}
-
-/* === ANIMAÇÃO === */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+  .cadastro-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .form-group label {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
   }
-}
 
-/* Exportar aluno */
+  .cadastro-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
+  }
 
-/* Filtrar */
+  .form-group label {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
 
-.footerModal {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-}
+  .form-group input {
+    padding: 10px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
 
-.sectionfilter {
-  display: flex;
-  gap: 10px;
-}
+  .form-group input:focus {
+    border-color: #00ab72;
+    background: #fff;
+  }
 
-.modal .sectionfilter2 select {
-  width: 300px;
-}
+  .form-buttons {
+    grid-column: span 3;
+    display: flex;
+    gap: 5px;
+  }
 
-.sectionfilter2 {
-  display: flex;
-  gap: 10px;
-}
+  .btn-confirmar,
+  .btn-cancelar {
+    width: 50%;
+    margin-top: 20px;
+    width: 50%;
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
 
-.modal select {
-  width: 150px;
-}
+  .btn-confirmar {
+    background-color: #00ab72;
+    color: #fff;
+  }
 
-.btnFilter {
-  margin-top: 10px;
-  background: #00ab72;
-  color: #fafafa;
-  width: 150px;
-  height: 50px;
-  border: none;
-  font-size: 18px;
-  font-weight: bolder;
-  border-radius: 10px;
-}
+  .btn-confirmar:hover {
+    background-color: #00804b;
+  }
 
-.btnFilter:hover {
-  background: #fafafa;
-  color: #00ab72;
-  border: 1px solid #00ab72;
-}
+  .btn-cancelar {
+    background-color: transparent;
+    color: #00ab72;
+    border: 2px solid #00ab72;
+  }
 
-.formEdit {
-  display: grid;
-}
+  .btn-cancelar:hover {
+    background-color: #00ab72;
+    color: #fff;
+  }
 
-.export {
-  width: 300px;
-}
+  /* FORMS */
+  .forms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(196, 192, 192);
+    flex-direction: column;
+    padding: 20px 0;
+    height: 100vh;
+  }
 
-/* SUPORTE */
-/* Container principal */
-.suporte-container {
-  width: 100%;
-  max-height: calc(100vh - 300px);
-  /* Ajusta para o header */
+  .logoForms {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin-right: 20px;
+  }
 
-  background: #f5f5f5;
-  margin-top: 0;
-}
+  .headerForms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00ab72;
+    width: 900px;
+    border-radius: 10px 10px 0 0;
+    height: 120px;
+  }
 
-.suporte-content {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 20px;
-  max-width: calc(100% - 220px);
-  background-color: transparent;
-  margin-left: 220px;
-}
+  .divTituloForms {
+    text-align: start;
+    text-indent: 2em;
+    font-size: 13px;
+    justify-content: center;
+    padding: 10px;
+    background-color: #fafafa;
+    width: 900px;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+  }
 
-/* Títulos das seções */
-.titulo-secao {
-  font-size: 20px;
-  font-weight: 600;
-  color: #00ab72;
-  text-align: center;
-  margin: 0 0 20px 0;
-  padding: 12px;
-  border: 2px solid #00ab72;
-  border-radius: 6px;
-  background: white;
-}
+  .inputPergunta {
+    width: 900px;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid rgb(88, 88, 88);
+    border-radius: 10px;
+    padding: 10px;
+  }
 
-/* Painel Suporte (coluna esquerda) */
-.painel-suporte {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+  .pergunta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 10px;
+    width: 900px;
+  }
 
-/* Caixas de status */
-.caixa-status {
-  background: white;
-  border-radius: 8px;
+  .pergunta p {
+    background-color: #fafafa;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-indent: 2em;
+    margin: 0;
+    margin-bottom: -5px;
+    border-radius: 10px 10px 0 0;
+  }
 
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
+  .pergunta>div:not(.divInputTypeRadio) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 50px;
+    gap: 20px;
+  }
 
-.caixa-status:hover {
-  transform: translateY(-2px);
-}
+  .inputPergunta {
+    border-radius: 0 0 10px 10px;
+  }
 
-.caixa-status p {
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: white;
-  font-weight: 500;
-}
+  .divInputTypeRadio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    background-color: #fafafa;
+    width: 900px;
+    height: 50px;
+  }
 
-.caixa-status .numero {
-  display: block;
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-  line-height: 1;
-}
+  .inputTypeRadio {
+    margin-right: 8px;
+    margin-left: 0;
+    cursor: pointer;
+  }
 
-/* Cores das caixas */
-.caixa-status.verde {
-  background: linear-gradient(135deg, #00ab72 0%, #00c781 100%);
-}
+  .pergunta>div label {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+  }
 
-.caixa-status.amarelo {
-  background: linear-gradient(135deg, #00ab72 0%, #00d890 100%);
-}
+  .proximo {
+    width: 220px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #00ab72;
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    margin-top: 20px;
+  }
 
-.caixa-status.cinza {
-  background: linear-gradient(135deg, #00ab72 0%, #00b579 100%);
-}
+  .proximo:hover {
+    background-color: #01885b;
+  }
 
+  .proximo:disabled {
+    background-color: #00ab7277;
+    cursor: not-allowed;
+  }
 
-/* Botão abrir chamados */
-.botao-abrir-chamado {
-  padding: 12px 20px;
-  background: white;
-  color: #00ab72;
-  border: 2px solid #00ab72;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 5px;
-}
+  .proximo:enabled {
+    border: none;
+  }
 
-.botao-abrir-chamado:hover {
-  background: #00ab72;
-  color: white;
-}
+  /* FORMS */
 
-/* Painel Tutoriais (coluna direita) */
-.painel-tutoriais {
-  display: flex;
-  flex-direction: column;
-}
+  /* CADASTRO ALUNO MENTOR */
 
-/* Grade de tutoriais */
-.grade-tutoriais {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
+  .formsMentor {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(196, 192, 192);
+    flex-direction: column;
+    padding: 20px 0;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
 
-/* Cartão de tutorial */
-.cartao-tutorial {
-  background: white;
-  border-radius: 8px;
+  .formsTituloMentor {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+  }
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .headerFormsMentor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00ab72;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding: 20px 0;
+  }
 
-.cartao-tutorial:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+  .headerFormsMentor h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: bold;
+  }
 
-/* Miniatura do vídeo */
-.miniatura {
-  width: 100%;
-  height: 140px;
-  background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
-  border-radius: 6px;
-  margin-bottom: 12px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .TituloFormsMentor {
+    text-align: start;
+    font-size: 13px;
+    padding: 25px 35px;
+    background-color: #fafafa;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
 
-.miniatura::before {
-  content: "▶";
-  font-size: 48px;
-  color: rgba(0, 0, 0, 0.25);
-}
+  .TituloFormsMentor h2 {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: bold;
+  }
 
-/* Título do tutorial */
-.titulo-tutorial {
-  margin: 0;
-  font-size: 14px;
-  color: #333;
-  text-align: center;
-  font-weight: 400;
-}
+  .TituloFormsMentor p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    font-size: 14px;
+  }
 
-/* Responsividade */
-@media (max-width: 1024px) {
+  .TituloFormsMentor p:last-child {
+    text-align: start;
+    text-indent: 2em;
+    margin: 5px 0 0 0;
+  }
+
+  .perguntaMentor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 900px;
+    gap: 10px;
+    /* ADICIONE ISSO - cria o espaço entre título e input */
+    margin-bottom: 20px;
+  }
+
+  .tituloPerguntaMentor {
+    background-color: #fafafa;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding: 15px 25px;
+    margin: 0;
+    /* MUDE DE "0 0 20px 0" PARA "0" */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .inputPerguntaMentor {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid #888;
+    background-color: #fafafa;
+    border-radius: 0 0 10px 10px;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin: 0;
+    /* MUDE DE "20px" PARA "0" */
+  }
+
+  .inputPerguntaMentor::placeholder {
+    color: #999;
+  }
+
+  .divBotoesMentor {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 900px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .voltar {
+    width: 220px;
+    height: 55px;
+    border-radius: 10px;
+    background-color: #00ab72;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .voltar:hover {
+    background-color: #009960;
+  }
+
+  .proximoMentor {
+    width: 220px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #00ab72;
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .proximoMentor:hover:not(:disabled) {
+    background-color: #009960;
+  }
+
+  .proximoMentor:disabled {
+    background-color: #00ab7277;
+    cursor: not-allowed;
+  }
+
+  .proximoMentor:enabled {
+    border: none;
+  }
+
+  /* CADASTRO ALUNO MENTOR */
+
+  /* CADASTRO ALUNOS */
+
+  .formsAlunos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(196, 192, 192);
+    flex-direction: column;
+    padding: 20px 0;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .formsTituloAlunos {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .headerFormsAlunos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00ab72;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding: 20px 0;
+  }
+
+  .headerFormsAlunos h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: bold;
+  }
+
+  .tituloFormsAlunos {
+    text-align: start;
+    font-size: 13px;
+    padding: 25px 35px;
+    background-color: #fafafa;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+
+  .tituloFormsAlunos h2 {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .tituloFormsAlunos p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .tituloFormsAlunos p:last-child {
+    text-align: start;
+    text-indent: 2em;
+    margin: 5px 0 0 0;
+  }
+
+  .perguntaAlunos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 900px;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .tituloPerguntaAluno {
+    background-color: #fafafa;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding: 15px 25px;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .inputPerguntaAluno {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid #888;
+    background-color: #fafafa;
+    border-radius: 0 0 10px 10px;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .inputPerguntaAluno::placeholder {
+    color: #999;
+  }
+
+  .botoesAluno {
+    position: relative;
+    width: 100%;
+    height: 80px;
+  }
+
+  .botoesAluno button {
+    width: 220px;
+    height: 55px;
+    border-radius: 10px;
+    background-color: #00ab72;
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .botoesAluno.dois-botoes .voltarAluno {
+    position: absolute;
+    left: 510px;
+  }
+
+  .botoesAluno.dois-botoes .proximoAluno {
+    position: absolute;
+    right: 510px;
+  }
+
+  .botoesAluno.dois-botoes .finalizar {
+    position: absolute;
+    right: 510px;
+  }
+
+  .botoesAluno.um-botao .proximoAluno,
+  .botoesAluno.um-botao .finalizar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .proximoAluno:hover:not(:disabled) {
+    background-color: #009960;
+  }
+
+  .proximoAluno:disabled {
+    background-color: #00ab7277;
+    cursor: not-allowed;
+  }
+
+  .proximoAluno:enabled {
+    border: none;
+  }
+
+  .finalizar:disabled {
+    background-color: #00ab7277;
+    cursor: not-allowed;
+  }
+
+  /* CADASTRO ALUNOS */
+
+  /* Exportar aluno */
+
+  /* === MODAL OVERLAY (FUNDO) === */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  /* === MODAL EXPORTAR === */
+  .modal {
+    background: #fff;
+    width: 600px;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal h2 {
+    font-size: 1.4rem;
+    color: #005945;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .modal label {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .modal input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .modal input:focus {
+    border-color: #00ab72;
+    box-shadow: 0 0 0 2px rgba(0, 171, 114, 0.1);
+  }
+
+  /* === CAMPOS DO RANGE === */
+  .inputs-Exportar {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .inpRange {
+    width: 50%;
+  }
+
+  /* === OPÇÕES DE EXPORTAÇÃO === */
+  .export-options {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 10px;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .radio-option input[type="radio"] {
+    accent-color: #00ab72;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* === AÇÕES DO MODAL === */
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  /* === MODAL EDITAR === */
+  .modal-editar {
+    background: #fff;
+    width: 450px;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-editar h2 {
+    font-size: 1.4rem;
+    color: #005945;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .modal-editar label {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .modal-editar input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .modal-editar input:focus {
+    border-color: #00ab72;
+  }
+
+  /* === ANIMAÇÃO === */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Exportar aluno */
+
+  /* Filtrar */
+
+  .footerModal {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .sectionfilter {
+    display: flex;
+    gap: 10px;
+  }
+
+  .modal .sectionfilter2 select {
+    width: 300px;
+  }
+
+  .sectionfilter2 {
+    display: flex;
+    gap: 10px;
+  }
+
+  .modal select {
+    width: 150px;
+  }
+
+  .btnFilter {
+    margin-top: 10px;
+    background: #00ab72;
+    color: #fafafa;
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-size: 18px;
+    font-weight: bolder;
+    border-radius: 10px;
+  }
+
+  .btnFilter:hover {
+    background: #fafafa;
+    color: #00ab72;
+    border: 1px solid #00ab72;
+  }
+
+  .formEdit {
+    display: grid;
+  }
+
+  .export {
+    width: 300px;
+  }
+
+  /* SUPORTE */
+  /* Container principal */
+  .suporte-container {
+    width: 100%;
+    max-height: calc(100vh - 300px);
+    /* Ajusta para o header */
+
+    background: #f5f5f5;
+    margin-top: 0;
+  }
+
   .suporte-content {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    max-width: calc(100% - 220px);
+    background-color: transparent;
+    margin-left: 220px;
   }
 
+  /* Títulos das seções */
+  .titulo-secao {
+    font-size: 20px;
+    font-weight: 600;
+    color: #00ab72;
+    text-align: center;
+    margin: 0 0 20px 0;
+    padding: 12px;
+    border: 2px solid #00ab72;
+    border-radius: 6px;
+    background: white;
+  }
+
+  /* Painel Suporte (coluna esquerda) */
+  .painel-suporte {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* Caixas de status */
+  .caixa-status {
+    background: white;
+    border-radius: 8px;
+
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .caixa-status:hover {
+    transform: translateY(-2px);
+  }
+
+  .caixa-status p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+  }
+
+  .caixa-status .numero {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+  }
+
+  /* Cores das caixas */
+  .caixa-status.verde {
+    background: linear-gradient(135deg, #00ab72 0%, #00c781 100%);
+  }
+
+  .caixa-status.amarelo {
+    background: linear-gradient(135deg, #00ab72 0%, #00d890 100%);
+  }
+
+  .caixa-status.cinza {
+    background: linear-gradient(135deg, #00ab72 0%, #00b579 100%);
+  }
+
+
+  /* Botão abrir chamados */
+  .botao-abrir-chamado {
+    padding: 12px 20px;
+    background: white;
+    color: #00ab72;
+    border: 2px solid #00ab72;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 5px;
+  }
+
+  .botao-abrir-chamado:hover {
+    background: #00ab72;
+    color: white;
+  }
+
+  /* Painel Tutoriais (coluna direita) */
+  .painel-tutoriais {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Grade de tutoriais */
   .grade-tutoriais {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (max-width: 768px) {
-  .grade-tutoriais {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* SUPORTE */
-
-/* Chat */
-
-.chat-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.chat-modal {
-  background: white;
-  width: 800px;
-  height: 500px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-}
-
-.chat-header {
-  background-color: #008c73;
-  color: white;
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.close-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.chat-container {
-  display: flex;
-  flex: 1;
-}
-
-.contacts {
-  width: 35%;
-  background-color: #f0f0f0;
-  border-right: 1px solid #ccc;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-.contact {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  margin-bottom: 8px;
-  background: white;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.contact:hover {
-  background: #e4f5f1;
-}
-
-.contact.selected {
-  border: 2px solid #008c73;
-}
-
-.avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background: #008c73;
-  margin-right: 10px;
-}
-
-.contact-info .name {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.contact-info .preview {
-  font-size: 12px;
-  color: #555;
-}
-
-.conversation {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-}
-
-.messages {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.message {
-  max-width: 70%;
-  padding: 10px;
-  border-radius: 10px;
-  position: relative;
-}
-
-.message p {
-  margin: 0;
-}
-
-.message span {
-  font-size: 10px;
-  color: gray;
-  display: block;
-  margin-top: 4px;
-  text-align: right;
-}
-
-.message.received {
-  background: #f0f0f0;
-  align-self: flex-start;
-}
-
-.message.sent {
-  background: #d1f3e0;
-  align-self: flex-end;
-}
-
-.message-input {
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  background: #fff;
-}
-
-.message-input input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  outline: none;
-}
-
-.send-btn {
-  background: #008c73;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  margin-left: 10px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-/* Chat */
-
-/* GERAL */
-.lista-filtros>div:first-child {
-  display: none;
-}
-
-.tipo-modal-buttons {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
-}
-
-.tipo-btn {
-  flex: 1;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: white;
-  font-weight: 600;
-  transition: all 0.25s ease;
-
-}
-
-.tipo-btn.entrada {
-  background-color: #00ab72;
-}
-
-.tipo-btn.entrada:hover {
-  background-color: #fafafa;
-  color: #00ab72;
-
-  transform: scale(1.05);
-
-}
-
-.tipo-btn.saida {
-  background-color: #fafafa;
-  color: #00ab72;
-}
-
-.tipo-btn.saida:hover {
-  background-color: #00ab72;
-  color: #fafafa;
-  transform: scale(1.05);
-}
-
-.btnChamados{
-
-  padding: 15px;
-  background: transparent;
-  border: none;
-  width: 100%;
-  height: 100%;
-}
-
-textarea {
-  resize: none;
-  flex: 1;
-  padding: 12px;
-
-  border: 1px solid #c5c5c5;
-  border-radius: 5px;
-  font-size: 14px;
-
-}
-
-
-/* ====== GERAL ====== */
-.dashboard {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 20px 20px;
-  font-family: "Poppins", sans-serif;
-  color: #1f2937;
- 
-}
-.selectsDash{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 10px;
-}
-
-
-.titulo {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0e6245;
-  margin-bottom: 20px;
-}
-
-/* ====== FILTRO DE ANO ====== */
-
-
-select {
-  border: 2px solid #d1d5db;
-  border-radius: 10px;
-  padding: 10px 16px;
-  background-color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-select:hover {
-  border-color: #10b981;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
-}
-
-select:focus {
-  outline: none;
-  border-color: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
-}
-
-/* ====== CARDS RESUMO ====== */
-.resumo-grid {
- padding: 10px; 
-}
-
-.resumo-grid {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.resumo-card {
-  flex: 0 0 auto;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 20px;
-  transition: all 0.3s ease;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.resumo-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.resumo-card:hover::before {
-  opacity: 1;
-}
-
-.resumo-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-  border-color: #10b981;
-}
-
-.resumo-card h2 {
-  font-size: 12px;
-  font-weight: 600;
-  color: #6b7280;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.resumo-card p {
-  font-size: 32px;
-  font-weight: bold;
-  background: linear-gradient(135deg, #10b981, #059669);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ====== CONTAINER DOS GRÁFICOS ====== */
-.graficos-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
-  
-}
-
-.grafico-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  min-height: 380px;
-  display: flex;
-  flex-direction: column;
-}
-
-.grafico-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);
-  border-color: #10b981;
-}
-
-.grafico-titulo {
-  font-size: 16px;
-  font-weight: 600;
-  color: #065f46;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e5e7eb;
-}
-
-.grafico-wrapper {
-  flex: 1;
-  min-height: 300px;
-}
-
-/* ====== GRÁFICO LARGO (EVOLUÇÃO) ====== */
-.grafico-largo {
-  grid-column: 1 / -1;
-}
-
-/* ====== CARDS DE CAMPANHAS ====== */
-.card-status {
-  padding: 20px;
-}
-
-.cards-campanhas-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  padding: 10px 0;
-}
-
-.card-campanha-mini {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.card-campanha-mini:hover {
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.card-campanha-icone {
-  font-size: 28px;
-  line-height: 1;
-}
-
-.card-campanha-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.card-campanha-titulo {
-  font-size: 11px;
-  font-weight: 600;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.card-campanha-valor {
-  font-size: 24px;
-  font-weight: bold;
-}
-.dashboard-top{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.dashboard-top select{
-  height: 50px;
-}
-/* ====== RESPONSIVIDADE ====== */
-@media (max-width: 1400px) {
-  .graficos-container {
-    margin-left: 0;
+  /* Cartão de tutorial */
+  .cartao-tutorial {
+    background: white;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .dashboard-top {
-    margin-left: 0;
+  .cartao-tutorial:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Miniatura do vídeo */
+  .miniatura {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .miniatura::before {
+    content: "▶";
+    font-size: 48px;
+    color: rgba(0, 0, 0, 0.25);
+  }
+
+  /* Título do tutorial */
+  .titulo-tutorial {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  /* Responsividade */
+  @media (max-width: 1024px) {
+    .suporte-content {
+      grid-template-columns: 1fr;
+    }
+
+    .grade-tutoriais {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grade-tutoriais {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* SUPORTE */
+
+  /* Chat */
+
+  .chat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .chat-modal {
+    background: white;
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .chat-header {
+    background-color: #008c73;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .chat-container {
+    display: flex;
+    flex: 1;
+  }
+
+  .contacts {
+    width: 35%;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .contact:hover {
+    background: #e4f5f1;
+  }
+
+  .contact.selected {
+    border: 2px solid #008c73;
+  }
+
+  .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #008c73;
+    margin-right: 10px;
+  }
+
+  .contact-info .name {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .contact-info .preview {
+    font-size: 12px;
+    color: #555;
+  }
+
+  .conversation {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+
+  .messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .message p {
+    margin: 0;
+  }
+
+  .message span {
+    font-size: 10px;
+    color: gray;
+    display: block;
+    margin-top: 4px;
+    text-align: right;
+  }
+
+  .message.received {
+    background: #f0f0f0;
+    align-self: flex-start;
+  }
+
+  .message.sent {
+    background: #d1f3e0;
+    align-self: flex-end;
+  }
+
+  .message-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+  }
+
+  .message-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .send-btn {
+    background: #008c73;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  /* Chat */
+
+  /* GERAL */
+  .lista-filtros>div:first-child {
+    display: none;
+  }
+
+  .tipo-modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+
+  .tipo-btn {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.25s ease;
 
   }
-}
 
-@media (max-width: 1024px) {
-  .graficos-container {
-    grid-template-columns: 1fr;
+  .tipo-btn.entrada {
+    background-color: #00ab72;
+  }
+
+  .tipo-btn.entrada:hover {
+    background-color: #fafafa;
+    color: #00ab72;
+
+    transform: scale(1.05);
+
+  }
+
+  .tipo-btn.saida {
+    background-color: #fafafa;
+    color: #00ab72;
+  }
+
+  .tipo-btn.saida:hover {
+    background-color: #00ab72;
+    color: #fafafa;
+    transform: scale(1.05);
+  }
+
+  .btnChamados {
+
+    padding: 15px;
+    background: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  textarea {
+    resize: none;
+    flex: 1;
+    padding: 12px;
+
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    font-size: 14px;
+
+  }
+
+
+  /* ====== GERAL ====== */
+  .dashboard {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px 20px;
+    font-family: "Poppins", sans-serif;
+    color: #1f2937;
+
+  }
+
+  .selectsDash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+
+  .titulo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0e6245;
+    margin-bottom: 20px;
+  }
+
+  /* ====== FILTRO DE ANO ====== */
+
+
+  select {
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    padding: 10px 16px;
+    background-color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  select:hover {
+    border-color: #10b981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+  }
+
+  select:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  }
+
+  /* ====== CARDS RESUMO ====== */
+  .resumo-grid {
+    padding: 10px;
   }
 
   .resumo-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    flex-wrap: wrap;
-  }
-
-  .cards-campanhas-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard {
-    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    padding-bottom: 10px;
   }
 
   .resumo-card {
-    flex: 0 0 160px;
+    flex: 0 0 auto;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-}
 
+  .resumo-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .resumo-card:hover::before {
+    opacity: 1;
+  }
+
+  .resumo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+    border-color: #10b981;
+  }
+
+  .resumo-card h2 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .resumo-card p {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #10b981, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ====== CONTAINER DOS GRÁFICOS ====== */
+  .graficos-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+
+  }
+
+  .grafico-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grafico-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+  }
+
+  .grafico-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #065f46;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .grafico-wrapper {
+    flex: 1;
+    min-height: 300px;
+  }
+
+  /* ====== GRÁFICO LARGO (EVOLUÇÃO) ====== */
+  .grafico-largo {
+    grid-column: 1 / -1;
+  }
+
+  /* ====== CARDS DE CAMPANHAS ====== */
+  .card-status {
+    padding: 20px;
+  }
+
+  .cards-campanhas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px 0;
+  }
+
+  .card-campanha-mini {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-campanha-mini:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-campanha-icone {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .card-campanha-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .card-campanha-titulo {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card-campanha-valor {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .dashboard-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard-top select {
+    height: 50px;
+  }
+
+  /* ====== RESPONSIVIDADE ====== */
+  @media (max-width: 1400px) {
+    .graficos-container {
+      margin-left: 0;
+    }
+
+    .dashboard-top {
+      margin-left: 0;
+
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .graficos-container {
+      grid-template-columns: 1fr;
+    }
+
+    .resumo-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      flex-wrap: wrap;
+    }
+
+    .cards-campanhas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard {
+      padding: 20px;
+    }
+
+    .resumo-card {
+      flex: 0 0 160px;
+    }
+  }
