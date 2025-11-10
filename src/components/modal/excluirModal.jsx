@@ -1,10 +1,10 @@
 import React from "react";
+import api from "../../api";
 
 function DeleteModal({
   isOpen,
   onClose,
   selected,
-  endpoint,
   setItens, 
   idField,
   carregarItens, 
@@ -13,28 +13,14 @@ function DeleteModal({
   if (!isOpen) return null;
 
   const excluirItens = async () => {
-    if (selected.length === 0) {
-      alert("Nenhum item selecionado para exclusão!");
-      return;
-    }
-
-    try {
-      const response = await fetch(`http://localhost:500/api/users/delete`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: selected , tabela}),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(data.msg || "Itens excluídos com sucesso!");
+    try {   
+      const response = await api.delete('/deleteFromTable', {
+        data:{ids:selected, tabela: tabela}});
+        alert(response.data.msg || "Itens excluídos com sucesso!");
         setItens((prev) => prev.filter((item) => !selected.includes(item[idField])));
         carregarItens();
         onClose();
-      } else {
-        alert(data.error || "Erro ao excluir itens!");
-      }
+
     } catch (err) {
       console.error("Erro ao excluir:", err);
       alert("Erro no servidor ao excluir itens");

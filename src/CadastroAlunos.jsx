@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
+import api from "./api.js"
 
 export default function CadastroAlunos() {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ export default function CadastroAlunos() {
     const grupoData = JSON.parse(localStorage.getItem("grupo"))
 
     const todosAlunos = mentorData ? [mentorData.nome, ...alunos.Aluno_Nome] : [...alunos.Aluno_Nome]
-    const matriculas = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
+    const ra = mentorData ? [mentorData.ra, ...alunos.Aluno_RA] : [...alunos.Aluno_RA]
     const email = mentorData ? [mentorData.email, ...alunos.Aluno_Email] : [...alunos.Aluno_Email]
     const senha = mentorData ? [mentorData.senha, ...alunos.Aluno_Senha] : [...alunos.Aluno_Senha]
     
@@ -85,12 +86,12 @@ export default function CadastroAlunos() {
       
       todosJuntos = todosAlunos.map((nome, i) => ({
         Aluno_Nome: nome,
-        Aluno_RA: matriculas[i],
+        Aluno_RA: ra[i],
         Aluno_Email: email[i],
         Aluno_Senha: senha[i],
-        Grupo_Nome: grupoData?.Grupo_Nome,
-        Grupo_Curso: grupoData?.Grupo_Curso,
-        Id_Grupo: Id_Grupo
+        Grupo_Nome: grupoData?.nome,
+        Grupo_Curso: grupoData?.curso,
+        Id_Grupo: grupoResponse?.Id_Grupo
       }))
       
       const res = await axios.post("http://localhost:500/api/users/alunos", todosJuntos)

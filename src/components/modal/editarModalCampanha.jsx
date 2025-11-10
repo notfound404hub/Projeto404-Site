@@ -1,4 +1,5 @@
 import React from "react";
+import api from "../../api";
 
 function EditCampanhaModal({
   isOpen,
@@ -21,28 +22,15 @@ function EditCampanhaModal({
 
   const salvarEdicao = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/campanhas/${campanhaEdit.ID_Campanha}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            Campanha_Nome: campanhaEdit.Campanha_Nome,
-            Campanha_Local: campanhaEdit.Campanha_Local,
-            Campanha_Meta: campanhaEdit.Campanha_Meta,
-            finish_at: campanhaEdit.finish_at,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.error || "Erro ao atualizar campanha");
-        return;
+      const dadosEditaveis = {
+        Campanha_Nome: campanhaEdit.Campanha_Nome,
+        Campanha_Local: campanhaEdit.Campanha_Local,
+        Campanha_Meta: campanhaEdit.Campanha_Meta,
+        finish_at: campanhaEdit.finish_at,
       }
-
-      alert("Campanha atualizada com sucesso!");
+      const response = await api.put(`/campanhas/${campanhaEdit.ID_Campanha}`, dadosEditaveis)
+      setCampanhaEdit(response.data)      
+      alert("Campanha atualizada com sucesso!")
       onClose();
       carregarCampanhas();
     } catch (error) {

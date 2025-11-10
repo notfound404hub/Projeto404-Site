@@ -9,6 +9,7 @@ import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
 import ExcluirModal from "./modal/excluirModal.jsx";
 import EditCampanhaModal from "./modal/editarModalCampanha.jsx";
+import api from "../api.js";
 
 function Campanhas({ onSelectPage }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -53,23 +54,10 @@ function Campanhas({ onSelectPage }) {
 
   const carregarCampanhas = async () => {
     try {
-      const response = await fetch(`http://localhost:500/api/users/tabela`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teste: teste }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && Array.isArray(data)) {
-        setCampanhas(data);
-        setCampanhasOriginais(data);
-      } else {
-        console.error("Resposta inválida ao carregar campanhas:", data);
-        setCampanhas([]);
-        setCampanhasOriginais([]);
-        alert(data?.error || "Erro ao buscar campanhas");
-      }
+      console.log("body: ", teste)
+      const response = await api.post(`/tabela`, {teste})
+      setCampanhas(response.data)
+      setCampanhasOriginais(response.data)
     } catch (err) {
       console.error("Erro ao buscar campanhas:", err);
       alert("Erro no servidor ao buscar campanhas");
@@ -165,14 +153,9 @@ function Campanhas({ onSelectPage }) {
     }
 
     const id = selected[0];
-    try {
-      const response = await fetch(
-        `http://localhost:500/api/users/campanhas/${id}`
-      );
-      if (!response.ok) throw new Error("Erro ao buscar campanha");
-
-      const data = await response.json();
-      setCampanhaEdit(data);
+    try {      
+      const response = await api.get(`campanhas/${id}`); 
+      setCampanhaEdit(response.data);
       setShowEditModal(true);
     } catch (err) {
       console.error("Erro ao buscar campanha:", err);

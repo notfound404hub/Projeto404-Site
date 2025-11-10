@@ -1,14 +1,13 @@
 import { useState } from "react";
 import api from "../api";
 
-function CadastroUsuario() {
+function CadastroAluno({ onSelectPage }) {
   const [formData, setFormData] = useState({
-    nome: "",
-    empresa: "",
-    cpfCnpj: "",
-    email: "",
-    telefone: "",
-    senha: "",
+    Aluno_Nome: "",
+    Aluno_Email: "",
+    Aluno_RA: "",
+    Grupo: "",
+    Aluno_Senha: "",
     confirmSenha: "",
   });
 
@@ -16,24 +15,24 @@ function CadastroUsuario() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validações no frontend
-    if (!formData.nome || !formData.email || !formData.senha) {
-      alert("Nome, e-mail e senha são obrigatórios!");
+    // Validações
+    if (!formData.Aluno_Nome || !formData.Aluno_Email || !formData.Aluno_RA || !formData.Grupo || !formData.Aluno_Senha) {
+      alert("Preencha todos os campos obrigatórios!");
       return;
     }
 
-    if (formData.senha !== formData.confirmSenha) {
+    if (formData.Aluno_Senha !== formData.confirmSenha) {
       alert("As senhas não coincidem!");
       return;
     }
 
-    if (formData.senha.length < 6) {
+    if (formData.Aluno_Senha.length < 6) {
       alert("A senha deve ter pelo menos 6 caracteres!");
       return;
     }
@@ -42,32 +41,32 @@ function CadastroUsuario() {
 
     try {
       const dadosEnvio = {
-        nome: formData.nome,
-        empresa: formData.empresa,
-        cpfCnpj: formData.cpfCnpj,
-        email: formData.email,
-        telefone: formData.telefone,
-        senha: formData.senha,
-        tabela: "Usuario"
+        Aluno_Nome: formData.Aluno_Nome,
+        Aluno_Email: formData.Aluno_Email,
+        Aluno_RA: formData.Aluno_RA,
+        Grupo: formData.Grupo,
+        Aluno_Senha: formData.Aluno_Senha,
+        tabela: "Aluno",
       };
 
-      const response = await api.post("/cadastroUsuario", dadosEnvio)
+      const response = await api.post("/cadastroAluno", dadosEnvio);
+      alert(response.data.msg || "Aluno cadastrado com sucesso!");
 
-      alert(response.data.msg || "Usuário cadastrado com sucesso!")
+      setFormData({
+        Aluno_Nome: "",
+        Aluno_Email: "",
+        Aluno_RA: "",
+        Grupo: "",
+        Aluno_Senha: "",
+        confirmSenha: "",
+      });
 
-        setFormData({
-          nome: "",
-          empresa: "",
-          cpfCnpj: "",
-          email: "",
-          telefone: "",
-          senha: "",
-          confirmSenha: "",
-        });
+      // Redireciona se a função foi passada via props
+      if (onSelectPage) onSelectPage("aluno");
 
     } catch (err) {
       console.error("Erro no cadastro:", err);
-      alert( err.response?.data?.error|| "Erro ao conectar com o servidor.");
+      alert(err.response?.data?.error || "Erro ao conectar com o servidor.");
     } finally {
       setLoading(false);
     }
@@ -76,75 +75,66 @@ function CadastroUsuario() {
   const handleCancel = () => {
     if (window.confirm("Deseja cancelar o cadastro? Os dados serão perdidos.")) {
       setFormData({
-        nome: "",
-        empresa: "",
-        cpfCnpj: "",
-        email: "",
-        telefone: "",
-        senha: "",
+        Aluno_Nome: "",
+        Aluno_Email: "",
+        Aluno_RA: "",
+        Grupo: "",
+        Aluno_Senha: "",
         confirmSenha: "",
       });
-    }
 
-    onSelectPage("usuario");
+      if (onSelectPage) onSelectPage("aluno");
+    }
   };
 
   return (
     <div className="cadastro-container">
-      <h2>Cadastro de Colaborador</h2>
+      <h2>Cadastro de Aluno</h2>
 
       <form className="cadastro-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nome *</label>
           <input
             type="text"
-            name="nome"
-            value={formData.nome}
+            name="Aluno_Nome"
+            value={formData.Aluno_Nome}
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="form-group">
-          <label>Empresa</label>
-          <input
-            type="text"
-            name="empresa"
-            value={formData.empresa}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>CPF/CNPJ</label>
-          <input
-            type="text"
-            name="cpfCnpj"
-            value={formData.cpfCnpj}
-            onChange={handleChange}
-            maxLength="18"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>E-mail *</label>
+          <label>Email *</label>
           <input
             type="email"
-            name="email"
-            value={formData.email}
+            name="Aluno_Email"
+            value={formData.Aluno_Email}
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="form-group">
-          <label>Telefone</label>
+          <label>Matrícula *</label>
           <input
             type="text"
-            name="telefone"
-            value={formData.telefone}
+            name="Aluno_RA"
+            value={formData.Aluno_RA}
+            onChange={handleChange}
+            maxLength="18"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Grupo *</label>
+          <input
+            type="text"
+            name="Grupo"
+            value={formData.Grupo}
             onChange={handleChange}
             maxLength="15"
+            required
           />
         </div>
 
@@ -152,8 +142,8 @@ function CadastroUsuario() {
           <label>Senha *</label>
           <input
             type="password"
-            name="senha"
-            value={formData.senha}
+            name="Aluno_Senha"
+            value={formData.Aluno_Senha}
             onChange={handleChange}
             required
             minLength="6"
@@ -161,7 +151,7 @@ function CadastroUsuario() {
         </div>
 
         <div className="form-group">
-          <label>Confirmação de senha *</label>
+          <label>Confirmação de Senha *</label>
           <input
             type="password"
             name="confirmSenha"
@@ -172,15 +162,16 @@ function CadastroUsuario() {
         </div>
 
         <div className="form-buttons">
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="btn-confirmar"
             disabled={loading}
           >
             {loading ? "Cadastrando..." : "Confirmar Cadastro"}
           </button>
-          <button 
-            type="button" 
+
+          <button
+            type="button"
             className="btn-cancelar"
             onClick={handleCancel}
             disabled={loading}
@@ -193,4 +184,4 @@ function CadastroUsuario() {
   );
 }
 
-export default CadastroUsuario;
+export default CadastroAluno;

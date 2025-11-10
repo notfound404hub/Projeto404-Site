@@ -1,20 +1,24 @@
 import React, { useState } from "react";
+import api from "../../api";
 
 function ImportarModal({
   isOpen,
   onClose,
   onImportSuccess,
   handleExportarUsuarios,
-  tabela
+  tabela,
 }) {
-  let rota = ""
+  let rota = "";
   switch (tabela) {
-    case 'Usuario ':
-      rota = "http://localhost:500/api/users/importarUsuarios"
-    break
-    case 'Campanha ':
-      rota = "http://localhost:500/api/users/importarCampanha"
-    break
+    case "Usuario ":
+      rota = "/importarUsuarios"
+      break
+    case "Campanha ":
+      rota = "/importarCampanha"
+      break
+    case "Aluno ":
+      rota = "/importarAlunos"
+      break
   }
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -32,30 +36,22 @@ function ImportarModal({
 
     try {
       console.log(" Enviando arquivo Excel para o backend...");
-      const response = await fetch(
-        rota,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
 
-      const data = await response.json();
+      const response = await api.post(rota, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });     
 
-      if (!response.ok) {
-        throw new Error(data.error || "Erro ao importar planilha");
-      }
-
-      alert(`${data.msg}`);
+      const data = response.data;
+      alert(`${data.msg}`)
       console.log(" Importação concluída:", data);
 
-      // Atualiza lista principal após sucesso
       if (onImportSuccess) onImportSuccess();
 
-      // Fecha o modal
       onClose();
     } catch (error) {
-      console.error(" Erro no envio da planilha:", error);
+      console.error(" Erro no envio da planilha:", error)
       alert("Erro ao importar planilha");
     }
   };
@@ -65,11 +61,10 @@ function ImportarModal({
       <div className="modal">
         <h2>Importar Usuários</h2>
         <p>
-          Baixe o molde abaixo, preencha as informações e envie a planilha
-          para importar os usuários.
+          Baixe o molde abaixo, preencha as informações e envie a planilha para
+          importar os usuários.
         </p>
 
-        {/* 🔹 Seção principal do modal */}
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <button
             className="export botaoLogin"
@@ -85,7 +80,6 @@ function ImportarModal({
           />
         </div>
 
-        {/* 🔹 Rodapé do modal */}
         <div className="footerModal">
           <button className="btnFilter" onClick={onClose}>
             Fechar

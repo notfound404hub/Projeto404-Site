@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { data } from "react-router-dom";
+import api from "../api.js"
 
 // 🔹 Imports dos modais
 import ImportModal from "./modal/importarModal.jsx";
@@ -52,26 +53,36 @@ function Usuarios({ onSelectPage }) {
   // Manipulação de filtros
   const handleChange = (event) => {
     setValorSelecionado(event.target.value);
+    if (event.target.value === "id") {
+      setFilterSelecionado("igual");
+    }
+  };
+  const abrirModalEdicao = async () => {
+    if (selected.length !== 1) {
+      alert("Selecione exatamente 1 usuário para editar!");
+      return;
+    }
+
+    const id = selected[0];
+
+    try {
+      const response = await api.get(`/usuario/${id}`);
+      setUsuarioEdit(response.data);
+      setShowEditModal(true);
+    } catch (err) {
+      console.error("Erro ao buscar usuário:", err);
+      alert("Erro ao buscar dados do usuário");
+    }
     if (event.target.value === "id") setFilterSelecionado("igual");
   };
 
   // Função: carregar usuários
   const carregarUsuarios = async () => {
     try {
-      const response = await fetch(`http://localhost:500/api/users/tabela`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teste: teste }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setUsuarios(data);
-        setUsuariosOriginais(data);
-      } else {
-        alert(data.error || "Erro ao buscar usuários");
-      }
+      console.log("body: ", teste)
+      const response = await api.post('/tabela', {teste} )
+        setUsuarios(response.data);
+        setUsuariosOriginais(response.data);
     } catch (err) {
       console.error("Erro ao buscar usuários:", err);
       alert("Erro no servidor ao buscar usuário");
@@ -161,30 +172,29 @@ function Usuarios({ onSelectPage }) {
   // Exclusão de usuários
  
 
-  // Abrir modal de edição
-  const abrirModalEdicao = async () => {
-    if (selected.length !== 1) {
-      alert("Selecione exatamente 1 usuário para editar!");
-      return;
-    }
+  // // Abrir modal de edição
+  // const abrirModalEdicao = async () => {
+  //   if (selected.length !== 1) {
+  //     alert("Selecione exatamente 1 usuário para editar!");
+  //     return;
+  //   }
 
-    const id = selected[0];
-    try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${id}`
-      );
-      if (!response.ok) throw new Error("Erro ao buscar usuário");
+  //   const id = selected[0];
+  //   try {
+  //     const response = await api.delete("/deleteFromTable", {
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ ids: selected }),
+  //     });
 
-      const data = await response.json();
-      setUsuarioEdit(data);
-      setShowEditModal(true);
-    } catch (err) {
-      console.error("Erro ao buscar usuário:", err);
-      alert("Erro ao buscar dados do usuário");
-    }
-  };
+  //     const data = await response.json();
+  //     setUsuarioEdit(data);
+  //     setShowEditModal(true);
+  //   } catch (err) {
+  //     console.error("Erro ao buscar usuário:", err);
+  //     alert("Erro ao buscar dados do usuário");
+  //   }
+  // };
 
-  // 🔹 JSX
   return (
     <div className="main-container-tabela">
       <div className="cabecalho-tabela">

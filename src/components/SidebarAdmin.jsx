@@ -1,15 +1,21 @@
 import { useState } from "react";
-<<<<<<< Updated upstream
 
-=======
+
+
+
+import api from "../api.js"
+
+
+
+
+
 import api from "../api.js"
 import { FaEllipsisV } from "react-icons/fa";
->>>>>>> Stashed changes
+
+
 function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage }) {
   const [modalConfig, setModalConfig] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
-
-  // estados para menus expansíveis
   const [openCadastros, setOpenCadastros] = useState(false);
   const [openDoacoes, setOpenDoacoes] = useState(false);
 
@@ -21,9 +27,8 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuarioPrincipal/${ID_Usuario}`,
-        { method: "DELETE" }
+      const response = await api.delete(
+        `/usuario/${ID_Usuario}`
       );
       const data = await response.json();
       alert(data.msg || data.error);
@@ -45,8 +50,8 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/usuario/${ID_Usuario}`
+      const response = await api.get(
+        `/usuario/${ID_Usuario}`
       );
       const data = await response.json();
 
