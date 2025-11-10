@@ -1,6 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showConecteSe, setShowConecteSe] = useState(true);
+  const [showAdminButton, setShowAdminButton] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
+
+  useEffect(() => {
+    const storedTipo = (localStorage.getItem("Tipo_Usuario") || "").toLowerCase();
+    const storedID = localStorage.getItem("ID_Usuario");
+    const token = localStorage.getItem("token");
+    if (storedTipo === "aluno") {
+      setShowConecteSe(false);
+      setShowAdminButton(false);
+      setShowLogout(true);
+    } else if (storedTipo === "usuario" && storedID) {
+      setShowConecteSe(false);
+      setShowAdminButton(true);
+      setShowLogout(true);
+    } else {
+      setShowConecteSe(true);
+      setShowAdminButton(false);
+      // if there's a token but no explicit tipo/ID, still show logout
+      setShowLogout(!!token);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Remove auth-related keys from localStorage
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("ID_Usuario");
+      localStorage.removeItem("Tipo_Usuario");
+      localStorage.removeItem("Email");
+    } catch (err) {
+      console.warn("Erro ao limpar localStorage:", err);
+    }
+
+    // Update local UI state
+    setShowConecteSe(true);
+    setShowAdminButton(false);
+    setShowLogout(false);
+
+    // Redirect to home (refresh ensures any other components read cleared storage)
+    window.location.href = "/";
+  };
   return (
     <body className="bodyImg">
        
@@ -29,9 +72,16 @@ function Home() {
        </div> 
        <button className="navHomeBotoes">Notícias</button> 
        <button className="navHomeBotoes">Contato</button> 
-       <button className="btnConectar" onClick={() => (window.location.href = "login")}>
-         Conecte-se
-       </button> 
+       {showConecteSe && (
+         <button className="btnConectar" onClick={() => (window.location.href = "login")}>Conecte-se</button>
+       )}
+       {!showConecteSe && showAdminButton && (
+         <button className="btnConectar" onClick={() => (window.location.href = "/admin")}>Admin</button>
+       )}
+
+       {showLogout && (
+         <button className="btnConectar" onClick={handleLogout}>Deslogar</button>
+       )}
      </nav> 
    </header>
     

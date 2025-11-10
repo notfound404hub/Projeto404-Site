@@ -26,7 +26,7 @@ function Verificar(){
         <div className="divVerificar">
             
         <aside className="asideVerificar">
-            <img className="logoVerificar" src="LogoFundoBranco.avif" alt="logo" />
+            <img className="logoVerificar" src="/LogoFundoBranco.avif" alt="logo" />
             <h1 className="h1VerificarEmail">Verificação de E-mail</h1>
             <p className="pVerificar">Não recebeu? <a href=""> Reenviar código</a></p>
             <h1 className="h1Verificar">Clique no botão abaixo para verificar seu E-mail. Um código será enviado para o seu e-mail logo após.

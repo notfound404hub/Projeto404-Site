@@ -14,4 +14,28 @@ api.interceptors.request.use(config => {
     return Promise.reject(error)
 })
 
+let handledExpiredToken = false;
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const status = error?.response?.status;
+        if ((status === 401 || status === 403) && !handledExpiredToken) {
+            handledExpiredToken = true;
+            try {
+                alert("Seu token expirou! Faça login novamente");
+            } catch (e) {
+            }
+            
+            localStorage.removeItem("token");
+            localStorage.removeItem("ID_Usuario");
+            localStorage.removeItem("Tipo_Usuario");
+            localStorage.removeItem("Email");
+
+            window.location.href = "/login";
+        }
+        return Promise.reject(error);
+    }
+);
+
 export default api

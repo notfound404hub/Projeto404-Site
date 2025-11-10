@@ -13,8 +13,6 @@ import ExcluirModal from "./modal/excluirModalAluno.jsx";
 import EditarModal from "./modal/editarModalAluno.jsx";
 
 function Alunos({ onSelectPage }) {
-  // Estados principais
-  const [selectedFile, setSelectedFile] = useState(null);
   const [filterSelecionado, setFilterSelecionado] = useState("igual");
   const [alunos, setAlunos] = useState([]);
   const [alunosOriginais, setAlunosOriginais] = useState([]);
@@ -218,7 +216,6 @@ const abrirModalEdicao = async () => {
               <th>RA</th>
               <th>Nome</th>
               <th>E-mail</th>
-              <th>Senha</th>
               <th>CPF</th>
               <th>Foto</th>
               <th>Telefone</th>
@@ -243,7 +240,6 @@ const abrirModalEdicao = async () => {
                 <td>{u.Aluno_RA}</td>
                 <td>{u.Aluno_Nome}</td>
                 <td>{u.Aluno_Email}</td>
-                <td>{u.Aluno_Senha}</td>
                 <td>{u.Aluno_Cpf}</td>
                 <td>{u.Aluno_Foto}</td>
                 <td>{u.Aluno_Telefone}</td>

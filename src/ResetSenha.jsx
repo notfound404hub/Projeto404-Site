@@ -22,17 +22,28 @@ function ResetSenha() {
       )
       console.log("Resposta recebida:", response.data);
       setMensagem(response.data.message)
+      // Clear any stale auth state so the login page doesn't show admin/logout buttons
+      try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("ID_Usuario");
+        localStorage.removeItem("Tipo_Usuario");
+        localStorage.removeItem("Email");
+      } catch (e) {
+        console.warn("Erro limpando localStorage após reset de senha:", e);
+      }
       navigate("/login")
     } catch (err) {
-      console.error({ err: "Erro ao mudar a senha", details: err.message })
-      setMensagem("Erro ao redefinir senha.");
+      // Try to extract a meaningful error message from the server response
+      console.error("Erro ao mudar a senha", err);
+      const serverMessage = err?.response?.data?.error || err?.response?.data?.message || err?.message;
+      setMensagem(serverMessage || "Erro ao redefinir senha.");
     }
   }
 
   return (
     <div className="divResetSenha">
       <aside className="asideResetSenha">
-        <img className="logoResetSenha" src="LogoFundoBranco.avif" alt="logo" />
+        <img className="logoResetSenha" src="/LogoFundoBranco.avif" alt="logo" />
         <h1 className="h1ResetSenha">Recuperação de senha</h1>
         <h2 className="h2ResetSenha">
           Digite sua nova senha abaixo e confirme. As senhas digitadas devem ser exatamente iguais.

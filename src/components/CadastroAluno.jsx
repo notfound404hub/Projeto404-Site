@@ -6,9 +6,7 @@ function CadastroAluno({ onSelectPage }) {
     Aluno_Nome: "",
     Aluno_Email: "",
     Aluno_RA: "",
-    Grupo: "",
-    Aluno_Senha: "",
-    confirmSenha: "",
+    Grupo: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -22,18 +20,8 @@ function CadastroAluno({ onSelectPage }) {
     e.preventDefault();
 
     // Validações
-    if (!formData.Aluno_Nome || !formData.Aluno_Email || !formData.Aluno_RA || !formData.Grupo || !formData.Aluno_Senha) {
+    if (!formData.Aluno_Nome || !formData.Aluno_Email || !formData.Aluno_RA || !formData.Grupo) {
       alert("Preencha todos os campos obrigatórios!");
-      return;
-    }
-
-    if (formData.Aluno_Senha !== formData.confirmSenha) {
-      alert("As senhas não coincidem!");
-      return;
-    }
-
-    if (formData.Aluno_Senha.length < 6) {
-      alert("A senha deve ter pelo menos 6 caracteres!");
       return;
     }
 
@@ -44,9 +32,8 @@ function CadastroAluno({ onSelectPage }) {
         Aluno_Nome: formData.Aluno_Nome,
         Aluno_Email: formData.Aluno_Email,
         Aluno_RA: formData.Aluno_RA,
-        Grupo: formData.Grupo,
-        Aluno_Senha: formData.Aluno_Senha,
-        tabela: "Aluno",
+        Grupo: formData.Grupo,   
+        tabela: "Aluno"
       };
 
       const response = await api.post("/cadastroAluno", dadosEnvio);
@@ -56,9 +43,7 @@ function CadastroAluno({ onSelectPage }) {
         Aluno_Nome: "",
         Aluno_Email: "",
         Aluno_RA: "",
-        Grupo: "",
-        Aluno_Senha: "",
-        confirmSenha: "",
+        Grupo: ""
       });
 
       // Redireciona se a função foi passada via props
@@ -137,30 +122,7 @@ function CadastroAluno({ onSelectPage }) {
             required
           />
         </div>
-
-        <div className="form-group">
-          <label>Senha *</label>
-          <input
-            type="password"
-            name="Aluno_Senha"
-            value={formData.Aluno_Senha}
-            onChange={handleChange}
-            required
-            minLength="6"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Confirmação de Senha *</label>
-          <input
-            type="password"
-            name="confirmSenha"
-            value={formData.confirmSenha}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
+        
         <div className="form-buttons">
           <button
             type="submit"

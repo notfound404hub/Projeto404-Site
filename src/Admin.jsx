@@ -13,6 +13,8 @@ import CadastroUsuario from "./components/cadastroUsuario.jsx";
 import CadastroCampanha from "./components/cadastroCampanha.jsx";
 import CadastroGrupo from "./components/CadastroGrupo.jsx";
 import CadastroAlimento from "./components/CadastroAlimento.jsx";
+import CadastroAluno from "./components/CadastroAluno.jsx";
+import CadastroDinheiro from "./components/CadastroDinheiro.jsx";
 
 function Admin() {
   const [userData, setUserData] = useState({
@@ -63,7 +65,9 @@ function Admin() {
         {activeScreen === "alimentos" && (
           <Alimentos onSelectPage={(page) => setActiveScreen(page)} />
         )}
-        {activeScreen === "dinheiro" && <Dinheiro />}
+        {activeScreen === "dinheiro" && (
+          <Dinheiro onSelectPage={(page) => setActiveScreen(page)} />
+        )}
         {activeScreen === "campanhas" && (
           <Campanhas onSelectPage={(page) => setActiveScreen(page)} />
         )}
@@ -78,6 +82,7 @@ function Admin() {
         )}
 
         {activeScreen === "CadastroCampanha" && <CadastroCampanha />}
+  {activeScreen === "CadastroDinheiro" && <CadastroDinheiro onSelectPage={(page) => setActiveScreen(page)} />}
         {activeScreen === "suporte" && <PainelSuporte />}
       </div>
     </div>

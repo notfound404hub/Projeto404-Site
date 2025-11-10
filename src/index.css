@@ -18,7 +18,7 @@ body {
   padding: 50px 0;
   width: 100vw;
   height: 100vh;
-  background-image: url("./imagemFundo.jpg");
+  background-image: url("/imagemFundo.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -119,6 +119,17 @@ form {
   scale: 1.1;
 
 }
+
+/* Container e espaçamento para os botões Entrada / Saída (CadastroDinheiro) */
+.tipo-btns-container {
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px; /* espaço entre os botões */
+  align-items: center;
+}
+
+/* Ajustes visuais: manter mesmo design para Entrada e Saída; classe .bntTiposEntrada já aplica a base */
+/* (base button styles for .bntTiposEntrada already defined earlier) */
 .footerLogin {
   margin-top: 20px;
 }
@@ -348,6 +359,44 @@ form {
 
 .btnProximo:hover {
   background-color: rgb(243, 243, 243);
+}
+
+/* SelecionarCadastro specific styles */
+.selecionar-aside {
+  align-items: center;
+  padding-top: 30px;
+}
+
+.selecionarLogo {
+  width: 140px;
+  height: 140px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.selecionarTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.selecionarButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  align-items: center;
+  padding: 0 30px 30px 30px;
+}
+
+.selecionarBtn {
+  width: 100%;
+  max-width: 520px;
+  height: 58px;
+  font-weight: bolder;
+  font-size: 16px;
+  border-radius: 10px;
 }
 
 /* CADASTRO */
@@ -2611,13 +2660,13 @@ form {
 }
 
 .tipo-btn.saida {
-  background-color: #fafafa;
-  color: #00ab72;
+  background-color: #e53935; /* red for saída */
+  color: #ffffff;
 }
 
 .tipo-btn.saida:hover {
-  background-color: #00ab72; 
-  color: #fafafa;
+  background-color: #b71c1c; /* darker red on hover */
+  color: #ffffff;
   transform: scale(1.05);
 }
 

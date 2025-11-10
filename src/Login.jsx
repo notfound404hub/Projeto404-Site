@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css'; 
 import { useNavigate } from "react-router-dom";
 import api from "./api.js"
@@ -6,6 +6,8 @@ import api from "./api.js"
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [showAdminButton, setShowAdminButton] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,6 +33,19 @@ function Login() {
       console.log("Tipo:", tipo);
       console.log("ID:", ID);
 
+      const tipoLower = (tipo || "").toString().toLowerCase();
+      if (tipoLower === "aluno") {
+        setShowAdminButton(false);
+        setShowLogout(true);
+      } else if (tipoLower === "usuario") {
+        if (ID) localStorage.setItem("ID_Usuario", ID);
+        setShowAdminButton(true);
+        setShowLogout(true);
+      } else {
+        setShowAdminButton(false);
+        setShowLogout(!!token);
+      }
+
       if (verificado != 1) {
         navigate(`/enviaremail/${token}`);
       } else {
@@ -42,11 +57,39 @@ function Login() {
     }
   };
 
+  useEffect(() => {
+    const storedTipo = (localStorage.getItem("Tipo_Usuario") || "").toLowerCase();
+    const storedID = localStorage.getItem("ID_Usuario");
+    const token = localStorage.getItem("token");
+    if (storedTipo === "aluno") {
+      setShowAdminButton(false);
+      setShowLogout(!!token);
+    } else if (storedTipo === "usuario" && storedID) {
+      setShowAdminButton(true);
+      setShowLogout(!!token);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("ID_Usuario");
+      localStorage.removeItem("Tipo_Usuario");
+      localStorage.removeItem("Email");
+    } catch (err) {
+      console.warn("Erro ao limpar localStorage:", err);
+    }
+    setShowAdminButton(false);
+    setShowLogout(false);
+
+    navigate("/");
+  };
+
   return (
     <div className="bodyImg">
       <div className="divLogin">
         <aside className="asideLogin">
-          <img className="logo" src="./public/logo.png" alt="Logo" />
+          <img className="logo" src="/logo.png" alt="Logo" />
 
           <p className="lbl_Bemvindo">
             Seja bem-vindo ao
@@ -85,6 +128,15 @@ function Login() {
           </form>
 
           <a href="/esquecer-senha">Esqueci minha senha</a>
+          <div className="connect-area">
+            {showAdminButton && (
+              <a className="botaoAdmin" href="/admin">Admin</a>
+            )}
+
+            {showLogout && (
+              <button className="conecteSeBtn" onClick={handleLogout}>Deslogar</button>
+            )}
+          </div>
           <p className="footerLogin">&copy; 2025, 404 not found</p>
         </aside>
       </div>

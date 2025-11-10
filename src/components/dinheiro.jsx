@@ -2,24 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-
-// 🔹 Imports dos modais
-
 import ExportarModal from "./modal/exportarModal.jsx";
 import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
 import ExcluirModal from "./modal/excluirModal.jsx";
-import EditarModal from "./modal/editarModalTransacoes.jsx";
+import EditarModal from "./modal/editarModalDinheiro.jsx";
 import ModalTipoTransacao from "./modal/ModalTipoTransacao.jsx";
+import api from "../api.js";
 
-function trasacoes({ onSelectPage }) {
-  // Estados principais
-  const [selectedFile, setSelectedFile] = useState(null);
+function transacoes({ onSelectPage }) {
   const [filterSelecionado, setFilterSelecionado] = useState("igual");
-  const [trasacoes, settrasacoes] = useState([]);
-  const [trasacoesOriginais, settrasacoesOriginais] = useState([]);
+  const [transacoes, settransacoes] = useState([]);
+  const [transacoesOriginais, settransacoesOriginais] = useState([]);
   const [selected, setSelected] = useState([]);
-  const [fileName, setFileName] = useState("trasacoes_exportados");
+  const [fileName, setFileName] = useState("transacoes_exportados");
   const [rangeStart, setRangeStart] = useState("");
   const [rangeEnd, setRangeEnd] = useState("");
   const [exportType, setExportType] = useState("Todos");
@@ -45,16 +41,26 @@ function trasacoes({ onSelectPage }) {
   const [showModalOrdenar, setshowModalOrdenar] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  
+
   const teste =
-  tipoTransacao === "entrada"
-    ? "TransacaoEntrada"
-    : tipoTransacao === "saida"
-    ? "TransacaoSaida"
-    : "";
+    tipoTransacao === "entrada"
+      ? "TransacaoEntrada"
+      : tipoTransacao === "saida"
+        ? "TransacaoSaida"
+        : "";
+
+  const idFieldName =
+    tipoTransacao === "entrada"
+      ? "ID_TransacaoEntrada"
+      : tipoTransacao === "saida"
+        ? "ID_TransacaoSaida"
+        : "ID_transacao";
+
+  const getId = (u) =>
+    u?.ID_TransacaoEntrada ?? u?.ID_TransacaoSaida ?? u?.ID_Transacao ?? u?.ID_transacao ?? u?.id;
 
 
-  filtros[0] = "trasacoes";
+  filtros[0] = "transacoes";
 
   // Opções dos filtros
   const handleSelect = (tipoEscolhido) => {
@@ -62,47 +68,32 @@ function trasacoes({ onSelectPage }) {
     setshowModalTipo(false); // Fecha o modal de tipo
     console.log("Tipo escolhido:", tipoEscolhido);
   };
-  
+
   // Manipulação de filtros
   const handleChange = (event) => {
     setValorSelecionado(event.target.value);
     if (event.target.value === "id") setFilterSelecionado("igual");
   };
 
-  
-
-  // Função: carregar trasacoess
-  const carregartrasacoes = async () => {
+  const carregartransacoes = async () => {
     try {
       if (!teste) return;
-      const response = await fetch(`http://localhost:500/api/users/tabela`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teste: teste }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        settrasacoes(data);
-        settrasacoesOriginais(data);
-      } else {
-        alert(data.error || "Erro ao buscar trasacoess");
-      }
+      const response = await api.post("/tabela", { teste });
+      const data = response.data;
+      settransacoes(data);
+      settransacoesOriginais(data);
     } catch (err) {
-      console.error("Erro ao buscar trasacoess:", err);
-      alert("Erro no servidor ao buscar trasacoes");
+      console.error("Erro ao buscar transacoes:", err);
+      alert("Erro no servidor ao buscar transacoes");
     }
   };
 
   useEffect(() => {
     if (tipoTransacao) {
-      carregartrasacoes();
+      carregartransacoes();
     }
   }, [tipoTransacao]);
-  
 
-  // Seleção de trasacoess
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
@@ -110,33 +101,33 @@ function trasacoes({ onSelectPage }) {
   };
 
   const toggleSelectAll = () => {
-    if (selected.length === trasacoes.length) {
+    if (selected.length === transacoes.length) {
       setSelected([]);
     } else {
-      setSelected(trasacoes.map((u) => u.ID_transacao));
+      setSelected(transacoes.map((u) => getId(u)).filter(Boolean));
     }
   };
 
-  const isAllSelected = selected.length === trasacoes.length;
+  const isAllSelected = selected.length === transacoes.length;
 
   useEffect(() => {
     if (headerCheckboxRef.current) {
       const isPartial =
-        selected.length > 0 && selected.length < trasacoes.length;
+        selected.length > 0 && selected.length < transacoes.length;
       headerCheckboxRef.current.indeterminate = isPartial;
     }
-  }, [selected, trasacoes.length]);
+  }, [selected, transacoes.length]);
 
   // Exportação
   const gerarWorkbook = (dados) => {
     const worksheet = XLSX.utils.json_to_sheet(dados);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "trasacoes");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "transacoes");
     return workbook;
   };
 
-  const exportartrasacoes = () => {
-    let dadosFiltrados = trasacoes;
+  const exportartransacoes = () => {
+    let dadosFiltrados = transacoes;
 
     if (exportType === "intervalo") {
       if (!rangeStart || !rangeEnd) {
@@ -145,9 +136,10 @@ function trasacoes({ onSelectPage }) {
       }
       const start = parseInt(rangeStart, 10);
       const end = parseInt(rangeEnd, 10);
-      dadosFiltrados = trasacoes.filter(
-        (u) => u.ID_transacao >= start && u.ID_transacao <= end
-      );
+      dadosFiltrados = transacoes.filter((u) => {
+        const id = getId(u);
+        return id >= start && id <= end;
+      });
 
       if (dadosFiltrados.length === 0) {
         alert("Nenhum transacao encontrado no range informado!");
@@ -166,14 +158,14 @@ function trasacoes({ onSelectPage }) {
     setShowModal(false);
   };
 
-  const handleExportartrasacoes = async () => {
+  const handleExportartransacoes = async () => {
     try {
-      console.log("🧾 Iniciando exportação de todos os trasacoess...");
+      console.log("🧾 Iniciando exportação de todos os transacoess...");
       setExportType("Todos");
-      await exportartrasacoes();
+      await exportartransacoes();
       alert("✅ Planilha exportada com sucesso!");
     } catch (erro) {
-      console.error("❌ Erro ao exportar trasacoess:", erro);
+      console.error("❌ Erro ao exportar transacoess:", erro);
       alert("Erro ao exportar planilha");
     }
   };
@@ -181,38 +173,39 @@ function trasacoes({ onSelectPage }) {
   // Abrir modal de edição
   const abrirModalEdicao = async () => {
     if (selected.length !== 1) {
-      alert("Selecione exatamente 1 trasacoes para editar!");
+      alert("Selecione exatamente 1 transacoes para editar!");
       return;
     }
-
     const id = selected[0];
+    let url = `/transacao/${id}`;
     try {
-      const response = await fetch(
-        `http://localhost:500/api/users/transacao/${id}`
-      );
-      if (!response.ok) throw new Error("Erro ao buscar trasacoes");
-
-      const data = await response.json();
+      if (tipoTransacao === "entrada") {
+        url = `/transacao/entrada/${id}`;
+      } else if (tipoTransacao === "saida") {
+        url = `/transacao/saida/${id}`;
+      }
+      const response = await api.get(url);
+      const data = response.data;
       settransacaoEdit(data);
       setShowEditModal(true);
     } catch (err) {
-      console.error("Erro ao buscar trasacoes:", err);
-      alert("Erro ao buscar dados do trasacoes");
+      console.error("Erro ao buscar transacoes:", err);
+      alert("Erro ao buscar dados do transacoes");
     }
   };
 
   // 🔹 JSX
-  
+
   return (
 
 
     <div className="main-container-tabela">
       {showModalTipo && <ModalTipoTransacao onSelect={handleSelect} />}
-     
+
       <div className="cabecalho-tabela">
         <button
           className="btn-tabela adicionar-tabela"
-          onClick={() => onSelectPage("Cadastrotransacao")}
+          onClick={() => onSelectPage("CadastroDinheiro")}
         >
           Adicionar +
         </button>
@@ -222,8 +215,8 @@ function trasacoes({ onSelectPage }) {
             Mais opções ▾
           </button>
           <div className="dropdown-content-tabela">
-            <a onClick={() => setShowModal(true)}>Exportar trasacoess</a>
-           
+            <a onClick={() => setShowModal(true)}>Exportar transações</a>
+
             <a onClick={() => setShowDeleteModal(true)}>Excluir</a>
             <a onClick={abrirModalEdicao}>Editar</a>
           </div>
@@ -247,7 +240,7 @@ function trasacoes({ onSelectPage }) {
       </div>
 
       <p className="indicador-selecionados-tabela">
-        {selected.length} trasacoes(s) selecionado(s)
+        {selected.length} transacoes(s) selecionado(s)
       </p>
 
       <div className="tabela">
@@ -274,17 +267,17 @@ function trasacoes({ onSelectPage }) {
           </thead>
 
           <tbody>
-            {trasacoes.map((u) => (
-              <tr key={u.ID_transacao}>
+            {transacoes.map((u) => (
+              <tr key={getId(u)}>
                 <td>
                   <input
                     className="chk-tabela"
                     type="checkbox"
-                    checked={selected.includes(u.ID_transacao)}
-                    onChange={() => toggleSelect(u.ID_transacao)}
+                    checked={selected.includes(getId(u))}
+                    onChange={() => toggleSelect(getId(u))}
                   />
                 </td>
-                <td>{u.ID_Transacao}</td>
+                <td>{getId(u)}</td>
                 <td>{u.transacao_Grupo}</td>
                 <td>{u.transacao_Aluno}</td>
                 <td>{u.transacao_Valor}</td>
@@ -313,18 +306,18 @@ function trasacoes({ onSelectPage }) {
         rangeEnd={rangeEnd}
         setRangeStart={setRangeStart}
         setRangeEnd={setRangeEnd}
-        exportarUsuarios={exportartrasacoes}
+        exportarUsuarios={exportartransacoes}
       />
 
-      
+
 
       <ExcluirModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
         selected={selected}
-        setItens={settrasacoes}
-        idField="ID_transacao"
-        carregarItens={carregartrasacoes}
+        setItens={settransacoes}
+        idField={idFieldName}
+        carregarItens={carregartransacoes}
         tabela={teste}
       />
 
@@ -337,8 +330,8 @@ function trasacoes({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        usuariosOriginais={trasacoesOriginais}
-        setResponse={settrasacoes}
+        usuariosOriginais={transacoesOriginais}
+        setResponse={settransacoes}
         campos={campostransacao}
         tabela={teste}
       />
@@ -350,7 +343,7 @@ function trasacoes({ onSelectPage }) {
         setValorSelecionado={setValorSelecionado}
         filterSelecionado={filterSelecionado}
         setFilterSelecionado={setFilterSelecionado}
-        setItens={settrasacoes}
+        setItens={settransacoes}
         tabela={teste}
         campos={campostransacao}
       />
@@ -360,10 +353,10 @@ function trasacoes({ onSelectPage }) {
         onClose={() => setShowEditModal(false)}
         transacaoEdit={transacaoEdit}
         settransacaoEdit={settransacaoEdit}
-        carregartrasacoes={carregartrasacoes}
+        carregartransacoes={carregartransacoes}
       />
     </div>
   );
 }
 
-export default trasacoes;
+export default transacoes;

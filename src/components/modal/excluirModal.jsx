@@ -16,6 +16,7 @@ function DeleteModal({
     try {   
       const response = await api.delete('/deleteFromTable', {
         data:{ids:selected, tabela: tabela}});
+        console.log("ids da exclusão",selected)
         alert(response.data.msg || "Itens excluídos com sucesso!");
         setItens((prev) => prev.filter((item) => !selected.includes(item[idField])));
         carregarItens();

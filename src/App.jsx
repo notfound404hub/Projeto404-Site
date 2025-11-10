@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import Home from "./Home";
-import Cadastro from "./Cadastro";
 import Verificar from "./Verificar";
 import EsqueciMinhaSenha from "./EsqueciMinhaSenha";
 import Admin from "./Admin";
@@ -20,8 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/cadastro" element={<Cadastro />} />
+  <Route path="/login" element={<Login />} />
         <Route path="/enviaremail/:token" element={<Verificar />} /> 
         <Route path="/verificar/:tokenVerifyMail" element={<EmailVerificado />} /> 
         <Route path="/esquecer-senha" element={<EsqueciMinhaSenha />} /> 

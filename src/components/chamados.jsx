@@ -9,8 +9,10 @@ const Chamados = ({ tipo, chamados, onVoltar, carregarChamados }) => {
 
   const excluirChamado = async (ID_Chamado) => {
     try {
-      await api.delete("/deleteChamado", { data: { ID_Chamado } });
-      alert("Chamado excluído com sucesso!");
+      const Criador_Tipo = localStorage.getItem("Tipo_Usuario") || "Usuario";
+      console.log("ExcluirChamado -> payload:", { ID_Chamado, Criador_Tipo });
+      const response = await api.delete("/deleteChamado", { data: { ID_Chamado, Criador_Tipo } });
+      alert(response.data?.msg || "Chamado excluído com sucesso!");
       if (carregarChamados) carregarChamados(); // atualiza a lista
     } catch (err) {
       console.error("Erro ao excluir chamado:", err);

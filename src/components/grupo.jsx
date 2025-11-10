@@ -42,6 +42,7 @@ function Grupo({ onSelectPage }) {
   const carregarGrupos = async () => {
     try {
       const response = await api.post("/grupos");
+      console.log(response.data);
       setGrupos(response.data);
       setGruposOriginais(response.data);
     } catch (err) {
