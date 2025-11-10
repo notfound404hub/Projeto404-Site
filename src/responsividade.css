@@ -1,0 +1,40 @@
+
+/* CELULAR (até 768px) */
+
+@media (max-width: 600px) {
+  /*Login*/
+  .asideLogin{
+    width: 460px;
+    height: 650px;
+  }
+  /* Admin */
+  .inputAdmin{
+    width: 150px;
+  }
+  .btnNotif,
+.btnChat,
+.btnPerfil{
+     width: 20px;
+  height: 20px;
+  }
+  .divPesquisar{
+    padding: 10px;
+  }
+ 
+
+}
+@media (min-width: 600px) and (max-width: 768px) { 
+  .asideLogin{
+    width: 500px;
+    height: 650px;
+  }   
+}
+
+/* TABLET (768px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+}
+/* DESKTOP (acima de 1024px) */
+@media (min-width: 1025px) {
+  
+}
+  

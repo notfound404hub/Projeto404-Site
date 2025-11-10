@@ -1,5 +1,10 @@
 import { useState } from "react";
+<<<<<<< Updated upstream
 
+=======
+import api from "../api.js"
+import { FaEllipsisV } from "react-icons/fa";
+>>>>>>> Stashed changes
 function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage }) {
   const [modalConfig, setModalConfig] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -58,18 +63,26 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
   };
 
   return (
-    <aside className="asideAdmin">
-      <img className="logoAdmin" src="LogoFundoBranco.avif" alt="logo" />
 
+
+    <aside className="asideAdmin">
+
+      <button
+        className="btnAsideAdmin"  >
+        <FaEllipsisV />
+      </button>
+
+      <img className="logoAdmin" src="LogoFundoBranco.avif" alt="logo" />
+      
       <ul className="menuAdmin">
         <li>
           <button className="btnAdmin" onClick={() => onSelectPage("home")}>
-            <img className="icon" src="home.png" alt="home" /> Página inicial
+            <img className="icon" src="home.png" alt="home" /> <p>Página inicial</p>
           </button>
         </li>
         <li>
           <button className="btnAdmin" onClick={() => onSelectPage("relatorios")}>
-            <img className="icon" src="report.png" alt="relatorio" /> Relatórios
+            <img className="icon" src="report.png" alt="relatorio" /> <p>Relatórios</p>
           </button>
         </li>
 
@@ -82,18 +95,18 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
               if (!openCadastros) setOpenDoacoes(false); // fecha doações ao abrir cadastros
             }}
           >
-            <img className="icon" src="verify.png" alt="cadastros" /> Cadastros
+            <img className="icon" src="verify.png" alt="cadastros" /> <p>Cadastros</p>
           </button>
           {openCadastros && (
             <ul className="submenu">
               <li>
                 <button className="btnSub" onClick={() => onSelectPage("aluno")}>
-                  <img className="icon" src="graduation.png" alt="Alunos" /> Aluno
+                  <img className="icon" src="graduation.png" alt="Alunos" /> <p>Aluno</p>
                 </button>
               </li>
               <li>
                 <button className="btnSub" onClick={() => onSelectPage("grupos")}>
-                  <img className="icon" src="people.png" alt="Grupo" /> Grupos
+                  <img className="icon" src="people.png" alt="Grupo" /> <p>Grupos</p>
                 </button>
               </li>
             </ul>
@@ -109,23 +122,23 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
               if (!openDoacoes) setOpenCadastros(false); // fecha cadastros ao abrir doações
             }}
           >
-            <img className="icon" src="heart.png" alt="doacoes" /> Doações
+            <img className="icon" src="heart.png" alt="doacoes" /> <p>Doações</p>
           </button>
           {openDoacoes && (
             <ul className="submenu">
               <li>
                 <button className="btnSub" onClick={() => onSelectPage("alimentos")}>
-                  <img className="icon" src="restaurant.png" alt="alimentos" /> Alimentos
+                  <img className="icon" src="restaurant.png" alt="alimentos" /> <p>Alimentos</p>
                 </button>
               </li>
               <li>
                 <button className="btnSub" onClick={() => onSelectPage("dinheiro")}>
-                  <img className="icon" src="dollar.png" alt="dinheiro" /> Dinheiro
+                  <img className="icon" src="dollar.png" alt="dinheiro" /> <p>Dinheiro</p>
                 </button>
               </li>
               <li>
                 <button className="btnSub" onClick={() => onSelectPage("campanhas")}>
-                  <img className="icon" src="campaign.png" alt="campanhas" /> Campanhas
+                  <img className="icon" src="campaign.png" alt="campanhas" /> <p>Campanhas</p>
                 </button>
               </li>
             </ul>
@@ -134,16 +147,16 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
 
         <li>
           <button className="btnAdmin" onClick={() => onSelectPage("usuarios")}>
-            <img className="icon" src="graduation.png" alt="usuarios" /> Usuários
+            <img className="icon" src="graduation.png" alt="usuarios" /> <p>Usuários</p>
           </button>
         </li>
-        
+
         <li>
           <button
             className="btnAdmin"
             onClick={() => onSelectPage("suporte")}
           >
-            <img className="icon" src="suport.png" alt="suporte" /> Suporte
+            <img className="icon" src="suport.png" alt="suporte" /> <p>Suporte</p>
           </button>
         </li>
       </ul>
@@ -154,12 +167,12 @@ function SidebarAdmin({ onLogout, onUpdate, userData, setUserData, onSelectPage 
             className="btnConfig"
             onClick={() => setModalConfig(!modalConfig)}
           >
-            <img className="icon" src="setting.png" alt="config" /> Configurações
+            <img className="icon" src="setting.png" alt="config" /> <p>Configurações</p>
           </button>
         </li>
         <li>
           <button className="btnSair" onClick={onLogout}>
-            <img className="icon" src="logout.png" alt="sair" /> Sair
+            <img className="icon" src="logout.png" alt="sair" /> <p>Sair</p>
           </button>
         </li>
       </ul>

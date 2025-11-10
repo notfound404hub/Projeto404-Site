@@ -4,25 +4,39 @@
   font-family: Poppins, sans-serif;
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;  
+overflow-x: hidden;
+
 }
+
 .bodyImg {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   padding: 50px 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-image: url("./imagemFundo.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+}
+
+.btnAsideAdimin {
+  display: none;
+  color: #00ab72;
+  background: none;
+  font-size: 25px;
+  padding: 5px;
+  margin: 10px;
+  border: none;
 }
 
 .asideLogin {
@@ -115,10 +129,11 @@ form {
 }
 
 
-.bntTiposEntrada:hover{
+.bntTiposEntrada:hover {
   scale: 1.1;
 
 }
+
 .footerLogin {
   margin-top: 20px;
 }
@@ -355,10 +370,20 @@ form {
 /* VERIFICAÇÃO */
 
 .asideVerificar {
+<<<<<<< Updated upstream
   position: absolute;
   right: 0;
   top: 0;
   height: 100%;
+=======
+  display: flex;
+  flex-direction: column;
+  /* organiza os elementos em coluna */
+  align-items: center;
+  /* centraliza horizontalmente */
+  justify-content: center;
+  /* centraliza verticalmente */
+>>>>>>> Stashed changes
   width: 450px;
   margin-right: 0 auto;
   background-color: white;
@@ -511,6 +536,7 @@ form {
   border-radius: 10px;
   margin-bottom: -20px;
 }
+
 .inputEsqueciSenha:placeholder {
   color: black;
 }
@@ -562,16 +588,131 @@ form {
 
 /* ESQUECI MINHA SENHA  */
 
+<<<<<<< Updated upstream
+=======
+/* RESET SENHA */
+/* VERIFICAÇÃO */
+
+/* ESQUECI MINHA SENHA */
+
+.asideResetSenha {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 450px;
+  margin-right: 0 auto;
+  background-color: white;
+  border-radius: 10px 0 0 10px;
+}
+
+.logoResetSenha {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+
+.h2ResetSenha {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  width: 400px;
+  color: black;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 20px;
+  margin-bottom: 60px;
+}
+
+.h1ResetSenha {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  color: black;
+  font-weight: bold;
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+
+.inputResetSenha {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  width: 300px;
+  height: 70px;
+  color: black;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.inputResetSenha:placeholder {
+  color: black;
+}
+
+.pEsqueciSenha {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+.btnResetSenha {
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 220px;
+  height: 50px;
+  display: flex;
+  justify-self: center;
+  border-radius: 10px;
+  margin-top: 30px;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #e7e6e6;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btnResetSenha:hover {
+  background-color: #d4d4d4;
+}
+
+.divResetSenha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 100px 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../public/fundoverde.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+/* RESET SENHA */
+
+>>>>>>> Stashed changes
 /* ADMIN */
 #root {
   height: 100%;
 }
+
 .mainAdmin {
   background-color: transparent;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 220px);
+  margin-left: 220px ;
   background-color: #fafafa;
 }
+
 .asideAdmin {
   display: flex;
   position: absolute;
@@ -581,9 +722,12 @@ form {
   height: 100%;
   width: 220px;
   background-color: #e6e4e4;
-
+  transition: all 0.3s ease;
   padding-bottom: 20px;
+
 }
+
+
 
 .menuAdmin {
   list-style: none;
@@ -618,16 +762,20 @@ form {
   padding-left: 20px;
   margin: 5px 0;
 }
+
 .menuAdmin.bottomMenu {
-  margin-top: auto; /* Empurra para o final da sidebar */
+  margin-top: auto;
+  /* Empurra para o final da sidebar */
 }
 
 .chk-tabela {
   accent-color: #00ab72;
 }
+
 .testechk {
   accent-color: #038a5d;
 }
+
 /* .chk-tabela:checked{
    color: #fafafa;
 }
@@ -644,13 +792,15 @@ form {
 .tabela-alunos td {
   white-space: nowrap;
 }
-.tbody tr{
+
+.tbody tr {
   transition: 0.3s;
 }
+
 .tabela {
   transition: 0.3s;
   width: 100%;
-  height: 420px;
+  height: 680px;
   overflow-x: auto;
   overflow-y: auto;
 }
@@ -664,6 +814,7 @@ form {
 .tabela-container-tabela td {
   white-space: nowrap;
 }
+
 .btnSub {
   display: flex;
   align-items: center;
@@ -717,22 +868,25 @@ form {
   background-color: #757575;
   margin-top: 10px;
 }
+
 .headerAdmin {
   margin-left: 220px;
   width: calc(100% - 220px);
 }
+
 .divPesquisar {
   box-sizing: border-box;
   display: flex;
   align-items: center;
   /* gap: 10px; */
- 
+
 
   padding: 30px;
   justify-content: space-between;
 }
-.chat-modal .divPesquisar{
- padding: 10px;
+
+.chat-modal .divPesquisar {
+  padding: 10px;
 }
 
 .divEsquerda {
@@ -762,6 +916,7 @@ form {
   background-color: #00ab72;
   cursor: pointer;
 }
+
 .inputAdmin:focus {
   outline: none;
 }
@@ -770,6 +925,7 @@ form {
   background: #029463;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .iconPesquisa {
   display: flex;
   align-self: center;
@@ -791,15 +947,18 @@ form {
   justify-self: center;
   align-self: center;
 }
+
 .divDireita {
   display: flex;
   /* align-items: center; */
   gap: 10px;
   margin-right: 30px;
 }
+
 .divDireita button:hover {
- scale: 1.1;
+  scale: 1.1;
 }
+
 .modalConfig {
   position: absolute;
   left: 260px;
@@ -855,6 +1014,7 @@ form {
     opacity: 0;
     transform: translate(-50%, -45%);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -916,9 +1076,9 @@ form {
 .main-container-tabela {
   padding: 10px;
   font-family: Arial, sans-serif;
-  width: calc(100% - 220px);
+  width:100%;
 
-  margin-left: 220px;
+  
   box-sizing: border-box;
   overflow-x: auto;
 }
@@ -926,18 +1086,21 @@ form {
 .cabecalho-tabela {
   padding-top: 10px;
 }
+
 .main-container-tabela .cabecalho-tabela {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
 }
+
 .rightMenu-tabela {
   display: flex;
   margin-left: auto;
   gap: 10px;
   width: auto;
 }
-.tiposEntrada{
+
+.tiposEntrada {
   gap: 10px;
   display: flex;
 }
@@ -1054,6 +1217,7 @@ form {
   background: #e9e8e8;
   font-weight: bold;
 }
+
 .main-container-tabela .tabela-container-tabela tr:nth-child(odd) {
   background: white;
 }
@@ -1061,11 +1225,193 @@ form {
 .main-container-tabela .tabela-container-tabela tr:nth-child(even) {
   background: #e9e8e8;
 }
+
 .main-container-tabela .tabela-container-tabela tr:hover {
   background: #aaaaaa;
 }
 
 /* suporte */
+<<<<<<< Updated upstream
+=======
+/* === MODAL DE CHAMADO === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-chamado {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-fechar-modal {
+
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #00ab72;
+}
+
+.mensagens-lista {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-mensagem {
+  width: 80%;
+}
+
+.btn-enviar {
+  margin: 5px;
+  width: 90px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #fafafa;
+  color: #fafafa;
+  background: #00ab72;
+}
+
+.btn-enviar:hover {
+  scale: 1.03;
+  color: #00ab72;
+  background: #fafafa;
+  border: 2px solid #00ab72;
+}
+
+
+.mensagem-item {
+  background-color: #f4f4f4;
+  padding: 12px 16px;
+  border-radius: 8px;
+
+}
+
+.aluno-mensagem {
+  background: #e9ffe9;
+  align-self: flex-end;
+  border-right: 4px solid #28a745;
+  min-width: 250px;
+}
+
+.suporte-mensagem {
+  min-width: 250px;
+  background: #cce5ff;
+  align-self: flex-start;
+  border-left: 4px solid #007bff;
+}
+
+.mensagem-item p {
+  margin: 2px 0;
+}
+
+.mensagem-item small {
+  color: #666;
+  font-size: 12px;
+}
+
+.chamados-tela {
+
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: calc(100% - 220px);
+  margin-left: 220px;
+
+}
+
+.chamados-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-voltar {
+  background: #00ab72;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lista-chamados {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.chamado-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.acoes-chamado {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-entrar {
+  background-color: #00a86b;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-excluir {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sem-chamados {
+  text-align: center;
+  color: #777;
+  font-size: 1.1rem;
+}
+
+>>>>>>> Stashed changes
 * {
   margin: 0;
   padding: 0;
@@ -1073,10 +1419,7 @@ form {
 }
 
 /* LAYOUT PRINCIPAL */
-.dashboard {
-  display: flex;
-  height: 100vh;
-}
+
 
 /* ========== BARRA LATERAL ========== */
 .barra-lateral {
@@ -1188,7 +1531,11 @@ form {
 }
 
 .caixa-status {
+<<<<<<< Updated upstream
   padding: 15px;
+=======
+
+>>>>>>> Stashed changes
   border-radius: 5px;
   color: white;
   margin-bottom: 10px;
@@ -1243,6 +1590,7 @@ form {
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
 /* Cadastro */
 .cadastro-container {
   width: calc(100% - 220px);
@@ -1252,7 +1600,20 @@ form {
 }
 
 /* GRUPO DE INPUT */
+<<<<<<< Updated upstream
 .form-group {
+=======
+.cadastro-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+>>>>>>> Stashed changes
   display: flex;
   flex-direction: column;
 }
@@ -1264,7 +1625,14 @@ form {
 }
 
 .form-group input {
+<<<<<<< Updated upstream
   padding: 10px;
+=======
+  width: 100%;
+  padding: 10px;
+
+  margin-bottom: 12px;
+>>>>>>> Stashed changes
   border: 1px solid #ccc;
   border-radius: 6px;
   outline: none;
@@ -1273,6 +1641,7 @@ form {
   transition: border-color 0.2s;
 }
 
+<<<<<<< Updated upstream
 .form-group input:focus {
   border-color: #00ab72;
   background: #fff;
@@ -1280,6 +1649,9 @@ form {
 
 .form-buttons {
   grid-column: span 3; /* ocupa todas as colunas */
+=======
+.form-buttons {
+>>>>>>> Stashed changes
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -1288,6 +1660,12 @@ form {
 
 .btn-confirmar,
 .btn-cancelar {
+<<<<<<< Updated upstream
+=======
+  width: 50%;
+  margin-top: 20px;
+
+>>>>>>> Stashed changes
   padding: 12px 25px;
   border: none;
   border-radius: 6px;
@@ -1389,7 +1767,7 @@ form {
   border-radius: 10px 10px 0 0;
 }
 
-.pergunta > div:not(.divInputTypeRadio) {
+.pergunta>div:not(.divInputTypeRadio) {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1418,7 +1796,8 @@ form {
   margin-left: 0;
   cursor: pointer;
 }
-.pergunta > div label {
+
+.pergunta>div label {
   display: flex;
   align-items: center;
   margin: 0 15px;
@@ -1434,13 +1813,16 @@ form {
   color: white;
   margin-top: 20px;
 }
+
 .proximo:hover {
   background-color: #01885b;
 }
+
 .proximo:disabled {
   background-color: #00ab7277;
   cursor: not-allowed;
 }
+
 .proximo:enabled {
   border: none;
 }
@@ -1519,7 +1901,8 @@ form {
   align-items: flex-start;
   flex-direction: column;
   width: 900px;
-  gap: 10px; /* ADICIONE ISSO - cria o espaço entre título e input */
+  gap: 10px;
+  /* ADICIONE ISSO - cria o espaço entre título e input */
   margin-bottom: 20px;
 }
 
@@ -1528,7 +1911,8 @@ form {
   width: 100%;
   border-radius: 10px 10px 0 0;
   padding: 15px 25px;
-  margin: 0; /* MUDE DE "0 0 20px 0" PARA "0" */
+  margin: 0;
+  /* MUDE DE "0 0 20px 0" PARA "0" */
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -1546,7 +1930,8 @@ form {
   padding: 10px 25px;
   box-sizing: border-box;
   font-size: 14px;
-  margin: 0; /* MUDE DE "20px" PARA "0" */
+  margin: 0;
+  /* MUDE DE "20px" PARA "0" */
 }
 
 .inputPerguntaMentor::placeholder {
@@ -1935,6 +2320,7 @@ form {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1950,21 +2336,25 @@ form {
   gap: 30px;
   justify-content: center;
 }
+
 .sectionfilter {
   display: flex;
   gap: 10px;
 }
 
-.modal .sectionfilter2 select{
+.modal .sectionfilter2 select {
   width: 300px;
 }
+
 .sectionfilter2 {
   display: flex;
   gap: 10px;
 }
+
 .modal select {
   width: 150px;
 }
+
 .btnFilter {
   margin-top: 10px;
   background: #00ab72;
@@ -1976,6 +2366,7 @@ form {
   font-weight: bolder;
   border-radius: 10px;
 }
+
 .btnFilter:hover {
   background: #fafafa;
   color: #00ab72;
@@ -1985,6 +2376,7 @@ form {
 .formEdit {
   display: grid;
 }
+
 .export {
   width: 300px;
 }
@@ -1993,7 +2385,8 @@ form {
 /* Container principal */
 .suporte-container {
   width: 100%;
-  max-height: calc(100vh - 300px); /* Ajusta para o header */
+  max-height: calc(100vh - 300px);
+  /* Ajusta para o header */
 
   background: #f5f5f5;
   margin-top: 0;
@@ -2062,6 +2455,7 @@ form {
   background: linear-gradient(135deg, #00ab72 0%, #00c781 100%);
 }
 
+<<<<<<< Updated upstream
 .caixa-status.amarelo {
   background: linear-gradient(135deg, #00ab72 0%, #00d890 100%);
 }
@@ -2070,6 +2464,8 @@ form {
   background: linear-gradient(135deg, #00ab72 0%, #00b579 100%);
 }
 
+=======
+>>>>>>> Stashed changes
 /* Botão abrir chamados */
 .botao-abrir-chamado {
   padding: 12px 20px;
@@ -2163,6 +2559,7 @@ form {
     grid-template-columns: 1fr;
   }
 }
+
 /* SUPORTE */
 
 /* Chat */
@@ -2333,9 +2730,10 @@ form {
 /* Chat */
 
 /* GERAL */
-.lista-filtros > div:first-child {
+.lista-filtros>div:first-child {
   display: none;
 }
+
 .tipo-modal-buttons {
   display: flex;
   justify-content: space-around;
@@ -2352,19 +2750,19 @@ form {
   color: white;
   font-weight: 600;
   transition: all 0.25s ease;
-  
+
 }
 
 .tipo-btn.entrada {
-  background-color: #00ab72; 
+  background-color: #00ab72;
 }
 
 .tipo-btn.entrada:hover {
   background-color: #fafafa;
   color: #00ab72;
-  
+
   transform: scale(1.05);
-  
+
 }
 
 .tipo-btn.saida {
@@ -2373,9 +2771,287 @@ form {
 }
 
 .tipo-btn.saida:hover {
-  background-color: #00ab72; 
+  background-color: #00ab72;
   color: #fafafa;
   transform: scale(1.05);
 }
 
+<<<<<<< Updated upstream
+=======
+.btnChamados {
+  padding: 15px;
+  background: transparent;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
 
+textarea {
+  resize: none;
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #c5c5c5;
+  border-radius: 5px;
+  font-size: 14px;
+
+}
+
+/* ====== GERAL ====== */
+.dashboard {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 20px 20px;
+  font-family: "Poppins", sans-serif;
+  color: #1f2937;
+ 
+}
+.selectsDash{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}
+>>>>>>> Stashed changes
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0e6245;
+  margin-bottom: 20px;
+}
+
+/* ====== FILTRO DE ANO ====== */
+
+select {
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+select:hover {
+  border-color: #10b981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+select:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+/* ====== CARDS RESUMO ====== */
+.resumo-grid {
+ padding: 10px; 
+}
+
+.resumo-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.resumo-card {
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.resumo-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.resumo-card:hover::before {
+  opacity: 1;
+}
+
+.resumo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+}
+
+.resumo-card h2 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.resumo-card p {
+  font-size: 32px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #10b981, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ====== CONTAINER DOS GRÁFICOS ====== */
+.graficos-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  
+}
+
+.grafico-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.grafico-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+}
+
+.grafico-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: #065f46;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.grafico-wrapper {
+  flex: 1;
+  min-height: 300px;
+}
+
+/* ====== GRÁFICO LARGO (EVOLUÇÃO) ====== */
+.grafico-largo {
+  grid-column: 1 / -1;
+}
+
+/* ====== CARDS DE CAMPANHAS ====== */
+.card-status {
+  padding: 20px;
+}
+
+.cards-campanhas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.card-campanha-mini {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-campanha-mini:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-campanha-icone {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.card-campanha-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-campanha-titulo {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-campanha-valor {
+  font-size: 24px;
+  font-weight: bold;
+}
+.dashboard-top{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-top select{
+  height: 50px;
+}
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 1400px) {
+  .graficos-container {
+    margin-left: 0;
+  }
+
+  .dashboard-top {
+    margin-left: 0;
+
+  }
+}
+
+@media (max-width: 1024px) {
+  .graficos-container {
+    grid-template-columns: 1fr;
+  }
+
+  .resumo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    flex-wrap: wrap;
+  }
+
+  .cards-campanhas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px;
+  }
+
+  .resumo-card {
+    flex: 0 0 160px;
+  }
+}
