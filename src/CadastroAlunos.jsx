@@ -80,7 +80,7 @@ export default function CadastroAlunos() {
     
     try{
       console.log("Dados enviados para o backend:", todosJuntos);
-      const grupoResponse = await axios.post("http://localhost:500/api/users/grupos", grupoData)
+      const grupoResponse = await axios.post("https://projeto404-site-backend.vercel.app/api/users/grupos", grupoData)
       Id_Grupo = grupoResponse.data.id
       console.log("Resposta do backend", grupoResponse.data)
       
