@@ -39,14 +39,8 @@ function CadastroAluno({ onSelectPage }) {
       const response = await api.post("/cadastroAluno", dadosEnvio);
       alert(response.data.msg || "Aluno cadastrado com sucesso!");
 
-      setFormData({
-        Aluno_Nome: "",
-        Aluno_Email: "",
-        Aluno_RA: "",
-        Grupo: ""
-      });
-
-      // Redireciona se a função foi passada via props
+      setFormData(response.data)
+      
       if (onSelectPage) onSelectPage("aluno");
 
     } catch (err) {

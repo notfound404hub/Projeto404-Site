@@ -1,4 +1,5 @@
 import React from "react";
+import api from "../../api.js"
 
 function OrderModal({
   isOpen,
@@ -19,33 +20,25 @@ function OrderModal({
   const ordenar = async () => {
     try {
       const body = {
-        campo: valorSelecionado,
-        direcao: filterSelecionado,
-        tabela: tabela
+        campo: valorSelecionado,     
+        direcao: filterSelecionado,  
+       tabela          
       };
-
+  
       console.log("📤 Enviando para backend:", body);
-
-      const response = await fetch("http://localhost:500/api/users/ordenar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      console.log("📥 Status da resposta:", response.status);
-
-      if (!response.ok) throw new Error("Erro ao buscar dados do servidor");
-
-      const data = await response.json();
-      console.log("✅ Dados recebidos:", data);
-
-      setItens(data);
+  
+      const response = await api.post("/ordenar", body);
+  
+      console.log("✅ Dados recebidos:", response.data);
+  
+      setItens(response.data);
       onClose();
     } catch (error) {
       console.error("❌ Erro ao aplicar ordenação:", error);
       alert("Erro ao aplicar ordenação. Veja o console para detalhes.");
     }
   };
+  
 
   // 🔹 Retorno JSX
   return (

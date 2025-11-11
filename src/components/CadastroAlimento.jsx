@@ -9,19 +9,36 @@ function CadastroAlimento({ onSelectPage }) {
     Alimento_Validade: "",
     Alimento_Peso: "",
     Alimento_Quantidade: "",
+    Aluno_Grupo: localStorage.getItem("Aluno_Grupo") || "", // Inicializa com o valor do localStorage, se existir
   });
-
+  const isAlunoGrupoReadOnly = !!localStorage.getItem("Aluno_Grupo"); // Define se o campo será somente leitura
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [eanValido, setEanValido] = useState(false);
 
-  const validarEAN13 = (codigo) => /^\d{13}$/.test(codigo);
+  // Valida EAN-13 com cálculo do dígito verificador
+  const validarEAN13 = (codigo) => {
+    if (!/^\d{13}$/.test(codigo)) return false;
+    const digits = codigo.split("").map(Number);
+    const checkDigit = digits.pop(); // último
 
+    const soma = digits.reduce((acc, d, idx) => {
+      return acc + d * (idx % 2 === 0 ? 1 : 3);
+    }, 0);
+    const resto = soma % 10;
+    const digitoCalculado = resto === 0 ? 0 : 10 - resto;
+    return digitoCalculado === checkDigit;
+  };
 
   const handleChange = async (e) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
+    let value = e.target.value;
 
-    if (name === "Alimento_Cod" && /[^0-9]/.test(value)) return;
+    if (name === "Alimento_Cod") {
+      value = value.replace(/\D/g, "");
+
+      if (value.length > 13) value = value.slice(0, 13);
+    }
 
     setFormData((prev) => ({ ...prev, [name]: value }));
 
@@ -31,9 +48,10 @@ function CadastroAlimento({ onSelectPage }) {
   };
 
   const buscarAlimento = async (ean) => {
-    if (!validarEAN13(ean.trim())) {
+    const clean = String(ean).trim();
+    if (!validarEAN13(clean)) {
       alert(
-        "❌ Código EAN inválido! Deve conter 13 dígitos numéricos válidos."
+        "❌ Código EAN inválido! Deve ser um EAN-13 válido (dígito verificador incorreto)."
       );
       setEanValido(false);
       return;
@@ -41,12 +59,13 @@ function CadastroAlimento({ onSelectPage }) {
 
     try {
       setLoading(true);
-      const res = await api.get(`/codigoAlimento/${ean}`);
-      console.log("resposta front: ",res)
-
+      const res = await api.get(`/codigoAlimento/${clean}`);
+      console.log(res);
+      // se 200 e retornar objeto do alimento, preenche
       if (res.data) {
         setFormData((prev) => ({
           ...prev,
+          Alimento_Cod: clean,
           Alimento_Nome: res.data.Alimento_Nome,
           Alimento_Marca: res.data.Alimento_Marca,
           Alimento_Peso: res.data.Alimento_Peso,
@@ -55,8 +74,11 @@ function CadastroAlimento({ onSelectPage }) {
         setShowModal(false);
       }
     } catch (err) {
+      // se backend devolver 404 (não existe), abre modal para cadastrar novo alimento
       if (err.response?.status === 404) {
         setShowModal(true);
+        // mantemos código preenchido no modal para facilitar cadastro
+        setEanValido(false);
       } else {
         alert("Erro ao buscar alimento no banco.");
         console.error(err);
@@ -76,6 +98,12 @@ function CadastroAlimento({ onSelectPage }) {
       return;
     }
 
+    // reforço: valida checksum antes de enviar novo alimento
+    if (!validarEAN13(Alimento_Cod)) {
+      alert("EAN inválido. Verifique o código antes de cadastrar.");
+      return;
+    }
+
     try {
       const res = await api.post("/cadastroAlimento", {
         Alimento_Cod,
@@ -87,6 +115,7 @@ function CadastroAlimento({ onSelectPage }) {
       alert(res.data.msg || "Alimento cadastrado com sucesso!");
       setShowModal(false);
       setEanValido(true);
+      // já preenche também o nome/marca/peso (resposta do back pode retornar o objeto; se quiser, adapte)
     } catch (err) {
       console.error(err);
       alert("Erro ao cadastrar novo alimento.");
@@ -105,13 +134,26 @@ function CadastroAlimento({ onSelectPage }) {
       return;
     }
 
+    if (!eanValido) {
+      alert(
+        "EAN inválido ou alimento não validado. Verifique o código primeiro."
+      );
+      return;
+    }
+
     try {
       setLoading(true);
-      const response = await api.post("/doacoes", {
-        Alimento_Cod: formData.Alimento_Cod,
+      const body = {
+        Alimento_Nome: formData.Alimento_Nome,
+        Alimento_Marca: formData.Alimento_Marca,
+        Alimento_Codigo: formData.Alimento_Cod, // nome diferente do campo original
         Alimento_Validade: formData.Alimento_Validade,
+        Alimento_Peso: formData.Alimento_Peso,
         Alimento_Quantidade: formData.Alimento_Quantidade,
-      });
+        Aluno_Grupo: formData.Aluno_Grupo,
+      };
+
+      const response = await api.post("/doacoes", body);
 
       alert(response.data.msg || "Doação registrada com sucesso!");
 
@@ -122,6 +164,7 @@ function CadastroAlimento({ onSelectPage }) {
         Alimento_Validade: "",
         Alimento_Peso: "",
         Alimento_Quantidade: "",
+        Aluno_Grupo: localStorage.getItem("Aluno_Grupo") || "",
       });
       setEanValido(false);
 
@@ -147,6 +190,8 @@ function CadastroAlimento({ onSelectPage }) {
             value={formData.Alimento_Cod}
             onChange={handleChange}
             maxLength={13}
+            inputMode="numeric"
+            pattern="\d{13}"
             required
           />
         </div>
@@ -206,6 +251,22 @@ function CadastroAlimento({ onSelectPage }) {
           />
         </div>
 
+        <div className="form-group">
+          <label htmlFor="Aluno_Grupo">Grupo do Aluno</label>
+          <input
+            type="text"
+            id="Aluno_Grupo"
+            name="Aluno_Grupo"
+            value={formData.Aluno_Grupo}
+            readOnly={isAlunoGrupoReadOnly} // Torna o campo somente leitura se houver valor no localStorage
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, Aluno_Grupo: e.target.value }))
+            }
+            placeholder="Digite o grupo do aluno"
+            className={`input ${isAlunoGrupoReadOnly ? "input-readonly" : ""}`} // Adiciona uma classe para estilização
+          />
+        </div>
+
         <button
           type="submit"
           className="btn-confirmar"
@@ -215,7 +276,7 @@ function CadastroAlimento({ onSelectPage }) {
         </button>
       </form>
 
-      {/* 🔹 Modal para cadastro de novo alimento */}
+      {/* Modal para cadastro de novo alimento */}
       {showModal && (
         <div
           className="modal-overlay"

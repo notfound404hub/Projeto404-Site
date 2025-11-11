@@ -8,13 +8,14 @@ import Campanhas from "./components/campanhas.jsx";
 import Usuarios from "./components/usuarios.jsx";
 import PainelSuporte from "./Suporte.jsx";
 import SidebarAdmin from "./components/SidebarAdmin.jsx";
-import HeaderAdmin from "./components/HeaderAdmin.jsx";
+
 import CadastroUsuario from "./components/cadastroUsuario.jsx";
 import CadastroCampanha from "./components/cadastroCampanha.jsx";
 import CadastroGrupo from "./components/CadastroGrupo.jsx";
 import CadastroAlimento from "./components/CadastroAlimento.jsx";
 import CadastroAluno from "./components/CadastroAluno.jsx";
 import CadastroDinheiro from "./components/CadastroDinheiro.jsx";
+import Relatorios from "./components/Relatorios.jsx";
 
 function Admin() {
   const [userData, setUserData] = useState({
@@ -51,7 +52,7 @@ function Admin() {
         onSelectPage={(page) => setActiveScreen(page)}
       />
       <div className="mainAdmin">
-        <HeaderAdmin />
+          
 
         {/* renderiza a tela conforme activeScreen */}
         {/* {activeScreen === "home" && <h2>Bem-vindo ao painel22222222</h2>} */}
@@ -73,6 +74,9 @@ function Admin() {
         )}
         {activeScreen === "usuarios" && (
           <Usuarios onSelectPage={(page) => setActiveScreen(page)} />
+        )}
+        {activeScreen === "relatorios" && (
+          <Relatorios onSelectPage={(page) => setActiveScreen(page)} />
         )}
         {activeScreen === "CadastroUsuario" && <CadastroUsuario />}
         {activeScreen === "CadastroAluno" && <CadastroAluno />}

@@ -43,7 +43,7 @@ function Alimentos({ onSelectPage }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
 
-  const tabela = "Alimento";
+  const tabela = "Alimentos";
   filtros[0] = tabela;
 
   const carregarAlimentos = async () => {

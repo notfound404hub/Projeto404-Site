@@ -216,11 +216,7 @@ const abrirModalEdicao = async () => {
               <th>RA</th>
               <th>Nome</th>
               <th>E-mail</th>
-              <th>CPF</th>
-              <th>Foto</th>
-              <th>Telefone</th>
               <th>Grupo</th>
-              <th>Turma</th>
               <th>Criado em</th>
             </tr>
           </thead>
@@ -240,11 +236,7 @@ const abrirModalEdicao = async () => {
                 <td>{u.Aluno_RA}</td>
                 <td>{u.Aluno_Nome}</td>
                 <td>{u.Aluno_Email}</td>
-                <td>{u.Aluno_Cpf}</td>
-                <td>{u.Aluno_Foto}</td>
-                <td>{u.Aluno_Telefone}</td>
                 <td>{u.Aluno_Grupo}</td>
-                <td>{u.Aluno_Turma}</td>
                 <td>
                   {new Date(u.created_at).toLocaleDateString("pt-BR", {
                     timeZone: "America/Sao_Paulo",

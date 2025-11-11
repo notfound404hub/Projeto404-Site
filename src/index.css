@@ -25,6 +25,29 @@ body {
   -o-background-size: cover;
 }
 
+/* ====== LAYOUT PRINCIPAL ====== */
+.bodyAdmin {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bodyAdmin aside {
+  width: 220px;
+ 
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.mainAdmin {
+  flex: 1;
+  overflow-y: auto;
+  background: #f8f9fa;
+}
+
 .asideLogin {
   display: flex;
   height: 590px;
@@ -781,7 +804,7 @@ form {
 .tabela {
   transition: 0.3s;
   width: 100%;
-  height: 420px;
+  height: 600;
   overflow-x: auto;
   overflow-y: auto;
 }
@@ -1380,6 +1403,8 @@ form {
 .dashboard {
   display: flex;
   height: 100vh;
+  width: calc(100% - 220px);
+  margin-left: 220px;
 }
 
 /* ========== BARRA LATERAL ========== */
@@ -1861,6 +1886,28 @@ form {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+}
+
+.divBotoesVoltar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.voltarMentor {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.voltarMentor:hover {
+  background-color: #dc2626;
 }
 
 .voltar {
@@ -2686,5 +2733,3 @@ textarea {
   font-size: 14px;
 
 }
-
-

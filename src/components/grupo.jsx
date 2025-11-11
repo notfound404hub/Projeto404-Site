@@ -9,6 +9,8 @@ import FiltroModal from "./modal/FilterModal.jsx";
 import OrdenarModal from "./modal/ordenarModal.jsx";
 import ExcluirModal from "./modal/excluirModal.jsx";
 import EditarModal from "./modal/editarModalAluno.jsx";
+import { useNavigate } from "react-router-dom";
+
 
 
 function Grupo({ onSelectPage }) {
@@ -24,6 +26,8 @@ function Grupo({ onSelectPage }) {
   const [grupoEdit, setGrupoEdit] = useState(null);
   const [filtros, setFiltros] = useState([]);
   const headerCheckboxRef = useRef(null);
+
+  const navigate = useNavigate()
 
   const camposGrupo = [
     { value: "ID_Grupo", label: "ID do grupo" },
@@ -156,7 +160,7 @@ function Grupo({ onSelectPage }) {
         >
           Adicionar +
         </button>
-        <button className="btn-tabela formulario-aluno">Formulário</button>
+        <button onClick={() => navigate("/forms")} className="btn-tabela formulario-aluno">Formulário</button>
         <div className="dropdown-tabela">
           <button className="btn-tabela mais-opcoes-tabela">Mais opções ▾</button>
           <div className="dropdown-content-tabela">

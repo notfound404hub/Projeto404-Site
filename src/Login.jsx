@@ -15,13 +15,17 @@ function Login() {
 
     try {
       const res = await api.post("/login", { email, senha });
-      const { msg, token, verificado, tipo, ID, error } = res.data;
+      const { msg, token, verificado, tipo, ID, error, Grupo } = res.data;
 
       if (error) {
         alert(error);
         return;
       }
 
+
+      if(Grupo){
+        localStorage.setItem("Aluno_Grupo", Grupo);
+      }
       localStorage.setItem("Tipo_Usuario", tipo);
      
       localStorage.setItem("token", token);
