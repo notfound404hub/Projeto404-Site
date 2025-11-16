@@ -7,7 +7,18 @@
       height: auto;
       min-height: 100vh;
     }
-  
+    .dashboard{
+  margin-left: 0;
+  width: 100%;
+}
+   .adicionar-tabela, .btn-tabela .mais-opcoes-tabela{
+   font-size: 12px;
+        padding: 8px 14px;
+  }
+  .dropdown-tabela .btn-tabela {
+    font-size: 12px;
+    padding: 6px 5px;
+  }
     .asideLogin, .asideCadastro, .asideVerificar, .asideEsqueciSenha, .asideResetSenha {
       width: 90%;
       max-width: 400px;
@@ -167,7 +178,7 @@
     .bodyImg {
       padding: 30px 20px;
     }
-  
+    
     .asideLogin, .asideCadastro, .asideVerificar, .asideEsqueciSenha, .asideResetSenha {
       width: 80%;
       max-width: 500px;
@@ -329,3 +340,126 @@
     }
   }
   
+  /* Sidebar responsive toggle styles */
+.asideAdmin {
+  transition: transform 0.28s ease, left 0.28s ease;
+  will-change: transform;
+}
+
+/* collapsed state for small screens: hide sidebar off-canvas */
+.asideAdmin.collapsed {
+  transform: translateX(-110%);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1002;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  background-color: #e6e4e4;
+}
+
+/* open on small screens */
+.asideAdmin.open {
+  transform: translateX(0);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1002;
+  background-color: #e6e4e4;
+}
+
+/* toggle button (hamburger) */
+.sidebar-toggle {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  z-index: 1003;
+  background: #00ab72;
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* close button inside sidebar for mobile */
+.close-sidebar-btn {
+  display: inline-flex;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 1004;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Desktop overrides: sidebar always visible, toggle hidden */
+@media (min-width: 769px) {
+  .asideAdmin {
+    transform: none !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: auto;
+    box-shadow: none;
+    background-color: #e6e4e4;
+  }
+  .sidebar-toggle,
+  .close-sidebar-btn {
+    display: none;
+  }
+}
+
+/* ensure mainAdmin margin behaves when sidebar is fixed on mobile */
+@media (max-width: 768px) {
+  .mainAdmin {
+    margin-left: 0;
+    width: 100%;
+  }
+ 
+  
+}
+
+/* Evita que o toggle da sidebar cubra o botão "Adicionar +" em mobile */
+@media (max-width: 768px) {
+  /* diminui o tamanho do toggle e coloca mais à esquerda */
+  .sidebar-toggle {
+    left: 12px;
+    top: 12px;
+    padding: 8px 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    z-index: 1001; /* abaixo dos controles da tabela */
+  }
+
+  /* garante espaço superior para o toggle sem sobrepor o conteúdo */
+  .main-container-tabela {
+    padding-top: 60px; /* ajuste conforme altura do toggle */
+  }
+
+  /* deixa o cabeçalho da tabela e o botão "Adicionar +" sobre o toggle */
+  .main-container-tabela .cabecalho-tabela,
+  .main-container-tabela .cabecalho-tabela .adicionar-tabela {
+    position: relative;
+   
+  }
+
+  
+}
+
+/* tablet: mantém comportamento similar se necessário */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-container-tabela {
+    padding-top: 20px;
+  }
+  .sidebar-toggle {
+    display: none; /* normalmente escondemos o toggle em tablet, mas deixe se quiser visível */
+  }
+}

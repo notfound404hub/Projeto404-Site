@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTrashAlt, FaArrowLeft, FaSignInAlt } from "react-icons/fa";
+import { FaTrashAlt, FaArrowLeft, FaSignInAlt, FaCheckCircle } from "react-icons/fa";
 import ModalChamado from "./modal/ModalChamado";
 import api from "../api.js";
 const Chamados = ({ tipo, chamados, onVoltar, carregarChamados }) => {
@@ -20,6 +20,19 @@ const Chamados = ({ tipo, chamados, onVoltar, carregarChamados }) => {
     }
   };
   
+  // novo: finaliza chamado (front-end chama backend)
+  const finalizarChamado = async (ID_Chamado) => {
+    try {
+      const Criador_Tipo = localStorage.getItem("Tipo_Usuario") || "Usuario";
+      if (!confirm("Deseja realmente finalizar este chamado?")) return;
+      const response = await api.put("/finalizarChamado", { ID_Chamado, Criador_Tipo });
+      alert(response.data?.msg || "Chamado finalizado com sucesso!");
+      if (carregarChamados) carregarChamados(); // atualiza a lista após alteração
+    } catch (err) {
+      console.error("Erro ao finalizar chamado:", err);
+      alert("Erro ao finalizar chamado.");
+    }
+  };
 
   return (
     <div className="chamados-tela">
@@ -51,6 +64,17 @@ const Chamados = ({ tipo, chamados, onVoltar, carregarChamados }) => {
                 >
                   <FaSignInAlt /> Entrar
                 </button>
+
+                {/* botão de finalizar (aparece apenas se não estiver finalizado) */}
+                {c.Chamado_Status !== "Finalizado" && (
+                  <button
+                    className="btn-entrar"
+                    onClick={() => finalizarChamado(c.ID_Chamado)}
+                  >
+                    <FaCheckCircle /> Finalizar
+                  </button>
+                )}
+
                 <button
                   className="btn-excluir"
                   onClick={() => excluirChamado(c.ID_Chamado)}
@@ -67,6 +91,7 @@ const Chamados = ({ tipo, chamados, onVoltar, carregarChamados }) => {
         <ModalChamado
           chamado={chamadoSelecionado}
           onClose={() => setChamadoSelecionado(null)}
+          carregarChamados = {carregarChamados}
         />
       )}
     </div>
